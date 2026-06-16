@@ -1,0 +1,81 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("MASTER_DATABASE_URL")
+  directUrl = env("MASTER_DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/master"
+}
+
+model SuperAdmin {
+  id                String   @id @default(uuid())
+  name              String
+  email             String   @unique
+  password          String
+  twoFactorSecret   String?
+  twoFactorEnabled  Boolean  @default(false)
+  createdAt         DateTime @default(now())
+}
+
+model Tenant {
+  id                 String        @id @default(uuid())
+  subdomain          String        @unique
+  customDomain       String?       @unique
+  status             TenantStatus  @default(PENDING)
+  dbConnectionString String
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  subscription       Subscription?
+}
+
+enum TenantStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+model Plan {
+  id           String         @id @default(uuid())
+  name         String
+  productLimit Int
+  trafficLimit Int
+  storageLimit Int
+  price        Decimal        @db.Decimal(10, 2)
+  interval     BillingCycle   @default(MONTHLY)
+  subscriptions Subscription[]
+}
+
+enum BillingCycle {
+  MONTHLY
+  YEARLY
+}
+
+model Subscription {
+  id                 String             @id @default(uuid())
+  tenantId           String             @unique
+  tenant             Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  planId             String
+  plan               Plan               @relation(fields: [planId], references: [id])
+  status             SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  stripeSubscriptionId String?
+  createdAt          DateTime           @default(now())
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+}
+
+model GlobalTheme {
+  id             String   @id @default(uuid())
+  name           String
+  codeIdentifier String   @unique
+  previewUrl     String
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+}

@@ -1,0 +1,183 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("TENANT_DATABASE_TEMPLATE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/tenant"
+}
+
+model StoreSetting {
+  id          String   @id @default(uuid())
+  storeName   String
+  logoUrl     String?
+  brandColor  String   @default("#4F46E5")
+  themeConfig Json
+  customCss   String?
+  customJs    String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Staff {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  role      StaffRole @default(STAFF)
+  status    Boolean   @default(true)
+  createdAt DateTime  @default(now())
+}
+
+enum StaffRole {
+  OWNER
+  ADMIN
+  STAFF
+}
+
+model Supplier {
+  id      String        @id @default(uuid())
+  name    String
+  email   String?
+  phone   String
+  address String?
+  batches SupplyBatch[]
+}
+
+model Category {
+  id       String     @id @default(uuid())
+  name     String
+  slug     String     @unique
+  parentId String?
+  parent   Category?  @relation("SubCategories", fields: [parentId], references: [id])
+  children Category[] @relation("SubCategories")
+  isActive Boolean    @default(true)
+  products Product[]
+}
+
+model Product {
+  id           String           @id @default(uuid())
+  title        String
+  description  String
+  basePrice    Decimal          @db.Decimal(10, 2)
+  comparePrice Decimal?         @db.Decimal(10, 2)
+  status       ProductStatus    @default(DRAFT)
+  categoryId   String?
+  category     Category?        @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  variants     ProductVariant[]
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  OUT_OF_STOCK
+}
+
+model ProductVariant {
+  id         String        @id @default(uuid())
+  productId  String
+  product    Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sku        String        @unique
+  price      Decimal       @db.Decimal(10, 2)
+  stock      Int           @default(0)
+  size       String?
+  color      String?
+  weight     Decimal?      @db.Decimal(6, 2)
+  orderItems OrderItem[]
+  batches    SupplyBatch[]
+}
+
+model SupplyBatch {
+  id         String         @id @default(uuid())
+  supplierId String
+  supplier   Supplier       @relation(fields: [supplierId], references: [id])
+  variantId  String
+  variant    ProductVariant @relation(fields: [variantId], references: [id])
+  quantity   Int
+  costPrice  Decimal        @db.Decimal(10, 2)
+  date       DateTime       @default(now())
+}
+
+model Order {
+  id              String         @id @default(uuid())
+  customerName    String
+  customerEmail   String?
+  customerPhone   String
+  shippingAddress String
+  totalPrice      Decimal        @db.Decimal(10, 2)
+  shippingCharge  Decimal        @db.Decimal(10, 2)
+  paymentMethod   PaymentMethod  @default(COD)
+  paymentStatus   PaymentStatus  @default(PENDING)
+  shippingStatus  ShippingStatus @default(PENDING)
+  awbCode         String?
+  trackingUrl     String?
+  createdAt       DateTime       @default(now())
+  orderItems      OrderItem[]
+}
+
+enum PaymentMethod {
+  COD
+  BKASH
+  NAGAD
+  CARD
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum ShippingStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model OrderItem {
+  id        String         @id @default(uuid())
+  orderId   String
+  order     Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id])
+  quantity  Int
+  price     Decimal        @db.Decimal(10, 2)
+}
+
+model Coupon {
+  id            String     @id @default(uuid())
+  code          String     @unique
+  type          CouponType @default(PERCENTAGE)
+  value         Decimal    @db.Decimal(10, 2)
+  minOrderValue Decimal    @default(0) @db.Decimal(10, 2)
+  startDate     DateTime
+  endDate       DateTime
+  isActive      Boolean    @default(true)
+}
+
+enum CouponType {
+  PERCENTAGE
+  FLAT
+}
+
+model Integration {
+  id       String          @id @default(uuid())
+  provider IntProviderType @unique
+  keysJson Json
+  isActive Boolean         @default(false)
+}
+
+enum IntProviderType {
+  BKASH
+  NAGAD
+  SSLCOMMERZ
+  PATHAO
+  STEADFAST
+  FB_PIXEL
+  GA4
+}
