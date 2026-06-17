@@ -3,6 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiOperation, ApiConsumes, ApiBody, ApiHeader, ApiBearerAuth } from '@nestjs/swagger';
 import { CloudinaryService } from '../../core/cloudinary/cloudinary.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import 'multer';
 
 @ApiTags('Tenant - Uploads')
 @ApiHeader({ name: 'x-tenant-id', description: 'Tenant subdomain', required: true })

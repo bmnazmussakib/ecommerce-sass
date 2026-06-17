@@ -90,6 +90,42 @@ Monitor and throttle traffic.
 
 ---
 
+## Phase 8: Advanced Storefront Features & Admin Automation (Pending MVP Requirements)
+Implement core storefront features, background queues, and administrative automation tasks.
+
+### Proposed Changes
+
+#### Meilisearch Product Sync
+- **[NEW]** `src/tenant/search/` (SearchModule, SearchService)
+- **Sync Listener:** Event listener that receives events when product catalog updates (create/update/delete) and synchronizes with Meilisearch index.
+
+#### OTP Verification for COD Checkouts
+- **[NEW]** `src/tenant/otp/` (OtpModule, OtpService)
+- **OTP Manager:** Logic to generate 6-digit code, store in Redis with 5 min TTL, and invoke external SMS Gateway (e.g., Greenweb, MimSMS).
+- **COD Checkout Update:** Restrict Order creation on Cash on Delivery method until the OTP challenge is solved.
+
+#### Anti-Fraud & Device Fingerprinting
+- **Anti-Fraud Filter:** Middleware or Guard checking request IP and device fingerprints stored in Redis.
+- **Throttling:** Blocks checkouts if suspicious order velocity thresholds are crossed.
+
+#### BD Courier Adapters
+- **[NEW]** `src/tenant/integration/adapters/steadfast.service.ts` & `pathao.service.ts`
+- **Fulfillment API:** Extend `order.controller.ts` with booking action that syncs data with Steadfast/Pathao REST APIs and stores consignment ID.
+
+#### Bulk CSV Product Parser
+- **[NEW]** `src/tenant/product/jobs/csv-parser.processor.ts`
+- **BullMQ Config:** Setup BullMQ and Redis processor to parse large product CSV files stored in Cloudflare R2 and bulk insert into `Tenant DB`.
+
+#### PDF Invoice Generator
+- **[NEW]** `src/tenant/order/invoice.service.ts`
+- **Invoice API:** Endpoint to compile order details into a clean PDF stream for merchant/customer download.
+
+#### Super Admin Cloudflare & Impersonation Automation
+- **Cloudflare API integration:** Master service endpoint to register custom domains, set up CNAME routing, and request SSL certificates.
+- **Impersonation Endpoint:** SuperAdmin Auth API generates a transient, secure JWT signed with tenant scope to bypass standard admin login.
+
+---
+
 ## Verification Plan
 
 ### Automated Tests

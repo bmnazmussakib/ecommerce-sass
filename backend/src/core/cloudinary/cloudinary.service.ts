@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { v2 as cloudinary, UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
 import { Readable } from 'stream';
+import 'multer';
 
 @Injectable()
 export class CloudinaryService {
@@ -14,7 +15,7 @@ export class CloudinaryService {
         {
           folder: 'ecomize_products',
         },
-        (error, result) => {
+        (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
           if (error) return reject(error);
           if (!result) return reject(new Error('Cloudinary upload returned no result'));
           resolve(result);
