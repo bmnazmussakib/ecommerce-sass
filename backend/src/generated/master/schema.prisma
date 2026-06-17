@@ -79,3 +79,12 @@ model GlobalTheme {
   isActive       Boolean  @default(true)
   createdAt      DateTime @default(now())
 }
+
+model TrafficLog {
+  id       String   @id @default(uuid())
+  tenantId String
+  date     DateTime @db.Date
+  count    Int      @default(0)
+
+  @@unique([tenantId, date])
+}

@@ -38,6 +38,11 @@ export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
  * 
  */
 export type GlobalTheme = $Result.DefaultSelection<Prisma.$GlobalThemePayload>
+/**
+ * Model TrafficLog
+ * 
+ */
+export type TrafficLog = $Result.DefaultSelection<Prisma.$TrafficLogPayload>
 
 /**
  * Enums
@@ -256,6 +261,16 @@ export class PrismaClient<
     * ```
     */
   get globalTheme(): Prisma.GlobalThemeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.trafficLog`: Exposes CRUD operations for the **TrafficLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrafficLogs
+    * const trafficLogs = await prisma.trafficLog.findMany()
+    * ```
+    */
+  get trafficLog(): Prisma.TrafficLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -700,7 +715,8 @@ export namespace Prisma {
     Tenant: 'Tenant',
     Plan: 'Plan',
     Subscription: 'Subscription',
-    GlobalTheme: 'GlobalTheme'
+    GlobalTheme: 'GlobalTheme',
+    TrafficLog: 'TrafficLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -716,7 +732,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "superAdmin" | "tenant" | "plan" | "subscription" | "globalTheme"
+      modelProps: "superAdmin" | "tenant" | "plan" | "subscription" | "globalTheme" | "trafficLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1090,6 +1106,80 @@ export namespace Prisma {
           }
         }
       }
+      TrafficLog: {
+        payload: Prisma.$TrafficLogPayload<ExtArgs>
+        fields: Prisma.TrafficLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TrafficLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TrafficLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>
+          }
+          findFirst: {
+            args: Prisma.TrafficLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TrafficLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>
+          }
+          findMany: {
+            args: Prisma.TrafficLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>[]
+          }
+          create: {
+            args: Prisma.TrafficLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>
+          }
+          createMany: {
+            args: Prisma.TrafficLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TrafficLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>[]
+          }
+          delete: {
+            args: Prisma.TrafficLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>
+          }
+          update: {
+            args: Prisma.TrafficLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.TrafficLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TrafficLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TrafficLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.TrafficLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrafficLogPayload>
+          }
+          aggregate: {
+            args: Prisma.TrafficLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTrafficLog>
+          }
+          groupBy: {
+            args: Prisma.TrafficLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TrafficLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TrafficLogCountArgs<ExtArgs>
+            result: $Utils.Optional<TrafficLogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1179,6 +1269,7 @@ export namespace Prisma {
     plan?: PlanOmit
     subscription?: SubscriptionOmit
     globalTheme?: GlobalThemeOmit
+    trafficLog?: TrafficLogOmit
   }
 
   /* Types for Logging */
@@ -6609,6 +6700,1010 @@ export namespace Prisma {
 
 
   /**
+   * Model TrafficLog
+   */
+
+  export type AggregateTrafficLog = {
+    _count: TrafficLogCountAggregateOutputType | null
+    _avg: TrafficLogAvgAggregateOutputType | null
+    _sum: TrafficLogSumAggregateOutputType | null
+    _min: TrafficLogMinAggregateOutputType | null
+    _max: TrafficLogMaxAggregateOutputType | null
+  }
+
+  export type TrafficLogAvgAggregateOutputType = {
+    count: number | null
+  }
+
+  export type TrafficLogSumAggregateOutputType = {
+    count: number | null
+  }
+
+  export type TrafficLogMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    date: Date | null
+    count: number | null
+  }
+
+  export type TrafficLogMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    date: Date | null
+    count: number | null
+  }
+
+  export type TrafficLogCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    date: number
+    count: number
+    _all: number
+  }
+
+
+  export type TrafficLogAvgAggregateInputType = {
+    count?: true
+  }
+
+  export type TrafficLogSumAggregateInputType = {
+    count?: true
+  }
+
+  export type TrafficLogMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    date?: true
+    count?: true
+  }
+
+  export type TrafficLogMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    date?: true
+    count?: true
+  }
+
+  export type TrafficLogCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    date?: true
+    count?: true
+    _all?: true
+  }
+
+  export type TrafficLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrafficLog to aggregate.
+     */
+    where?: TrafficLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrafficLogs to fetch.
+     */
+    orderBy?: TrafficLogOrderByWithRelationInput | TrafficLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TrafficLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrafficLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrafficLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TrafficLogs
+    **/
+    _count?: true | TrafficLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TrafficLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TrafficLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TrafficLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TrafficLogMaxAggregateInputType
+  }
+
+  export type GetTrafficLogAggregateType<T extends TrafficLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateTrafficLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTrafficLog[P]>
+      : GetScalarType<T[P], AggregateTrafficLog[P]>
+  }
+
+
+
+
+  export type TrafficLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrafficLogWhereInput
+    orderBy?: TrafficLogOrderByWithAggregationInput | TrafficLogOrderByWithAggregationInput[]
+    by: TrafficLogScalarFieldEnum[] | TrafficLogScalarFieldEnum
+    having?: TrafficLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TrafficLogCountAggregateInputType | true
+    _avg?: TrafficLogAvgAggregateInputType
+    _sum?: TrafficLogSumAggregateInputType
+    _min?: TrafficLogMinAggregateInputType
+    _max?: TrafficLogMaxAggregateInputType
+  }
+
+  export type TrafficLogGroupByOutputType = {
+    id: string
+    tenantId: string
+    date: Date
+    count: number
+    _count: TrafficLogCountAggregateOutputType | null
+    _avg: TrafficLogAvgAggregateOutputType | null
+    _sum: TrafficLogSumAggregateOutputType | null
+    _min: TrafficLogMinAggregateOutputType | null
+    _max: TrafficLogMaxAggregateOutputType | null
+  }
+
+  type GetTrafficLogGroupByPayload<T extends TrafficLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TrafficLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TrafficLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TrafficLogGroupByOutputType[P]>
+            : GetScalarType<T[P], TrafficLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TrafficLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    date?: boolean
+    count?: boolean
+  }, ExtArgs["result"]["trafficLog"]>
+
+  export type TrafficLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    date?: boolean
+    count?: boolean
+  }, ExtArgs["result"]["trafficLog"]>
+
+  export type TrafficLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    date?: boolean
+    count?: boolean
+  }, ExtArgs["result"]["trafficLog"]>
+
+  export type TrafficLogSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    date?: boolean
+    count?: boolean
+  }
+
+  export type TrafficLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "date" | "count", ExtArgs["result"]["trafficLog"]>
+
+  export type $TrafficLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TrafficLog"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      date: Date
+      count: number
+    }, ExtArgs["result"]["trafficLog"]>
+    composites: {}
+  }
+
+  type TrafficLogGetPayload<S extends boolean | null | undefined | TrafficLogDefaultArgs> = $Result.GetResult<Prisma.$TrafficLogPayload, S>
+
+  type TrafficLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TrafficLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TrafficLogCountAggregateInputType | true
+    }
+
+  export interface TrafficLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TrafficLog'], meta: { name: 'TrafficLog' } }
+    /**
+     * Find zero or one TrafficLog that matches the filter.
+     * @param {TrafficLogFindUniqueArgs} args - Arguments to find a TrafficLog
+     * @example
+     * // Get one TrafficLog
+     * const trafficLog = await prisma.trafficLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TrafficLogFindUniqueArgs>(args: SelectSubset<T, TrafficLogFindUniqueArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one TrafficLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TrafficLogFindUniqueOrThrowArgs} args - Arguments to find a TrafficLog
+     * @example
+     * // Get one TrafficLog
+     * const trafficLog = await prisma.trafficLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TrafficLogFindUniqueOrThrowArgs>(args: SelectSubset<T, TrafficLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first TrafficLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrafficLogFindFirstArgs} args - Arguments to find a TrafficLog
+     * @example
+     * // Get one TrafficLog
+     * const trafficLog = await prisma.trafficLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TrafficLogFindFirstArgs>(args?: SelectSubset<T, TrafficLogFindFirstArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first TrafficLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrafficLogFindFirstOrThrowArgs} args - Arguments to find a TrafficLog
+     * @example
+     * // Get one TrafficLog
+     * const trafficLog = await prisma.trafficLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TrafficLogFindFirstOrThrowArgs>(args?: SelectSubset<T, TrafficLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more TrafficLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrafficLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TrafficLogs
+     * const trafficLogs = await prisma.trafficLog.findMany()
+     * 
+     * // Get first 10 TrafficLogs
+     * const trafficLogs = await prisma.trafficLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const trafficLogWithIdOnly = await prisma.trafficLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TrafficLogFindManyArgs>(args?: SelectSubset<T, TrafficLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a TrafficLog.
+     * @param {TrafficLogCreateArgs} args - Arguments to create a TrafficLog.
+     * @example
+     * // Create one TrafficLog
+     * const TrafficLog = await prisma.trafficLog.create({
+     *   data: {
+     *     // ... data to create a TrafficLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends TrafficLogCreateArgs>(args: SelectSubset<T, TrafficLogCreateArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many TrafficLogs.
+     * @param {TrafficLogCreateManyArgs} args - Arguments to create many TrafficLogs.
+     * @example
+     * // Create many TrafficLogs
+     * const trafficLog = await prisma.trafficLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TrafficLogCreateManyArgs>(args?: SelectSubset<T, TrafficLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TrafficLogs and returns the data saved in the database.
+     * @param {TrafficLogCreateManyAndReturnArgs} args - Arguments to create many TrafficLogs.
+     * @example
+     * // Create many TrafficLogs
+     * const trafficLog = await prisma.trafficLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TrafficLogs and only return the `id`
+     * const trafficLogWithIdOnly = await prisma.trafficLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TrafficLogCreateManyAndReturnArgs>(args?: SelectSubset<T, TrafficLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a TrafficLog.
+     * @param {TrafficLogDeleteArgs} args - Arguments to delete one TrafficLog.
+     * @example
+     * // Delete one TrafficLog
+     * const TrafficLog = await prisma.trafficLog.delete({
+     *   where: {
+     *     // ... filter to delete one TrafficLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TrafficLogDeleteArgs>(args: SelectSubset<T, TrafficLogDeleteArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one TrafficLog.
+     * @param {TrafficLogUpdateArgs} args - Arguments to update one TrafficLog.
+     * @example
+     * // Update one TrafficLog
+     * const trafficLog = await prisma.trafficLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TrafficLogUpdateArgs>(args: SelectSubset<T, TrafficLogUpdateArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more TrafficLogs.
+     * @param {TrafficLogDeleteManyArgs} args - Arguments to filter TrafficLogs to delete.
+     * @example
+     * // Delete a few TrafficLogs
+     * const { count } = await prisma.trafficLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TrafficLogDeleteManyArgs>(args?: SelectSubset<T, TrafficLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrafficLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrafficLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TrafficLogs
+     * const trafficLog = await prisma.trafficLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TrafficLogUpdateManyArgs>(args: SelectSubset<T, TrafficLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrafficLogs and returns the data updated in the database.
+     * @param {TrafficLogUpdateManyAndReturnArgs} args - Arguments to update many TrafficLogs.
+     * @example
+     * // Update many TrafficLogs
+     * const trafficLog = await prisma.trafficLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TrafficLogs and only return the `id`
+     * const trafficLogWithIdOnly = await prisma.trafficLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TrafficLogUpdateManyAndReturnArgs>(args: SelectSubset<T, TrafficLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one TrafficLog.
+     * @param {TrafficLogUpsertArgs} args - Arguments to update or create a TrafficLog.
+     * @example
+     * // Update or create a TrafficLog
+     * const trafficLog = await prisma.trafficLog.upsert({
+     *   create: {
+     *     // ... data to create a TrafficLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TrafficLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TrafficLogUpsertArgs>(args: SelectSubset<T, TrafficLogUpsertArgs<ExtArgs>>): Prisma__TrafficLogClient<$Result.GetResult<Prisma.$TrafficLogPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of TrafficLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrafficLogCountArgs} args - Arguments to filter TrafficLogs to count.
+     * @example
+     * // Count the number of TrafficLogs
+     * const count = await prisma.trafficLog.count({
+     *   where: {
+     *     // ... the filter for the TrafficLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends TrafficLogCountArgs>(
+      args?: Subset<T, TrafficLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TrafficLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TrafficLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrafficLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TrafficLogAggregateArgs>(args: Subset<T, TrafficLogAggregateArgs>): Prisma.PrismaPromise<GetTrafficLogAggregateType<T>>
+
+    /**
+     * Group by TrafficLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrafficLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TrafficLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TrafficLogGroupByArgs['orderBy'] }
+        : { orderBy?: TrafficLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TrafficLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTrafficLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TrafficLog model
+   */
+  readonly fields: TrafficLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TrafficLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TrafficLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TrafficLog model
+   */ 
+  interface TrafficLogFieldRefs {
+    readonly id: FieldRef<"TrafficLog", 'String'>
+    readonly tenantId: FieldRef<"TrafficLog", 'String'>
+    readonly date: FieldRef<"TrafficLog", 'DateTime'>
+    readonly count: FieldRef<"TrafficLog", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TrafficLog findUnique
+   */
+  export type TrafficLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * Filter, which TrafficLog to fetch.
+     */
+    where: TrafficLogWhereUniqueInput
+  }
+
+  /**
+   * TrafficLog findUniqueOrThrow
+   */
+  export type TrafficLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * Filter, which TrafficLog to fetch.
+     */
+    where: TrafficLogWhereUniqueInput
+  }
+
+  /**
+   * TrafficLog findFirst
+   */
+  export type TrafficLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * Filter, which TrafficLog to fetch.
+     */
+    where?: TrafficLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrafficLogs to fetch.
+     */
+    orderBy?: TrafficLogOrderByWithRelationInput | TrafficLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrafficLogs.
+     */
+    cursor?: TrafficLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrafficLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrafficLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrafficLogs.
+     */
+    distinct?: TrafficLogScalarFieldEnum | TrafficLogScalarFieldEnum[]
+  }
+
+  /**
+   * TrafficLog findFirstOrThrow
+   */
+  export type TrafficLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * Filter, which TrafficLog to fetch.
+     */
+    where?: TrafficLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrafficLogs to fetch.
+     */
+    orderBy?: TrafficLogOrderByWithRelationInput | TrafficLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrafficLogs.
+     */
+    cursor?: TrafficLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrafficLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrafficLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrafficLogs.
+     */
+    distinct?: TrafficLogScalarFieldEnum | TrafficLogScalarFieldEnum[]
+  }
+
+  /**
+   * TrafficLog findMany
+   */
+  export type TrafficLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * Filter, which TrafficLogs to fetch.
+     */
+    where?: TrafficLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrafficLogs to fetch.
+     */
+    orderBy?: TrafficLogOrderByWithRelationInput | TrafficLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TrafficLogs.
+     */
+    cursor?: TrafficLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrafficLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrafficLogs.
+     */
+    skip?: number
+    distinct?: TrafficLogScalarFieldEnum | TrafficLogScalarFieldEnum[]
+  }
+
+  /**
+   * TrafficLog create
+   */
+  export type TrafficLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * The data needed to create a TrafficLog.
+     */
+    data: XOR<TrafficLogCreateInput, TrafficLogUncheckedCreateInput>
+  }
+
+  /**
+   * TrafficLog createMany
+   */
+  export type TrafficLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TrafficLogs.
+     */
+    data: TrafficLogCreateManyInput | TrafficLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TrafficLog createManyAndReturn
+   */
+  export type TrafficLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many TrafficLogs.
+     */
+    data: TrafficLogCreateManyInput | TrafficLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TrafficLog update
+   */
+  export type TrafficLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * The data needed to update a TrafficLog.
+     */
+    data: XOR<TrafficLogUpdateInput, TrafficLogUncheckedUpdateInput>
+    /**
+     * Choose, which TrafficLog to update.
+     */
+    where: TrafficLogWhereUniqueInput
+  }
+
+  /**
+   * TrafficLog updateMany
+   */
+  export type TrafficLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TrafficLogs.
+     */
+    data: XOR<TrafficLogUpdateManyMutationInput, TrafficLogUncheckedUpdateManyInput>
+    /**
+     * Filter which TrafficLogs to update
+     */
+    where?: TrafficLogWhereInput
+  }
+
+  /**
+   * TrafficLog updateManyAndReturn
+   */
+  export type TrafficLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * The data used to update TrafficLogs.
+     */
+    data: XOR<TrafficLogUpdateManyMutationInput, TrafficLogUncheckedUpdateManyInput>
+    /**
+     * Filter which TrafficLogs to update
+     */
+    where?: TrafficLogWhereInput
+  }
+
+  /**
+   * TrafficLog upsert
+   */
+  export type TrafficLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * The filter to search for the TrafficLog to update in case it exists.
+     */
+    where: TrafficLogWhereUniqueInput
+    /**
+     * In case the TrafficLog found by the `where` argument doesn't exist, create a new TrafficLog with this data.
+     */
+    create: XOR<TrafficLogCreateInput, TrafficLogUncheckedCreateInput>
+    /**
+     * In case the TrafficLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TrafficLogUpdateInput, TrafficLogUncheckedUpdateInput>
+  }
+
+  /**
+   * TrafficLog delete
+   */
+  export type TrafficLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+    /**
+     * Filter which TrafficLog to delete.
+     */
+    where: TrafficLogWhereUniqueInput
+  }
+
+  /**
+   * TrafficLog deleteMany
+   */
+  export type TrafficLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrafficLogs to delete
+     */
+    where?: TrafficLogWhereInput
+  }
+
+  /**
+   * TrafficLog without action
+   */
+  export type TrafficLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrafficLog
+     */
+    select?: TrafficLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrafficLog
+     */
+    omit?: TrafficLogOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6685,6 +7780,16 @@ export namespace Prisma {
   };
 
   export type GlobalThemeScalarFieldEnum = (typeof GlobalThemeScalarFieldEnum)[keyof typeof GlobalThemeScalarFieldEnum]
+
+
+  export const TrafficLogScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    date: 'date',
+    count: 'count'
+  };
+
+  export type TrafficLogScalarFieldEnum = (typeof TrafficLogScalarFieldEnum)[keyof typeof TrafficLogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7162,6 +8267,56 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"GlobalTheme"> | Date | string
   }
 
+  export type TrafficLogWhereInput = {
+    AND?: TrafficLogWhereInput | TrafficLogWhereInput[]
+    OR?: TrafficLogWhereInput[]
+    NOT?: TrafficLogWhereInput | TrafficLogWhereInput[]
+    id?: StringFilter<"TrafficLog"> | string
+    tenantId?: StringFilter<"TrafficLog"> | string
+    date?: DateTimeFilter<"TrafficLog"> | Date | string
+    count?: IntFilter<"TrafficLog"> | number
+  }
+
+  export type TrafficLogOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    date?: SortOrder
+    count?: SortOrder
+  }
+
+  export type TrafficLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_date?: TrafficLogTenantIdDateCompoundUniqueInput
+    AND?: TrafficLogWhereInput | TrafficLogWhereInput[]
+    OR?: TrafficLogWhereInput[]
+    NOT?: TrafficLogWhereInput | TrafficLogWhereInput[]
+    tenantId?: StringFilter<"TrafficLog"> | string
+    date?: DateTimeFilter<"TrafficLog"> | Date | string
+    count?: IntFilter<"TrafficLog"> | number
+  }, "id" | "tenantId_date">
+
+  export type TrafficLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    date?: SortOrder
+    count?: SortOrder
+    _count?: TrafficLogCountOrderByAggregateInput
+    _avg?: TrafficLogAvgOrderByAggregateInput
+    _max?: TrafficLogMaxOrderByAggregateInput
+    _min?: TrafficLogMinOrderByAggregateInput
+    _sum?: TrafficLogSumOrderByAggregateInput
+  }
+
+  export type TrafficLogScalarWhereWithAggregatesInput = {
+    AND?: TrafficLogScalarWhereWithAggregatesInput | TrafficLogScalarWhereWithAggregatesInput[]
+    OR?: TrafficLogScalarWhereWithAggregatesInput[]
+    NOT?: TrafficLogScalarWhereWithAggregatesInput | TrafficLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TrafficLog"> | string
+    tenantId?: StringWithAggregatesFilter<"TrafficLog"> | string
+    date?: DateTimeWithAggregatesFilter<"TrafficLog"> | Date | string
+    count?: IntWithAggregatesFilter<"TrafficLog"> | number
+  }
+
   export type SuperAdminCreateInput = {
     id?: string
     name: string
@@ -7516,6 +8671,55 @@ export namespace Prisma {
     previewUrl?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrafficLogCreateInput = {
+    id?: string
+    tenantId: string
+    date: Date | string
+    count?: number
+  }
+
+  export type TrafficLogUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    date: Date | string
+    count?: number
+  }
+
+  export type TrafficLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TrafficLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TrafficLogCreateManyInput = {
+    id?: string
+    tenantId: string
+    date: Date | string
+    count?: number
+  }
+
+  export type TrafficLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TrafficLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7919,6 +9123,40 @@ export namespace Prisma {
     previewUrl?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type TrafficLogTenantIdDateCompoundUniqueInput = {
+    tenantId: string
+    date: Date | string
+  }
+
+  export type TrafficLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    date?: SortOrder
+    count?: SortOrder
+  }
+
+  export type TrafficLogAvgOrderByAggregateInput = {
+    count?: SortOrder
+  }
+
+  export type TrafficLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    date?: SortOrder
+    count?: SortOrder
+  }
+
+  export type TrafficLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    date?: SortOrder
+    count?: SortOrder
+  }
+
+  export type TrafficLogSumOrderByAggregateInput = {
+    count?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

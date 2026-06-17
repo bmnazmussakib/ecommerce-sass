@@ -167,6 +167,13 @@ exports.Prisma.GlobalThemeScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.TrafficLogScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  date: 'date',
+  count: 'count'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -203,7 +210,8 @@ exports.Prisma.ModelName = {
   Tenant: 'Tenant',
   Plan: 'Plan',
   Subscription: 'Subscription',
-  GlobalTheme: 'GlobalTheme'
+  GlobalTheme: 'GlobalTheme',
+  TrafficLog: 'TrafficLog'
 };
 
 /**

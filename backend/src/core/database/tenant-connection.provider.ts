@@ -33,7 +33,7 @@ export class TenantConnectionProvider {
 
         if (isLocalhost) {
           // Fallback or test header for local development testing
-          const testTenant = req.headers['x-tenant-id'] as string;
+          const testTenant = (req.headers['x-tenant-id'] as string) || (req.query?.tenantId as string);
           if (testTenant) {
             subdomain = testTenant;
           } else {

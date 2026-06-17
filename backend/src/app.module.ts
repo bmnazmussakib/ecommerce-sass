@@ -7,6 +7,7 @@ import { TenantModule } from './tenant/tenant.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TenantResolverMiddleware } from './core/middleware/tenant-resolver.middleware';
+import { TrafficThrottleMiddleware } from './core/middleware/traffic-throttle.middleware';
 
 @Module({
   imports: [
@@ -24,5 +25,10 @@ export class AppModule implements NestModule {
     consumer
       .apply(TenantResolverMiddleware)
       .forRoutes('*');
+
+    consumer
+      .apply(TrafficThrottleMiddleware)
+      .forRoutes('api/tenant/*');
   }
 }
+

@@ -6,6 +6,8 @@ import { ProductModule } from './product/product.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { CouponModule } from './coupon/coupon.module';
 import { OrderModule } from './order/order.module';
+import { IntegrationModule } from './integration/integration.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -15,7 +17,9 @@ import { OrderModule } from './order/order.module';
     ProductModule,
     SupplierModule,
     CouponModule,
-    OrderModule
+    OrderModule,
+    IntegrationModule,
+    AnalyticsModule
   ]
 })
 export class TenantModule {}
