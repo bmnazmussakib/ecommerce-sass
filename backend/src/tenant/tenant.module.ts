@@ -8,6 +8,7 @@ import { CouponModule } from './coupon/coupon.module';
 import { OrderModule } from './order/order.module';
 import { IntegrationModule } from './integration/integration.module';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { AnalyticsModule } from './analytics/analytics.module';
     CouponModule,
     OrderModule,
     IntegrationModule,
-    AnalyticsModule
+    AnalyticsModule,
+    UploadModule
   ]
 })
 export class TenantModule {}

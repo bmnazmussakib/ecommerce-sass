@@ -6,12 +6,12 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Tenant - Product Categories')
 @ApiHeader({ name: 'x-tenant-id', description: 'Tenant subdomain', required: true })
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @Controller('api/tenant/categories')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Post()
   @ApiOperation({ summary: 'Create a category' })
   create(@Body() createCategoryDto: CreateCategoryDto) {
@@ -30,12 +30,16 @@ export class CategoryController {
     return this.categoryService.findOne(id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   @ApiOperation({ summary: 'Update a category' })
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update(id, updateCategoryDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a category' })
   remove(@Param('id') id: string) {

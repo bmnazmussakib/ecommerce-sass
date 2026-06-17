@@ -6,8 +6,6 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Tenant - Store Settings')
 @ApiHeader({ name: 'x-tenant-id', description: 'Tenant subdomain', required: true })
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @Controller('api/tenant/settings')
 export class SettingsController {
   constructor(private readonly settingsService: SettingsService) {}
@@ -18,6 +16,8 @@ export class SettingsController {
     return this.settingsService.getSettings();
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Put()
   @ApiOperation({ summary: 'Update store settings' })
   updateSettings(@Body() updateSettingsDto: UpdateSettingsDto) {
