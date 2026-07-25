@@ -195,7 +195,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\personal\\ecommerce-sass\\backend\\src\\generated\\master",
+      "value": "D:\\PROJECT FILE\\ecommerce-sass\\backend\\src\\generated\\master",
       "fromEnvVar": null
     },
     "config": {
@@ -206,10 +206,14 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-musl-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\personal\\ecommerce-sass\\backend\\prisma\\master.prisma",
+    "sourceFilePath": "D:\\PROJECT FILE\\ecommerce-sass\\backend\\prisma\\master.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -223,6 +227,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -231,8 +236,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "datasource db {\n  provider  = \"postgresql\"\n  url       = env(\"MASTER_DATABASE_URL\")\n  directUrl = env(\"MASTER_DIRECT_URL\")\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/master\"\n}\n\nmodel SuperAdmin {\n  id               String   @id @default(uuid())\n  name             String\n  email            String   @unique\n  password         String\n  twoFactorSecret  String?\n  twoFactorEnabled Boolean  @default(false)\n  createdAt        DateTime @default(now())\n}\n\nmodel Tenant {\n  id                 String        @id @default(uuid())\n  subdomain          String        @unique\n  customDomain       String?       @unique\n  status             TenantStatus  @default(PENDING)\n  dbConnectionString String\n  createdAt          DateTime      @default(now())\n  updatedAt          DateTime      @updatedAt\n  subscription       Subscription?\n}\n\nenum TenantStatus {\n  PENDING\n  ACTIVE\n  SUSPENDED\n}\n\nmodel Plan {\n  id            String         @id @default(uuid())\n  name          String\n  productLimit  Int\n  trafficLimit  Int\n  storageLimit  Int\n  price         Decimal        @db.Decimal(10, 2)\n  interval      BillingCycle   @default(MONTHLY)\n  subscriptions Subscription[]\n}\n\nenum BillingCycle {\n  MONTHLY\n  YEARLY\n}\n\nmodel Subscription {\n  id                   String             @id @default(uuid())\n  tenantId             String             @unique\n  tenant               Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)\n  planId               String\n  plan                 Plan               @relation(fields: [planId], references: [id])\n  status               SubscriptionStatus @default(ACTIVE)\n  currentPeriodStart   DateTime\n  currentPeriodEnd     DateTime\n  stripeSubscriptionId String?\n  createdAt            DateTime           @default(now())\n}\n\nenum SubscriptionStatus {\n  ACTIVE\n  PAST_DUE\n  CANCELED\n}\n\nmodel GlobalTheme {\n  id             String   @id @default(uuid())\n  name           String\n  codeIdentifier String   @unique\n  previewUrl     String\n  isActive       Boolean  @default(true)\n  createdAt      DateTime @default(now())\n}\n\nmodel TrafficLog {\n  id       String   @id @default(uuid())\n  tenantId String\n  date     DateTime @db.Date\n  count    Int      @default(0)\n\n  @@unique([tenantId, date])\n}\n",
-  "inlineSchemaHash": "05e1fdc34755ed5a4c4853b6fbf418d846cbbd77d7a141dbe6dc1947b23df6d1",
+  "inlineSchema": "datasource db {\n  provider  = \"postgresql\"\n  url       = env(\"MASTER_DATABASE_URL\")\n  directUrl = env(\"MASTER_DIRECT_URL\")\n}\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/master\"\n  binaryTargets = [\"native\", \"linux-musl-openssl-3.0.x\"]\n}\n\nmodel SuperAdmin {\n  id               String   @id @default(uuid())\n  name             String\n  email            String   @unique\n  password         String\n  twoFactorSecret  String?\n  twoFactorEnabled Boolean  @default(false)\n  createdAt        DateTime @default(now())\n}\n\nmodel Tenant {\n  id                 String        @id @default(uuid())\n  subdomain          String        @unique\n  customDomain       String?       @unique\n  status             TenantStatus  @default(PENDING)\n  dbConnectionString String\n  createdAt          DateTime      @default(now())\n  updatedAt          DateTime      @updatedAt\n  subscription       Subscription?\n}\n\nenum TenantStatus {\n  PENDING\n  ACTIVE\n  SUSPENDED\n}\n\nmodel Plan {\n  id            String         @id @default(uuid())\n  name          String\n  productLimit  Int\n  trafficLimit  Int\n  storageLimit  Int\n  price         Decimal        @db.Decimal(10, 2)\n  interval      BillingCycle   @default(MONTHLY)\n  subscriptions Subscription[]\n}\n\nenum BillingCycle {\n  MONTHLY\n  YEARLY\n}\n\nmodel Subscription {\n  id                   String             @id @default(uuid())\n  tenantId             String             @unique\n  tenant               Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)\n  planId               String\n  plan                 Plan               @relation(fields: [planId], references: [id])\n  status               SubscriptionStatus @default(ACTIVE)\n  currentPeriodStart   DateTime\n  currentPeriodEnd     DateTime\n  stripeSubscriptionId String?\n  createdAt            DateTime           @default(now())\n}\n\nenum SubscriptionStatus {\n  ACTIVE\n  PAST_DUE\n  CANCELED\n}\n\nmodel GlobalTheme {\n  id             String   @id @default(uuid())\n  name           String\n  codeIdentifier String   @unique\n  previewUrl     String\n  isActive       Boolean  @default(true)\n  createdAt      DateTime @default(now())\n}\n\nmodel TrafficLog {\n  id       String   @id @default(uuid())\n  tenantId String\n  date     DateTime @db.Date\n  count    Int      @default(0)\n\n  @@unique([tenantId, date])\n}\n",
+  "inlineSchemaHash": "5988954fb964de91c44d8fb851a801a6a281bacde2436a1e89ac81a78689b37b",
   "copyEngine": true
 }
 config.dirname = '/'

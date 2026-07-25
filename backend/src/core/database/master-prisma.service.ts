@@ -7,10 +7,13 @@ export class MasterPrismaService extends PrismaClient implements OnModuleInit, O
   private readonly logger = new Logger(MasterPrismaService.name);
 
   constructor(configService: ConfigService) {
+    const dbUrl = configService.get<string>('MASTER_DATABASE_URL');
+    console.log('MASTER_DATABASE_URL from configService:', dbUrl);
+    console.log('MASTER_DATABASE_URL from process.env:', process.env.MASTER_DATABASE_URL);
     super({
       datasources: {
         db: {
-          url: configService.get<string>('MASTER_DATABASE_URL') || '',
+          url: dbUrl || process.env.MASTER_DATABASE_URL || '',
         },
       },
     });
