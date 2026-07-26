@@ -3,13 +3,17 @@ import { ApiTags, ApiBearerAuth, ApiHeader, ApiOperation } from '@nestjs/swagger
 import { OrderService } from './order.service';
 import { CreateOrderDto, UpdateOrderStatusDto } from './dto/order.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { InvoiceService } from './invoice.service';
 import * as express from 'express';
 
 @ApiTags('Tenant - Orders')
 @ApiHeader({ name: 'x-tenant-id', required: true })
 @Controller('api/tenant/orders')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(
+    private readonly orderService: OrderService,
+    private readonly invoiceService: InvoiceService,
+  ) {}
 
   @Post('checkout')
   @ApiOperation({ summary: 'Place a new order (Public API)' })
@@ -67,9 +71,19 @@ export class OrderController {
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
+  @Get(':id/invoice')
+  @ApiOperation({ summary: 'Download order PDF invoice' })
+  async getInvoice(@Param('id') id: string, @Res() res: express.Response) {
+    const order = await this.orderService.findOne(id);
+    return this.invoiceService.generateInvoicePdf(order, res);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Patch(':id/status')
   @ApiOperation({ summary: 'Update order payment/shipping status (Admin)' })
   updateStatus(@Param('id') id: string, @Body() updateOrderStatusDto: UpdateOrderStatusDto) {
     return this.orderService.updateStatus(id, updateOrderStatusDto);
   }
 }
+
