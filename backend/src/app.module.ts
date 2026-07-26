@@ -1,6 +1,7 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { DatabaseModule } from './core/database/database.module';
 import { MasterModule } from './master/master.module';
 import { TenantModule } from './tenant/tenant.module';
@@ -13,6 +14,10 @@ import { TrafficThrottleMiddleware } from './core/middleware/traffic-throttle.mi
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     EventEmitterModule.forRoot(),
+    ThrottlerModule.forRoot([{
+      ttl: 60000, // 1 minute
+      limit: 100, // Max 100 requests per minute per client
+    }]),
     DatabaseModule,
     MasterModule,
     TenantModule,

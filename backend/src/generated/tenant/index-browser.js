@@ -135,6 +135,8 @@ exports.Prisma.StaffScalarFieldEnum = {
   password: 'password',
   role: 'role',
   status: 'status',
+  twoFactorSecret: 'twoFactorSecret',
+  twoFactorEnabled: 'twoFactorEnabled',
   createdAt: 'createdAt'
 };
 

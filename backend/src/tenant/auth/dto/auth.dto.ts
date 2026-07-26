@@ -36,3 +36,20 @@ export class RegisterDto {
   @IsOptional()
   role?: StaffRole;
 }
+
+export class Verify2FaDto {
+  @ApiProperty({ description: 'OTP Code from Authenticator App' })
+  @IsString()
+  token!: string;
+
+  @ApiProperty({ description: 'Staff Email Address' })
+  @IsEmail()
+  email!: string;
+}
+
+export class Enable2FaDto {
+  @ApiProperty({ description: 'OTP Code from Authenticator App' })
+  @IsString()
+  token!: string;
+}
+

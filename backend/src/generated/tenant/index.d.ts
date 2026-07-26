@@ -3086,6 +3086,8 @@ export namespace Prisma {
     password: string | null
     role: $Enums.StaffRole | null
     status: boolean | null
+    twoFactorSecret: string | null
+    twoFactorEnabled: boolean | null
     createdAt: Date | null
   }
 
@@ -3096,6 +3098,8 @@ export namespace Prisma {
     password: string | null
     role: $Enums.StaffRole | null
     status: boolean | null
+    twoFactorSecret: string | null
+    twoFactorEnabled: boolean | null
     createdAt: Date | null
   }
 
@@ -3106,6 +3110,8 @@ export namespace Prisma {
     password: number
     role: number
     status: number
+    twoFactorSecret: number
+    twoFactorEnabled: number
     createdAt: number
     _all: number
   }
@@ -3118,6 +3124,8 @@ export namespace Prisma {
     password?: true
     role?: true
     status?: true
+    twoFactorSecret?: true
+    twoFactorEnabled?: true
     createdAt?: true
   }
 
@@ -3128,6 +3136,8 @@ export namespace Prisma {
     password?: true
     role?: true
     status?: true
+    twoFactorSecret?: true
+    twoFactorEnabled?: true
     createdAt?: true
   }
 
@@ -3138,6 +3148,8 @@ export namespace Prisma {
     password?: true
     role?: true
     status?: true
+    twoFactorSecret?: true
+    twoFactorEnabled?: true
     createdAt?: true
     _all?: true
   }
@@ -3221,6 +3233,8 @@ export namespace Prisma {
     password: string
     role: $Enums.StaffRole
     status: boolean
+    twoFactorSecret: string | null
+    twoFactorEnabled: boolean
     createdAt: Date
     _count: StaffCountAggregateOutputType | null
     _min: StaffMinAggregateOutputType | null
@@ -3248,6 +3262,8 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     status?: boolean
+    twoFactorSecret?: boolean
+    twoFactorEnabled?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["staff"]>
 
@@ -3258,6 +3274,8 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     status?: boolean
+    twoFactorSecret?: boolean
+    twoFactorEnabled?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["staff"]>
 
@@ -3268,6 +3286,8 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     status?: boolean
+    twoFactorSecret?: boolean
+    twoFactorEnabled?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["staff"]>
 
@@ -3278,10 +3298,12 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     status?: boolean
+    twoFactorSecret?: boolean
+    twoFactorEnabled?: boolean
     createdAt?: boolean
   }
 
-  export type StaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "status" | "createdAt", ExtArgs["result"]["staff"]>
+  export type StaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "status" | "twoFactorSecret" | "twoFactorEnabled" | "createdAt", ExtArgs["result"]["staff"]>
 
   export type $StaffPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Staff"
@@ -3293,6 +3315,8 @@ export namespace Prisma {
       password: string
       role: $Enums.StaffRole
       status: boolean
+      twoFactorSecret: string | null
+      twoFactorEnabled: boolean
       createdAt: Date
     }, ExtArgs["result"]["staff"]>
     composites: {}
@@ -3723,6 +3747,8 @@ export namespace Prisma {
     readonly password: FieldRef<"Staff", 'String'>
     readonly role: FieldRef<"Staff", 'StaffRole'>
     readonly status: FieldRef<"Staff", 'Boolean'>
+    readonly twoFactorSecret: FieldRef<"Staff", 'String'>
+    readonly twoFactorEnabled: FieldRef<"Staff", 'Boolean'>
     readonly createdAt: FieldRef<"Staff", 'DateTime'>
   }
     
@@ -14087,6 +14113,8 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     status: 'status',
+    twoFactorSecret: 'twoFactorSecret',
+    twoFactorEnabled: 'twoFactorEnabled',
     createdAt: 'createdAt'
   };
 
@@ -14517,6 +14545,8 @@ export namespace Prisma {
     password?: StringFilter<"Staff"> | string
     role?: EnumStaffRoleFilter<"Staff"> | $Enums.StaffRole
     status?: BoolFilter<"Staff"> | boolean
+    twoFactorSecret?: StringNullableFilter<"Staff"> | string | null
+    twoFactorEnabled?: BoolFilter<"Staff"> | boolean
     createdAt?: DateTimeFilter<"Staff"> | Date | string
   }
 
@@ -14527,6 +14557,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
+    twoFactorSecret?: SortOrderInput | SortOrder
+    twoFactorEnabled?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14540,6 +14572,8 @@ export namespace Prisma {
     password?: StringFilter<"Staff"> | string
     role?: EnumStaffRoleFilter<"Staff"> | $Enums.StaffRole
     status?: BoolFilter<"Staff"> | boolean
+    twoFactorSecret?: StringNullableFilter<"Staff"> | string | null
+    twoFactorEnabled?: BoolFilter<"Staff"> | boolean
     createdAt?: DateTimeFilter<"Staff"> | Date | string
   }, "id" | "email">
 
@@ -14550,6 +14584,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
+    twoFactorSecret?: SortOrderInput | SortOrder
+    twoFactorEnabled?: SortOrder
     createdAt?: SortOrder
     _count?: StaffCountOrderByAggregateInput
     _max?: StaffMaxOrderByAggregateInput
@@ -14566,6 +14602,8 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"Staff"> | string
     role?: EnumStaffRoleWithAggregatesFilter<"Staff"> | $Enums.StaffRole
     status?: BoolWithAggregatesFilter<"Staff"> | boolean
+    twoFactorSecret?: StringNullableWithAggregatesFilter<"Staff"> | string | null
+    twoFactorEnabled?: BoolWithAggregatesFilter<"Staff"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Staff"> | Date | string
   }
 
@@ -15265,6 +15303,8 @@ export namespace Prisma {
     password: string
     role?: $Enums.StaffRole
     status?: boolean
+    twoFactorSecret?: string | null
+    twoFactorEnabled?: boolean
     createdAt?: Date | string
   }
 
@@ -15275,6 +15315,8 @@ export namespace Prisma {
     password: string
     role?: $Enums.StaffRole
     status?: boolean
+    twoFactorSecret?: string | null
+    twoFactorEnabled?: boolean
     createdAt?: Date | string
   }
 
@@ -15285,6 +15327,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumStaffRoleFieldUpdateOperationsInput | $Enums.StaffRole
     status?: BoolFieldUpdateOperationsInput | boolean
+    twoFactorSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    twoFactorEnabled?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15295,6 +15339,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumStaffRoleFieldUpdateOperationsInput | $Enums.StaffRole
     status?: BoolFieldUpdateOperationsInput | boolean
+    twoFactorSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    twoFactorEnabled?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15305,6 +15351,8 @@ export namespace Prisma {
     password: string
     role?: $Enums.StaffRole
     status?: boolean
+    twoFactorSecret?: string | null
+    twoFactorEnabled?: boolean
     createdAt?: Date | string
   }
 
@@ -15315,6 +15363,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumStaffRoleFieldUpdateOperationsInput | $Enums.StaffRole
     status?: BoolFieldUpdateOperationsInput | boolean
+    twoFactorSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    twoFactorEnabled?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15325,6 +15375,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumStaffRoleFieldUpdateOperationsInput | $Enums.StaffRole
     status?: BoolFieldUpdateOperationsInput | boolean
+    twoFactorSecret?: NullableStringFieldUpdateOperationsInput | string | null
+    twoFactorEnabled?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16172,6 +16224,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
+    twoFactorSecret?: SortOrder
+    twoFactorEnabled?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -16182,6 +16236,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
+    twoFactorSecret?: SortOrder
+    twoFactorEnabled?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -16192,6 +16248,8 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     status?: SortOrder
+    twoFactorSecret?: SortOrder
+    twoFactorEnabled?: SortOrder
     createdAt?: SortOrder
   }
 

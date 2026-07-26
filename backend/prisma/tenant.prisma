@@ -21,13 +21,15 @@ model StoreSetting {
 }
 
 model Staff {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  role      StaffRole @default(STAFF)
-  status    Boolean  @default(true)
-  createdAt DateTime @default(now())
+  id                String   @id @default(uuid())
+  name              String
+  email             String   @unique
+  password          String
+  role              StaffRole @default(STAFF)
+  status            Boolean  @default(true)
+  twoFactorSecret   String?
+  twoFactorEnabled  Boolean  @default(false)
+  createdAt         DateTime @default(now())
 }
 
 enum StaffRole {
