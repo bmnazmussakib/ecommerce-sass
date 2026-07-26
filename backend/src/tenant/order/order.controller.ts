@@ -53,6 +53,27 @@ export class OrderController {
     }
   }
 
+  @Post('ssl-callback')
+  @ApiOperation({ summary: 'SSLCommerz payment callback IPN (Public API)' })
+  async sslCallback(
+    @Query('orderId') orderId: string,
+    @Query('status') status: string,
+    @Body() body: any,
+    @Res() res: express.Response
+  ) {
+    try {
+      const valId = body.val_id;
+      const result = await this.orderService.verifySslCommerzPayment(orderId, valId, status);
+      if (result.success) {
+        return res.json({ message: 'Payment verified successfully via SSLCommerz', orderId });
+      } else {
+        return res.status(400).json({ message: 'Payment validation failed', reason: result.reason });
+      }
+    } catch (err: any) {
+      return res.status(500).json({ message: 'Verification error', error: err.message });
+    }
+  }
+
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -86,4 +107,3 @@ export class OrderController {
     return this.orderService.updateStatus(id, updateOrderStatusDto);
   }
 }
-

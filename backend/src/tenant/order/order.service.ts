@@ -3,12 +3,14 @@ import { TENANT_PRISMA_CLIENT } from '../../core/database/tenant-connection.prov
 import { PrismaClient as TenantPrismaClient, Prisma } from '@prisma/tenant-client';
 import { CreateOrderDto, UpdateOrderStatusDto } from './dto/order.dto';
 import { BkashService } from '../integration/adapters/bkash.service';
+import { SslCommerzService } from '../integration/adapters/sslcommerz.service';
 
 @Injectable()
 export class OrderService {
   constructor(
     @Inject(TENANT_PRISMA_CLIENT) private readonly prisma: TenantPrismaClient,
     private readonly bkashService: BkashService,
+    private readonly sslCommerzService: SslCommerzService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -131,6 +133,8 @@ export class OrderService {
 
 
       let bkashURL: string | null = null;
+      let sslczGatewayUrl: string | null = null;
+
       if (dto.paymentMethod === 'BKASH') {
         const integration = await tx.integration.findUnique({
           where: { provider: 'BKASH' }
@@ -150,19 +154,44 @@ export class OrderService {
           callbackUrl
         );
         bkashURL = paymentRes.bkashURL;
+      } else if (dto.paymentMethod === 'CARD') {
+        const integration = await tx.integration.findUnique({
+          where: { provider: 'SSLCOMMERZ' }
+        });
+        if (!integration || !integration.isActive) {
+          throw new BadRequestException('SSLCommerz integration is not configured or active');
+        }
+
+        const keys = integration.keysJson as any;
+        const successUrl = `${origin}/api/tenant/orders/ssl-callback?status=success&orderId=${order.id}&tenantId=${tenantId}`;
+        const failUrl = `${origin}/api/tenant/orders/ssl-callback?status=fail&orderId=${order.id}&tenantId=${tenantId}`;
+        const cancelUrl = `${origin}/api/tenant/orders/ssl-callback?status=cancel&orderId=${order.id}&tenantId=${tenantId}`;
+
+        sslczGatewayUrl = await this.sslCommerzService.initiatePayment(keys, {
+          total_amount: totalPrice.toNumber(),
+          tran_id: order.id,
+          success_url: successUrl,
+          fail_url: failUrl,
+          cancel_url: cancelUrl,
+          cus_name: order.customerName,
+          cus_email: order.customerEmail || 'customer@ecomize.com',
+          cus_phone: order.customerPhone,
+          cus_add1: order.shippingAddress,
+        });
       }
 
       return {
-        message: bkashURL ? 'Redirect to bKash' : 'Order placed successfully',
+        message: bkashURL || sslczGatewayUrl ? 'Redirect to Payment Gateway' : 'Order placed successfully',
         orderId: order.id,
         subTotal,
         discount,
         shippingCharge,
         totalPrice,
-        bkashURL
+        paymentUrl: bkashURL || sslczGatewayUrl,
       };
     });
   }
+
 
   async verifyBkashPayment(orderId: string, paymentID: string, status: string) {
     console.log(`Verifying bKash Payment: orderId=${orderId}, paymentID=${paymentID}, status=${status}`);
@@ -218,6 +247,44 @@ export class OrderService {
     }
   }
 
+  async verifySslCommerzPayment(orderId: string, valId: string, status: string) {
+    const order = await this.prisma.order.findUnique({ where: { id: orderId } });
+    if (!order) throw new NotFoundException('Order not found');
+
+    if (status !== 'success' || !valId) {
+      await this.prisma.order.update({
+        where: { id: orderId },
+        data: { paymentStatus: 'FAILED' }
+      });
+      return { success: false, orderId, reason: `Payment status failed: ${status}` };
+    }
+
+    const integration = await this.prisma.integration.findUnique({
+      where: { provider: 'SSLCOMMERZ' }
+    });
+
+    if (!integration || !integration.isActive) {
+      throw new BadRequestException('SSLCommerz configuration missing');
+    }
+
+    const keys = integration.keysJson as any;
+    const isValid = await this.sslCommerzService.validatePayment(keys, valId);
+
+    if (isValid) {
+      await this.prisma.order.update({
+        where: { id: orderId },
+        data: { paymentStatus: 'PAID' }
+      });
+      return { success: true, orderId };
+    } else {
+      await this.prisma.order.update({
+        where: { id: orderId },
+        data: { paymentStatus: 'FAILED' }
+      });
+      return { success: false, orderId, reason: 'Payment validation failed at SSLCommerz' };
+    }
+  }
+
   async findAll() {
     return this.prisma.order.findMany({
       orderBy: { createdAt: 'desc' },
@@ -246,3 +313,4 @@ export class OrderService {
     });
   }
 }
+
