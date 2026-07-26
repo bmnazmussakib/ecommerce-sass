@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile, Req } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiHeader, ApiBearerAuth } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+
 
 @ApiTags('Tenant - Products')
 @ApiHeader({ name: 'x-tenant-id', description: 'Tenant subdomain', required: true })
@@ -16,6 +19,27 @@ export class ProductController {
   @ApiOperation({ summary: 'Create a product' })
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Post('bulk-upload')
+  @ApiOperation({ summary: 'Bulk upload products via CSV' })
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: './uploads',
+      filename: (req: any, file: any, cb: any) => {
+        cb(null, `csv-${Date.now()}-${file.originalname}`);
+      },
+    }),
+  }))
+
+  async bulkUpload(
+    @UploadedFile() file: Express.Multer.File,
+    @Req() req: any,
+  ) {
+    const tenantId = req.headers['x-tenant-id'] || 'default';
+    return this.productService.addCsvImportJob(file.path, tenantId);
   }
 
   @Get()
@@ -46,3 +70,4 @@ export class ProductController {
     return this.productService.remove(id);
   }
 }
+

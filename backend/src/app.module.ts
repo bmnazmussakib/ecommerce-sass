@@ -1,7 +1,8 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { BullModule } from '@nestjs/bullmq';
 import { DatabaseModule } from './core/database/database.module';
 import { MasterModule } from './master/master.module';
 import { TenantModule } from './tenant/tenant.module';
@@ -18,6 +19,16 @@ import { TrafficThrottleMiddleware } from './core/middleware/traffic-throttle.mi
       ttl: 60000, // 1 minute
       limit: 100, // Max 100 requests per minute per client
     }]),
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        connection: {
+          host: configService.get<string>('REDIS_HOST') || 'localhost',
+          port: configService.get<number>('REDIS_PORT') || 6379,
+        },
+      }),
+      inject: [ConfigService],
+    }),
     DatabaseModule,
     MasterModule,
     TenantModule,
