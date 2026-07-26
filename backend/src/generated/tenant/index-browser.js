@@ -201,6 +201,22 @@ exports.Prisma.OrderScalarFieldEnum = {
   shippingStatus: 'shippingStatus',
   awbCode: 'awbCode',
   trackingUrl: 'trackingUrl',
+  fingerprint: 'fingerprint',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BlockedFingerprintScalarFieldEnum = {
+  id: 'id',
+  fingerprint: 'fingerprint',
+  reason: 'reason',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BlockedContactScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  type: 'type',
+  reason: 'reason',
   createdAt: 'createdAt'
 };
 
@@ -312,6 +328,8 @@ exports.Prisma.ModelName = {
   ProductVariant: 'ProductVariant',
   SupplyBatch: 'SupplyBatch',
   Order: 'Order',
+  BlockedFingerprint: 'BlockedFingerprint',
+  BlockedContact: 'BlockedContact',
   OrderItem: 'OrderItem',
   Coupon: 'Coupon',
   Integration: 'Integration'

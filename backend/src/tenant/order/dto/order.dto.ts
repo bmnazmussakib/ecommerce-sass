@@ -46,6 +46,11 @@ export class CreateOrderDto {
   @ValidateNested({ each: true })
   @Type(() => OrderItemDto)
   items!: OrderItemDto[];
+
+  @ApiProperty({ example: 'device-fingerprint-hash-val', required: false })
+  @IsOptional()
+  @IsString()
+  fingerprint?: string;
 }
 
 export class UpdateOrderStatusDto {

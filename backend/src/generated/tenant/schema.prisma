@@ -116,8 +116,24 @@ model Order {
   shippingStatus  ShippingStatus @default(PENDING)
   awbCode         String?
   trackingUrl     String?
+  fingerprint     String? // Client device signature
   createdAt       DateTime       @default(now())
   orderItems      OrderItem[]
+}
+
+model BlockedFingerprint {
+  id          String   @id @default(uuid())
+  fingerprint String   @unique
+  reason      String?
+  createdAt   DateTime @default(now())
+}
+
+model BlockedContact {
+  id        String   @id @default(uuid())
+  value     String   @unique // Blocked phone number or email
+  type      String // 'PHONE' or 'EMAIL'
+  reason    String?
+  createdAt DateTime @default(now())
 }
 
 enum PaymentMethod {

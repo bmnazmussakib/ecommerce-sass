@@ -16,6 +16,44 @@ export class OrderService {
       throw new BadRequestException('Order must contain at least one item');
     }
 
+    // 1. Check Spam Blocklist (Email and Phone)
+    const blockList = await this.prisma.blockedContact.findFirst({
+      where: {
+        OR: [
+          { value: dto.customerPhone },
+          dto.customerEmail ? { value: dto.customerEmail } : undefined,
+        ].filter(Boolean) as any,
+      },
+    });
+
+    if (blockList) {
+      throw new BadRequestException('Order rejected. Contact support for assistance.');
+    }
+
+    // 2. Check Device Fingerprint Blocklist
+    if (dto.fingerprint) {
+      const blockedFingerprint = await this.prisma.blockedFingerprint.findUnique({
+        where: { fingerprint: dto.fingerprint },
+      });
+      if (blockedFingerprint) {
+        throw new BadRequestException('Order rejected. Suspicious activity detected.');
+      }
+
+      // 3. Velocity check: Max 3 orders within 5 minutes from same device signature
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+      const recentOrdersCount = await this.prisma.order.count({
+        where: {
+          fingerprint: dto.fingerprint,
+          createdAt: { gte: fiveMinutesAgo },
+        },
+      });
+
+      if (recentOrdersCount >= 3) {
+        throw new BadRequestException('Too many orders placed. Please try again later.');
+      }
+    }
+
+
     return await this.prisma.$transaction(async (tx) => {
       let subTotal = new Prisma.Decimal(0);
       const orderItemsData = [];
@@ -83,12 +121,14 @@ export class OrderService {
           paymentMethod: dto.paymentMethod,
           shippingCharge,
           totalPrice,
+          fingerprint: dto.fingerprint,
           orderItems: {
             create: orderItemsData
           }
         },
         include: { orderItems: true }
       });
+
 
       let bkashURL: string | null = null;
       if (dto.paymentMethod === 'BKASH') {

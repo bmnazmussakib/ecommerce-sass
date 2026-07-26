@@ -54,6 +54,16 @@ export type SupplyBatch = $Result.DefaultSelection<Prisma.$SupplyBatchPayload>
  */
 export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>
 /**
+ * Model BlockedFingerprint
+ * 
+ */
+export type BlockedFingerprint = $Result.DefaultSelection<Prisma.$BlockedFingerprintPayload>
+/**
+ * Model BlockedContact
+ * 
+ */
+export type BlockedContact = $Result.DefaultSelection<Prisma.$BlockedContactPayload>
+/**
  * Model OrderItem
  * 
  */
@@ -376,6 +386,26 @@ export class PrismaClient<
     * ```
     */
   get order(): Prisma.OrderDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.blockedFingerprint`: Exposes CRUD operations for the **BlockedFingerprint** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BlockedFingerprints
+    * const blockedFingerprints = await prisma.blockedFingerprint.findMany()
+    * ```
+    */
+  get blockedFingerprint(): Prisma.BlockedFingerprintDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.blockedContact`: Exposes CRUD operations for the **BlockedContact** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BlockedContacts
+    * const blockedContacts = await prisma.blockedContact.findMany()
+    * ```
+    */
+  get blockedContact(): Prisma.BlockedContactDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.orderItem`: Exposes CRUD operations for the **OrderItem** model.
@@ -854,6 +884,8 @@ export namespace Prisma {
     ProductVariant: 'ProductVariant',
     SupplyBatch: 'SupplyBatch',
     Order: 'Order',
+    BlockedFingerprint: 'BlockedFingerprint',
+    BlockedContact: 'BlockedContact',
     OrderItem: 'OrderItem',
     Coupon: 'Coupon',
     Integration: 'Integration'
@@ -872,7 +904,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "supplyBatch" | "order" | "orderItem" | "coupon" | "integration"
+      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1468,6 +1500,154 @@ export namespace Prisma {
           }
         }
       }
+      BlockedFingerprint: {
+        payload: Prisma.$BlockedFingerprintPayload<ExtArgs>
+        fields: Prisma.BlockedFingerprintFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BlockedFingerprintFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BlockedFingerprintFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>
+          }
+          findFirst: {
+            args: Prisma.BlockedFingerprintFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BlockedFingerprintFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>
+          }
+          findMany: {
+            args: Prisma.BlockedFingerprintFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>[]
+          }
+          create: {
+            args: Prisma.BlockedFingerprintCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>
+          }
+          createMany: {
+            args: Prisma.BlockedFingerprintCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BlockedFingerprintCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>[]
+          }
+          delete: {
+            args: Prisma.BlockedFingerprintDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>
+          }
+          update: {
+            args: Prisma.BlockedFingerprintUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>
+          }
+          deleteMany: {
+            args: Prisma.BlockedFingerprintDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BlockedFingerprintUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BlockedFingerprintUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>[]
+          }
+          upsert: {
+            args: Prisma.BlockedFingerprintUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedFingerprintPayload>
+          }
+          aggregate: {
+            args: Prisma.BlockedFingerprintAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBlockedFingerprint>
+          }
+          groupBy: {
+            args: Prisma.BlockedFingerprintGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BlockedFingerprintGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BlockedFingerprintCountArgs<ExtArgs>
+            result: $Utils.Optional<BlockedFingerprintCountAggregateOutputType> | number
+          }
+        }
+      }
+      BlockedContact: {
+        payload: Prisma.$BlockedContactPayload<ExtArgs>
+        fields: Prisma.BlockedContactFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BlockedContactFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BlockedContactFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>
+          }
+          findFirst: {
+            args: Prisma.BlockedContactFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BlockedContactFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>
+          }
+          findMany: {
+            args: Prisma.BlockedContactFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>[]
+          }
+          create: {
+            args: Prisma.BlockedContactCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>
+          }
+          createMany: {
+            args: Prisma.BlockedContactCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BlockedContactCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>[]
+          }
+          delete: {
+            args: Prisma.BlockedContactDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>
+          }
+          update: {
+            args: Prisma.BlockedContactUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>
+          }
+          deleteMany: {
+            args: Prisma.BlockedContactDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BlockedContactUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BlockedContactUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>[]
+          }
+          upsert: {
+            args: Prisma.BlockedContactUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlockedContactPayload>
+          }
+          aggregate: {
+            args: Prisma.BlockedContactAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBlockedContact>
+          }
+          groupBy: {
+            args: Prisma.BlockedContactGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BlockedContactGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BlockedContactCountArgs<ExtArgs>
+            result: $Utils.Optional<BlockedContactCountAggregateOutputType> | number
+          }
+        }
+      }
       OrderItem: {
         payload: Prisma.$OrderItemPayload<ExtArgs>
         fields: Prisma.OrderItemFieldRefs
@@ -1782,6 +1962,8 @@ export namespace Prisma {
     productVariant?: ProductVariantOmit
     supplyBatch?: SupplyBatchOmit
     order?: OrderOmit
+    blockedFingerprint?: BlockedFingerprintOmit
+    blockedContact?: BlockedContactOmit
     orderItem?: OrderItemOmit
     coupon?: CouponOmit
     integration?: IntegrationOmit
@@ -9795,6 +9977,7 @@ export namespace Prisma {
     shippingStatus: $Enums.ShippingStatus | null
     awbCode: string | null
     trackingUrl: string | null
+    fingerprint: string | null
     createdAt: Date | null
   }
 
@@ -9811,6 +9994,7 @@ export namespace Prisma {
     shippingStatus: $Enums.ShippingStatus | null
     awbCode: string | null
     trackingUrl: string | null
+    fingerprint: string | null
     createdAt: Date | null
   }
 
@@ -9827,6 +10011,7 @@ export namespace Prisma {
     shippingStatus: number
     awbCode: number
     trackingUrl: number
+    fingerprint: number
     createdAt: number
     _all: number
   }
@@ -9855,6 +10040,7 @@ export namespace Prisma {
     shippingStatus?: true
     awbCode?: true
     trackingUrl?: true
+    fingerprint?: true
     createdAt?: true
   }
 
@@ -9871,6 +10057,7 @@ export namespace Prisma {
     shippingStatus?: true
     awbCode?: true
     trackingUrl?: true
+    fingerprint?: true
     createdAt?: true
   }
 
@@ -9887,6 +10074,7 @@ export namespace Prisma {
     shippingStatus?: true
     awbCode?: true
     trackingUrl?: true
+    fingerprint?: true
     createdAt?: true
     _all?: true
   }
@@ -9990,6 +10178,7 @@ export namespace Prisma {
     shippingStatus: $Enums.ShippingStatus
     awbCode: string | null
     trackingUrl: string | null
+    fingerprint: string | null
     createdAt: Date
     _count: OrderCountAggregateOutputType | null
     _avg: OrderAvgAggregateOutputType | null
@@ -10025,6 +10214,7 @@ export namespace Prisma {
     shippingStatus?: boolean
     awbCode?: boolean
     trackingUrl?: boolean
+    fingerprint?: boolean
     createdAt?: boolean
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -10043,6 +10233,7 @@ export namespace Prisma {
     shippingStatus?: boolean
     awbCode?: boolean
     trackingUrl?: boolean
+    fingerprint?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["order"]>
 
@@ -10059,6 +10250,7 @@ export namespace Prisma {
     shippingStatus?: boolean
     awbCode?: boolean
     trackingUrl?: boolean
+    fingerprint?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["order"]>
 
@@ -10075,10 +10267,11 @@ export namespace Prisma {
     shippingStatus?: boolean
     awbCode?: boolean
     trackingUrl?: boolean
+    fingerprint?: boolean
     createdAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerName" | "customerEmail" | "customerPhone" | "shippingAddress" | "totalPrice" | "shippingCharge" | "paymentMethod" | "paymentStatus" | "shippingStatus" | "awbCode" | "trackingUrl" | "createdAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerName" | "customerEmail" | "customerPhone" | "shippingAddress" | "totalPrice" | "shippingCharge" | "paymentMethod" | "paymentStatus" | "shippingStatus" | "awbCode" | "trackingUrl" | "fingerprint" | "createdAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -10104,6 +10297,7 @@ export namespace Prisma {
       shippingStatus: $Enums.ShippingStatus
       awbCode: string | null
       trackingUrl: string | null
+      fingerprint: string | null
       createdAt: Date
     }, ExtArgs["result"]["order"]>
     composites: {}
@@ -10541,6 +10735,7 @@ export namespace Prisma {
     readonly shippingStatus: FieldRef<"Order", 'ShippingStatus'>
     readonly awbCode: FieldRef<"Order", 'String'>
     readonly trackingUrl: FieldRef<"Order", 'String'>
+    readonly fingerprint: FieldRef<"Order", 'String'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
   }
     
@@ -10957,6 +11152,1959 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OrderInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BlockedFingerprint
+   */
+
+  export type AggregateBlockedFingerprint = {
+    _count: BlockedFingerprintCountAggregateOutputType | null
+    _min: BlockedFingerprintMinAggregateOutputType | null
+    _max: BlockedFingerprintMaxAggregateOutputType | null
+  }
+
+  export type BlockedFingerprintMinAggregateOutputType = {
+    id: string | null
+    fingerprint: string | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type BlockedFingerprintMaxAggregateOutputType = {
+    id: string | null
+    fingerprint: string | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type BlockedFingerprintCountAggregateOutputType = {
+    id: number
+    fingerprint: number
+    reason: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BlockedFingerprintMinAggregateInputType = {
+    id?: true
+    fingerprint?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type BlockedFingerprintMaxAggregateInputType = {
+    id?: true
+    fingerprint?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type BlockedFingerprintCountAggregateInputType = {
+    id?: true
+    fingerprint?: true
+    reason?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BlockedFingerprintAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlockedFingerprint to aggregate.
+     */
+    where?: BlockedFingerprintWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedFingerprints to fetch.
+     */
+    orderBy?: BlockedFingerprintOrderByWithRelationInput | BlockedFingerprintOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BlockedFingerprintWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedFingerprints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedFingerprints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BlockedFingerprints
+    **/
+    _count?: true | BlockedFingerprintCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BlockedFingerprintMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BlockedFingerprintMaxAggregateInputType
+  }
+
+  export type GetBlockedFingerprintAggregateType<T extends BlockedFingerprintAggregateArgs> = {
+        [P in keyof T & keyof AggregateBlockedFingerprint]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBlockedFingerprint[P]>
+      : GetScalarType<T[P], AggregateBlockedFingerprint[P]>
+  }
+
+
+
+
+  export type BlockedFingerprintGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlockedFingerprintWhereInput
+    orderBy?: BlockedFingerprintOrderByWithAggregationInput | BlockedFingerprintOrderByWithAggregationInput[]
+    by: BlockedFingerprintScalarFieldEnum[] | BlockedFingerprintScalarFieldEnum
+    having?: BlockedFingerprintScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BlockedFingerprintCountAggregateInputType | true
+    _min?: BlockedFingerprintMinAggregateInputType
+    _max?: BlockedFingerprintMaxAggregateInputType
+  }
+
+  export type BlockedFingerprintGroupByOutputType = {
+    id: string
+    fingerprint: string
+    reason: string | null
+    createdAt: Date
+    _count: BlockedFingerprintCountAggregateOutputType | null
+    _min: BlockedFingerprintMinAggregateOutputType | null
+    _max: BlockedFingerprintMaxAggregateOutputType | null
+  }
+
+  type GetBlockedFingerprintGroupByPayload<T extends BlockedFingerprintGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BlockedFingerprintGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BlockedFingerprintGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BlockedFingerprintGroupByOutputType[P]>
+            : GetScalarType<T[P], BlockedFingerprintGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BlockedFingerprintSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fingerprint?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["blockedFingerprint"]>
+
+  export type BlockedFingerprintSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fingerprint?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["blockedFingerprint"]>
+
+  export type BlockedFingerprintSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fingerprint?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["blockedFingerprint"]>
+
+  export type BlockedFingerprintSelectScalar = {
+    id?: boolean
+    fingerprint?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }
+
+  export type BlockedFingerprintOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fingerprint" | "reason" | "createdAt", ExtArgs["result"]["blockedFingerprint"]>
+
+  export type $BlockedFingerprintPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BlockedFingerprint"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      fingerprint: string
+      reason: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["blockedFingerprint"]>
+    composites: {}
+  }
+
+  type BlockedFingerprintGetPayload<S extends boolean | null | undefined | BlockedFingerprintDefaultArgs> = $Result.GetResult<Prisma.$BlockedFingerprintPayload, S>
+
+  type BlockedFingerprintCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BlockedFingerprintFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BlockedFingerprintCountAggregateInputType | true
+    }
+
+  export interface BlockedFingerprintDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BlockedFingerprint'], meta: { name: 'BlockedFingerprint' } }
+    /**
+     * Find zero or one BlockedFingerprint that matches the filter.
+     * @param {BlockedFingerprintFindUniqueArgs} args - Arguments to find a BlockedFingerprint
+     * @example
+     * // Get one BlockedFingerprint
+     * const blockedFingerprint = await prisma.blockedFingerprint.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BlockedFingerprintFindUniqueArgs>(args: SelectSubset<T, BlockedFingerprintFindUniqueArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one BlockedFingerprint that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BlockedFingerprintFindUniqueOrThrowArgs} args - Arguments to find a BlockedFingerprint
+     * @example
+     * // Get one BlockedFingerprint
+     * const blockedFingerprint = await prisma.blockedFingerprint.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BlockedFingerprintFindUniqueOrThrowArgs>(args: SelectSubset<T, BlockedFingerprintFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first BlockedFingerprint that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedFingerprintFindFirstArgs} args - Arguments to find a BlockedFingerprint
+     * @example
+     * // Get one BlockedFingerprint
+     * const blockedFingerprint = await prisma.blockedFingerprint.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BlockedFingerprintFindFirstArgs>(args?: SelectSubset<T, BlockedFingerprintFindFirstArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first BlockedFingerprint that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedFingerprintFindFirstOrThrowArgs} args - Arguments to find a BlockedFingerprint
+     * @example
+     * // Get one BlockedFingerprint
+     * const blockedFingerprint = await prisma.blockedFingerprint.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BlockedFingerprintFindFirstOrThrowArgs>(args?: SelectSubset<T, BlockedFingerprintFindFirstOrThrowArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more BlockedFingerprints that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedFingerprintFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BlockedFingerprints
+     * const blockedFingerprints = await prisma.blockedFingerprint.findMany()
+     * 
+     * // Get first 10 BlockedFingerprints
+     * const blockedFingerprints = await prisma.blockedFingerprint.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const blockedFingerprintWithIdOnly = await prisma.blockedFingerprint.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BlockedFingerprintFindManyArgs>(args?: SelectSubset<T, BlockedFingerprintFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a BlockedFingerprint.
+     * @param {BlockedFingerprintCreateArgs} args - Arguments to create a BlockedFingerprint.
+     * @example
+     * // Create one BlockedFingerprint
+     * const BlockedFingerprint = await prisma.blockedFingerprint.create({
+     *   data: {
+     *     // ... data to create a BlockedFingerprint
+     *   }
+     * })
+     * 
+     */
+    create<T extends BlockedFingerprintCreateArgs>(args: SelectSubset<T, BlockedFingerprintCreateArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many BlockedFingerprints.
+     * @param {BlockedFingerprintCreateManyArgs} args - Arguments to create many BlockedFingerprints.
+     * @example
+     * // Create many BlockedFingerprints
+     * const blockedFingerprint = await prisma.blockedFingerprint.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BlockedFingerprintCreateManyArgs>(args?: SelectSubset<T, BlockedFingerprintCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BlockedFingerprints and returns the data saved in the database.
+     * @param {BlockedFingerprintCreateManyAndReturnArgs} args - Arguments to create many BlockedFingerprints.
+     * @example
+     * // Create many BlockedFingerprints
+     * const blockedFingerprint = await prisma.blockedFingerprint.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BlockedFingerprints and only return the `id`
+     * const blockedFingerprintWithIdOnly = await prisma.blockedFingerprint.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BlockedFingerprintCreateManyAndReturnArgs>(args?: SelectSubset<T, BlockedFingerprintCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a BlockedFingerprint.
+     * @param {BlockedFingerprintDeleteArgs} args - Arguments to delete one BlockedFingerprint.
+     * @example
+     * // Delete one BlockedFingerprint
+     * const BlockedFingerprint = await prisma.blockedFingerprint.delete({
+     *   where: {
+     *     // ... filter to delete one BlockedFingerprint
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BlockedFingerprintDeleteArgs>(args: SelectSubset<T, BlockedFingerprintDeleteArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one BlockedFingerprint.
+     * @param {BlockedFingerprintUpdateArgs} args - Arguments to update one BlockedFingerprint.
+     * @example
+     * // Update one BlockedFingerprint
+     * const blockedFingerprint = await prisma.blockedFingerprint.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BlockedFingerprintUpdateArgs>(args: SelectSubset<T, BlockedFingerprintUpdateArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more BlockedFingerprints.
+     * @param {BlockedFingerprintDeleteManyArgs} args - Arguments to filter BlockedFingerprints to delete.
+     * @example
+     * // Delete a few BlockedFingerprints
+     * const { count } = await prisma.blockedFingerprint.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BlockedFingerprintDeleteManyArgs>(args?: SelectSubset<T, BlockedFingerprintDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlockedFingerprints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedFingerprintUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BlockedFingerprints
+     * const blockedFingerprint = await prisma.blockedFingerprint.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BlockedFingerprintUpdateManyArgs>(args: SelectSubset<T, BlockedFingerprintUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlockedFingerprints and returns the data updated in the database.
+     * @param {BlockedFingerprintUpdateManyAndReturnArgs} args - Arguments to update many BlockedFingerprints.
+     * @example
+     * // Update many BlockedFingerprints
+     * const blockedFingerprint = await prisma.blockedFingerprint.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BlockedFingerprints and only return the `id`
+     * const blockedFingerprintWithIdOnly = await prisma.blockedFingerprint.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BlockedFingerprintUpdateManyAndReturnArgs>(args: SelectSubset<T, BlockedFingerprintUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one BlockedFingerprint.
+     * @param {BlockedFingerprintUpsertArgs} args - Arguments to update or create a BlockedFingerprint.
+     * @example
+     * // Update or create a BlockedFingerprint
+     * const blockedFingerprint = await prisma.blockedFingerprint.upsert({
+     *   create: {
+     *     // ... data to create a BlockedFingerprint
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BlockedFingerprint we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BlockedFingerprintUpsertArgs>(args: SelectSubset<T, BlockedFingerprintUpsertArgs<ExtArgs>>): Prisma__BlockedFingerprintClient<$Result.GetResult<Prisma.$BlockedFingerprintPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of BlockedFingerprints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedFingerprintCountArgs} args - Arguments to filter BlockedFingerprints to count.
+     * @example
+     * // Count the number of BlockedFingerprints
+     * const count = await prisma.blockedFingerprint.count({
+     *   where: {
+     *     // ... the filter for the BlockedFingerprints we want to count
+     *   }
+     * })
+    **/
+    count<T extends BlockedFingerprintCountArgs>(
+      args?: Subset<T, BlockedFingerprintCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BlockedFingerprintCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BlockedFingerprint.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedFingerprintAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BlockedFingerprintAggregateArgs>(args: Subset<T, BlockedFingerprintAggregateArgs>): Prisma.PrismaPromise<GetBlockedFingerprintAggregateType<T>>
+
+    /**
+     * Group by BlockedFingerprint.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedFingerprintGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BlockedFingerprintGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BlockedFingerprintGroupByArgs['orderBy'] }
+        : { orderBy?: BlockedFingerprintGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BlockedFingerprintGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBlockedFingerprintGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BlockedFingerprint model
+   */
+  readonly fields: BlockedFingerprintFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BlockedFingerprint.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BlockedFingerprintClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BlockedFingerprint model
+   */ 
+  interface BlockedFingerprintFieldRefs {
+    readonly id: FieldRef<"BlockedFingerprint", 'String'>
+    readonly fingerprint: FieldRef<"BlockedFingerprint", 'String'>
+    readonly reason: FieldRef<"BlockedFingerprint", 'String'>
+    readonly createdAt: FieldRef<"BlockedFingerprint", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BlockedFingerprint findUnique
+   */
+  export type BlockedFingerprintFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedFingerprint to fetch.
+     */
+    where: BlockedFingerprintWhereUniqueInput
+  }
+
+  /**
+   * BlockedFingerprint findUniqueOrThrow
+   */
+  export type BlockedFingerprintFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedFingerprint to fetch.
+     */
+    where: BlockedFingerprintWhereUniqueInput
+  }
+
+  /**
+   * BlockedFingerprint findFirst
+   */
+  export type BlockedFingerprintFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedFingerprint to fetch.
+     */
+    where?: BlockedFingerprintWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedFingerprints to fetch.
+     */
+    orderBy?: BlockedFingerprintOrderByWithRelationInput | BlockedFingerprintOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlockedFingerprints.
+     */
+    cursor?: BlockedFingerprintWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedFingerprints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedFingerprints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlockedFingerprints.
+     */
+    distinct?: BlockedFingerprintScalarFieldEnum | BlockedFingerprintScalarFieldEnum[]
+  }
+
+  /**
+   * BlockedFingerprint findFirstOrThrow
+   */
+  export type BlockedFingerprintFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedFingerprint to fetch.
+     */
+    where?: BlockedFingerprintWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedFingerprints to fetch.
+     */
+    orderBy?: BlockedFingerprintOrderByWithRelationInput | BlockedFingerprintOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlockedFingerprints.
+     */
+    cursor?: BlockedFingerprintWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedFingerprints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedFingerprints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlockedFingerprints.
+     */
+    distinct?: BlockedFingerprintScalarFieldEnum | BlockedFingerprintScalarFieldEnum[]
+  }
+
+  /**
+   * BlockedFingerprint findMany
+   */
+  export type BlockedFingerprintFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedFingerprints to fetch.
+     */
+    where?: BlockedFingerprintWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedFingerprints to fetch.
+     */
+    orderBy?: BlockedFingerprintOrderByWithRelationInput | BlockedFingerprintOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BlockedFingerprints.
+     */
+    cursor?: BlockedFingerprintWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedFingerprints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedFingerprints.
+     */
+    skip?: number
+    distinct?: BlockedFingerprintScalarFieldEnum | BlockedFingerprintScalarFieldEnum[]
+  }
+
+  /**
+   * BlockedFingerprint create
+   */
+  export type BlockedFingerprintCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * The data needed to create a BlockedFingerprint.
+     */
+    data: XOR<BlockedFingerprintCreateInput, BlockedFingerprintUncheckedCreateInput>
+  }
+
+  /**
+   * BlockedFingerprint createMany
+   */
+  export type BlockedFingerprintCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BlockedFingerprints.
+     */
+    data: BlockedFingerprintCreateManyInput | BlockedFingerprintCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BlockedFingerprint createManyAndReturn
+   */
+  export type BlockedFingerprintCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * The data used to create many BlockedFingerprints.
+     */
+    data: BlockedFingerprintCreateManyInput | BlockedFingerprintCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BlockedFingerprint update
+   */
+  export type BlockedFingerprintUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * The data needed to update a BlockedFingerprint.
+     */
+    data: XOR<BlockedFingerprintUpdateInput, BlockedFingerprintUncheckedUpdateInput>
+    /**
+     * Choose, which BlockedFingerprint to update.
+     */
+    where: BlockedFingerprintWhereUniqueInput
+  }
+
+  /**
+   * BlockedFingerprint updateMany
+   */
+  export type BlockedFingerprintUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BlockedFingerprints.
+     */
+    data: XOR<BlockedFingerprintUpdateManyMutationInput, BlockedFingerprintUncheckedUpdateManyInput>
+    /**
+     * Filter which BlockedFingerprints to update
+     */
+    where?: BlockedFingerprintWhereInput
+  }
+
+  /**
+   * BlockedFingerprint updateManyAndReturn
+   */
+  export type BlockedFingerprintUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * The data used to update BlockedFingerprints.
+     */
+    data: XOR<BlockedFingerprintUpdateManyMutationInput, BlockedFingerprintUncheckedUpdateManyInput>
+    /**
+     * Filter which BlockedFingerprints to update
+     */
+    where?: BlockedFingerprintWhereInput
+  }
+
+  /**
+   * BlockedFingerprint upsert
+   */
+  export type BlockedFingerprintUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * The filter to search for the BlockedFingerprint to update in case it exists.
+     */
+    where: BlockedFingerprintWhereUniqueInput
+    /**
+     * In case the BlockedFingerprint found by the `where` argument doesn't exist, create a new BlockedFingerprint with this data.
+     */
+    create: XOR<BlockedFingerprintCreateInput, BlockedFingerprintUncheckedCreateInput>
+    /**
+     * In case the BlockedFingerprint was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BlockedFingerprintUpdateInput, BlockedFingerprintUncheckedUpdateInput>
+  }
+
+  /**
+   * BlockedFingerprint delete
+   */
+  export type BlockedFingerprintDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+    /**
+     * Filter which BlockedFingerprint to delete.
+     */
+    where: BlockedFingerprintWhereUniqueInput
+  }
+
+  /**
+   * BlockedFingerprint deleteMany
+   */
+  export type BlockedFingerprintDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlockedFingerprints to delete
+     */
+    where?: BlockedFingerprintWhereInput
+  }
+
+  /**
+   * BlockedFingerprint without action
+   */
+  export type BlockedFingerprintDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedFingerprint
+     */
+    select?: BlockedFingerprintSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedFingerprint
+     */
+    omit?: BlockedFingerprintOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BlockedContact
+   */
+
+  export type AggregateBlockedContact = {
+    _count: BlockedContactCountAggregateOutputType | null
+    _min: BlockedContactMinAggregateOutputType | null
+    _max: BlockedContactMaxAggregateOutputType | null
+  }
+
+  export type BlockedContactMinAggregateOutputType = {
+    id: string | null
+    value: string | null
+    type: string | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type BlockedContactMaxAggregateOutputType = {
+    id: string | null
+    value: string | null
+    type: string | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type BlockedContactCountAggregateOutputType = {
+    id: number
+    value: number
+    type: number
+    reason: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BlockedContactMinAggregateInputType = {
+    id?: true
+    value?: true
+    type?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type BlockedContactMaxAggregateInputType = {
+    id?: true
+    value?: true
+    type?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type BlockedContactCountAggregateInputType = {
+    id?: true
+    value?: true
+    type?: true
+    reason?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BlockedContactAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlockedContact to aggregate.
+     */
+    where?: BlockedContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedContacts to fetch.
+     */
+    orderBy?: BlockedContactOrderByWithRelationInput | BlockedContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BlockedContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BlockedContacts
+    **/
+    _count?: true | BlockedContactCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BlockedContactMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BlockedContactMaxAggregateInputType
+  }
+
+  export type GetBlockedContactAggregateType<T extends BlockedContactAggregateArgs> = {
+        [P in keyof T & keyof AggregateBlockedContact]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBlockedContact[P]>
+      : GetScalarType<T[P], AggregateBlockedContact[P]>
+  }
+
+
+
+
+  export type BlockedContactGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlockedContactWhereInput
+    orderBy?: BlockedContactOrderByWithAggregationInput | BlockedContactOrderByWithAggregationInput[]
+    by: BlockedContactScalarFieldEnum[] | BlockedContactScalarFieldEnum
+    having?: BlockedContactScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BlockedContactCountAggregateInputType | true
+    _min?: BlockedContactMinAggregateInputType
+    _max?: BlockedContactMaxAggregateInputType
+  }
+
+  export type BlockedContactGroupByOutputType = {
+    id: string
+    value: string
+    type: string
+    reason: string | null
+    createdAt: Date
+    _count: BlockedContactCountAggregateOutputType | null
+    _min: BlockedContactMinAggregateOutputType | null
+    _max: BlockedContactMaxAggregateOutputType | null
+  }
+
+  type GetBlockedContactGroupByPayload<T extends BlockedContactGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BlockedContactGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BlockedContactGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BlockedContactGroupByOutputType[P]>
+            : GetScalarType<T[P], BlockedContactGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BlockedContactSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    type?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["blockedContact"]>
+
+  export type BlockedContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    type?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["blockedContact"]>
+
+  export type BlockedContactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    type?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["blockedContact"]>
+
+  export type BlockedContactSelectScalar = {
+    id?: boolean
+    value?: boolean
+    type?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }
+
+  export type BlockedContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "value" | "type" | "reason" | "createdAt", ExtArgs["result"]["blockedContact"]>
+
+  export type $BlockedContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BlockedContact"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      value: string
+      type: string
+      reason: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["blockedContact"]>
+    composites: {}
+  }
+
+  type BlockedContactGetPayload<S extends boolean | null | undefined | BlockedContactDefaultArgs> = $Result.GetResult<Prisma.$BlockedContactPayload, S>
+
+  type BlockedContactCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BlockedContactFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BlockedContactCountAggregateInputType | true
+    }
+
+  export interface BlockedContactDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BlockedContact'], meta: { name: 'BlockedContact' } }
+    /**
+     * Find zero or one BlockedContact that matches the filter.
+     * @param {BlockedContactFindUniqueArgs} args - Arguments to find a BlockedContact
+     * @example
+     * // Get one BlockedContact
+     * const blockedContact = await prisma.blockedContact.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BlockedContactFindUniqueArgs>(args: SelectSubset<T, BlockedContactFindUniqueArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one BlockedContact that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BlockedContactFindUniqueOrThrowArgs} args - Arguments to find a BlockedContact
+     * @example
+     * // Get one BlockedContact
+     * const blockedContact = await prisma.blockedContact.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BlockedContactFindUniqueOrThrowArgs>(args: SelectSubset<T, BlockedContactFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first BlockedContact that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedContactFindFirstArgs} args - Arguments to find a BlockedContact
+     * @example
+     * // Get one BlockedContact
+     * const blockedContact = await prisma.blockedContact.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BlockedContactFindFirstArgs>(args?: SelectSubset<T, BlockedContactFindFirstArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first BlockedContact that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedContactFindFirstOrThrowArgs} args - Arguments to find a BlockedContact
+     * @example
+     * // Get one BlockedContact
+     * const blockedContact = await prisma.blockedContact.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BlockedContactFindFirstOrThrowArgs>(args?: SelectSubset<T, BlockedContactFindFirstOrThrowArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more BlockedContacts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedContactFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BlockedContacts
+     * const blockedContacts = await prisma.blockedContact.findMany()
+     * 
+     * // Get first 10 BlockedContacts
+     * const blockedContacts = await prisma.blockedContact.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const blockedContactWithIdOnly = await prisma.blockedContact.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BlockedContactFindManyArgs>(args?: SelectSubset<T, BlockedContactFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a BlockedContact.
+     * @param {BlockedContactCreateArgs} args - Arguments to create a BlockedContact.
+     * @example
+     * // Create one BlockedContact
+     * const BlockedContact = await prisma.blockedContact.create({
+     *   data: {
+     *     // ... data to create a BlockedContact
+     *   }
+     * })
+     * 
+     */
+    create<T extends BlockedContactCreateArgs>(args: SelectSubset<T, BlockedContactCreateArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many BlockedContacts.
+     * @param {BlockedContactCreateManyArgs} args - Arguments to create many BlockedContacts.
+     * @example
+     * // Create many BlockedContacts
+     * const blockedContact = await prisma.blockedContact.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BlockedContactCreateManyArgs>(args?: SelectSubset<T, BlockedContactCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BlockedContacts and returns the data saved in the database.
+     * @param {BlockedContactCreateManyAndReturnArgs} args - Arguments to create many BlockedContacts.
+     * @example
+     * // Create many BlockedContacts
+     * const blockedContact = await prisma.blockedContact.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BlockedContacts and only return the `id`
+     * const blockedContactWithIdOnly = await prisma.blockedContact.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BlockedContactCreateManyAndReturnArgs>(args?: SelectSubset<T, BlockedContactCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a BlockedContact.
+     * @param {BlockedContactDeleteArgs} args - Arguments to delete one BlockedContact.
+     * @example
+     * // Delete one BlockedContact
+     * const BlockedContact = await prisma.blockedContact.delete({
+     *   where: {
+     *     // ... filter to delete one BlockedContact
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BlockedContactDeleteArgs>(args: SelectSubset<T, BlockedContactDeleteArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one BlockedContact.
+     * @param {BlockedContactUpdateArgs} args - Arguments to update one BlockedContact.
+     * @example
+     * // Update one BlockedContact
+     * const blockedContact = await prisma.blockedContact.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BlockedContactUpdateArgs>(args: SelectSubset<T, BlockedContactUpdateArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more BlockedContacts.
+     * @param {BlockedContactDeleteManyArgs} args - Arguments to filter BlockedContacts to delete.
+     * @example
+     * // Delete a few BlockedContacts
+     * const { count } = await prisma.blockedContact.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BlockedContactDeleteManyArgs>(args?: SelectSubset<T, BlockedContactDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlockedContacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedContactUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BlockedContacts
+     * const blockedContact = await prisma.blockedContact.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BlockedContactUpdateManyArgs>(args: SelectSubset<T, BlockedContactUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlockedContacts and returns the data updated in the database.
+     * @param {BlockedContactUpdateManyAndReturnArgs} args - Arguments to update many BlockedContacts.
+     * @example
+     * // Update many BlockedContacts
+     * const blockedContact = await prisma.blockedContact.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BlockedContacts and only return the `id`
+     * const blockedContactWithIdOnly = await prisma.blockedContact.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BlockedContactUpdateManyAndReturnArgs>(args: SelectSubset<T, BlockedContactUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one BlockedContact.
+     * @param {BlockedContactUpsertArgs} args - Arguments to update or create a BlockedContact.
+     * @example
+     * // Update or create a BlockedContact
+     * const blockedContact = await prisma.blockedContact.upsert({
+     *   create: {
+     *     // ... data to create a BlockedContact
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BlockedContact we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BlockedContactUpsertArgs>(args: SelectSubset<T, BlockedContactUpsertArgs<ExtArgs>>): Prisma__BlockedContactClient<$Result.GetResult<Prisma.$BlockedContactPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of BlockedContacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedContactCountArgs} args - Arguments to filter BlockedContacts to count.
+     * @example
+     * // Count the number of BlockedContacts
+     * const count = await prisma.blockedContact.count({
+     *   where: {
+     *     // ... the filter for the BlockedContacts we want to count
+     *   }
+     * })
+    **/
+    count<T extends BlockedContactCountArgs>(
+      args?: Subset<T, BlockedContactCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BlockedContactCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BlockedContact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedContactAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BlockedContactAggregateArgs>(args: Subset<T, BlockedContactAggregateArgs>): Prisma.PrismaPromise<GetBlockedContactAggregateType<T>>
+
+    /**
+     * Group by BlockedContact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlockedContactGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BlockedContactGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BlockedContactGroupByArgs['orderBy'] }
+        : { orderBy?: BlockedContactGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BlockedContactGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBlockedContactGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BlockedContact model
+   */
+  readonly fields: BlockedContactFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BlockedContact.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BlockedContactClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BlockedContact model
+   */ 
+  interface BlockedContactFieldRefs {
+    readonly id: FieldRef<"BlockedContact", 'String'>
+    readonly value: FieldRef<"BlockedContact", 'String'>
+    readonly type: FieldRef<"BlockedContact", 'String'>
+    readonly reason: FieldRef<"BlockedContact", 'String'>
+    readonly createdAt: FieldRef<"BlockedContact", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BlockedContact findUnique
+   */
+  export type BlockedContactFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedContact to fetch.
+     */
+    where: BlockedContactWhereUniqueInput
+  }
+
+  /**
+   * BlockedContact findUniqueOrThrow
+   */
+  export type BlockedContactFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedContact to fetch.
+     */
+    where: BlockedContactWhereUniqueInput
+  }
+
+  /**
+   * BlockedContact findFirst
+   */
+  export type BlockedContactFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedContact to fetch.
+     */
+    where?: BlockedContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedContacts to fetch.
+     */
+    orderBy?: BlockedContactOrderByWithRelationInput | BlockedContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlockedContacts.
+     */
+    cursor?: BlockedContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlockedContacts.
+     */
+    distinct?: BlockedContactScalarFieldEnum | BlockedContactScalarFieldEnum[]
+  }
+
+  /**
+   * BlockedContact findFirstOrThrow
+   */
+  export type BlockedContactFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedContact to fetch.
+     */
+    where?: BlockedContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedContacts to fetch.
+     */
+    orderBy?: BlockedContactOrderByWithRelationInput | BlockedContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlockedContacts.
+     */
+    cursor?: BlockedContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlockedContacts.
+     */
+    distinct?: BlockedContactScalarFieldEnum | BlockedContactScalarFieldEnum[]
+  }
+
+  /**
+   * BlockedContact findMany
+   */
+  export type BlockedContactFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * Filter, which BlockedContacts to fetch.
+     */
+    where?: BlockedContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlockedContacts to fetch.
+     */
+    orderBy?: BlockedContactOrderByWithRelationInput | BlockedContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BlockedContacts.
+     */
+    cursor?: BlockedContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlockedContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlockedContacts.
+     */
+    skip?: number
+    distinct?: BlockedContactScalarFieldEnum | BlockedContactScalarFieldEnum[]
+  }
+
+  /**
+   * BlockedContact create
+   */
+  export type BlockedContactCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * The data needed to create a BlockedContact.
+     */
+    data: XOR<BlockedContactCreateInput, BlockedContactUncheckedCreateInput>
+  }
+
+  /**
+   * BlockedContact createMany
+   */
+  export type BlockedContactCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BlockedContacts.
+     */
+    data: BlockedContactCreateManyInput | BlockedContactCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BlockedContact createManyAndReturn
+   */
+  export type BlockedContactCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * The data used to create many BlockedContacts.
+     */
+    data: BlockedContactCreateManyInput | BlockedContactCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BlockedContact update
+   */
+  export type BlockedContactUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * The data needed to update a BlockedContact.
+     */
+    data: XOR<BlockedContactUpdateInput, BlockedContactUncheckedUpdateInput>
+    /**
+     * Choose, which BlockedContact to update.
+     */
+    where: BlockedContactWhereUniqueInput
+  }
+
+  /**
+   * BlockedContact updateMany
+   */
+  export type BlockedContactUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BlockedContacts.
+     */
+    data: XOR<BlockedContactUpdateManyMutationInput, BlockedContactUncheckedUpdateManyInput>
+    /**
+     * Filter which BlockedContacts to update
+     */
+    where?: BlockedContactWhereInput
+  }
+
+  /**
+   * BlockedContact updateManyAndReturn
+   */
+  export type BlockedContactUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * The data used to update BlockedContacts.
+     */
+    data: XOR<BlockedContactUpdateManyMutationInput, BlockedContactUncheckedUpdateManyInput>
+    /**
+     * Filter which BlockedContacts to update
+     */
+    where?: BlockedContactWhereInput
+  }
+
+  /**
+   * BlockedContact upsert
+   */
+  export type BlockedContactUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * The filter to search for the BlockedContact to update in case it exists.
+     */
+    where: BlockedContactWhereUniqueInput
+    /**
+     * In case the BlockedContact found by the `where` argument doesn't exist, create a new BlockedContact with this data.
+     */
+    create: XOR<BlockedContactCreateInput, BlockedContactUncheckedCreateInput>
+    /**
+     * In case the BlockedContact was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BlockedContactUpdateInput, BlockedContactUncheckedUpdateInput>
+  }
+
+  /**
+   * BlockedContact delete
+   */
+  export type BlockedContactDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
+    /**
+     * Filter which BlockedContact to delete.
+     */
+    where: BlockedContactWhereUniqueInput
+  }
+
+  /**
+   * BlockedContact deleteMany
+   */
+  export type BlockedContactDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlockedContacts to delete
+     */
+    where?: BlockedContactWhereInput
+  }
+
+  /**
+   * BlockedContact without action
+   */
+  export type BlockedContactDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlockedContact
+     */
+    select?: BlockedContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlockedContact
+     */
+    omit?: BlockedContactOmit<ExtArgs> | null
   }
 
 
@@ -14197,10 +16345,32 @@ export namespace Prisma {
     shippingStatus: 'shippingStatus',
     awbCode: 'awbCode',
     trackingUrl: 'trackingUrl',
+    fingerprint: 'fingerprint',
     createdAt: 'createdAt'
   };
 
   export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+  export const BlockedFingerprintScalarFieldEnum: {
+    id: 'id',
+    fingerprint: 'fingerprint',
+    reason: 'reason',
+    createdAt: 'createdAt'
+  };
+
+  export type BlockedFingerprintScalarFieldEnum = (typeof BlockedFingerprintScalarFieldEnum)[keyof typeof BlockedFingerprintScalarFieldEnum]
+
+
+  export const BlockedContactScalarFieldEnum: {
+    id: 'id',
+    value: 'value',
+    type: 'type',
+    reason: 'reason',
+    createdAt: 'createdAt'
+  };
+
+  export type BlockedContactScalarFieldEnum = (typeof BlockedContactScalarFieldEnum)[keyof typeof BlockedContactScalarFieldEnum]
 
 
   export const OrderItemScalarFieldEnum: {
@@ -14962,6 +17132,7 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFilter<"Order"> | $Enums.ShippingStatus
     awbCode?: StringNullableFilter<"Order"> | string | null
     trackingUrl?: StringNullableFilter<"Order"> | string | null
+    fingerprint?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     orderItems?: OrderItemListRelationFilter
   }
@@ -14979,6 +17150,7 @@ export namespace Prisma {
     shippingStatus?: SortOrder
     awbCode?: SortOrderInput | SortOrder
     trackingUrl?: SortOrderInput | SortOrder
+    fingerprint?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     orderItems?: OrderItemOrderByRelationAggregateInput
   }
@@ -14999,6 +17171,7 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFilter<"Order"> | $Enums.ShippingStatus
     awbCode?: StringNullableFilter<"Order"> | string | null
     trackingUrl?: StringNullableFilter<"Order"> | string | null
+    fingerprint?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     orderItems?: OrderItemListRelationFilter
   }, "id">
@@ -15016,6 +17189,7 @@ export namespace Prisma {
     shippingStatus?: SortOrder
     awbCode?: SortOrderInput | SortOrder
     trackingUrl?: SortOrderInput | SortOrder
+    fingerprint?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: OrderCountOrderByAggregateInput
     _avg?: OrderAvgOrderByAggregateInput
@@ -15040,7 +17214,107 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusWithAggregatesFilter<"Order"> | $Enums.ShippingStatus
     awbCode?: StringNullableWithAggregatesFilter<"Order"> | string | null
     trackingUrl?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    fingerprint?: StringNullableWithAggregatesFilter<"Order"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
+  }
+
+  export type BlockedFingerprintWhereInput = {
+    AND?: BlockedFingerprintWhereInput | BlockedFingerprintWhereInput[]
+    OR?: BlockedFingerprintWhereInput[]
+    NOT?: BlockedFingerprintWhereInput | BlockedFingerprintWhereInput[]
+    id?: StringFilter<"BlockedFingerprint"> | string
+    fingerprint?: StringFilter<"BlockedFingerprint"> | string
+    reason?: StringNullableFilter<"BlockedFingerprint"> | string | null
+    createdAt?: DateTimeFilter<"BlockedFingerprint"> | Date | string
+  }
+
+  export type BlockedFingerprintOrderByWithRelationInput = {
+    id?: SortOrder
+    fingerprint?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BlockedFingerprintWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    fingerprint?: string
+    AND?: BlockedFingerprintWhereInput | BlockedFingerprintWhereInput[]
+    OR?: BlockedFingerprintWhereInput[]
+    NOT?: BlockedFingerprintWhereInput | BlockedFingerprintWhereInput[]
+    reason?: StringNullableFilter<"BlockedFingerprint"> | string | null
+    createdAt?: DateTimeFilter<"BlockedFingerprint"> | Date | string
+  }, "id" | "fingerprint">
+
+  export type BlockedFingerprintOrderByWithAggregationInput = {
+    id?: SortOrder
+    fingerprint?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: BlockedFingerprintCountOrderByAggregateInput
+    _max?: BlockedFingerprintMaxOrderByAggregateInput
+    _min?: BlockedFingerprintMinOrderByAggregateInput
+  }
+
+  export type BlockedFingerprintScalarWhereWithAggregatesInput = {
+    AND?: BlockedFingerprintScalarWhereWithAggregatesInput | BlockedFingerprintScalarWhereWithAggregatesInput[]
+    OR?: BlockedFingerprintScalarWhereWithAggregatesInput[]
+    NOT?: BlockedFingerprintScalarWhereWithAggregatesInput | BlockedFingerprintScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BlockedFingerprint"> | string
+    fingerprint?: StringWithAggregatesFilter<"BlockedFingerprint"> | string
+    reason?: StringNullableWithAggregatesFilter<"BlockedFingerprint"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BlockedFingerprint"> | Date | string
+  }
+
+  export type BlockedContactWhereInput = {
+    AND?: BlockedContactWhereInput | BlockedContactWhereInput[]
+    OR?: BlockedContactWhereInput[]
+    NOT?: BlockedContactWhereInput | BlockedContactWhereInput[]
+    id?: StringFilter<"BlockedContact"> | string
+    value?: StringFilter<"BlockedContact"> | string
+    type?: StringFilter<"BlockedContact"> | string
+    reason?: StringNullableFilter<"BlockedContact"> | string | null
+    createdAt?: DateTimeFilter<"BlockedContact"> | Date | string
+  }
+
+  export type BlockedContactOrderByWithRelationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    type?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BlockedContactWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    value?: string
+    AND?: BlockedContactWhereInput | BlockedContactWhereInput[]
+    OR?: BlockedContactWhereInput[]
+    NOT?: BlockedContactWhereInput | BlockedContactWhereInput[]
+    type?: StringFilter<"BlockedContact"> | string
+    reason?: StringNullableFilter<"BlockedContact"> | string | null
+    createdAt?: DateTimeFilter<"BlockedContact"> | Date | string
+  }, "id" | "value">
+
+  export type BlockedContactOrderByWithAggregationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    type?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: BlockedContactCountOrderByAggregateInput
+    _max?: BlockedContactMaxOrderByAggregateInput
+    _min?: BlockedContactMinOrderByAggregateInput
+  }
+
+  export type BlockedContactScalarWhereWithAggregatesInput = {
+    AND?: BlockedContactScalarWhereWithAggregatesInput | BlockedContactScalarWhereWithAggregatesInput[]
+    OR?: BlockedContactScalarWhereWithAggregatesInput[]
+    NOT?: BlockedContactScalarWhereWithAggregatesInput | BlockedContactScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BlockedContact"> | string
+    value?: StringWithAggregatesFilter<"BlockedContact"> | string
+    type?: StringWithAggregatesFilter<"BlockedContact"> | string
+    reason?: StringNullableWithAggregatesFilter<"BlockedContact"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BlockedContact"> | Date | string
   }
 
   export type OrderItemWhereInput = {
@@ -15748,6 +18022,7 @@ export namespace Prisma {
     shippingStatus?: $Enums.ShippingStatus
     awbCode?: string | null
     trackingUrl?: string | null
+    fingerprint?: string | null
     createdAt?: Date | string
     orderItems?: OrderItemCreateNestedManyWithoutOrderInput
   }
@@ -15765,6 +18040,7 @@ export namespace Prisma {
     shippingStatus?: $Enums.ShippingStatus
     awbCode?: string | null
     trackingUrl?: string | null
+    fingerprint?: string | null
     createdAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
   }
@@ -15782,6 +18058,7 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
     awbCode?: NullableStringFieldUpdateOperationsInput | string | null
     trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUpdateManyWithoutOrderNestedInput
   }
@@ -15799,6 +18076,7 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
     awbCode?: NullableStringFieldUpdateOperationsInput | string | null
     trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
   }
@@ -15816,6 +18094,7 @@ export namespace Prisma {
     shippingStatus?: $Enums.ShippingStatus
     awbCode?: string | null
     trackingUrl?: string | null
+    fingerprint?: string | null
     createdAt?: Date | string
   }
 
@@ -15832,6 +18111,7 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
     awbCode?: NullableStringFieldUpdateOperationsInput | string | null
     trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15848,6 +18128,112 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
     awbCode?: NullableStringFieldUpdateOperationsInput | string | null
     trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedFingerprintCreateInput = {
+    id?: string
+    fingerprint: string
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BlockedFingerprintUncheckedCreateInput = {
+    id?: string
+    fingerprint: string
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BlockedFingerprintUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fingerprint?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedFingerprintUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fingerprint?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedFingerprintCreateManyInput = {
+    id?: string
+    fingerprint: string
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BlockedFingerprintUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fingerprint?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedFingerprintUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fingerprint?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedContactCreateInput = {
+    id?: string
+    value: string
+    type: string
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BlockedContactUncheckedCreateInput = {
+    id?: string
+    value: string
+    type: string
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BlockedContactUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedContactUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedContactCreateManyInput = {
+    id?: string
+    value: string
+    type: string
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BlockedContactUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlockedContactUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16649,6 +19035,7 @@ export namespace Prisma {
     shippingStatus?: SortOrder
     awbCode?: SortOrder
     trackingUrl?: SortOrder
+    fingerprint?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -16670,6 +19057,7 @@ export namespace Prisma {
     shippingStatus?: SortOrder
     awbCode?: SortOrder
     trackingUrl?: SortOrder
+    fingerprint?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -16686,6 +19074,7 @@ export namespace Prisma {
     shippingStatus?: SortOrder
     awbCode?: SortOrder
     trackingUrl?: SortOrder
+    fingerprint?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -16722,6 +19111,51 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumShippingStatusFilter<$PrismaModel>
     _max?: NestedEnumShippingStatusFilter<$PrismaModel>
+  }
+
+  export type BlockedFingerprintCountOrderByAggregateInput = {
+    id?: SortOrder
+    fingerprint?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BlockedFingerprintMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fingerprint?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BlockedFingerprintMinOrderByAggregateInput = {
+    id?: SortOrder
+    fingerprint?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BlockedContactCountOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    type?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BlockedContactMaxOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    type?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BlockedContactMinOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    type?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type OrderScalarRelationFilter = {
@@ -18331,6 +20765,7 @@ export namespace Prisma {
     shippingStatus?: $Enums.ShippingStatus
     awbCode?: string | null
     trackingUrl?: string | null
+    fingerprint?: string | null
     createdAt?: Date | string
   }
 
@@ -18347,6 +20782,7 @@ export namespace Prisma {
     shippingStatus?: $Enums.ShippingStatus
     awbCode?: string | null
     trackingUrl?: string | null
+    fingerprint?: string | null
     createdAt?: Date | string
   }
 
@@ -18408,6 +20844,7 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
     awbCode?: NullableStringFieldUpdateOperationsInput | string | null
     trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18424,6 +20861,7 @@ export namespace Prisma {
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
     awbCode?: NullableStringFieldUpdateOperationsInput | string | null
     trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
