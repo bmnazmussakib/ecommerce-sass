@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile, Req } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiHeader, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiHeader, ApiBearerAuth, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -24,6 +24,18 @@ export class ProductController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post('bulk-upload')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @ApiOperation({ summary: 'Bulk upload products via CSV' })
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
@@ -33,8 +45,8 @@ export class ProductController {
       },
     }),
   }))
-
   async bulkUpload(
+
     @UploadedFile() file: Express.Multer.File,
     @Req() req: any,
   ) {
