@@ -65,14 +65,15 @@ export class OrderController {
       const valId = body.val_id;
       const result = await this.orderService.verifySslCommerzPayment(orderId, valId, status);
       if (result.success) {
-        return res.json({ message: 'Payment verified successfully via SSLCommerz', orderId });
+        return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-success?orderId=${orderId}`);
       } else {
-        return res.status(400).json({ message: 'Payment validation failed', reason: result.reason });
+        return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-failed?orderId=${orderId}&reason=${result.reason}`);
       }
     } catch (err: any) {
-      return res.status(500).json({ message: 'Verification error', error: err.message });
+      return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-failed?orderId=${orderId}&error=${err.message}`);
     }
   }
+
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
