@@ -27,6 +27,12 @@ export class TenantController {
     return this.tenantService.findOne(id);
   }
 
+  @Post(':id/impersonate')
+  @ApiOperation({ summary: 'Impersonate a tenant (View-as-Vendor)' })
+  impersonate(@Param('id') id: string) {
+    return this.tenantService.impersonate(id);
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'Update a tenant' })
   update(@Param('id') id: string, @Body() updateTenantDto: UpdateTenantDto) {

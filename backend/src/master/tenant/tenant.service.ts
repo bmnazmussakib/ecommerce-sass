@@ -1,10 +1,58 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { MasterPrismaService } from '../../core/database/master-prisma.service';
 import { CreateTenantDto, UpdateTenantDto } from './dto/tenant.dto';
+import { PrismaClient as TenantPrismaClient } from '@prisma/tenant-client';
 
 @Injectable()
 export class TenantService {
-  constructor(private prisma: MasterPrismaService) {}
+  constructor(
+    private prisma: MasterPrismaService,
+    private jwtService: JwtService,
+  ) {}
+
+  async impersonate(id: string) {
+    const tenant = await this.findOne(id);
+
+    // Dynamic resolution of tenant DB to fetch owner/staff details
+    const tenantPrisma = new TenantPrismaClient({
+      datasources: {
+        db: {
+          url: tenant.dbConnectionString,
+        },
+      },
+    });
+
+    try {
+      await tenantPrisma.$connect();
+      // Find an owner or admin to impersonate
+      const owner = await tenantPrisma.staff.findFirst({
+        where: { role: 'OWNER' },
+      });
+
+      if (!owner) {
+        throw new NotFoundException('No OWNER staff member found in tenant DB');
+      }
+
+      // Generate a secure JWT signed with tenant scope
+      const payload = { sub: owner.id, email: owner.email, role: owner.role, impersonated: true };
+      const token = this.jwtService.sign(payload);
+
+      return {
+        access_token: token,
+        subdomain: tenant.subdomain,
+        customDomain: tenant.customDomain,
+        staff: {
+          id: owner.id,
+          name: owner.name,
+          email: owner.email,
+          role: owner.role,
+        },
+      };
+    } finally {
+      await tenantPrisma.$disconnect();
+    }
+  }
 
   async create(createTenantDto: CreateTenantDto) {
     // Check if subdomain exists
