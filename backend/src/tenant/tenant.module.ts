@@ -9,6 +9,7 @@ import { OrderModule } from './order/order.module';
 import { IntegrationModule } from './integration/integration.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { UploadModule } from './upload/upload.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -21,7 +22,9 @@ import { UploadModule } from './upload/upload.module';
     OrderModule,
     IntegrationModule,
     AnalyticsModule,
-    UploadModule
+    UploadModule,
+    SearchModule
   ]
 })
 export class TenantModule {}
+

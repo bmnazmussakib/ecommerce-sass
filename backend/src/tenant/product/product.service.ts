@@ -5,6 +5,7 @@ import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { MasterPrismaService } from '../../core/database/master-prisma.service';
+import { MeiliSearchService } from '../search/meilisearch.service';
 
 @Injectable()
 export class ProductService {
@@ -12,6 +13,7 @@ export class ProductService {
     @Inject(TENANT_PRISMA_CLIENT) private readonly prisma: TenantPrismaClient,
     @InjectQueue('csv-import') private readonly csvQueue: Queue,
     private readonly masterPrisma: MasterPrismaService,
+    private readonly meilisearchService: MeiliSearchService,
   ) {}
 
   async addCsvImportJob(filePath: string, tenantId: string) {
@@ -30,18 +32,28 @@ export class ProductService {
     return { jobId: job.id, message: 'CSV Import queued successfully' };
   }
 
-  async create(createProductDto: CreateProductDto) {
+  async search(query: string, tenantId: string) {
+    return this.meilisearchService.searchProducts(tenantId, query);
+  }
+
+
+  async create(createProductDto: CreateProductDto, tenantId: string = 'default') {
     const { variants, ...productData } = createProductDto;
     
-    return this.prisma.product.create({
+    const product = await this.prisma.product.create({
       data: {
         ...productData,
         variants: variants ? {
           create: variants,
         } : undefined,
       },
-      include: { variants: true },
+      include: { category: true, variants: true },
     });
+
+    // Async sync to Meilisearch
+    await this.meilisearchService.syncProduct(tenantId, product);
+
+    return product;
   }
 
   async findAll() {
@@ -59,17 +71,28 @@ export class ProductService {
     return product;
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto, tenantId: string = 'default') {
     await this.findOne(id);
-    return this.prisma.product.update({
+    const product = await this.prisma.product.update({
       where: { id },
       data: updateProductDto,
-      include: { variants: true },
+      include: { category: true, variants: true },
     });
+
+    // Async sync to Meilisearch
+    await this.meilisearchService.syncProduct(tenantId, product);
+
+    return product;
   }
 
-  async remove(id: string) {
+  async remove(id: string, tenantId: string = 'default') {
     await this.findOne(id);
-    return this.prisma.product.delete({ where: { id } });
+    const product = await this.prisma.product.delete({ where: { id } });
+
+    // Async delete from Meilisearch
+    await this.meilisearchService.deleteProduct(tenantId, id);
+
+    return product;
   }
 }
+

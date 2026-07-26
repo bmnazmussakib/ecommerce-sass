@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile, Req, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiHeader, ApiBearerAuth, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
@@ -17,8 +17,9 @@ export class ProductController {
   @UseGuards(JwtAuthGuard)
   @Post()
   @ApiOperation({ summary: 'Create a product' })
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productService.create(createProductDto);
+  create(@Body() createProductDto: CreateProductDto, @Req() req: any) {
+    const tenantId = req.headers['x-tenant-id'] || 'default';
+    return this.productService.create(createProductDto, tenantId);
   }
 
   @ApiBearerAuth()
@@ -46,12 +47,21 @@ export class ProductController {
     }),
   }))
   async bulkUpload(
-
     @UploadedFile() file: Express.Multer.File,
     @Req() req: any,
   ) {
     const tenantId = req.headers['x-tenant-id'] || 'default';
     return this.productService.addCsvImportJob(file.path, tenantId);
+  }
+
+  @Get('search')
+  @ApiOperation({ summary: 'Search products using Meilisearch (Public)' })
+  async search(
+    @Query('q') query: string,
+    @Req() req: any,
+  ) {
+    const tenantId = req.headers['x-tenant-id'] || 'default';
+    return this.productService.search(query, tenantId);
   }
 
   @Get()
@@ -70,16 +80,19 @@ export class ProductController {
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   @ApiOperation({ summary: 'Update a product' })
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productService.update(id, updateProductDto);
+  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto, @Req() req: any) {
+    const tenantId = req.headers['x-tenant-id'] || 'default';
+    return this.productService.update(id, updateProductDto, tenantId);
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a product' })
-  remove(@Param('id') id: string) {
-    return this.productService.remove(id);
+  remove(@Param('id') id: string, @Req() req: any) {
+    const tenantId = req.headers['x-tenant-id'] || 'default';
+    return this.productService.remove(id, tenantId);
   }
 }
+
 
