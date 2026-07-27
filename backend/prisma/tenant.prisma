@@ -15,6 +15,7 @@ model StoreSetting {
   logoUrl       String?
   brandColor    String   @default("#4F46E5")
   themeConfig   Json
+  taxRate       Decimal  @default(0.00) @db.Decimal(5, 2) // Tax percentage e.g. 15.00 for 15%
   customCss     String?
   customJs      String?
   updatedAt     DateTime @updatedAt
@@ -111,6 +112,7 @@ model Order {
   shippingAddress String
   totalPrice      Decimal        @db.Decimal(10, 2)
   shippingCharge  Decimal        @db.Decimal(10, 2)
+  taxPaid         Decimal        @default(0.00) @db.Decimal(10, 2)
   paymentMethod   PaymentMethod  @default(COD)
   paymentStatus   PaymentStatus  @default(PENDING)
   shippingStatus  ShippingStatus @default(PENDING)

@@ -10,8 +10,10 @@ export class SettingsService {
   ) {}
 
   async getSettings() {
-    // There should be only one setting per tenant, or we fetch the first one
-    let settings = await this.prisma.storeSetting.findFirst();
+    // Return the latest settings record to avoid duplicate row conflicts
+    let settings = await this.prisma.storeSetting.findFirst({
+      orderBy: { updatedAt: 'desc' }
+    });
     
     // If not exists, we can create a default one
     if (!settings) {

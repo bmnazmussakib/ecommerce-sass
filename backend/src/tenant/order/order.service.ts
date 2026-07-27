@@ -116,7 +116,14 @@ export class OrderService {
 
       // Flat shipping charge
       const shippingCharge = new Prisma.Decimal(100);
-      const totalPrice = subTotal.sub(discount).add(shippingCharge);
+
+      // Fetch store settings to get taxRate
+      const settings = await tx.storeSetting.findFirst();
+      const taxRatePercent = settings?.taxRate ? Number(settings.taxRate) : 0;
+      
+      const priceBeforeTax = subTotal.sub(discount);
+      const taxPaid = priceBeforeTax.mul(taxRatePercent).div(100);
+      const totalPrice = priceBeforeTax.add(taxPaid).add(shippingCharge);
 
       const order = await tx.order.create({
         data: {
@@ -126,6 +133,7 @@ export class OrderService {
           shippingAddress: dto.shippingAddress,
           paymentMethod: dto.paymentMethod,
           shippingCharge,
+          taxPaid,
           totalPrice,
           fingerprint: dto.fingerprint,
           orderItems: {
@@ -190,6 +198,7 @@ export class OrderService {
         subTotal,
         discount,
         shippingCharge,
+        taxPaid,
         totalPrice,
         paymentUrl: bkashURL || sslczGatewayUrl,
       };

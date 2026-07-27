@@ -2239,8 +2239,18 @@ export namespace Prisma {
 
   export type AggregateStoreSetting = {
     _count: StoreSettingCountAggregateOutputType | null
+    _avg: StoreSettingAvgAggregateOutputType | null
+    _sum: StoreSettingSumAggregateOutputType | null
     _min: StoreSettingMinAggregateOutputType | null
     _max: StoreSettingMaxAggregateOutputType | null
+  }
+
+  export type StoreSettingAvgAggregateOutputType = {
+    taxRate: Decimal | null
+  }
+
+  export type StoreSettingSumAggregateOutputType = {
+    taxRate: Decimal | null
   }
 
   export type StoreSettingMinAggregateOutputType = {
@@ -2248,6 +2258,7 @@ export namespace Prisma {
     storeName: string | null
     logoUrl: string | null
     brandColor: string | null
+    taxRate: Decimal | null
     customCss: string | null
     customJs: string | null
     updatedAt: Date | null
@@ -2258,6 +2269,7 @@ export namespace Prisma {
     storeName: string | null
     logoUrl: string | null
     brandColor: string | null
+    taxRate: Decimal | null
     customCss: string | null
     customJs: string | null
     updatedAt: Date | null
@@ -2269,6 +2281,7 @@ export namespace Prisma {
     logoUrl: number
     brandColor: number
     themeConfig: number
+    taxRate: number
     customCss: number
     customJs: number
     updatedAt: number
@@ -2276,11 +2289,20 @@ export namespace Prisma {
   }
 
 
+  export type StoreSettingAvgAggregateInputType = {
+    taxRate?: true
+  }
+
+  export type StoreSettingSumAggregateInputType = {
+    taxRate?: true
+  }
+
   export type StoreSettingMinAggregateInputType = {
     id?: true
     storeName?: true
     logoUrl?: true
     brandColor?: true
+    taxRate?: true
     customCss?: true
     customJs?: true
     updatedAt?: true
@@ -2291,6 +2313,7 @@ export namespace Prisma {
     storeName?: true
     logoUrl?: true
     brandColor?: true
+    taxRate?: true
     customCss?: true
     customJs?: true
     updatedAt?: true
@@ -2302,6 +2325,7 @@ export namespace Prisma {
     logoUrl?: true
     brandColor?: true
     themeConfig?: true
+    taxRate?: true
     customCss?: true
     customJs?: true
     updatedAt?: true
@@ -2346,6 +2370,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: StoreSettingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StoreSettingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: StoreSettingMinAggregateInputType
@@ -2376,6 +2412,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: StoreSettingCountAggregateInputType | true
+    _avg?: StoreSettingAvgAggregateInputType
+    _sum?: StoreSettingSumAggregateInputType
     _min?: StoreSettingMinAggregateInputType
     _max?: StoreSettingMaxAggregateInputType
   }
@@ -2386,10 +2424,13 @@ export namespace Prisma {
     logoUrl: string | null
     brandColor: string
     themeConfig: JsonValue
+    taxRate: Decimal
     customCss: string | null
     customJs: string | null
     updatedAt: Date
     _count: StoreSettingCountAggregateOutputType | null
+    _avg: StoreSettingAvgAggregateOutputType | null
+    _sum: StoreSettingSumAggregateOutputType | null
     _min: StoreSettingMinAggregateOutputType | null
     _max: StoreSettingMaxAggregateOutputType | null
   }
@@ -2414,6 +2455,7 @@ export namespace Prisma {
     logoUrl?: boolean
     brandColor?: boolean
     themeConfig?: boolean
+    taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
     updatedAt?: boolean
@@ -2425,6 +2467,7 @@ export namespace Prisma {
     logoUrl?: boolean
     brandColor?: boolean
     themeConfig?: boolean
+    taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
     updatedAt?: boolean
@@ -2436,6 +2479,7 @@ export namespace Prisma {
     logoUrl?: boolean
     brandColor?: boolean
     themeConfig?: boolean
+    taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
     updatedAt?: boolean
@@ -2447,12 +2491,13 @@ export namespace Prisma {
     logoUrl?: boolean
     brandColor?: boolean
     themeConfig?: boolean
+    taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
     updatedAt?: boolean
   }
 
-  export type StoreSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeName" | "logoUrl" | "brandColor" | "themeConfig" | "customCss" | "customJs" | "updatedAt", ExtArgs["result"]["storeSetting"]>
+  export type StoreSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeName" | "logoUrl" | "brandColor" | "themeConfig" | "taxRate" | "customCss" | "customJs" | "updatedAt", ExtArgs["result"]["storeSetting"]>
 
   export type $StoreSettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "StoreSetting"
@@ -2463,6 +2508,7 @@ export namespace Prisma {
       logoUrl: string | null
       brandColor: string
       themeConfig: Prisma.JsonValue
+      taxRate: Prisma.Decimal
       customCss: string | null
       customJs: string | null
       updatedAt: Date
@@ -2894,6 +2940,7 @@ export namespace Prisma {
     readonly logoUrl: FieldRef<"StoreSetting", 'String'>
     readonly brandColor: FieldRef<"StoreSetting", 'String'>
     readonly themeConfig: FieldRef<"StoreSetting", 'Json'>
+    readonly taxRate: FieldRef<"StoreSetting", 'Decimal'>
     readonly customCss: FieldRef<"StoreSetting", 'String'>
     readonly customJs: FieldRef<"StoreSetting", 'String'>
     readonly updatedAt: FieldRef<"StoreSetting", 'DateTime'>
@@ -9957,11 +10004,13 @@ export namespace Prisma {
   export type OrderAvgAggregateOutputType = {
     totalPrice: Decimal | null
     shippingCharge: Decimal | null
+    taxPaid: Decimal | null
   }
 
   export type OrderSumAggregateOutputType = {
     totalPrice: Decimal | null
     shippingCharge: Decimal | null
+    taxPaid: Decimal | null
   }
 
   export type OrderMinAggregateOutputType = {
@@ -9972,6 +10021,7 @@ export namespace Prisma {
     shippingAddress: string | null
     totalPrice: Decimal | null
     shippingCharge: Decimal | null
+    taxPaid: Decimal | null
     paymentMethod: $Enums.PaymentMethod | null
     paymentStatus: $Enums.PaymentStatus | null
     shippingStatus: $Enums.ShippingStatus | null
@@ -9989,6 +10039,7 @@ export namespace Prisma {
     shippingAddress: string | null
     totalPrice: Decimal | null
     shippingCharge: Decimal | null
+    taxPaid: Decimal | null
     paymentMethod: $Enums.PaymentMethod | null
     paymentStatus: $Enums.PaymentStatus | null
     shippingStatus: $Enums.ShippingStatus | null
@@ -10006,6 +10057,7 @@ export namespace Prisma {
     shippingAddress: number
     totalPrice: number
     shippingCharge: number
+    taxPaid: number
     paymentMethod: number
     paymentStatus: number
     shippingStatus: number
@@ -10020,11 +10072,13 @@ export namespace Prisma {
   export type OrderAvgAggregateInputType = {
     totalPrice?: true
     shippingCharge?: true
+    taxPaid?: true
   }
 
   export type OrderSumAggregateInputType = {
     totalPrice?: true
     shippingCharge?: true
+    taxPaid?: true
   }
 
   export type OrderMinAggregateInputType = {
@@ -10035,6 +10089,7 @@ export namespace Prisma {
     shippingAddress?: true
     totalPrice?: true
     shippingCharge?: true
+    taxPaid?: true
     paymentMethod?: true
     paymentStatus?: true
     shippingStatus?: true
@@ -10052,6 +10107,7 @@ export namespace Prisma {
     shippingAddress?: true
     totalPrice?: true
     shippingCharge?: true
+    taxPaid?: true
     paymentMethod?: true
     paymentStatus?: true
     shippingStatus?: true
@@ -10069,6 +10125,7 @@ export namespace Prisma {
     shippingAddress?: true
     totalPrice?: true
     shippingCharge?: true
+    taxPaid?: true
     paymentMethod?: true
     paymentStatus?: true
     shippingStatus?: true
@@ -10173,6 +10230,7 @@ export namespace Prisma {
     shippingAddress: string
     totalPrice: Decimal
     shippingCharge: Decimal
+    taxPaid: Decimal
     paymentMethod: $Enums.PaymentMethod
     paymentStatus: $Enums.PaymentStatus
     shippingStatus: $Enums.ShippingStatus
@@ -10209,6 +10267,7 @@ export namespace Prisma {
     shippingAddress?: boolean
     totalPrice?: boolean
     shippingCharge?: boolean
+    taxPaid?: boolean
     paymentMethod?: boolean
     paymentStatus?: boolean
     shippingStatus?: boolean
@@ -10228,6 +10287,7 @@ export namespace Prisma {
     shippingAddress?: boolean
     totalPrice?: boolean
     shippingCharge?: boolean
+    taxPaid?: boolean
     paymentMethod?: boolean
     paymentStatus?: boolean
     shippingStatus?: boolean
@@ -10245,6 +10305,7 @@ export namespace Prisma {
     shippingAddress?: boolean
     totalPrice?: boolean
     shippingCharge?: boolean
+    taxPaid?: boolean
     paymentMethod?: boolean
     paymentStatus?: boolean
     shippingStatus?: boolean
@@ -10262,6 +10323,7 @@ export namespace Prisma {
     shippingAddress?: boolean
     totalPrice?: boolean
     shippingCharge?: boolean
+    taxPaid?: boolean
     paymentMethod?: boolean
     paymentStatus?: boolean
     shippingStatus?: boolean
@@ -10271,7 +10333,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerName" | "customerEmail" | "customerPhone" | "shippingAddress" | "totalPrice" | "shippingCharge" | "paymentMethod" | "paymentStatus" | "shippingStatus" | "awbCode" | "trackingUrl" | "fingerprint" | "createdAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerName" | "customerEmail" | "customerPhone" | "shippingAddress" | "totalPrice" | "shippingCharge" | "taxPaid" | "paymentMethod" | "paymentStatus" | "shippingStatus" | "awbCode" | "trackingUrl" | "fingerprint" | "createdAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -10292,6 +10354,7 @@ export namespace Prisma {
       shippingAddress: string
       totalPrice: Prisma.Decimal
       shippingCharge: Prisma.Decimal
+      taxPaid: Prisma.Decimal
       paymentMethod: $Enums.PaymentMethod
       paymentStatus: $Enums.PaymentStatus
       shippingStatus: $Enums.ShippingStatus
@@ -10730,6 +10793,7 @@ export namespace Prisma {
     readonly shippingAddress: FieldRef<"Order", 'String'>
     readonly totalPrice: FieldRef<"Order", 'Decimal'>
     readonly shippingCharge: FieldRef<"Order", 'Decimal'>
+    readonly taxPaid: FieldRef<"Order", 'Decimal'>
     readonly paymentMethod: FieldRef<"Order", 'PaymentMethod'>
     readonly paymentStatus: FieldRef<"Order", 'PaymentStatus'>
     readonly shippingStatus: FieldRef<"Order", 'ShippingStatus'>
@@ -16246,6 +16310,7 @@ export namespace Prisma {
     logoUrl: 'logoUrl',
     brandColor: 'brandColor',
     themeConfig: 'themeConfig',
+    taxRate: 'taxRate',
     customCss: 'customCss',
     customJs: 'customJs',
     updatedAt: 'updatedAt'
@@ -16340,6 +16405,7 @@ export namespace Prisma {
     shippingAddress: 'shippingAddress',
     totalPrice: 'totalPrice',
     shippingCharge: 'shippingCharge',
+    taxPaid: 'taxPaid',
     paymentMethod: 'paymentMethod',
     paymentStatus: 'paymentStatus',
     shippingStatus: 'shippingStatus',
@@ -16475,6 +16541,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -16506,20 +16586,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'Decimal'
-   */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-  /**
-   * Reference to a field of type 'Decimal[]'
-   */
-  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -16647,6 +16713,7 @@ export namespace Prisma {
     logoUrl?: StringNullableFilter<"StoreSetting"> | string | null
     brandColor?: StringFilter<"StoreSetting"> | string
     themeConfig?: JsonFilter<"StoreSetting">
+    taxRate?: DecimalFilter<"StoreSetting"> | Decimal | DecimalJsLike | number | string
     customCss?: StringNullableFilter<"StoreSetting"> | string | null
     customJs?: StringNullableFilter<"StoreSetting"> | string | null
     updatedAt?: DateTimeFilter<"StoreSetting"> | Date | string
@@ -16658,6 +16725,7 @@ export namespace Prisma {
     logoUrl?: SortOrderInput | SortOrder
     brandColor?: SortOrder
     themeConfig?: SortOrder
+    taxRate?: SortOrder
     customCss?: SortOrderInput | SortOrder
     customJs?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
@@ -16672,6 +16740,7 @@ export namespace Prisma {
     logoUrl?: StringNullableFilter<"StoreSetting"> | string | null
     brandColor?: StringFilter<"StoreSetting"> | string
     themeConfig?: JsonFilter<"StoreSetting">
+    taxRate?: DecimalFilter<"StoreSetting"> | Decimal | DecimalJsLike | number | string
     customCss?: StringNullableFilter<"StoreSetting"> | string | null
     customJs?: StringNullableFilter<"StoreSetting"> | string | null
     updatedAt?: DateTimeFilter<"StoreSetting"> | Date | string
@@ -16683,12 +16752,15 @@ export namespace Prisma {
     logoUrl?: SortOrderInput | SortOrder
     brandColor?: SortOrder
     themeConfig?: SortOrder
+    taxRate?: SortOrder
     customCss?: SortOrderInput | SortOrder
     customJs?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
     _count?: StoreSettingCountOrderByAggregateInput
+    _avg?: StoreSettingAvgOrderByAggregateInput
     _max?: StoreSettingMaxOrderByAggregateInput
     _min?: StoreSettingMinOrderByAggregateInput
+    _sum?: StoreSettingSumOrderByAggregateInput
   }
 
   export type StoreSettingScalarWhereWithAggregatesInput = {
@@ -16700,6 +16772,7 @@ export namespace Prisma {
     logoUrl?: StringNullableWithAggregatesFilter<"StoreSetting"> | string | null
     brandColor?: StringWithAggregatesFilter<"StoreSetting"> | string
     themeConfig?: JsonWithAggregatesFilter<"StoreSetting">
+    taxRate?: DecimalWithAggregatesFilter<"StoreSetting"> | Decimal | DecimalJsLike | number | string
     customCss?: StringNullableWithAggregatesFilter<"StoreSetting"> | string | null
     customJs?: StringNullableWithAggregatesFilter<"StoreSetting"> | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"StoreSetting"> | Date | string
@@ -17127,6 +17200,7 @@ export namespace Prisma {
     shippingAddress?: StringFilter<"Order"> | string
     totalPrice?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFilter<"Order"> | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFilter<"Order"> | $Enums.ShippingStatus
@@ -17145,6 +17219,7 @@ export namespace Prisma {
     shippingAddress?: SortOrder
     totalPrice?: SortOrder
     shippingCharge?: SortOrder
+    taxPaid?: SortOrder
     paymentMethod?: SortOrder
     paymentStatus?: SortOrder
     shippingStatus?: SortOrder
@@ -17166,6 +17241,7 @@ export namespace Prisma {
     shippingAddress?: StringFilter<"Order"> | string
     totalPrice?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFilter<"Order"> | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFilter<"Order"> | $Enums.ShippingStatus
@@ -17184,6 +17260,7 @@ export namespace Prisma {
     shippingAddress?: SortOrder
     totalPrice?: SortOrder
     shippingCharge?: SortOrder
+    taxPaid?: SortOrder
     paymentMethod?: SortOrder
     paymentStatus?: SortOrder
     shippingStatus?: SortOrder
@@ -17209,6 +17286,7 @@ export namespace Prisma {
     shippingAddress?: StringWithAggregatesFilter<"Order"> | string
     totalPrice?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodWithAggregatesFilter<"Order"> | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusWithAggregatesFilter<"Order"> | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusWithAggregatesFilter<"Order"> | $Enums.ShippingStatus
@@ -17499,6 +17577,7 @@ export namespace Prisma {
     logoUrl?: string | null
     brandColor?: string
     themeConfig: JsonNullValueInput | InputJsonValue
+    taxRate?: Decimal | DecimalJsLike | number | string
     customCss?: string | null
     customJs?: string | null
     updatedAt?: Date | string
@@ -17510,6 +17589,7 @@ export namespace Prisma {
     logoUrl?: string | null
     brandColor?: string
     themeConfig: JsonNullValueInput | InputJsonValue
+    taxRate?: Decimal | DecimalJsLike | number | string
     customCss?: string | null
     customJs?: string | null
     updatedAt?: Date | string
@@ -17521,6 +17601,7 @@ export namespace Prisma {
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     brandColor?: StringFieldUpdateOperationsInput | string
     themeConfig?: JsonNullValueInput | InputJsonValue
+    taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17532,6 +17613,7 @@ export namespace Prisma {
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     brandColor?: StringFieldUpdateOperationsInput | string
     themeConfig?: JsonNullValueInput | InputJsonValue
+    taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17543,6 +17625,7 @@ export namespace Prisma {
     logoUrl?: string | null
     brandColor?: string
     themeConfig: JsonNullValueInput | InputJsonValue
+    taxRate?: Decimal | DecimalJsLike | number | string
     customCss?: string | null
     customJs?: string | null
     updatedAt?: Date | string
@@ -17554,6 +17637,7 @@ export namespace Prisma {
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     brandColor?: StringFieldUpdateOperationsInput | string
     themeConfig?: JsonNullValueInput | InputJsonValue
+    taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17565,6 +17649,7 @@ export namespace Prisma {
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     brandColor?: StringFieldUpdateOperationsInput | string
     themeConfig?: JsonNullValueInput | InputJsonValue
+    taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18017,6 +18102,7 @@ export namespace Prisma {
     shippingAddress: string
     totalPrice: Decimal | DecimalJsLike | number | string
     shippingCharge: Decimal | DecimalJsLike | number | string
+    taxPaid?: Decimal | DecimalJsLike | number | string
     paymentMethod?: $Enums.PaymentMethod
     paymentStatus?: $Enums.PaymentStatus
     shippingStatus?: $Enums.ShippingStatus
@@ -18035,6 +18121,7 @@ export namespace Prisma {
     shippingAddress: string
     totalPrice: Decimal | DecimalJsLike | number | string
     shippingCharge: Decimal | DecimalJsLike | number | string
+    taxPaid?: Decimal | DecimalJsLike | number | string
     paymentMethod?: $Enums.PaymentMethod
     paymentStatus?: $Enums.PaymentStatus
     shippingStatus?: $Enums.ShippingStatus
@@ -18053,6 +18140,7 @@ export namespace Prisma {
     shippingAddress?: StringFieldUpdateOperationsInput | string
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
@@ -18071,6 +18159,7 @@ export namespace Prisma {
     shippingAddress?: StringFieldUpdateOperationsInput | string
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
@@ -18089,6 +18178,7 @@ export namespace Prisma {
     shippingAddress: string
     totalPrice: Decimal | DecimalJsLike | number | string
     shippingCharge: Decimal | DecimalJsLike | number | string
+    taxPaid?: Decimal | DecimalJsLike | number | string
     paymentMethod?: $Enums.PaymentMethod
     paymentStatus?: $Enums.PaymentStatus
     shippingStatus?: $Enums.ShippingStatus
@@ -18106,6 +18196,7 @@ export namespace Prisma {
     shippingAddress?: StringFieldUpdateOperationsInput | string
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
@@ -18123,6 +18214,7 @@ export namespace Prisma {
     shippingAddress?: StringFieldUpdateOperationsInput | string
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
@@ -18469,6 +18561,17 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -18491,9 +18594,14 @@ export namespace Prisma {
     logoUrl?: SortOrder
     brandColor?: SortOrder
     themeConfig?: SortOrder
+    taxRate?: SortOrder
     customCss?: SortOrder
     customJs?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type StoreSettingAvgOrderByAggregateInput = {
+    taxRate?: SortOrder
   }
 
   export type StoreSettingMaxOrderByAggregateInput = {
@@ -18501,6 +18609,7 @@ export namespace Prisma {
     storeName?: SortOrder
     logoUrl?: SortOrder
     brandColor?: SortOrder
+    taxRate?: SortOrder
     customCss?: SortOrder
     customJs?: SortOrder
     updatedAt?: SortOrder
@@ -18511,9 +18620,14 @@ export namespace Prisma {
     storeName?: SortOrder
     logoUrl?: SortOrder
     brandColor?: SortOrder
+    taxRate?: SortOrder
     customCss?: SortOrder
     customJs?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type StoreSettingSumOrderByAggregateInput = {
+    taxRate?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -18575,6 +18689,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18740,17 +18870,6 @@ export namespace Prisma {
     isActive?: SortOrder
   }
 
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
   export type DecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -18823,22 +18942,6 @@ export namespace Prisma {
   export type ProductSumOrderByAggregateInput = {
     basePrice?: SortOrder
     comparePrice?: SortOrder
-  }
-
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -19030,6 +19133,7 @@ export namespace Prisma {
     shippingAddress?: SortOrder
     totalPrice?: SortOrder
     shippingCharge?: SortOrder
+    taxPaid?: SortOrder
     paymentMethod?: SortOrder
     paymentStatus?: SortOrder
     shippingStatus?: SortOrder
@@ -19042,6 +19146,7 @@ export namespace Prisma {
   export type OrderAvgOrderByAggregateInput = {
     totalPrice?: SortOrder
     shippingCharge?: SortOrder
+    taxPaid?: SortOrder
   }
 
   export type OrderMaxOrderByAggregateInput = {
@@ -19052,6 +19157,7 @@ export namespace Prisma {
     shippingAddress?: SortOrder
     totalPrice?: SortOrder
     shippingCharge?: SortOrder
+    taxPaid?: SortOrder
     paymentMethod?: SortOrder
     paymentStatus?: SortOrder
     shippingStatus?: SortOrder
@@ -19069,6 +19175,7 @@ export namespace Prisma {
     shippingAddress?: SortOrder
     totalPrice?: SortOrder
     shippingCharge?: SortOrder
+    taxPaid?: SortOrder
     paymentMethod?: SortOrder
     paymentStatus?: SortOrder
     shippingStatus?: SortOrder
@@ -19081,6 +19188,7 @@ export namespace Prisma {
   export type OrderSumOrderByAggregateInput = {
     totalPrice?: SortOrder
     shippingCharge?: SortOrder
+    taxPaid?: SortOrder
   }
 
   export type EnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
@@ -19301,6 +19409,14 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -19473,14 +19589,6 @@ export namespace Prisma {
     connectOrCreate?: ProductVariantCreateOrConnectWithoutProductInput | ProductVariantCreateOrConnectWithoutProductInput[]
     createMany?: ProductVariantCreateManyProductInputEnvelope
     connect?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[]
-  }
-
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -19785,6 +19893,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -19874,6 +19993,22 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -19918,17 +20053,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -19945,22 +20069,6 @@ export namespace Prisma {
     in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumProductStatusFilter<$PrismaModel> | $Enums.ProductStatus
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -20760,6 +20868,7 @@ export namespace Prisma {
     shippingAddress: string
     totalPrice: Decimal | DecimalJsLike | number | string
     shippingCharge: Decimal | DecimalJsLike | number | string
+    taxPaid?: Decimal | DecimalJsLike | number | string
     paymentMethod?: $Enums.PaymentMethod
     paymentStatus?: $Enums.PaymentStatus
     shippingStatus?: $Enums.ShippingStatus
@@ -20777,6 +20886,7 @@ export namespace Prisma {
     shippingAddress: string
     totalPrice: Decimal | DecimalJsLike | number | string
     shippingCharge: Decimal | DecimalJsLike | number | string
+    taxPaid?: Decimal | DecimalJsLike | number | string
     paymentMethod?: $Enums.PaymentMethod
     paymentStatus?: $Enums.PaymentStatus
     shippingStatus?: $Enums.ShippingStatus
@@ -20839,6 +20949,7 @@ export namespace Prisma {
     shippingAddress?: StringFieldUpdateOperationsInput | string
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
@@ -20856,6 +20967,7 @@ export namespace Prisma {
     shippingAddress?: StringFieldUpdateOperationsInput | string
     totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus

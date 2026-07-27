@@ -123,6 +123,7 @@ exports.Prisma.StoreSettingScalarFieldEnum = {
   logoUrl: 'logoUrl',
   brandColor: 'brandColor',
   themeConfig: 'themeConfig',
+  taxRate: 'taxRate',
   customCss: 'customCss',
   customJs: 'customJs',
   updatedAt: 'updatedAt'
@@ -196,6 +197,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   shippingAddress: 'shippingAddress',
   totalPrice: 'totalPrice',
   shippingCharge: 'shippingCharge',
+  taxPaid: 'taxPaid',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',
   shippingStatus: 'shippingStatus',

@@ -22,6 +22,10 @@ export class UpdateSettingsDto {
   @IsOptional()
   themeConfig?: object;
 
+  @ApiProperty({ description: 'Tax rate percentage', required: false })
+  @IsOptional()
+  taxRate?: number;
+
   @ApiProperty({ description: 'Custom CSS', required: false })
   @IsString()
   @IsOptional()

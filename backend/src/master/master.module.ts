@@ -6,9 +6,10 @@ import { BillingModule } from './billing/billing.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { GlobalThemeModule } from './theme/global-theme.module';
 import { GdprModule } from './gdpr/gdpr.module';
+import { PlatformAnalyticsModule } from './analytics/platform-analytics.module';
 
 @Module({
-  imports: [TenantModule, PlanModule, AuthModule, BillingModule, SubscriptionModule, GlobalThemeModule, GdprModule]
+  imports: [TenantModule, PlanModule, AuthModule, BillingModule, SubscriptionModule, GlobalThemeModule, GdprModule, PlatformAnalyticsModule]
 })
 export class MasterModule {}
 

@@ -86,8 +86,9 @@ export class InvoiceService {
 
     // 6. Summary Totals
     const shipping = Number(order.shippingCharge);
+    const taxPaid = Number(order.taxPaid || 0);
     const total = Number(order.totalPrice);
-    const discount = subtotal + shipping - total;
+    const discount = subtotal + shipping + taxPaid - total;
 
     doc.text('Subtotal:', 380, position, { width: 100, align: 'right' });
     doc.text(subtotal.toFixed(2), 480, position, { width: 80, align: 'right' });
@@ -95,6 +96,10 @@ export class InvoiceService {
     position += 15;
     doc.text('Discount:', 380, position, { width: 100, align: 'right' });
     doc.text(discount > 0 ? `-${discount.toFixed(2)}` : '0.00', 480, position, { width: 80, align: 'right' });
+
+    position += 15;
+    doc.text('Tax (VAT/GST):', 380, position, { width: 100, align: 'right' });
+    doc.text(taxPaid.toFixed(2), 480, position, { width: 80, align: 'right' });
 
     position += 15;
     doc.text('Shipping Charge:', 380, position, { width: 100, align: 'right' });

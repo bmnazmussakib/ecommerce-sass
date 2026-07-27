@@ -25,11 +25,11 @@
 | 1.13 | Vendor onboarding workflow | ✅ Done | Backend | — | — | Automatic DB provisioning, status management, staff registry |
 | 1.14 | Custom domain auto-SSL | 🔜 Due | Backend | Medium | Cloudflare (Free plan) | Let's Encrypt / Cloudflare SSL provisioning |
 | 1.15 | Visitor quota enforcement | 🔜 Due | Backend | Medium | Redis / Upstash (free tier) | Count visitors, throttle when over limit |
-| 1.16 | Platform analytics dashboard | 🔜 Due | B/E + F/E | Medium | — | Aggregated platform metrics |
+| 1.16 | Platform analytics dashboard | ✅ Done | B/E + F/E | — | Aggregated platform metrics dashboard API |
 | 1.17 | Infrastructure monitoring | 🔜 Due | B/E + F/E | Medium | Grafana/Prometheus (free self-hosted) | Per-tenant resource usage |
 | 1.18 | Global announcement & notifications | 🔜 Due | B/E + F/E | Medium | Email/SMS provider (free tier) | Send alerts to all/multiple vendors |
-| 1.19 | Audit log | 🔜 Due | Backend | Medium | — | Activity tracking for compliance |
-| 1.20 | GDPR data anonymization | 🔜 Due | Backend | Low | — | Data anonymization for GDPR compliance |
+| 1.19 | Audit log | ✅ Done | Backend | — | Action tracking and history API |
+| 1.20 | GDPR data anonymization | ✅ Done | Backend | — | Anonymize customer data API |
 | 1.21 | Invoice & tax management | 🔜 Due | Backend | Low | — | PDF invoices, multi-currency, tax rules |
 | 1.22 | Platform payment gateway (manual withdrawal) | ✅ Done | Backend | — | SSLCommerz/MFS (txn fees) | Manual payment submit + admin review flow |
 | 1.23 | Feature toggle system | 🔜 Due | Backend | Low | — | Enable/disable features per tenant |
@@ -148,10 +148,10 @@
 
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
-| Super Admin | 13 | 1 | 10 | 0 |
+| Super Admin | 16 | 1 | 7 | 0 |
 | Vendor Panel | 22 | 2 | 22 | 7 |
 | Storefront | 6 (Backend only) | 5 | 0 | 1 |
 | System & Security | 13 | 0 | 7 | 1 |
-| **Total** | **54** | **8** | **39** | **9** |
+| **Total** | **57** | **8** | **36** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.
