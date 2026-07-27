@@ -10,3 +10,20 @@ export class LoginDto {
   @IsString()
   password!: string;
 }
+
+export class Verify2FaDto {
+  @ApiProperty({ example: 'admin@ecomize.com' })
+  @IsEmail()
+  email!: string;
+
+  @ApiProperty({ example: '123456' })
+  @IsString()
+  token!: string;
+}
+
+export class Enable2FaDto {
+  @ApiProperty({ example: '123456' })
+  @IsString()
+  token!: string;
+}
+

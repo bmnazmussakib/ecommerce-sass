@@ -3,6 +3,8 @@ import { ApiTags, ApiBearerAuth, ApiHeader, ApiOperation } from '@nestjs/swagger
 import { OrderService } from './order.service';
 import { CreateOrderDto, UpdateOrderStatusDto, FulfillOrderDto } from './dto/order.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
 import { InvoiceService } from './invoice.service';
 import * as express from 'express';
 
@@ -101,7 +103,8 @@ export class OrderController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Patch(':id/status')
   @ApiOperation({ summary: 'Update order payment/shipping status (Admin)' })
   updateStatus(@Param('id') id: string, @Body() updateOrderStatusDto: UpdateOrderStatusDto) {
@@ -109,7 +112,8 @@ export class OrderController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post(':id/fulfill')
   @ApiOperation({ summary: 'Fulfill order using Steadfast/Pathao Courier (Admin)' })
   fulfill(

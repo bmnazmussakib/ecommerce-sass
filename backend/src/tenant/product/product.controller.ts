@@ -3,6 +3,8 @@ import { ApiTags, ApiOperation, ApiHeader, ApiBearerAuth, ApiConsumes, ApiBody }
 import { ProductService } from './product.service';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 
@@ -14,7 +16,8 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post()
   @ApiOperation({ summary: 'Create a product' })
   create(@Body() createProductDto: CreateProductDto, @Req() req: any) {
@@ -22,8 +25,10 @@ export class ProductController {
     return this.productService.create(createProductDto, tenantId);
   }
 
+
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('bulk-upload')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -77,7 +82,8 @@ export class ProductController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Patch(':id')
   @ApiOperation({ summary: 'Update a product' })
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto, @Req() req: any) {
@@ -86,7 +92,8 @@ export class ProductController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a product' })
   remove(@Param('id') id: string, @Req() req: any) {
