@@ -4,6 +4,8 @@ import { PrismaClient as TenantPrismaClient, Prisma } from '@prisma/tenant-clien
 import { CreateOrderDto, UpdateOrderStatusDto } from './dto/order.dto';
 import { BkashService } from '../integration/adapters/bkash.service';
 import { SslCommerzService } from '../integration/adapters/sslcommerz.service';
+import { SteadfastService } from '../integration/adapters/steadfast.service';
+import { PathaoService } from '../integration/adapters/pathao.service';
 
 @Injectable()
 export class OrderService {
@@ -11,6 +13,8 @@ export class OrderService {
     @Inject(TENANT_PRISMA_CLIENT) private readonly prisma: TenantPrismaClient,
     private readonly bkashService: BkashService,
     private readonly sslCommerzService: SslCommerzService,
+    private readonly steadfastService: SteadfastService,
+    private readonly pathaoService: PathaoService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -310,6 +314,64 @@ export class OrderService {
     return this.prisma.order.update({
       where: { id },
       data: { ...dto }
+    });
+  }
+
+  async fulfillOrder(orderId: string, courier: 'STEADFAST' | 'PATHAO', metadata?: any) {
+    const order = await this.prisma.order.findUnique({
+      where: { id: orderId },
+      include: { orderItems: { include: { variant: { include: { product: true } } } } }
+    });
+
+    if (!order) throw new NotFoundException('Order not found');
+
+    const integration = await this.prisma.integration.findUnique({
+      where: { provider: courier as any }
+    });
+
+    if (!integration || !integration.isActive) {
+      throw new BadRequestException(`${courier} integration is not configured or active`);
+    }
+
+    const keys = integration.keysJson as any;
+    let awbCode = '';
+    let trackingUrl = '';
+
+    if (courier === 'STEADFAST') {
+      const res = await this.steadfastService.createOrder(keys, {
+        invoice: order.id,
+        recipient_name: order.customerName,
+        recipient_phone: order.customerPhone,
+        recipient_address: order.shippingAddress,
+        cod_amount: order.totalPrice.toNumber(),
+        note: metadata?.note || 'Fulfill order',
+      });
+      awbCode = res.consignment_id;
+      trackingUrl = res.tracking_url;
+    } else if (courier === 'PATHAO') {
+      const res = await this.pathaoService.createOrder(keys, {
+        recipient_name: order.customerName,
+        recipient_phone: order.customerPhone,
+        recipient_address: order.shippingAddress,
+        recipient_city: metadata?.recipient_city,
+        recipient_zone: metadata?.recipient_zone,
+        recipient_area: metadata?.recipient_area,
+        item_quantity: order.orderItems.reduce((acc, item) => acc + item.quantity, 0),
+        item_weight: metadata?.item_weight || 0.5,
+        amount_to_collect: order.totalPrice.toNumber(),
+        special_instruction: metadata?.special_instruction,
+      });
+      awbCode = res.consignment_id;
+      trackingUrl = res.tracking_url;
+    }
+
+    return await this.prisma.order.update({
+      where: { id: orderId },
+      data: {
+        awbCode,
+        trackingUrl,
+        shippingStatus: 'SHIPPED',
+      }
     });
   }
 }

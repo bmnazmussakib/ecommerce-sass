@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, UseGuards, Req, Query, Res } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiHeader, ApiOperation } from '@nestjs/swagger';
 import { OrderService } from './order.service';
-import { CreateOrderDto, UpdateOrderStatusDto } from './dto/order.dto';
+import { CreateOrderDto, UpdateOrderStatusDto, FulfillOrderDto } from './dto/order.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { InvoiceService } from './invoice.service';
 import * as express from 'express';
@@ -106,5 +106,16 @@ export class OrderController {
   @ApiOperation({ summary: 'Update order payment/shipping status (Admin)' })
   updateStatus(@Param('id') id: string, @Body() updateOrderStatusDto: UpdateOrderStatusDto) {
     return this.orderService.updateStatus(id, updateOrderStatusDto);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Post(':id/fulfill')
+  @ApiOperation({ summary: 'Fulfill order using Steadfast/Pathao Courier (Admin)' })
+  fulfill(
+    @Param('id') id: string,
+    @Body() fulfillDto: FulfillOrderDto,
+  ) {
+    return this.orderService.fulfillOrder(id, fulfillDto.courier, fulfillDto.metadata);
   }
 }

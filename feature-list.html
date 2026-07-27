@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecomize — Feature List</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #1e293b;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border: #334155;
+      --header-bg: linear-gradient(135deg, #1e293b, #0f172a);
+      --hover-bg: rgba(255,255,255,0.02);
+      --card-bg: rgba(255,255,255,0.04);
+      --tag-be-bg: #1e3a5f;
+      --tag-fe-bg: #3b1f3b;
+      --tag-infra-bg: #1f3b2c;
+    }
+    .light-mode {
+      --bg: #f8fafc;
+      --bg-alt: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --border: #e2e8f0;
+      --header-bg: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+      --hover-bg: rgba(0,0,0,0.02);
+      --card-bg: rgba(0,0,0,0.03);
+      --tag-be-bg: #dbeafe;
+      --tag-fe-bg: #f3e8ff;
+      --tag-infra-bg: #dcfce7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+      transition: background .25s, color .25s;
+    }
+    .container { max-width: 1280px; margin: 0 auto; }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 32px;
+      background: var(--header-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    header h1 { font-size: 28px; font-weight: 700; color: var(--text); }
+    header p { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+    header .stack { margin-top: 12px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    header .stack span {
+      padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+    }
+    .tag-be { background: var(--tag-be-bg); color: #2563eb; }
+    .tag-fe { background: var(--tag-fe-bg); color: #7c3aed; }
+    .tag-infra { background: var(--tag-infra-bg); color: #16a34a; }
+
+    /* Toggle */
+    .theme-toggle {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--bg-alt); border: 1px solid var(--border);
+      color: var(--text); border-radius: 999px; padding: 6px 14px;
+      font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+      transition: background .25s, color .25s;
+    }
+    .theme-toggle:hover { opacity: .8; }
+
+    /* Legend */
+    .legend {
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 28px; padding: 16px; background: var(--bg-alt); border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .legend-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+    .dot-done { background: #22c55e; }
+    .dot-high { background: #ef4444; }
+    .dot-medium { background: #f59e0b; }
+    .dot-low { background: #3b82f6; }
+    .dot-roadmap { background: #64748b; }
+
+    /* Sections */
+    .section { margin-bottom: 32px; }
+    .section-title {
+      font-size: 20px; font-weight: 700; padding: 14px 20px;
+      border-radius: 12px 12px 0 0; border: 1px solid var(--border); border-bottom: none;
+    }
+    .section-title .count { font-size: 13px; font-weight: 400; opacity: 0.7; margin-left: 8px; }
+
+    table {
+      width: 100%; border-collapse: collapse;
+      border: 1px solid var(--border); border-radius: 0 0 12px 12px; overflow: hidden;
+    }
+    th {
+      text-align: left; padding: 10px 14px; font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim);
+      background: var(--bg-alt); border-bottom: 1px solid var(--border);
+    }
+    td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--bg-alt); vertical-align: middle; }
+
+    /* Status badges */
+    .status { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+    .status-done { background: rgba(34,197,94,0.15); color: #16a34a; }
+    .light-mode .status-done { background: rgba(34,197,94,0.12); color: #15803d; }
+    .status-high { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .light-mode .status-high { background: rgba(239,68,68,0.12); color: #dc2626; }
+    .status-medium { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .light-mode .status-medium { background: rgba(245,158,11,0.12); color: #d97706; }
+    .status-low { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .light-mode .status-low { background: rgba(59,130,246,0.12); color: #2563eb; }
+    .status-roadmap { background: rgba(100,116,139,0.15); color: #64748b; }
+    .light-mode .status-roadmap { background: rgba(100,116,139,0.12); color: #475569; }
+
+    /* Layer badges */
+    .layer { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+    .layer-be { background: rgba(96,165,250,0.15); color: #2563eb; }
+    .light-mode .layer-be { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+    .layer-fe { background: rgba(192,132,252,0.15); color: #7c3aed; }
+    .light-mode .layer-fe { background: rgba(124,58,237,0.1); color: #6d28d9; }
+    .layer-both { background: linear-gradient(135deg, rgba(96,165,250,0.2), rgba(192,132,252,0.2)); color: #6d28d9; }
+    .light-mode .layer-both { background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.1)); color: #5b21b6; }
+    .layer-infra { background: rgba(74,222,128,0.15); color: #16a34a; }
+    .light-mode .layer-infra { background: rgba(22,163,74,0.1); color: #15803d; }
+
+    /* Priority dots in table */
+    .priority-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+    .num { color: var(--text-dim); font-size: 12px; width: 40px; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--hover-bg); }
+    .section-st-super .section-title { background: linear-gradient(135deg, #1e3a5f44, var(--bg-alt)); color: #3b82f6; }
+    .light-mode .section-st-super .section-title { background: linear-gradient(135deg, #dbeafe, var(--bg-alt)); color: #2563eb; }
+    .section-st-vendor .section-title { background: linear-gradient(135deg, #3b1f3b44, var(--bg-alt)); color: #a855f7; }
+    .light-mode .section-st-vendor .section-title { background: linear-gradient(135deg, #f3e8ff, var(--bg-alt)); color: #7c3aed; }
+    .section-st-storefront .section-title { background: linear-gradient(135deg, #1f3b2c44, var(--bg-alt)); color: #22c55e; }
+    .light-mode .section-st-storefront .section-title { background: linear-gradient(135deg, #dcfce7, var(--bg-alt)); color: #16a34a; }
+    .section-st-security .section-title { background: linear-gradient(135deg, #3b352044, var(--bg-alt)); color: #eab308; }
+    .light-mode .section-st-security .section-title { background: linear-gradient(135deg, #fef9c3, var(--bg-alt)); color: #ca8a04; }
+
+    /* Accordion */
+    .section-title {
+      cursor: pointer;
+      user-select: none;
+    }
+    .section-title::after {
+      content: '▾';
+      float: right;
+      font-size: 16px;
+      transition: transform .3s;
+    }
+    .section-title.collapsed::after {
+      transform: rotate(-90deg);
+    }
+    .section-content {
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .section-content.collapsed {
+      max-height: 0 !important;
+    }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
+      margin-top: 24px;
+    }
+    .summary-card {
+      padding: 16px; border-radius: 12px; border: 1px solid var(--border); text-align: center;
+    }
+    .summary-card .num { font-size: 28px; font-weight: 700; display: block; }
+    .summary-card .label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .summary-done { background: rgba(34,197,94,0.08); }
+    .summary-done .num { color: #16a34a; }
+    .light-mode .summary-done .num { color: #15803d; }
+    .summary-high { background: rgba(239,68,68,0.08); }
+    .summary-high .num { color: #ef4444; }
+    .light-mode .summary-high .num { color: #dc2626; }
+    .summary-medium { background: rgba(245,158,11,0.08); }
+    .summary-medium .num { color: #f59e0b; }
+    .light-mode .summary-medium .num { color: #d97706; }
+    .summary-low { background: rgba(59,130,246,0.08); }
+    .summary-low .num { color: #3b82f6; }
+    .light-mode .summary-low .num { color: #2563eb; }
+    .summary-roadmap { background: rgba(100,116,139,0.08); }
+    .summary-roadmap .num { color: #64748b; }
+    .light-mode .summary-roadmap .num { color: #475569; }
+    .summary-total { background: var(--card-bg); }
+    .summary-total .num { color: var(--text); }
+
+    @media (max-width: 768px) {
+      body { padding: 12px; }
+      th, td { padding: 8px 10px; font-size: 12px; }
+      .layer { font-size: 10px; }
+      .theme-toggle { top: 10px; right: 10px; padding: 4px 10px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+  <h1>Ecomize — Feature Implementation Status</h1>
+  <p>Multi-Tenant eCommerce SaaS Platform</p>
+  <div class="stack">
+    <span class="tag-be">Backend: NestJS + Prisma + PostgreSQL</span>
+    <span class="tag-fe">Frontend: Next.js (not started)</span>
+    <span class="tag-infra">Infrastructure: Docker / K8s / CDN</span>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot dot-done"></span> Implemented</div>
+  <div class="legend-item"><span class="legend-dot dot-high"></span> Due — High Priority</div>
+  <div class="legend-item"><span class="legend-dot dot-medium"></span> Due — Medium Priority</div>
+  <div class="legend-item"><span class="legend-dot dot-low"></span> Due — Low Priority</div>
+  <div class="legend-item"><span class="legend-dot dot-roadmap"></span> Roadmap</div>
+</div>
+
+<!-- ==================== SUPER ADMIN ==================== -->
+<div class="section section-st-super">
+  <div class="section-title" onclick="toggleSection(this)">
+    Super Admin Panel <span class="count">(Platform Owner)</span>
+  </div>
+  <div class="section-content">
+  <table>
+    <thead>
+      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:110px">Status</th><th style="width:100px">Layer</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">1.1</td><td>Plan CRUD</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Full CRUD with product/traffic/storage limits</td></tr>
+      <tr><td class="num">1.2</td><td>Tenant CRUD</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Subdomain + custom domain, status management</td></tr>
+      <tr><td class="num">1.3</td><td>Tenant impersonation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Generate JWT as vendor OWNER</td></tr>
+      <tr><td class="num">1.4</td><td>Traffic / rate limiting</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Per-plan daily request caps</td></tr>
+      <tr><td class="num">1.5</td><td>Super Admin login & auth</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td>Model exists, no login controller or guard</td></tr>
+      <tr><td class="num">1.6</td><td>Super Admin 2FA</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td>TOTP fields in schema, no code</td></tr>
+      <tr><td class="num">1.7</td><td>Admin role-based access</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td>Permission system for admin staff</td></tr>
+      <tr><td class="num">1.8</td><td>Subscription billing (Stripe)</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td>Recurring payments, webhooks, auto-renew</td></tr>
+      <tr><td class="num">1.9</td><td>Subscription CRUD</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td>Assign plans, upgrade/downgrade cycle</td></tr>
+      <tr><td class="num">1.10</td><td>GlobalTheme management</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td>Upload/activate/deactivate themes (schema exists)</td></tr>
+      <tr><td class="num">1.11</td><td>Vendor onboarding workflow</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td>PENDING → ACTIVE/SUSPENDED lifecycle</td></tr>
+      <tr><td class="num">1.12</td><td>Custom domain auto-SSL</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Cloudflare API + Let's Encrypt</td></tr>
+      <tr><td class="num">1.13</td><td>Visitor quota enforcement</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Count + throttle when over plan limit</td></tr>
+      <tr><td class="num">1.14</td><td>Platform analytics dashboard</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td>MRR, vendor count, uptime</td></tr>
+      <tr><td class="num">1.15</td><td>Infrastructure monitoring</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td>Server load, DB size per tenant</td></tr>
+      <tr><td class="num">1.16</td><td>Global announcements</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td>Send alerts to vendors</td></tr>
+      <tr><td class="num">1.17</td><td>Audit log</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Admin action tracking</td></tr>
+      <tr><td class="num">1.18</td><td>Invoice & tax management</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td>Multi-currency, VAT/GST</td></tr>
+      <tr><td class="num">1.19</td><td>Feature toggle system</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td>Beta features per vendor</td></tr>
+      <tr><td class="num">1.20</td><td>Super Admin panel UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td>Dashboard, vendor list, plan mgmt</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ==================== VENDOR PANEL ==================== -->
+<div class="section section-st-vendor">
+  <div class="section-title" onclick="toggleSection(this)">
+    Vendor Panel <span class="count">(Merchant Dashboard)</span>
+  </div>
+  <div class="section-content">
+  <table>
+    <thead>
+      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:130px">Status</th><th style="width:100px">Layer</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">2.1</td><td>Staff registration & login (JWT)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>bcrypt hashing, Passport JWT</td></tr>
+      <tr><td class="num">2.2</td><td>TOTP 2FA</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Generate, enable, disable, verify</td></tr>
+      <tr><td class="num">2.3</td><td>Store settings</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Name, logo, brand color, theme config</td></tr>
+      <tr><td class="num">2.4</td><td>Custom CSS / JS</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Per-store custom code</td></tr>
+      <tr><td class="num">2.5</td><td>Category management</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Nested hierarchy CRUD</td></tr>
+      <tr><td class="num">2.6</td><td>Product CRUD + variants</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Size/color/weight/SKU/price/stock</td></tr>
+      <tr><td class="num">2.7</td><td>Bulk CSV product import</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>BullMQ background job</td></tr>
+      <tr><td class="num">2.8</td><td>Meilisearch product search</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Per-tenant indices, auto-sync</td></tr>
+      <tr><td class="num">2.9</td><td>Supplier management</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>CRUD with contacts</td></tr>
+      <tr><td class="num">2.10</td><td>Coupon / discount engine</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Percentage/flat, min order, date range</td></tr>
+      <tr><td class="num">2.11</td><td>Order checkout flow</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Stock deduct, coupon, anti-fraud, shipping</td></tr>
+      <tr><td class="num">2.12</td><td>Anti-fraud order protection</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Blocklist + fingerprint + velocity (max 3/5min)</td></tr>
+      <tr><td class="num">2.13</td><td>bKash payment integration</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Tokenized checkout API with callback</td></tr>
+      <tr><td class="num">2.14</td><td>SSLCommerz payment integration</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Gateway API v4 with IPN callback</td></tr>
+      <tr><td class="num">2.15</td><td>PDF invoice generation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Per-order PDF via PDFKit</td></tr>
+      <tr><td class="num">2.16</td><td>Steadfast courier fulfillment</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Create order with sandbox mock</td></tr>
+      <tr><td class="num">2.17</td><td>Pathao courier fulfillment</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Token + create order with sandbox mock</td></tr>
+      <tr><td class="num">2.18</td><td>Order listing & status updates</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Payment/shipping status management</td></tr>
+      <tr><td class="num">2.19</td><td>Integrations key management</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>CRUD API keys per provider</td></tr>
+      <tr><td class="num">2.20</td><td>Analytics dashboard</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Revenue, sales chart, top products, order statuses</td></tr>
+      <tr><td class="num">2.21</td><td>Image upload (Cloudinary)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Product/store image upload</td></tr>
+      <tr><td class="num">2.22</td><td>SupplyBatch (stock entry & costing)</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Schema exists, no endpoints</td></tr>
+      <tr><td class="num">2.23</td><td>NAGAD payment integration</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Enum exists, no adapter</td></tr>
+      <tr><td class="num">2.24</td><td>FB Pixel / GA4 / GTM tracking</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Enums exist, no implementation</td></tr>
+      <tr><td class="num">2.25</td><td>Role-based authorization (OWNER/ADMIN/STAFF)</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Permission guards per role</td></tr>
+      <tr><td class="num">2.26</td><td>Order refund & return handling</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>Full return workflow</td></tr>
+      <tr><td class="num">2.27</td><td>Abandoned cart recovery</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td>Email/SMS reminders</td></tr>
+      <tr><td class="num">2.28</td><td>Flash sales & advanced promos</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td>Time-bound sales events</td></tr>
+      <tr><td class="num">2.29</td><td>Email marketing integration</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-both">Both</span></td><td>Mailchimp etc.</td></tr>
+      <tr><td class="num">2.30</td><td>SEO management (meta, sitemap, OG)</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td>Per-page SEO editor</td></tr>
+      <tr><td class="num">2.31</td><td>Vendor dashboard UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td>Full merchant dashboard</td></tr>
+      <tr><td class="num">2.32</td><td>Drag-and-drop storefront builder</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td>Section-based page builder</td></tr>
+      <tr><td class="num">2.33</td><td>Live chat widget</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-fe">Frontend</span></td><td>Customer engagement</td></tr>
+      <tr><td class="num">2.34</td><td>Multi-language support</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-fe">Frontend</span></td><td>i18n per store</td></tr>
+      <tr><td class="num">2.35</td><td>Affiliate system</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-both">Both</span></td><td>Referral tracking</td></tr>
+      <tr><td class="num">2.36</td><td>Loyalty points system</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-be">Backend</span></td><td>Customer rewards</td></tr>
+      <tr><td class="num">2.37</td><td>Multi-warehouse stock</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-be">Backend</span></td><td>Premium feature</td></tr>
+      <tr><td class="num">2.38</td><td>Mobile app / PWA generation</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-fe">Frontend</span></td><td>For premium vendors</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ==================== STOREFRONT ==================== -->
+<div class="section section-st-storefront">
+  <div class="section-title" onclick="toggleSection(this)">
+    Customer Storefront <span class="count">(Shopper-facing)</span>
+  </div>
+  <div class="section-content">
+  <table>
+    <thead>
+      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:130px">Status</th><th style="width:100px">Layer</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">3.1</td><td>Product catalog & browsing API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td>Public API ready, no frontend UI</td></tr>
+      <tr><td class="num">3.2</td><td>Category browsing API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td>Public API ready</td></tr>
+      <tr><td class="num">3.3</td><td>Instant product search API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td>Meilisearch full-text search</td></tr>
+      <tr><td class="num">3.4</td><td>Checkout API (COD + gateways)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td>Full flow API ready</td></tr>
+      <tr><td class="num">3.5</td><td>OTP for COD verification</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td>Redis TTL-based</td></tr>
+      <tr><td class="num">3.6</td><td>Order tracking API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td>Public order lookup</td></tr>
+      <tr><td class="num">3.7</td><td>Responsive storefront UI (Next.js)</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td>SSR/ISR, sub-1s load target</td></tr>
+      <tr><td class="num">3.8</td><td>One-page checkout UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td>Full checkout form</td></tr>
+      <tr><td class="num">3.9</td><td>Product filtering UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td>Price, size, category filters</td></tr>
+      <tr><td class="num">3.10</td><td>CDN edge caching (Cloudflare)</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>Static assets + ISR pages</td></tr>
+      <tr><td class="num">3.11</td><td>Incremental Static Regeneration</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td>Next.js ISR for fast loads</td></tr>
+      <tr><td class="num">3.12</td><td>Product reviews & ratings</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-both">Both</span></td><td>Customer testimonials</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== SYSTEM & SECURITY ==================== -->
+<div class="section section-st-security">
+  <div class="section-title">
+    System & Security <span class="count">(Infrastructure / Cross-cutting)</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:130px">Status</th><th style="width:100px">Layer</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">4.1</td><td>DB-per-tenant isolation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Separate PostgreSQL DB per vendor</td></tr>
+      <tr><td class="num">4.2</td><td>Subdomain tenant resolution</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Auto-detect from Host header</td></tr>
+      <tr><td class="num">4.3</td><td>Custom domain resolution</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Fallback customDomain lookup</td></tr>
+      <tr><td class="num">4.4</td><td>Global rate limiting</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>NestJS ThrottlerModule (100 req/min)</td></tr>
+      <tr><td class="num">4.5</td><td>Per-plan traffic quota</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Custom TrafficThrottleMiddleware</td></tr>
+      <tr><td class="num">4.6</td><td>JWT authentication</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Passport JWT, 1d expiry</td></tr>
+      <tr><td class="num">4.7</td><td>Password hashing (bcrypt)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>10 rounds</td></tr>
+      <tr><td class="num">4.8</td><td>Anti-fraud — email/phone blocklist</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>BlockedContact model</td></tr>
+      <tr><td class="num">4.9</td><td>Anti-fraud — device fingerprint</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>BlockedFingerprint model</td></tr>
+      <tr><td class="num">4.10</td><td>Anti-fraud — velocity check</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Max 3 orders per fingerprint per 5 min</td></tr>
+      <tr><td class="num">4.11</td><td>BullMQ background job queue</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Redis-backed CSV import queue</td></tr>
+      <tr><td class="num">4.12</td><td>Swagger API documentation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Available at <code>/api</code></td></tr>
+      <tr><td class="num">4.13</td><td>Cloudinary image storage</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td>Stream upload</td></tr>
+      <tr><td class="num">4.14</td><td>CAPTCHA for login & forms</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td>Brute-force protection</td></tr>
+      <tr><td class="num">4.15</td><td>WAF (Web Application Firewall)</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>AWS WAF / Cloudflare</td></tr>
+      <tr><td class="num">4.16</td><td>Automated backups & restore</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>DB backup strategy</td></tr>
+      <tr><td class="num">4.17</td><td>Rate limiting per store / API key</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td>API key-based throttling</td></tr>
+      <tr><td class="num">4.18</td><td>ELK / CloudWatch logging</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>Centralized logging</td></tr>
+      <tr><td class="num">4.19</td><td>CI/CD pipeline</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>GitHub Actions / automated deploy</td></tr>
+      <tr><td class="num">4.20</td><td>Docker containerization</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>Dockerfile + compose exist, deployment pending</td></tr>
+      <tr><td class="num">4.21</td><td>Kubernetes auto-scaling</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>EKS / Fargate orchestration</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== SUMMARY ==================== -->
+<div class="section">
+  <div class="section-title" style="background:linear-gradient(135deg,var(--bg-alt),var(--bg));color:var(--text)">
+    Summary <span class="count">(Feature Count by Category & Status)</span>
+  </div>
+  <div class="summary-grid">
+    <div class="summary-card summary-done">
+      <span class="num">42</span>
+      <span class="label">✅ Implemented</span>
+    </div>
+    <div class="summary-card summary-high">
+      <span class="num">12</span>
+      <span class="label">🔜 Due — High Priority</span>
+    </div>
+    <div class="summary-card summary-medium">
+      <span class="num">13</span>
+      <span class="label">🔜 Due — Medium Priority</span>
+    </div>
+    <div class="summary-card summary-low">
+      <span class="num">5</span>
+      <span class="label">🔜 Due — Low Priority</span>
+    </div>
+    <div class="summary-card summary-roadmap">
+      <span class="num">7</span>
+      <span class="label">🧭 Roadmap</span>
+    </div>
+    <div class="summary-card summary-total">
+      <span class="num">79</span>
+      <span class="label">Total Features</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    const btn = document.getElementById('themeToggle');
+    const isLight = document.body.classList.contains('light-mode');
+    btn.textContent = isLight ? '☀️ Light' : '🌙 Dark';
+    localStorage.setItem('ecomize-theme', isLight ? 'light' : 'dark');
+  }
+  (function() {
+    if (localStorage.getItem('ecomize-theme') === 'light') {
+      document.body.classList.add('light-mode');
+      document.getElementById('themeToggle').textContent = '☀️ Light';
+    }
+  })();
+</script>
+</body>
+</html>

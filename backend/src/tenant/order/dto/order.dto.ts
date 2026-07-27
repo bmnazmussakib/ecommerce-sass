@@ -74,3 +74,14 @@ export class UpdateOrderStatusDto {
   @IsString()
   trackingUrl?: string;
 }
+
+export class FulfillOrderDto {
+  @ApiProperty({ enum: ['STEADFAST', 'PATHAO'] })
+  @IsString()
+  courier!: 'STEADFAST' | 'PATHAO';
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  metadata?: any;
+}
+
