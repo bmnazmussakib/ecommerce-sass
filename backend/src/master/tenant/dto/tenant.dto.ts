@@ -20,6 +20,10 @@ export class CreateTenantDto {
   @ApiProperty({ description: 'Supabase DB Connection String for this tenant' })
   @IsString()
   dbConnectionString!: string;
+
+  @ApiProperty({ description: 'Key-value map of feature toggles', required: false })
+  @IsOptional()
+  featureToggles?: Record<string, boolean>;
 }
 
 export class UpdateTenantDto {
@@ -42,4 +46,8 @@ export class UpdateTenantDto {
   @IsString()
   @IsOptional()
   dbConnectionString?: string;
+
+  @ApiProperty({ description: 'Key-value map of feature toggles', required: false })
+  @IsOptional()
+  featureToggles?: Record<string, boolean>;
 }

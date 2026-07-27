@@ -7,6 +7,8 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { FeatureToggle } from '../../core/decorators/feature-toggle.decorator';
+import { FeatureToggleGuard } from '../../core/guards/feature-toggle.guard';
 
 
 @ApiTags('Tenant - Products')
@@ -28,7 +30,8 @@ export class ProductController {
 
   @ApiBearerAuth()
   @Roles('OWNER', 'ADMIN')
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard, FeatureToggleGuard)
+  @FeatureToggle('bulk_csv_import')
   @Post('bulk-upload')
   @ApiConsumes('multipart/form-data')
   @ApiBody({

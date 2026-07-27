@@ -134,7 +134,8 @@ exports.Prisma.TenantScalarFieldEnum = {
   status: 'status',
   dbConnectionString: 'dbConnectionString',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  featureToggles: 'featureToggles'
 };
 
 exports.Prisma.PlanScalarFieldEnum = {
@@ -194,6 +195,10 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -202,6 +207,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.TenantStatus = exports.$Enums.TenantStatus = {
   PENDING: 'PENDING',

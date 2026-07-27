@@ -2597,6 +2597,7 @@ export namespace Prisma {
     dbConnectionString: number
     createdAt: number
     updatedAt: number
+    featureToggles: number
     _all: number
   }
 
@@ -2629,6 +2630,7 @@ export namespace Prisma {
     dbConnectionString?: true
     createdAt?: true
     updatedAt?: true
+    featureToggles?: true
     _all?: true
   }
 
@@ -2712,6 +2714,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt: Date
     updatedAt: Date
+    featureToggles: JsonValue
     _count: TenantCountAggregateOutputType | null
     _min: TenantMinAggregateOutputType | null
     _max: TenantMaxAggregateOutputType | null
@@ -2739,6 +2742,7 @@ export namespace Prisma {
     dbConnectionString?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    featureToggles?: boolean
     subscription?: boolean | Tenant$subscriptionArgs<ExtArgs>
     payments?: boolean | Tenant$paymentsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
@@ -2752,6 +2756,7 @@ export namespace Prisma {
     dbConnectionString?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    featureToggles?: boolean
   }, ExtArgs["result"]["tenant"]>
 
   export type TenantSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2762,6 +2767,7 @@ export namespace Prisma {
     dbConnectionString?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    featureToggles?: boolean
   }, ExtArgs["result"]["tenant"]>
 
   export type TenantSelectScalar = {
@@ -2772,9 +2778,10 @@ export namespace Prisma {
     dbConnectionString?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    featureToggles?: boolean
   }
 
-  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "subdomain" | "customDomain" | "status" | "dbConnectionString" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
+  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "subdomain" | "customDomain" | "status" | "dbConnectionString" | "createdAt" | "updatedAt" | "featureToggles", ExtArgs["result"]["tenant"]>
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subscription?: boolean | Tenant$subscriptionArgs<ExtArgs>
     payments?: boolean | Tenant$paymentsArgs<ExtArgs>
@@ -2797,6 +2804,7 @@ export namespace Prisma {
       dbConnectionString: string
       createdAt: Date
       updatedAt: Date
+      featureToggles: Prisma.JsonValue
     }, ExtArgs["result"]["tenant"]>
     composites: {}
   }
@@ -3229,6 +3237,7 @@ export namespace Prisma {
     readonly dbConnectionString: FieldRef<"Tenant", 'String'>
     readonly createdAt: FieldRef<"Tenant", 'DateTime'>
     readonly updatedAt: FieldRef<"Tenant", 'DateTime'>
+    readonly featureToggles: FieldRef<"Tenant", 'Json'>
   }
     
 
@@ -9130,7 +9139,8 @@ export namespace Prisma {
     status: 'status',
     dbConnectionString: 'dbConnectionString',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    featureToggles: 'featureToggles'
   };
 
   export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
@@ -9211,6 +9221,13 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -9225,6 +9242,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -9278,6 +9304,13 @@ export namespace Prisma {
    * Reference to a field of type 'TenantStatus[]'
    */
   export type ListEnumTenantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -9455,6 +9488,7 @@ export namespace Prisma {
     dbConnectionString?: StringFilter<"Tenant"> | string
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
+    featureToggles?: JsonFilter<"Tenant">
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     payments?: SubscriptionPaymentListRelationFilter
   }
@@ -9467,6 +9501,7 @@ export namespace Prisma {
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    featureToggles?: SortOrder
     subscription?: SubscriptionOrderByWithRelationInput
     payments?: SubscriptionPaymentOrderByRelationAggregateInput
   }
@@ -9482,6 +9517,7 @@ export namespace Prisma {
     dbConnectionString?: StringFilter<"Tenant"> | string
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
+    featureToggles?: JsonFilter<"Tenant">
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     payments?: SubscriptionPaymentListRelationFilter
   }, "id" | "subdomain" | "customDomain">
@@ -9494,6 +9530,7 @@ export namespace Prisma {
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    featureToggles?: SortOrder
     _count?: TenantCountOrderByAggregateInput
     _max?: TenantMaxOrderByAggregateInput
     _min?: TenantMinOrderByAggregateInput
@@ -9510,6 +9547,7 @@ export namespace Prisma {
     dbConnectionString?: StringWithAggregatesFilter<"Tenant"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+    featureToggles?: JsonWithAggregatesFilter<"Tenant">
   }
 
   export type PlanWhereInput = {
@@ -9935,6 +9973,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionCreateNestedOneWithoutTenantInput
     payments?: SubscriptionPaymentCreateNestedManyWithoutTenantInput
   }
@@ -9947,6 +9986,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutTenantInput
     payments?: SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -9959,6 +9999,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionUpdateOneWithoutTenantNestedInput
     payments?: SubscriptionPaymentUpdateManyWithoutTenantNestedInput
   }
@@ -9971,6 +10012,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionUncheckedUpdateOneWithoutTenantNestedInput
     payments?: SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -9983,6 +10025,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
   }
 
   export type TenantUpdateManyMutationInput = {
@@ -9993,6 +10036,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
   }
 
   export type TenantUncheckedUpdateManyInput = {
@@ -10003,6 +10047,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
   }
 
   export type PlanCreateInput = {
@@ -10518,6 +10563,28 @@ export namespace Prisma {
     notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumTenantStatusFilter<$PrismaModel> | $Enums.TenantStatus
   }
+  export type JsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type SubscriptionNullableScalarRelationFilter = {
     is?: SubscriptionWhereInput | null
@@ -10542,6 +10609,7 @@ export namespace Prisma {
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    featureToggles?: SortOrder
   }
 
   export type TenantMaxOrderByAggregateInput = {
@@ -10572,6 +10640,31 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTenantStatusFilter<$PrismaModel>
     _max?: NestedEnumTenantStatusFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -11311,6 +11404,28 @@ export namespace Prisma {
     _min?: NestedEnumTenantStatusFilter<$PrismaModel>
     _max?: NestedEnumTenantStatusFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
@@ -11684,6 +11799,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     payments?: SubscriptionPaymentCreateNestedManyWithoutTenantInput
   }
 
@@ -11695,6 +11811,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     payments?: SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
   }
 
@@ -11749,6 +11866,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     payments?: SubscriptionPaymentUpdateManyWithoutTenantNestedInput
   }
 
@@ -11760,6 +11878,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     payments?: SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
   }
 
@@ -11804,6 +11923,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionCreateNestedOneWithoutTenantInput
   }
 
@@ -11815,6 +11935,7 @@ export namespace Prisma {
     dbConnectionString: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutTenantInput
   }
 
@@ -11869,6 +11990,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionUpdateOneWithoutTenantNestedInput
   }
 
@@ -11880,6 +12002,7 @@ export namespace Prisma {
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    featureToggles?: JsonNullValueInput | InputJsonValue
     subscription?: SubscriptionUncheckedUpdateOneWithoutTenantNestedInput
   }
 

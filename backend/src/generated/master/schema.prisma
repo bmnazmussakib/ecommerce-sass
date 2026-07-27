@@ -28,6 +28,7 @@ model Tenant {
   dbConnectionString String
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
+  featureToggles     Json                  @default("{}")
   subscription       Subscription?
   payments           SubscriptionPayment[]
 }
