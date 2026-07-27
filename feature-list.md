@@ -17,10 +17,10 @@
 | 1.5 | Super Admin login & auth | ✅ Done | Backend | — | — | JWT-based login with bcrypt and guard |
 | 1.6 | Super Admin 2FA | ✅ Done | Backend | — | — | TOTP setup, enable, disable, verify |
 | 1.7 | Admin role-based access | ✅ Done | Backend | — | — | Permission system for admin staff |
-| 1.8 | Subscription billing (Stripe) | 🔜 Due | Backend | High | Stripe (~2.9% + $0.30/txn) | Recurring payments, webhooks, auto-renew |
-| 1.9 | Subscription CRUD | 🔜 Due | Backend | High | — | Assign plans, upgrade/downgrade cycle |
+| 1.8 | Subscription billing (SSLCommerz) | ✅ Done | Backend | — | SSLCommerz API (txn fees) | Gateway payment with callback verification |
+| 1.9 | Subscription CRUD | ✅ Done | Backend | — | — | Assign plans, upgrade/downgrade via billing flow |
 | 1.10 | Multi-currency plan pricing | 🔜 Due | Backend | Low | — | Set pricing in multiple currencies per plan |
-| 1.11 | Admin store data access | 🔜 Due | Backend | Medium | — | View vendor products, orders, customers |
+| 1.11 | Admin store data access | ✅ Done | Backend | — | — | View vendor products, orders, customers |
 | 1.12 | GlobalTheme management | 🔜 Due | Backend | High | Cloudinary (free 25GB) | Theme rollout for vendors (model exists) |
 | 1.13 | Vendor onboarding workflow | 🔜 Due | Backend | High | — | Approval/suspension lifecycle |
 | 1.14 | Custom domain auto-SSL | 🔜 Due | Backend | Medium | Cloudflare (Free plan) | Let's Encrypt / Cloudflare SSL provisioning |
@@ -31,7 +31,7 @@
 | 1.19 | Audit log | 🔜 Due | Backend | Medium | — | Activity tracking for compliance |
 | 1.20 | GDPR data anonymization | 🔜 Due | Backend | Low | — | Data anonymization for GDPR compliance |
 | 1.21 | Invoice & tax management | 🔜 Due | Backend | Low | — | PDF invoices, multi-currency, tax rules |
-| 1.22 | Platform payment gateway (manual withdrawal) | 🔜 Due | Backend | Medium | Stripe/SSLCommerz (txn fees) | Platform-as-gateway, manual payout records |
+| 1.22 | Platform payment gateway (manual withdrawal) | ✅ Done | Backend | — | SSLCommerz/MFS (txn fees) | Manual payment submit + admin review flow |
 | 1.23 | Feature toggle system | 🔜 Due | Backend | Low | — | Enable/disable features per tenant |
 | 1.24 | Super Admin panel UI | 🔜 Due | Frontend | High | — | Dashboard, vendor list, plan mgmt, etc. |
 
@@ -148,10 +148,10 @@
 
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
-| Super Admin | 7 | 5 | 12 | 0 |
+| Super Admin | 11 | 3 | 10 | 0 |
 | Vendor Panel | 21 | 2 | 23 | 7 |
 | Storefront | 6 (Backend only) | 5 | 0 | 1 |
 | System & Security | 13 | 0 | 7 | 1 |
-| **Total** | **47** | **12** | **42** | **9** |
+| **Total** | **51** | **10** | **40** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.

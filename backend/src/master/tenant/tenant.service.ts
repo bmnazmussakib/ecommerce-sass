@@ -54,6 +54,62 @@ export class TenantService {
     }
   }
 
+  private async getTenantPrismaClient(tenantId: string): Promise<TenantPrismaClient> {
+    const tenant = await this.findOne(tenantId);
+    return new TenantPrismaClient({
+      datasources: {
+        db: {
+          url: tenant.dbConnectionString,
+        },
+      },
+    });
+  }
+
+  async getTenantProducts(tenantId: string) {
+    const tenantPrisma = await this.getTenantPrismaClient(tenantId);
+    try {
+      await tenantPrisma.$connect();
+      return await tenantPrisma.product.findMany({
+        include: { variants: true },
+      });
+    } finally {
+      await tenantPrisma.$disconnect();
+    }
+  }
+
+  async getTenantOrders(tenantId: string) {
+    const tenantPrisma = await this.getTenantPrismaClient(tenantId);
+    try {
+      await tenantPrisma.$connect();
+      return await tenantPrisma.order.findMany({
+        include: { orderItems: { include: { variant: true } } },
+        orderBy: { createdAt: 'desc' },
+      });
+    } finally {
+      await tenantPrisma.$disconnect();
+    }
+  }
+
+  async getTenantStaff(tenantId: string) {
+    const tenantPrisma = await this.getTenantPrismaClient(tenantId);
+    try {
+      await tenantPrisma.$connect();
+      return await tenantPrisma.staff.findMany({
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          status: true,
+          createdAt: true,
+        },
+      });
+    } finally {
+      await tenantPrisma.$disconnect();
+    }
+  }
+
+
   async create(createTenantDto: CreateTenantDto) {
     // Check if subdomain exists
     const existing = await this.prisma.tenant.findUnique({

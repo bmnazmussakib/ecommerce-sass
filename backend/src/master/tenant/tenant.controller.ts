@@ -36,6 +36,24 @@ export class TenantController {
     return this.tenantService.impersonate(id);
   }
 
+  @Get(':id/store-data/products')
+  @ApiOperation({ summary: 'Get all products of a specific tenant (Super Admin)' })
+  getProducts(@Param('id') id: string) {
+    return this.tenantService.getTenantProducts(id);
+  }
+
+  @Get(':id/store-data/orders')
+  @ApiOperation({ summary: 'Get all orders of a specific tenant (Super Admin)' })
+  getOrders(@Param('id') id: string) {
+    return this.tenantService.getTenantOrders(id);
+  }
+
+  @Get(':id/store-data/staff')
+  @ApiOperation({ summary: 'Get all staff members of a specific tenant (Super Admin)' })
+  getStaff(@Param('id') id: string) {
+    return this.tenantService.getTenantStaff(id);
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'Update a tenant' })
   update(@Param('id') id: string, @Body() updateTenantDto: UpdateTenantDto) {
