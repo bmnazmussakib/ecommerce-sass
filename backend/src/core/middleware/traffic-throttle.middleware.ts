@@ -17,10 +17,45 @@ export class TrafficThrottleMiddleware implements NestMiddleware {
     }
 
     try {
+      // Get tenant details
+      const tenant = await this.masterPrisma.tenant.findUnique({
+        where: { subdomain: tenantId },
+      });
+
+      if (!tenant) {
+        throw new HttpException(
+          { statusCode: HttpStatus.NOT_FOUND, message: 'Tenant not found' },
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      // Block all requests if suspended
+      if (tenant.status === 'SUSPENDED') {
+        throw new HttpException(
+          {
+            statusCode: HttpStatus.FORBIDDEN,
+            message: 'This store has been suspended. Please contact support.',
+          },
+          HttpStatus.FORBIDDEN,
+        );
+      }
+
+      // Block public storefront routes if pending approval
+      const isPublicRoute = !req.headers.authorization;
+      if (tenant.status === 'PENDING' && isPublicRoute) {
+        throw new HttpException(
+          {
+            statusCode: HttpStatus.FORBIDDEN,
+            message: 'This store is currently pending approval. Please check back later.',
+          },
+          HttpStatus.FORBIDDEN,
+        );
+      }
+
       // Get tenant's plan traffic limit
       const subscription = await this.masterPrisma.subscription.findFirst({
         where: {
-          tenant: { subdomain: tenantId },
+          tenantId: tenant.id,
           status: 'ACTIVE',
         },
         include: { plan: true },
