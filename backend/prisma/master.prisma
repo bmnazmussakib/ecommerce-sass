@@ -29,6 +29,7 @@ model Tenant {
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
   subscription       Subscription?
+  payments           SubscriptionPayment[]
 }
 
 enum TenantStatus {
@@ -46,6 +47,7 @@ model Plan {
   price        Decimal        @db.Decimal(10, 2)
   interval     BillingCycle   @default(MONTHLY)
   subscriptions Subscription[]
+  payments     SubscriptionPayment[]
 }
 
 enum BillingCycle {
@@ -89,3 +91,32 @@ model TrafficLog {
 
   @@unique([tenantId, date])
 }
+
+model SubscriptionPayment {
+  id            String               @id @default(uuid())
+  tenantId      String
+  tenant        Tenant               @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  planId        String
+  plan          Plan                 @relation(fields: [planId], references: [id])
+  amount        Decimal              @db.Decimal(10, 2)
+  method        BillingPaymentMethod
+  gateway       String?              // 'SSLCOMMERZ'
+  status        BillingPaymentStatus @default(PENDING)
+  transactionId String?              @unique
+  senderNumber  String?
+  notes         String?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+}
+
+enum BillingPaymentMethod {
+  GATEWAY
+  MANUAL
+}
+
+enum BillingPaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+

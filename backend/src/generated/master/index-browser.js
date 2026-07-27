@@ -174,6 +174,21 @@ exports.Prisma.TrafficLogScalarFieldEnum = {
   count: 'count'
 };
 
+exports.Prisma.SubscriptionPaymentScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  planId: 'planId',
+  amount: 'amount',
+  method: 'method',
+  gateway: 'gateway',
+  status: 'status',
+  transactionId: 'transactionId',
+  senderNumber: 'senderNumber',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -205,13 +220,25 @@ exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
   CANCELED: 'CANCELED'
 };
 
+exports.BillingPaymentMethod = exports.$Enums.BillingPaymentMethod = {
+  GATEWAY: 'GATEWAY',
+  MANUAL: 'MANUAL'
+};
+
+exports.BillingPaymentStatus = exports.$Enums.BillingPaymentStatus = {
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  FAILED: 'FAILED'
+};
+
 exports.Prisma.ModelName = {
   SuperAdmin: 'SuperAdmin',
   Tenant: 'Tenant',
   Plan: 'Plan',
   Subscription: 'Subscription',
   GlobalTheme: 'GlobalTheme',
-  TrafficLog: 'TrafficLog'
+  TrafficLog: 'TrafficLog',
+  SubscriptionPayment: 'SubscriptionPayment'
 };
 
 /**

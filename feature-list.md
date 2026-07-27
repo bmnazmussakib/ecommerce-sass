@@ -14,9 +14,9 @@
 | 1.2 | Tenant CRUD | ✅ Done | Backend | — | — | Subdomain + custom domain, status management |
 | 1.3 | Tenant impersonation | ✅ Done | Backend | — | — | Generate JWT as vendor OWNER |
 | 1.4 | Traffic/rate limiting | ✅ Done | Backend | — | Redis (free self-hosted) | Daily request caps via TrafficLog table |
-| 1.5 | Super Admin login & auth | 🔜 Due | Backend | High | — | Login/2FA for platform admin (model exists) |
-| 1.6 | Super Admin 2FA | 🔜 Due | Backend | High | — | TOTP 2FA (model exists, no code) |
-| 1.7 | Admin role-based access | 🔜 Due | Backend | High | — | Permission system for admin staff |
+| 1.5 | Super Admin login & auth | ✅ Done | Backend | — | — | JWT-based login with bcrypt and guard |
+| 1.6 | Super Admin 2FA | ✅ Done | Backend | — | — | TOTP setup, enable, disable, verify |
+| 1.7 | Admin role-based access | ✅ Done | Backend | — | — | Permission system for admin staff |
 | 1.8 | Subscription billing (Stripe) | 🔜 Due | Backend | High | Stripe (~2.9% + $0.30/txn) | Recurring payments, webhooks, auto-renew |
 | 1.9 | Subscription CRUD | 🔜 Due | Backend | High | — | Assign plans, upgrade/downgrade cycle |
 | 1.10 | Multi-currency plan pricing | 🔜 Due | Backend | Low | — | Set pricing in multiple currencies per plan |
@@ -148,10 +148,10 @@
 
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
-| Super Admin | 4 | 8 | 12 | 0 |
+| Super Admin | 7 | 5 | 12 | 0 |
 | Vendor Panel | 21 | 2 | 23 | 7 |
 | Storefront | 6 (Backend only) | 5 | 0 | 1 |
 | System & Security | 13 | 0 | 7 | 1 |
-| **Total** | **44** | **15** | **42** | **9** |
+| **Total** | **47** | **12** | **42** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.
