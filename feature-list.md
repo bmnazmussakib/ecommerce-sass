@@ -21,8 +21,8 @@
 | 1.9 | Subscription CRUD | ✅ Done | Backend | — | — | Assign plans, upgrade/downgrade via billing flow |
 | 1.10 | Multi-currency plan pricing | 🔜 Due | Backend | Low | — | Set pricing in multiple currencies per plan |
 | 1.11 | Admin store data access | ✅ Done | Backend | — | — | View vendor products, orders, customers |
-| 1.12 | GlobalTheme management | 🔜 Due | Backend | High | Cloudinary (free 25GB) | Theme rollout for vendors (model exists) |
-| 1.13 | Vendor onboarding workflow | 🔜 Due | Backend | High | — | Approval/suspension lifecycle |
+| 1.12 | GlobalTheme management | ✅ Done | Backend | — | Cloudinary (free 25GB) | Full CRUD with upload/activate/deactivate |
+| 1.13 | Vendor onboarding workflow | ✅ Done | Backend | — | — | Automatic DB provisioning, status management, staff registry |
 | 1.14 | Custom domain auto-SSL | 🔜 Due | Backend | Medium | Cloudflare (Free plan) | Let's Encrypt / Cloudflare SSL provisioning |
 | 1.15 | Visitor quota enforcement | 🔜 Due | Backend | Medium | Redis / Upstash (free tier) | Count visitors, throttle when over limit |
 | 1.16 | Platform analytics dashboard | 🔜 Due | B/E + F/E | Medium | — | Aggregated platform metrics |
@@ -65,7 +65,7 @@
 | 2.22 | SupplyBatch (stock entry & costing) | 🔜 Due | Backend | Medium | — | Schema exists, no endpoints |
 | 2.23 | NAGAD payment integration | 🔜 Due | Backend | Medium | Nagad API (txn fees) | Schema has NAGAD enum |
 | 2.24 | FB Pixel / GA4 / GTM tracking | 🔜 Due | Backend | Medium | FB/Google APIs (free) | Schema has enums, no implementation |
-| 2.25 | Role-based authorization | 🔜 Due | Backend | Medium | — | OWNER/ADMIN/STAFF guards |
+| 2.25 | Role-based authorization | ✅ Done | Backend | — | — | OWNER/ADMIN/STAFF guards with RolesGuard |
 | 2.26 | Order refund & return handling | 🔜 Due | Backend | Medium | — | Full return workflow |
 | 2.27 | Abandoned cart recovery | 🔜 Due | B/E + F/E | Medium | Email/SMS provider (free tier) | Email/SMS reminders |
 | 2.28 | Flash sales & advanced promos | 🔜 Due | Backend | Low | — | Time-bound sales events |
@@ -148,10 +148,10 @@
 
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
-| Super Admin | 11 | 3 | 10 | 0 |
-| Vendor Panel | 21 | 2 | 23 | 7 |
+| Super Admin | 13 | 1 | 10 | 0 |
+| Vendor Panel | 22 | 2 | 22 | 7 |
 | Storefront | 6 (Backend only) | 5 | 0 | 1 |
 | System & Security | 13 | 0 | 7 | 1 |
-| **Total** | **51** | **10** | **40** | **9** |
+| **Total** | **54** | **8** | **39** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.
