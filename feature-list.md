@@ -19,17 +19,21 @@
 | 1.7 | Admin role-based access | 🔜 Due | Backend | High | — | Permission system for admin staff |
 | 1.8 | Subscription billing (Stripe) | 🔜 Due | Backend | High | Stripe (~2.9% + $0.30/txn) | Recurring payments, webhooks, auto-renew |
 | 1.9 | Subscription CRUD | 🔜 Due | Backend | High | — | Assign plans, upgrade/downgrade cycle |
-| 1.10 | GlobalTheme management | 🔜 Due | Backend | High | Cloudinary (free 25GB) | Theme rollout for vendors (model exists) |
-| 1.11 | Vendor onboarding workflow | 🔜 Due | Backend | High | — | Approval/suspension lifecycle |
-| 1.12 | Custom domain auto-SSL | 🔜 Due | Backend | Medium | Cloudflare (Free plan) | Let's Encrypt / Cloudflare SSL provisioning |
-| 1.13 | Visitor quota enforcement | 🔜 Due | Backend | Medium | Redis / Upstash (free tier) | Count visitors, throttle when over limit |
-| 1.14 | Platform analytics dashboard | 🔜 Due | B/E + F/E | Medium | — | Aggregated platform metrics |
-| 1.15 | Infrastructure monitoring | 🔜 Due | B/E + F/E | Medium | Grafana/Prometheus (free self-hosted) | Per-tenant resource usage |
-| 1.16 | Global announcement & notifications | 🔜 Due | B/E + F/E | Medium | Email/SMS provider (free tier) | Send alerts to all/multiple vendors |
-| 1.17 | Audit log | 🔜 Due | Backend | Medium | — | Activity tracking for compliance |
-| 1.18 | Invoice & tax management | 🔜 Due | Backend | Low | — | PDF invoices, multi-currency, tax rules |
-| 1.19 | Feature toggle system | 🔜 Due | Backend | Low | — | Enable/disable features per tenant |
-| 1.20 | Super Admin panel UI | 🔜 Due | Frontend | High | — | Dashboard, vendor list, plan mgmt, etc. |
+| 1.10 | Multi-currency plan pricing | 🔜 Due | Backend | Low | — | Set pricing in multiple currencies per plan |
+| 1.11 | Admin store data access | 🔜 Due | Backend | Medium | — | View vendor products, orders, customers |
+| 1.12 | GlobalTheme management | 🔜 Due | Backend | High | Cloudinary (free 25GB) | Theme rollout for vendors (model exists) |
+| 1.13 | Vendor onboarding workflow | 🔜 Due | Backend | High | — | Approval/suspension lifecycle |
+| 1.14 | Custom domain auto-SSL | 🔜 Due | Backend | Medium | Cloudflare (Free plan) | Let's Encrypt / Cloudflare SSL provisioning |
+| 1.15 | Visitor quota enforcement | 🔜 Due | Backend | Medium | Redis / Upstash (free tier) | Count visitors, throttle when over limit |
+| 1.16 | Platform analytics dashboard | 🔜 Due | B/E + F/E | Medium | — | Aggregated platform metrics |
+| 1.17 | Infrastructure monitoring | 🔜 Due | B/E + F/E | Medium | Grafana/Prometheus (free self-hosted) | Per-tenant resource usage |
+| 1.18 | Global announcement & notifications | 🔜 Due | B/E + F/E | Medium | Email/SMS provider (free tier) | Send alerts to all/multiple vendors |
+| 1.19 | Audit log | 🔜 Due | Backend | Medium | — | Activity tracking for compliance |
+| 1.20 | GDPR data anonymization | 🔜 Due | Backend | Low | — | Data anonymization for GDPR compliance |
+| 1.21 | Invoice & tax management | 🔜 Due | Backend | Low | — | PDF invoices, multi-currency, tax rules |
+| 1.22 | Platform payment gateway (manual withdrawal) | 🔜 Due | Backend | Medium | Stripe/SSLCommerz (txn fees) | Platform-as-gateway, manual payout records |
+| 1.23 | Feature toggle system | 🔜 Due | Backend | Low | — | Enable/disable features per tenant |
+| 1.24 | Super Admin panel UI | 🔜 Due | Frontend | High | — | Dashboard, vendor list, plan mgmt, etc. |
 
 ---
 
@@ -67,14 +71,29 @@
 | 2.28 | Flash sales & advanced promos | 🔜 Due | Backend | Low | — | Time-bound sales events |
 | 2.29 | Email marketing integration | 🔜 Due | B/E + F/E | Low | Mailchimp (500 contacts free) | Campaign management |
 | 2.30 | SEO management (meta, sitemap, OG) | 🔜 Due | Backend | Low | — | Per-page SEO editor |
-| 2.31 | Vendor dashboard UI | 🔜 Due | Frontend | High | — | Full merchant dashboard |
-| 2.32 | Drag-and-drop storefront builder | 🔜 Due | Frontend | High | GrapesJS (open source) | Section-based page builder |
-| 2.33 | Live chat widget | 🧭 Roadmap | Frontend | Low | Tawk.to / Crisp (free tier) | Customer engagement |
-| 2.34 | Multi-language support | 🧭 Roadmap | Frontend | Low | i18n libraries (open source) | i18n per store |
-| 2.35 | Affiliate system | 🧭 Roadmap | B/E + F/E | Low | — | Referral tracking |
-| 2.36 | Loyalty points system | 🧭 Roadmap | Backend | Low | — | Customer rewards |
-| 2.37 | Multi-warehouse stock support | 🧭 Roadmap | Backend | Low | — | Premium feature |
-| 2.38 | Mobile app / PWA generation | 🧭 Roadmap | Frontend | Low | PWA (free), App store ($99/yr) | For premium vendors |
+| 2.31 | Customer list & CRUD | 🔜 Due | Backend | Medium | — | Customer records with segmentation |
+| 2.32 | Enable/disable store toggle | 🔜 Due | Backend | Medium | — | Pause/resume storefront visibility |
+| 2.33 | Digital product support | 🔜 Due | Backend | Medium | — | File delivery for digital downloads |
+| 2.34 | Low-stock alerts | 🔜 Due | Backend | Medium | Email/SMS provider (free tier) | Notify when stock below threshold |
+| 2.35 | Shipping zones & rates | 🔜 Due | Backend | Medium | — | Zone-based shipping cost config |
+| 2.36 | Redx courier integration | 🔜 Due | Backend | Medium | Redx API (courier fees) | Courier booking with AWB generation |
+| 2.37 | Webhook configuration | 🔜 Due | Backend | Medium | — | Event-driven webhook calls |
+| 2.38 | Data export — CSV/JSON | 🔜 Due | Backend | Medium | — | Export products, orders, customers |
+| 2.39 | Product scheduling — launch later | 🔜 Due | Backend | Low | — | Schedule product publish date |
+| 2.40 | BOGO offers | 🔜 Due | Backend | Low | — | Buy-one-get-one promotion engine |
+| 2.41 | Tax rules by region | 🔜 Due | Backend | Low | — | Tax config per region |
+| 2.42 | Social media links & auto-sharing | 🔜 Due | Both | Low | Free | FB/Twitter/WhatsApp sharing config |
+| 2.43 | Popup campaigns & exit intent | 🔜 Due | Both | Low | — | Marketing popups with exit detection |
+| 2.44 | Contact form | 🔜 Due | Backend | Low | — | Customer inquiry form handling |
+| 2.45 | Heatmaps & session replays | 🧭 Roadmap | Both | Low | Hotjar/Clarity (free tier) | Visitor behavior analytics |
+| 2.46 | Vendor dashboard UI | 🔜 Due | Frontend | High | — | Full merchant dashboard |
+| 2.47 | Drag-and-drop storefront builder | 🔜 Due | Frontend | High | GrapesJS (open source) | Section-based page builder |
+| 2.48 | Live chat widget | 🧭 Roadmap | Frontend | Low | Tawk.to / Crisp (free tier) | Customer engagement |
+| 2.49 | Multi-language support | 🧭 Roadmap | Frontend | Low | i18n libraries (open source) | i18n per store |
+| 2.50 | Affiliate system | 🧭 Roadmap | B/E + F/E | Low | — | Referral tracking |
+| 2.51 | Loyalty points system | 🧭 Roadmap | Backend | Low | — | Customer rewards |
+| 2.52 | Multi-warehouse stock support | 🧭 Roadmap | Backend | Low | — | Premium feature |
+| 2.53 | Mobile app / PWA generation | 🧭 Roadmap | Frontend | Low | PWA (free), App store ($99/yr) | For premium vendors |
 
 ---
 
@@ -129,10 +148,10 @@
 
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
-| Super Admin | 4 | 6 | 6 | 0 |
-| Vendor Panel | 20 | 2 | 6 | 5 |
-| Storefront | 6 (Backend only) | 4 | 0 | 1 |
-| System & Security | 12 | 0 | 6 | 1 |
-| **Total** | **42** | **12** | **18** | **7** |
+| Super Admin | 4 | 8 | 12 | 0 |
+| Vendor Panel | 21 | 2 | 23 | 7 |
+| Storefront | 6 (Backend only) | 5 | 0 | 1 |
+| System & Security | 13 | 0 | 7 | 1 |
+| **Total** | **44** | **15** | **42** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.
