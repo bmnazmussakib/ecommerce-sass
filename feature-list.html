@@ -165,6 +165,9 @@
     .section-content.collapsed {
       max-height: 0 !important;
     }
+    .section-title.no-accordion::after {
+      display: none;
+    }
 
     .summary-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
@@ -221,6 +224,39 @@
   <div class="legend-item"><span class="legend-dot dot-medium"></span> Due — Medium Priority</div>
   <div class="legend-item"><span class="legend-dot dot-low"></span> Due — Low Priority</div>
   <div class="legend-item"><span class="legend-dot dot-roadmap"></span> Roadmap</div>
+</div>
+
+<!-- ==================== SUMMARY ==================== -->
+<div class="section">
+  <div class="section-title no-accordion" style="background:linear-gradient(135deg,var(--bg-alt),var(--bg));color:var(--text)"
+    Summary <span class="count">(Feature Count by Category & Status)</span>
+  </div>
+  <div class="summary-grid">
+    <div class="summary-card summary-done">
+      <span class="num">42</span>
+      <span class="label">✅ Implemented</span>
+    </div>
+    <div class="summary-card summary-high">
+      <span class="num">12</span>
+      <span class="label">🔜 Due — High Priority</span>
+    </div>
+    <div class="summary-card summary-medium">
+      <span class="num">13</span>
+      <span class="label">🔜 Due — Medium Priority</span>
+    </div>
+    <div class="summary-card summary-low">
+      <span class="num">5</span>
+      <span class="label">🔜 Due — Low Priority</span>
+    </div>
+    <div class="summary-card summary-roadmap">
+      <span class="num">7</span>
+      <span class="label">🧭 Roadmap</span>
+    </div>
+    <div class="summary-card summary-total">
+      <span class="num">79</span>
+      <span class="label">Total Features</span>
+    </div>
+  </div>
 </div>
 
 <!-- ==================== SUPER ADMIN ==================== -->
@@ -338,13 +374,15 @@
       <tr><td class="num">3.12</td><td>Product reviews & ratings</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-both">Both</span></td><td>Customer testimonials</td></tr>
     </tbody>
   </table>
+  </div>
 </div>
 
 <!-- ==================== SYSTEM & SECURITY ==================== -->
 <div class="section section-st-security">
-  <div class="section-title">
+  <div class="section-title" onclick="toggleSection(this)">
     System & Security <span class="count">(Infrastructure / Cross-cutting)</span>
   </div>
+  <div class="section-content">
   <table>
     <thead>
       <tr><th style="width:40px">#</th><th>Feature</th><th style="width:130px">Status</th><th style="width:100px">Layer</th><th>Notes</th></tr>
@@ -373,38 +411,6 @@
       <tr><td class="num">4.21</td><td>Kubernetes auto-scaling</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td>EKS / Fargate orchestration</td></tr>
     </tbody>
   </table>
-</div>
-
-<!-- ==================== SUMMARY ==================== -->
-<div class="section">
-  <div class="section-title" style="background:linear-gradient(135deg,var(--bg-alt),var(--bg));color:var(--text)">
-    Summary <span class="count">(Feature Count by Category & Status)</span>
-  </div>
-  <div class="summary-grid">
-    <div class="summary-card summary-done">
-      <span class="num">42</span>
-      <span class="label">✅ Implemented</span>
-    </div>
-    <div class="summary-card summary-high">
-      <span class="num">12</span>
-      <span class="label">🔜 Due — High Priority</span>
-    </div>
-    <div class="summary-card summary-medium">
-      <span class="num">13</span>
-      <span class="label">🔜 Due — Medium Priority</span>
-    </div>
-    <div class="summary-card summary-low">
-      <span class="num">5</span>
-      <span class="label">🔜 Due — Low Priority</span>
-    </div>
-    <div class="summary-card summary-roadmap">
-      <span class="num">7</span>
-      <span class="label">🧭 Roadmap</span>
-    </div>
-    <div class="summary-card summary-total">
-      <span class="num">79</span>
-      <span class="label">Total Features</span>
-    </div>
   </div>
 </div>
 
@@ -418,11 +424,23 @@
     btn.textContent = isLight ? '☀️ Light' : '🌙 Dark';
     localStorage.setItem('ecomize-theme', isLight ? 'light' : 'dark');
   }
+
+  function toggleSection(titleEl) {
+    const content = titleEl.nextElementSibling;
+    const isCollapsed = content.classList.contains('collapsed');
+    content.style.maxHeight = isCollapsed ? content.scrollHeight + 'px' : '0px';
+    content.classList.toggle('collapsed');
+    titleEl.classList.toggle('collapsed');
+  }
+
   (function() {
     if (localStorage.getItem('ecomize-theme') === 'light') {
       document.body.classList.add('light-mode');
       document.getElementById('themeToggle').textContent = '☀️ Light';
     }
+    document.querySelectorAll('.section-content').forEach(function(el) {
+      el.style.maxHeight = el.scrollHeight + 'px';
+    });
   })();
 </script>
 </body>
