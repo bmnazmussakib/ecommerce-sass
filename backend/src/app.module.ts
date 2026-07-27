@@ -10,6 +10,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TenantResolverMiddleware } from './core/middleware/tenant-resolver.middleware';
 import { TrafficThrottleMiddleware } from './core/middleware/traffic-throttle.middleware';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { AuditLogInterceptor } from './core/interceptors/audit-log.interceptor';
 
 @Module({
   imports: [
@@ -34,7 +36,13 @@ import { TrafficThrottleMiddleware } from './core/middleware/traffic-throttle.mi
     TenantModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuditLogInterceptor,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

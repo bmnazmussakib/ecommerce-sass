@@ -190,12 +190,27 @@ exports.Prisma.SubscriptionPaymentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  userId: 'userId',
+  userEmail: 'userEmail',
+  userRole: 'userRole',
+  details: 'details',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
 exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull
 };
 
@@ -249,7 +264,8 @@ exports.Prisma.ModelName = {
   Subscription: 'Subscription',
   GlobalTheme: 'GlobalTheme',
   TrafficLog: 'TrafficLog',
-  SubscriptionPayment: 'SubscriptionPayment'
+  SubscriptionPayment: 'SubscriptionPayment',
+  AuditLog: 'AuditLog'
 };
 
 /**
