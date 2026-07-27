@@ -119,9 +119,27 @@ export class TenantService {
       throw new ConflictException('Subdomain already exists');
     }
 
-    return this.prisma.tenant.create({
+    const tenant = await this.prisma.tenant.create({
       data: createTenantDto,
     });
+
+    // Automatically push/initialize tables to the new tenant database instance
+    try {
+      const { execSync } = require('child_process');
+      console.log(`[Auto-Onboard] Pushing tenant schema to new database connection: ${tenant.dbConnectionString}`);
+      execSync(`npx prisma db push --schema=prisma/tenant.prisma`, {
+        env: {
+          ...process.env,
+          TENANT_DATABASE_TEMPLATE_URL: tenant.dbConnectionString,
+        },
+      });
+      console.log(`[Auto-Onboard] Tenant schema synchronized successfully.`);
+    } catch (error) {
+      console.error(`[Auto-Onboard] Failed to push schema to tenant DB:`, error);
+      // Fail gracefully or handle depending on requirements (here we log and allow metadata creation)
+    }
+
+    return tenant;
   }
 
   async findAll() {
