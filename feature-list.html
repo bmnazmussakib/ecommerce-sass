@@ -3,407 +3,524 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecomize — Feature List</title>
+  <title>Ecomize — Feature Implementation Status</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
-      --bg: #0f172a;
-      --bg-alt: #1e293b;
+      --bg: #0b1121;
+      --bg-alt: #131c31;
+      --bg-hover: #1a2744;
+      --surface: #1a2744;
       --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --border: #334155;
-      --header-bg: linear-gradient(135deg, #1e293b, #0f172a);
-      --hover-bg: rgba(255,255,255,0.02);
-      --card-bg: rgba(255,255,255,0.04);
-      --tag-be-bg: #1e3a5f;
-      --tag-fe-bg: #3b1f3b;
-      --tag-infra-bg: #1f3b2c;
+      --text-muted: #8899b4;
+      --text-dim: #5a6d8a;
+      --border: #1e2d4a;
+      --border-light: #2a3d5e;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-green: #22c55e;
+      --accent-amber: #eab308;
+      --accent-red: #ef4444;
+      --header-border: #2a3d5e;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.2);
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
     }
+
     .light-mode {
       --bg: #f8fafc;
       --bg-alt: #ffffff;
-      --text: #1e293b;
+      --bg-hover: #f1f5f9;
+      --surface: #f1f5f9;
+      --text: #0f172a;
       --text-muted: #64748b;
       --text-dim: #94a3b8;
       --border: #e2e8f0;
-      --header-bg: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-      --hover-bg: rgba(0,0,0,0.02);
-      --card-bg: rgba(0,0,0,0.03);
-      --tag-be-bg: #dbeafe;
-      --tag-fe-bg: #f3e8ff;
-      --tag-infra-bg: #dcfce7;
+      --border-light: #cbd5e1;
+      --header-border: #cbd5e1;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      padding: 24px;
-      transition: background .25s, color .25s;
+      padding: 0;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 1400px; margin: 0 auto; }
 
-    header {
+    .container { max-width: 1440px; margin: 0 auto; padding: 0 24px 48px; }
+
+    /* Header */
+    .header {
       text-align: center;
+      padding: 40px 32px 32px;
       margin-bottom: 32px;
-      padding: 32px;
-      background: var(--header-bg);
-      border-radius: 16px;
-      border: 1px solid var(--border);
       position: relative;
+      border-bottom: 1px solid var(--border);
     }
-    header h1 { font-size: 28px; font-weight: 700; color: var(--text); }
-    header p { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
-    header .stack { margin-top: 12px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    header .stack span {
-      padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+    .header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
     }
-    .tag-be { background: var(--tag-be-bg); color: #2563eb; }
-    .tag-fe { background: var(--tag-fe-bg); color: #7c3aed; }
-    .tag-infra { background: var(--tag-infra-bg); color: #16a34a; }
+    .header h1 span { color: var(--accent-blue); }
+    .header .sub {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .header .stack {
+      margin-top: 16px;
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .header .stack span {
+      padding: 3px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+    }
+    .tag-be { background: rgba(59,130,246,0.08); color: var(--accent-blue); border-color: rgba(59,130,246,0.2); }
+    .tag-fe { background: rgba(139,92,246,0.08); color: var(--accent-purple); border-color: rgba(139,92,246,0.2); }
+    .tag-infra { background: rgba(34,197,94,0.08); color: var(--accent-green); border-color: rgba(34,197,94,0.2); }
 
     .theme-toggle {
-      position: absolute; top: 16px; right: 16px;
-      background: var(--bg-alt); border: 1px solid var(--border);
-      color: var(--text); border-radius: 999px; padding: 6px 14px;
-      font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px;
-      transition: background .25s, color .25s;
-    }
-    .theme-toggle:hover { opacity: .8; }
-
-    .legend {
-      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 28px; padding: 16px; background: var(--bg-alt); border-radius: 12px;
+      position: absolute; top: 20px; right: 24px;
+      background: var(--bg-alt);
       border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all .2s;
     }
-    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-    .legend-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
-    .dot-done { background: #22c55e; }
-    .dot-high { background: #ef4444; }
-    .dot-medium { background: #f59e0b; }
-    .dot-low { background: #3b82f6; }
-    .dot-roadmap { background: #64748b; }
+    .theme-toggle:hover { border-color: var(--border-light); color: var(--text); }
 
-    .section { margin-bottom: 32px; }
-    .section-title {
-      font-size: 20px; font-weight: 700; padding: 14px 20px;
-      border-radius: 12px 12px 0 0; border: 1px solid var(--border); border-bottom: none;
+    /* Legend bar */
+    .legend {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      padding: 12px 20px;
+      background: var(--bg-alt);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 12px;
     }
-    .section-title .count { font-size: 13px; font-weight: 400; opacity: 0.7; margin-left: 8px; }
-
-    table {
-      width: 100%; border-collapse: collapse;
-      border: 1px solid var(--border); border-radius: 0 0 12px 12px; overflow: hidden;
+    .legend-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
     }
-    th {
-      text-align: left; padding: 10px 14px; font-size: 12px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim);
-      background: var(--bg-alt); border-bottom: 1px solid var(--border);
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-done { background: var(--accent-green); }
+    .dot-high { background: var(--accent-red); }
+    .dot-medium { background: var(--accent-amber); }
+    .dot-low { background: var(--accent-blue); }
+    .dot-roadmap { background: var(--text-dim); }
+
+    .cost-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 4px;
+      font-family: var(--font-mono);
     }
-    td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--bg-alt); vertical-align: middle; }
+    .cb-none { background: rgba(100,116,139,0.1); color: var(--text-dim); }
+    .cb-free { background: rgba(34,197,94,0.1); color: var(--accent-green); }
+    .cb-freetier { background: rgba(59,130,246,0.1); color: var(--accent-blue); }
+    .cb-txfee { background: rgba(234,179,8,0.1); color: var(--accent-amber); }
+    .cb-paid { background: rgba(239,68,68,0.1); color: var(--accent-red); }
 
-    .status { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
-    .status-done { background: rgba(34,197,94,0.15); color: #16a34a; }
-    .light-mode .status-done { background: rgba(34,197,94,0.12); color: #15803d; }
-    .status-high { background: rgba(239,68,68,0.15); color: #ef4444; }
-    .light-mode .status-high { background: rgba(239,68,68,0.12); color: #dc2626; }
-    .status-medium { background: rgba(245,158,11,0.15); color: #f59e0b; }
-    .light-mode .status-medium { background: rgba(245,158,11,0.12); color: #d97706; }
-    .status-low { background: rgba(59,130,246,0.15); color: #3b82f6; }
-    .light-mode .status-low { background: rgba(59,130,246,0.12); color: #2563eb; }
-    .status-roadmap { background: rgba(100,116,139,0.15); color: #64748b; }
-    .light-mode .status-roadmap { background: rgba(100,116,139,0.12); color: #475569; }
-
-    .layer { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
-    .layer-be { background: rgba(96,165,250,0.15); color: #2563eb; }
-    .light-mode .layer-be { background: rgba(37,99,235,0.1); color: #1d4ed8; }
-    .layer-fe { background: rgba(192,132,252,0.15); color: #7c3aed; }
-    .light-mode .layer-fe { background: rgba(124,58,237,0.1); color: #6d28d9; }
-    .layer-both { background: linear-gradient(135deg, rgba(96,165,250,0.2), rgba(192,132,252,0.2)); color: #6d28d9; }
-    .light-mode .layer-both { background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.1)); color: #5b21b6; }
-    .layer-infra { background: rgba(74,222,128,0.15); color: #16a34a; }
-    .light-mode .layer-infra { background: rgba(22,163,74,0.1); color: #15803d; }
-
-    /* Cost badges */
-    .cost { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; white-space: nowrap; display: inline-block; }
-    .cost-none { background: rgba(100,116,139,0.15); color: #94a3b8; }
-    .cost-free { background: rgba(34,197,94,0.15); color: #4ade80; }
-    .light-mode .cost-free { background: rgba(34,197,94,0.12); color: #15803d; }
-    .cost-freetier { background: rgba(59,130,246,0.15); color: #60a5fa; }
-    .light-mode .cost-freetier { background: rgba(59,130,246,0.12); color: #2563eb; }
-    .cost-paid { background: rgba(239,68,68,0.15); color: #f87171; }
-    .light-mode .cost-paid { background: rgba(239,68,68,0.12); color: #dc2626; }
-    .cost-txfee { background: rgba(245,158,11,0.15); color: #fbbf24; }
-    .light-mode .cost-txfee { background: rgba(245,158,11,0.12); color: #d97706; }
-
-    .priority-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-
-    .num { color: var(--text-dim); font-size: 12px; width: 40px; }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: var(--hover-bg); }
-    .section-st-super .section-title { background: linear-gradient(135deg, #1e3a5f44, var(--bg-alt)); color: #3b82f6; }
-    .light-mode .section-st-super .section-title { background: linear-gradient(135deg, #dbeafe, var(--bg-alt)); color: #2563eb; }
-    .section-st-vendor .section-title { background: linear-gradient(135deg, #3b1f3b44, var(--bg-alt)); color: #a855f7; }
-    .light-mode .section-st-vendor .section-title { background: linear-gradient(135deg, #f3e8ff, var(--bg-alt)); color: #7c3aed; }
-    .section-st-storefront .section-title { background: linear-gradient(135deg, #1f3b2c44, var(--bg-alt)); color: #22c55e; }
-    .light-mode .section-st-storefront .section-title { background: linear-gradient(135deg, #dcfce7, var(--bg-alt)); color: #16a34a; }
-    .section-st-security .section-title { background: linear-gradient(135deg, #3b352044, var(--bg-alt)); color: #eab308; }
-    .light-mode .section-st-security .section-title { background: linear-gradient(135deg, #fef9c3, var(--bg-alt)); color: #ca8a04; }
-
-    .section-title { cursor: pointer; user-select: none; }
-    .section-title::after { content: '▾'; float: right; font-size: 16px; transition: transform .3s; }
-    .section-title.collapsed::after { transform: rotate(-90deg); }
-    .section-content { overflow: hidden; transition: max-height 0.3s ease; }
-    .section-content.collapsed { max-height: 0 !important; }
-    .section-title.no-accordion::after { display: none; }
-
+    /* Summary cards */
     .summary-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
-      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
     }
     .summary-card {
-      padding: 16px; border-radius: 12px; border: 1px solid var(--border); text-align: center;
+      padding: 20px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      text-align: center;
+      background: var(--bg-alt);
     }
-    .summary-card .num { font-size: 28px; font-weight: 700; display: block; }
-    .summary-card .label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-    .summary-done { background: rgba(34,197,94,0.08); }
-    .summary-done .num { color: #16a34a; }
-    .light-mode .summary-done .num { color: #15803d; }
-    .summary-high { background: rgba(239,68,68,0.08); }
-    .summary-high .num { color: #ef4444; }
-    .light-mode .summary-high .num { color: #dc2626; }
-    .summary-medium { background: rgba(245,158,11,0.08); }
-    .summary-medium .num { color: #f59e0b; }
-    .light-mode .summary-medium .num { color: #d97706; }
-    .summary-low { background: rgba(59,130,246,0.08); }
-    .summary-low .num { color: #3b82f6; }
-    .light-mode .summary-low .num { color: #2563eb; }
-    .summary-roadmap { background: rgba(100,116,139,0.08); }
-    .summary-roadmap .num { color: #64748b; }
-    .light-mode .summary-roadmap .num { color: #475569; }
-    .summary-total { background: var(--card-bg); }
-    .summary-total .num { color: var(--text); }
+    .summary-card .num {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .summary-card .label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .sc-done .num { color: var(--accent-green); }
+    .sc-high .num { color: var(--accent-red); }
+    .sc-medium .num { color: var(--accent-amber); }
+    .sc-low .num { color: var(--accent-blue); }
+    .sc-roadmap .num { color: var(--text-dim); }
+    .sc-total .num { color: var(--text); }
 
-    @media (max-width: 768px) {
-      body { padding: 12px; }
-      th, td { padding: 8px 10px; font-size: 12px; }
-      .layer, .cost { font-size: 10px; }
-      .theme-toggle { top: 10px; right: 10px; padding: 4px 10px; font-size: 12px; }
+    /* Sections */
+    .section { margin-bottom: 24px; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      user-select: none;
+      transition: background .15s;
+    }
+    .section-title:hover { background: var(--bg-hover); }
+    .section-title .label {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .section-title .count {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+    .section-title .arrow {
+      font-size: 14px;
+      color: var(--text-dim);
+      transition: transform .25s;
+      line-height: 1;
+    }
+    .section-title.collapsed .arrow { transform: rotate(-90deg); }
+
+    .section-content {
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .section-content.collapsed { max-height: 0 !important; }
+
+    /* Tables */
+    .table-wrap {
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      text-align: left;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr { transition: background .1s; }
+    tbody tr:hover { background: var(--bg-hover); }
+    tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+
+    .num-col { color: var(--text-dim); font-size: 12px; width: 36px; white-space: nowrap; }
+
+    /* Status badges */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+    .s-done { background: rgba(34,197,94,0.1); color: var(--accent-green); }
+    .s-high { background: rgba(239,68,68,0.1); color: var(--accent-red); }
+    .s-medium { background: rgba(234,179,8,0.1); color: var(--accent-amber); }
+    .s-low { background: rgba(59,130,246,0.1); color: var(--accent-blue); }
+    .s-roadmap { background: rgba(100,116,139,0.1); color: var(--text-dim); }
+
+    /* Layer badges */
+    .layer-badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+    }
+    .lb-be { background: rgba(59,130,246,0.08); color: var(--accent-blue); }
+    .lb-fe { background: rgba(139,92,246,0.08); color: var(--accent-purple); }
+    .lb-both { background: rgba(139,92,246,0.08); color: var(--accent-purple); }
+    .lb-infra { background: rgba(34,197,94,0.08); color: var(--accent-green); }
+
+    /* Feature name */
+    .feature-name { font-weight: 500; }
+
+    .notes-cell { color: var(--text-muted); font-size: 12px; }
+    .notes-cell code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: rgba(100,116,139,0.1);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 900px) {
+      .container { padding: 0 12px 32px; }
+      .header { padding: 28px 16px 20px; }
+      .header h1 { font-size: 20px; }
+      .theme-toggle { top: 12px; right: 12px; }
+      thead th, tbody td { padding: 8px 10px; font-size: 12px; }
+      .cost-badge, .layer-badge, .status { font-size: 10px; }
+    }
+    @media (max-width: 600px) {
+      thead th, tbody td { padding: 6px 8px; font-size: 11px; }
+      .num-col { width: 28px; }
     }
   </style>
 </head>
 <body>
 <div class="container">
 
-<header>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
-  <h1>Ecomize — Feature Implementation Status</h1>
-  <p>Multi-Tenant eCommerce SaaS Platform</p>
+<div class="header">
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <span id="themeLabel">Dark</span>
+  </button>
+  <h1>Ecomize <span>Feature Status</span></h1>
+  <p class="sub">Multi-Tenant eCommerce SaaS Platform — Implementation Progress</p>
   <div class="stack">
     <span class="tag-be">Backend: NestJS + Prisma + PostgreSQL</span>
     <span class="tag-fe">Frontend: Next.js (not started)</span>
     <span class="tag-infra">Infrastructure: Docker / K8s / CDN</span>
   </div>
-</header>
-
-<div class="legend">
-  <div class="legend-item"><span class="legend-dot dot-done"></span> Implemented</div>
-  <div class="legend-item"><span class="legend-dot dot-high"></span> Due — High Priority</div>
-  <div class="legend-item"><span class="legend-dot dot-medium"></span> Due — Medium Priority</div>
-  <div class="legend-item"><span class="legend-dot dot-low"></span> Due — Low Priority</div>
-  <div class="legend-item"><span class="legend-dot dot-roadmap"></span> Roadmap</div>
-  <div class="legend-item" style="margin-left:12px;padding-left:12px;border-left:1px solid var(--border)"><span class="cost cost-none">—</span> No deps</div>
-  <div class="legend-item"><span class="cost cost-free">Free</span> Free</div>
-  <div class="legend-item"><span class="cost cost-freetier">Free tier</span> Has free tier</div>
-  <div class="legend-item"><span class="cost cost-txfee">Tx fee</span> Transaction fee</div>
-  <div class="legend-item"><span class="cost cost-paid">Paid</span> Paid</div>
 </div>
 
-<!-- ==================== SUMMARY ==================== -->
-<div class="section">
-  <div class="section-title no-accordion" style="background:linear-gradient(135deg,var(--bg-alt),var(--bg));color:var(--text)">
-    Summary <span class="count">(Feature Count by Category & Status)</span>
-  </div>
-  <div class="summary-grid">
-    <div class="summary-card summary-done">
-      <span class="num">42</span>
-      <span class="label">✅ Implemented</span>
-    </div>
-    <div class="summary-card summary-high">
-      <span class="num">12</span>
-      <span class="label">🔜 Due — High Priority</span>
-    </div>
-    <div class="summary-card summary-medium">
-      <span class="num">13</span>
-      <span class="label">🔜 Due — Medium Priority</span>
-    </div>
-    <div class="summary-card summary-low">
-      <span class="num">5</span>
-      <span class="label">🔜 Due — Low Priority</span>
-    </div>
-    <div class="summary-card summary-roadmap">
-      <span class="num">7</span>
-      <span class="label">🧭 Roadmap</span>
-    </div>
-    <div class="summary-card summary-total">
-      <span class="num">79</span>
-      <span class="label">Total Features</span>
-    </div>
-  </div>
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot dot-done"></span> Done</div>
+  <div class="legend-item"><span class="legend-dot dot-high"></span> High</div>
+  <div class="legend-item"><span class="legend-dot dot-medium"></span> Medium</div>
+  <div class="legend-item"><span class="legend-dot dot-low"></span> Low</div>
+  <div class="legend-item"><span class="legend-dot dot-roadmap"></span> Roadmap</div>
+  <div class="legend-divider"></div>
+  <div class="legend-item"><span class="cost-badge cb-none">—</span> None</div>
+  <div class="legend-item"><span class="cost-badge cb-free">Free</span> Free</div>
+  <div class="legend-item"><span class="cost-badge cb-freetier">Free tier</span> Free tier</div>
+  <div class="legend-item"><span class="cost-badge cb-txfee">Tx fee</span> Transaction fee</div>
+  <div class="legend-item"><span class="cost-badge cb-paid">Paid</span> Paid</div>
+</div>
+
+<!-- Summary -->
+<div class="summary-grid">
+  <div class="summary-card sc-done"><span class="num">42</span><div class="label">Implemented</div></div>
+  <div class="summary-card sc-high"><span class="num">12</span><div class="label">High Priority</div></div>
+  <div class="summary-card sc-medium"><span class="num">13</span><div class="label">Medium Priority</div></div>
+  <div class="summary-card sc-low"><span class="num">5</span><div class="label">Low Priority</div></div>
+  <div class="summary-card sc-roadmap"><span class="num">7</span><div class="label">Roadmap</div></div>
+  <div class="summary-card sc-total"><span class="num">79</span><div class="label">Total Features</div></div>
 </div>
 
 <!-- ==================== SUPER ADMIN ==================== -->
 <div class="section section-st-super">
   <div class="section-title" onclick="toggleSection(this)">
-    Super Admin Panel <span class="count">(Platform Owner)</span>
+    <span><span class="label">Super Admin Panel</span><span class="count">(20 features)</span></span>
+    <span class="arrow">▼</span>
   </div>
   <div class="section-content">
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:105px">Status</th><th style="width:90px">Layer</th><th style="width:160px">3rd Party / Cost</th><th>Notes</th></tr>
+      <tr><th style="width:36px">#</th><th>Feature</th><th style="width:90px">Status</th><th style="width:76px">Layer</th><th style="width:150px">Dependencies / Cost</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td class="num">1.1</td><td>Plan CRUD</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Full CRUD with product/traffic/storage limits</td></tr>
-      <tr><td class="num">1.2</td><td>Tenant CRUD</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Subdomain + custom domain, status management</td></tr>
-      <tr><td class="num">1.3</td><td>Tenant impersonation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Generate JWT as vendor OWNER</td></tr>
-      <tr><td class="num">1.4</td><td>Traffic / rate limiting</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-free">Redis (self-hosted)</span></td><td>Per-plan daily request caps</td></tr>
-      <tr><td class="num">1.5</td><td>Super Admin login & auth</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Model exists, no login controller or guard</td></tr>
-      <tr><td class="num">1.6</td><td>Super Admin 2FA</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>TOTP fields in schema, no code</td></tr>
-      <tr><td class="num">1.7</td><td>Admin role-based access</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Permission system for admin staff</td></tr>
-      <tr><td class="num">1.8</td><td>Subscription billing (Stripe)</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-txfee">Stripe (~2.9%+$0.30/txn)</span></td><td>Recurring payments, webhooks, auto-renew</td></tr>
-      <tr><td class="num">1.9</td><td>Subscription CRUD</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Assign plans, upgrade/downgrade cycle</td></tr>
-      <tr><td class="num">1.10</td><td>GlobalTheme management</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">Cloudinary (free 25GB)</span></td><td>Upload/activate/deactivate themes (schema exists)</td></tr>
-      <tr><td class="num">1.11</td><td>Vendor onboarding workflow</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>PENDING → ACTIVE/SUSPENDED lifecycle</td></tr>
-      <tr><td class="num">1.12</td><td>Custom domain auto-SSL</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">Cloudflare (Free plan)</span></td><td>Cloudflare API + Let's Encrypt</td></tr>
-      <tr><td class="num">1.13</td><td>Visitor quota enforcement</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">Redis / Upstash (free tier)</span></td><td>Count + throttle when over plan limit</td></tr>
-      <tr><td class="num">1.14</td><td>Platform analytics dashboard</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-none">—</span></td><td>MRR, vendor count, uptime</td></tr>
-      <tr><td class="num">1.15</td><td>Infrastructure monitoring</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-freetier">Grafana/Prometheus (free self-hosted)</span></td><td>Server load, DB size per tenant</td></tr>
-      <tr><td class="num">1.16</td><td>Global announcements</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-freetier">Email/SMS provider (free tier)</span></td><td>Send alerts to vendors</td></tr>
-      <tr><td class="num">1.17</td><td>Audit log</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Admin action tracking</td></tr>
-      <tr><td class="num">1.18</td><td>Invoice & tax management</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Multi-currency, VAT/GST</td></tr>
-      <tr><td class="num">1.19</td><td>Feature toggle system</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Beta features per vendor</td></tr>
-      <tr><td class="num">1.20</td><td>Super Admin panel UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-none">—</span></td><td>Dashboard, vendor list, plan mgmt</td></tr>
+      <tr><td class="num-col">1.1</td><td class="feature-name">Plan CRUD</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Full CRUD with product/traffic/storage limits</td></tr>
+      <tr><td class="num-col">1.2</td><td class="feature-name">Tenant CRUD</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Subdomain + custom domain, status management</td></tr>
+      <tr><td class="num-col">1.3</td><td class="feature-name">Tenant impersonation</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Generate JWT as vendor OWNER</td></tr>
+      <tr><td class="num-col">1.4</td><td class="feature-name">Traffic / rate limiting</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-free">Redis (self-hosted)</span></td><td class="notes-cell">Per-plan daily request caps</td></tr>
+      <tr><td class="num-col">1.5</td><td class="feature-name">Super Admin login &amp; auth</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Model exists, no login controller or guard</td></tr>
+      <tr><td class="num-col">1.6</td><td class="feature-name">Super Admin 2FA</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">TOTP fields in schema, no code</td></tr>
+      <tr><td class="num-col">1.7</td><td class="feature-name">Admin role-based access</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Permission system for admin staff</td></tr>
+      <tr><td class="num-col">1.8</td><td class="feature-name">Subscription billing (Stripe)</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-txfee">Stripe (~2.9% + $0.30)</span></td><td class="notes-cell">Recurring payments, webhooks, auto-renew</td></tr>
+      <tr><td class="num-col">1.9</td><td class="feature-name">Subscription CRUD</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Assign plans, upgrade/downgrade cycle</td></tr>
+      <tr><td class="num-col">1.10</td><td class="feature-name">GlobalTheme management</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">Cloudinary (25GB free)</span></td><td class="notes-cell">Upload/activate/deactivate themes (schema exists)</td></tr>
+      <tr><td class="num-col">1.11</td><td class="feature-name">Vendor onboarding workflow</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">PENDING → ACTIVE/SUSPENDED lifecycle</td></tr>
+      <tr><td class="num-col">1.12</td><td class="feature-name">Custom domain auto-SSL</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">Cloudflare (Free plan)</span></td><td class="notes-cell">Cloudflare API + Let's Encrypt</td></tr>
+      <tr><td class="num-col">1.13</td><td class="feature-name">Visitor quota enforcement</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">Redis / Upstash (free tier)</span></td><td class="notes-cell">Count + throttle when over plan limit</td></tr>
+      <tr><td class="num-col">1.14</td><td class="feature-name">Platform analytics dashboard</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">MRR, vendor count, uptime</td></tr>
+      <tr><td class="num-col">1.15</td><td class="feature-name">Infrastructure monitoring</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-freetier">Grafana/Prometheus (free)</span></td><td class="notes-cell">Server load, DB size per tenant</td></tr>
+      <tr><td class="num-col">1.16</td><td class="feature-name">Global announcements</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-freetier">Email/SMS (free tier)</span></td><td class="notes-cell">Send alerts to vendors</td></tr>
+      <tr><td class="num-col">1.17</td><td class="feature-name">Audit log</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Admin action tracking</td></tr>
+      <tr><td class="num-col">1.18</td><td class="feature-name">Invoice &amp; tax management</td><td><span class="status s-low"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Low</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Multi-currency, VAT/GST</td></tr>
+      <tr><td class="num-col">1.19</td><td class="feature-name">Feature toggle system</td><td><span class="status s-low"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Low</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Beta features per vendor</td></tr>
+      <tr><td class="num-col">1.20</td><td class="feature-name">Super Admin panel UI</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Dashboard, vendor list, plan mgmt</td></tr>
     </tbody>
   </table>
+  </div>
   </div>
 </div>
 
 <!-- ==================== VENDOR PANEL ==================== -->
-<div class="section section-st-vendor">
+<div class="section">
   <div class="section-title" onclick="toggleSection(this)">
-    Vendor Panel <span class="count">(Merchant Dashboard)</span>
+    <span><span class="label">Vendor Panel</span><span class="count">(38 features)</span></span>
+    <span class="arrow">▼</span>
   </div>
   <div class="section-content">
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:105px">Status</th><th style="width:90px">Layer</th><th style="width:170px">3rd Party / Cost</th><th>Notes</th></tr>
+      <tr><th style="width:36px">#</th><th>Feature</th><th style="width:90px">Status</th><th style="width:76px">Layer</th><th style="width:150px">Dependencies / Cost</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td class="num">2.1</td><td>Staff registration & login (JWT)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>bcrypt hashing, Passport JWT</td></tr>
-      <tr><td class="num">2.2</td><td>TOTP 2FA</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Generate, enable, disable, verify</td></tr>
-      <tr><td class="num">2.3</td><td>Store settings</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Name, logo, brand color, theme config</td></tr>
-      <tr><td class="num">2.4</td><td>Custom CSS / JS</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Per-store custom code</td></tr>
-      <tr><td class="num">2.5</td><td>Category management</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Nested hierarchy CRUD</td></tr>
-      <tr><td class="num">2.6</td><td>Product CRUD + variants</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Size/color/weight/SKU/price/stock</td></tr>
-      <tr><td class="num">2.7</td><td>Bulk CSV product import</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-free">BullMQ + Redis (OSS)</span></td><td>BullMQ background job</td></tr>
-      <tr><td class="num">2.8</td><td>Meilisearch product search</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">Meilisearch (free self-hosted / cloud paid)</span></td><td>Per-tenant indices, auto-sync</td></tr>
-      <tr><td class="num">2.9</td><td>Supplier management</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>CRUD with contacts</td></tr>
-      <tr><td class="num">2.10</td><td>Coupon / discount engine</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Percentage/flat, min order, date range</td></tr>
-      <tr><td class="num">2.11</td><td>Order checkout flow</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Stock deduct, coupon, anti-fraud, shipping</td></tr>
-      <tr><td class="num">2.12</td><td>Anti-fraud order protection</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">FingerprintJS (20K/mo free)</span></td><td>Blocklist + fingerprint + velocity (max 3/5min)</td></tr>
-      <tr><td class="num">2.13</td><td>bKash payment integration</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-txfee">bKash API (txn fees)</span></td><td>Tokenized checkout API with callback</td></tr>
-      <tr><td class="num">2.14</td><td>SSLCommerz payment integration</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-txfee">SSLCommerz API (txn fees)</span></td><td>Gateway API v4 with IPN callback</td></tr>
-      <tr><td class="num">2.15</td><td>PDF invoice generation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Per-order PDF via PDFKit</td></tr>
-      <tr><td class="num">2.16</td><td>Steadfast courier fulfillment</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-txfee">Steadfast API (courier fees)</span></td><td>Create order with sandbox mock</td></tr>
-      <tr><td class="num">2.17</td><td>Pathao courier fulfillment</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-txfee">Pathao API (courier fees)</span></td><td>Token + create order with sandbox mock</td></tr>
-      <tr><td class="num">2.18</td><td>Order listing & status updates</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Payment/shipping status management</td></tr>
-      <tr><td class="num">2.19</td><td>Integrations key management</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>CRUD API keys per provider</td></tr>
-      <tr><td class="num">2.20</td><td>Analytics dashboard</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Revenue, sales chart, top products, order statuses</td></tr>
-      <tr><td class="num">2.21</td><td>Image upload (Cloudinary)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">Cloudinary (25GB free)</span></td><td>Product/store image upload</td></tr>
-      <tr><td class="num">2.22</td><td>SupplyBatch (stock entry & costing)</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Schema exists, no endpoints</td></tr>
-      <tr><td class="num">2.23</td><td>NAGAD payment integration</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-txfee">Nagad API (txn fees)</span></td><td>Enum exists, no adapter</td></tr>
-      <tr><td class="num">2.24</td><td>FB Pixel / GA4 / GTM tracking</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-free">FB/Google APIs (free)</span></td><td>Enums exist, no implementation</td></tr>
-      <tr><td class="num">2.25</td><td>Role-based authorization</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>OWNER/ADMIN/STAFF permission guards</td></tr>
-      <tr><td class="num">2.26</td><td>Order refund & return handling</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Full return workflow</td></tr>
-      <tr><td class="num">2.27</td><td>Abandoned cart recovery</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-freetier">Email/SMS provider (free tier)</span></td><td>Email/SMS reminders</td></tr>
-      <tr><td class="num">2.28</td><td>Flash sales & advanced promos</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Time-bound sales events</td></tr>
-      <tr><td class="num">2.29</td><td>Email marketing integration</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-freetier">Mailchimp (500 contacts free)</span></td><td>Mailchimp etc.</td></tr>
-      <tr><td class="num">2.30</td><td>SEO management (meta, sitemap, OG)</td><td><span class="status status-low"><span class="priority-dot" style="background:#3b82f6"></span>Due — Low</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Per-page SEO editor</td></tr>
-      <tr><td class="num">2.31</td><td>Vendor dashboard UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-none">—</span></td><td>Full merchant dashboard</td></tr>
-      <tr><td class="num">2.32</td><td>Drag-and-drop storefront builder</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-free">GrapesJS (open source)</span></td><td>Section-based page builder</td></tr>
-      <tr><td class="num">2.33</td><td>Live chat widget</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-freetier">Tawk.to / Crisp (free tier)</span></td><td>Customer engagement</td></tr>
-      <tr><td class="num">2.34</td><td>Multi-language support</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-free">i18n libraries (open source)</span></td><td>i18n per store</td></tr>
-      <tr><td class="num">2.35</td><td>Affiliate system</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-none">—</span></td><td>Referral tracking</td></tr>
-      <tr><td class="num">2.36</td><td>Loyalty points system</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Customer rewards</td></tr>
-      <tr><td class="num">2.37</td><td>Multi-warehouse stock</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Premium feature</td></tr>
-      <tr><td class="num">2.38</td><td>Mobile app / PWA generation</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-freetier">PWA (free), App store ($99/yr)</span></td><td>For premium vendors</td></tr>
+      <tr><td class="num-col">2.1</td><td class="feature-name">Staff registration &amp; login (JWT)</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">bcrypt hashing, Passport JWT</td></tr>
+      <tr><td class="num-col">2.2</td><td class="feature-name">TOTP 2FA</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Generate, enable, disable, verify</td></tr>
+      <tr><td class="num-col">2.3</td><td class="feature-name">Store settings</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Name, logo, brand color, theme config</td></tr>
+      <tr><td class="num-col">2.4</td><td class="feature-name">Custom CSS / JS</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Per-store custom code</td></tr>
+      <tr><td class="num-col">2.5</td><td class="feature-name">Category management</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Nested hierarchy CRUD</td></tr>
+      <tr><td class="num-col">2.6</td><td class="feature-name">Product CRUD + variants</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Size/color/weight/SKU/price/stock</td></tr>
+      <tr><td class="num-col">2.7</td><td class="feature-name">Bulk CSV product import</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-free">BullMQ + Redis (OSS)</span></td><td class="notes-cell">BullMQ background job</td></tr>
+      <tr><td class="num-col">2.8</td><td class="feature-name">Meilisearch product search</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">Meilisearch (free self-hosted)</span></td><td class="notes-cell">Per-tenant indices, auto-sync</td></tr>
+      <tr><td class="num-col">2.9</td><td class="feature-name">Supplier management</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">CRUD with contacts</td></tr>
+      <tr><td class="num-col">2.10</td><td class="feature-name">Coupon / discount engine</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Percentage/flat, min order, date range</td></tr>
+      <tr><td class="num-col">2.11</td><td class="feature-name">Order checkout flow</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Stock deduct, coupon, anti-fraud, shipping</td></tr>
+      <tr><td class="num-col">2.12</td><td class="feature-name">Anti-fraud order protection</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">FingerprintJS (20K/mo free)</span></td><td class="notes-cell">Blocklist + fingerprint + velocity (max 3/5min)</td></tr>
+      <tr><td class="num-col">2.13</td><td class="feature-name">bKash payment integration</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-txfee">bKash API (txn fees)</span></td><td class="notes-cell">Tokenized checkout API with callback</td></tr>
+      <tr><td class="num-col">2.14</td><td class="feature-name">SSLCommerz payment integration</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-txfee">SSLCommerz API (txn fees)</span></td><td class="notes-cell">Gateway API v4 with IPN callback</td></tr>
+      <tr><td class="num-col">2.15</td><td class="feature-name">PDF invoice generation</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Per-order PDF via PDFKit</td></tr>
+      <tr><td class="num-col">2.16</td><td class="feature-name">Steadfast courier fulfillment</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-txfee">Steadfast API (courier fees)</span></td><td class="notes-cell">Create order with sandbox mock</td></tr>
+      <tr><td class="num-col">2.17</td><td class="feature-name">Pathao courier fulfillment</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-txfee">Pathao API (courier fees)</span></td><td class="notes-cell">Token + create order with sandbox mock</td></tr>
+      <tr><td class="num-col">2.18</td><td class="feature-name">Order listing &amp; status updates</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Payment/shipping status management</td></tr>
+      <tr><td class="num-col">2.19</td><td class="feature-name">Integrations key management</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">CRUD API keys per provider</td></tr>
+      <tr><td class="num-col">2.20</td><td class="feature-name">Analytics dashboard</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Revenue, sales chart, top products, order statuses</td></tr>
+      <tr><td class="num-col">2.21</td><td class="feature-name">Image upload (Cloudinary)</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">Cloudinary (25GB free)</span></td><td class="notes-cell">Product/store image upload</td></tr>
+      <tr><td class="num-col">2.22</td><td class="feature-name">SupplyBatch (stock entry &amp; costing)</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Schema exists, no endpoints</td></tr>
+      <tr><td class="num-col">2.23</td><td class="feature-name">NAGAD payment integration</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-txfee">Nagad API (txn fees)</span></td><td class="notes-cell">Enum exists, no adapter</td></tr>
+      <tr><td class="num-col">2.24</td><td class="feature-name">FB Pixel / GA4 / GTM tracking</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-free">FB/Google APIs (free)</span></td><td class="notes-cell">Enums exist, no implementation</td></tr>
+      <tr><td class="num-col">2.25</td><td class="feature-name">Role-based authorization</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">OWNER/ADMIN/STAFF permission guards</td></tr>
+      <tr><td class="num-col">2.26</td><td class="feature-name">Order refund &amp; return handling</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Full return workflow</td></tr>
+      <tr><td class="num-col">2.27</td><td class="feature-name">Abandoned cart recovery</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-freetier">Email/SMS (free tier)</span></td><td class="notes-cell">Email/SMS reminders</td></tr>
+      <tr><td class="num-col">2.28</td><td class="feature-name">Flash sales &amp; advanced promos</td><td><span class="status s-low"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Low</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Time-bound sales events</td></tr>
+      <tr><td class="num-col">2.29</td><td class="feature-name">Email marketing integration</td><td><span class="status s-low"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Low</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-freetier">Mailchimp (500 contacts free)</span></td><td class="notes-cell">Mailchimp etc.</td></tr>
+      <tr><td class="num-col">2.30</td><td class="feature-name">SEO management (meta, sitemap, OG)</td><td><span class="status s-low"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Low</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Per-page SEO editor</td></tr>
+      <tr><td class="num-col">2.31</td><td class="feature-name">Vendor dashboard UI</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Full merchant dashboard</td></tr>
+      <tr><td class="num-col">2.32</td><td class="feature-name">Drag-and-drop storefront builder</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-free">GrapesJS (open source)</span></td><td class="notes-cell">Section-based page builder</td></tr>
+      <tr><td class="num-col">2.33</td><td class="feature-name">Live chat widget</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-freetier">Tawk.to / Crisp (free tier)</span></td><td class="notes-cell">Customer engagement</td></tr>
+      <tr><td class="num-col">2.34</td><td class="feature-name">Multi-language support</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-free">i18n libraries (OSS)</span></td><td class="notes-cell">i18n per store</td></tr>
+      <tr><td class="num-col">2.35</td><td class="feature-name">Affiliate system</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Referral tracking</td></tr>
+      <tr><td class="num-col">2.36</td><td class="feature-name">Loyalty points system</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Customer rewards</td></tr>
+      <tr><td class="num-col">2.37</td><td class="feature-name">Multi-warehouse stock</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Premium feature</td></tr>
+      <tr><td class="num-col">2.38</td><td class="feature-name">Mobile app / PWA generation</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-freetier">PWA (free), App store ($99/yr)</span></td><td class="notes-cell">For premium vendors</td></tr>
     </tbody>
   </table>
+  </div>
   </div>
 </div>
 
 <!-- ==================== STOREFRONT ==================== -->
-<div class="section section-st-storefront">
+<div class="section">
   <div class="section-title" onclick="toggleSection(this)">
-    Customer Storefront <span class="count">(Shopper-facing)</span>
+    <span><span class="label">Customer Storefront</span><span class="count">(12 features)</span></span>
+    <span class="arrow">▼</span>
   </div>
   <div class="section-content">
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:105px">Status</th><th style="width:90px">Layer</th><th style="width:170px">3rd Party / Cost</th><th>Notes</th></tr>
+      <tr><th style="width:36px">#</th><th>Feature</th><th style="width:90px">Status</th><th style="width:76px">Layer</th><th style="width:150px">Dependencies / Cost</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td class="num">3.1</td><td>Product catalog & browsing API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td><span class="cost cost-none">—</span></td><td>Public API ready, no frontend UI</td></tr>
-      <tr><td class="num">3.2</td><td>Category browsing API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td><span class="cost cost-none">—</span></td><td>Public API ready</td></tr>
-      <tr><td class="num">3.3</td><td>Instant product search API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td><span class="cost cost-freetier">Meilisearch (free self-hosted)</span></td><td>Meilisearch full-text search</td></tr>
-      <tr><td class="num">3.4</td><td>Checkout API (COD + gateways)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td><span class="cost cost-txfee">bKash/SSLCommerz (txn fees)</span></td><td>Full flow API ready</td></tr>
-      <tr><td class="num">3.5</td><td>OTP for COD verification</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td><span class="cost cost-freetier">SMS gateway (pay-per-use)</span></td><td>Redis TTL-based</td></tr>
-      <tr><td class="num">3.6</td><td>Order tracking API</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend only</span></td><td><span class="cost cost-none">—</span></td><td>Public order lookup</td></tr>
-      <tr><td class="num">3.7</td><td>Responsive storefront UI (Next.js)</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-none">—</span></td><td>SSR/ISR, sub-1s load target</td></tr>
-      <tr><td class="num">3.8</td><td>One-page checkout UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-none">—</span></td><td>Full checkout form</td></tr>
-      <tr><td class="num">3.9</td><td>Product filtering UI</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-none">—</span></td><td>Price, size, category filters</td></tr>
-      <tr><td class="num">3.10</td><td>CDN edge caching (Cloudflare)</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td><span class="cost cost-freetier">Cloudflare (Free plan)</span></td><td>Static assets + ISR pages</td></tr>
-      <tr><td class="num">3.11</td><td>Incremental Static Regeneration</td><td><span class="status status-high"><span class="priority-dot" style="background:#ef4444"></span>Due — High</span></td><td><span class="layer layer-fe">Frontend</span></td><td><span class="cost cost-none">—</span></td><td>Next.js ISR for fast loads</td></tr>
-      <tr><td class="num">3.12</td><td>Product reviews & ratings</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-none">—</span></td><td>Customer testimonials</td></tr>
+      <tr><td class="num-col">3.1</td><td class="feature-name">Product catalog &amp; browsing API</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Public API ready, no frontend UI</td></tr>
+      <tr><td class="num-col">3.2</td><td class="feature-name">Category browsing API</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Public API ready</td></tr>
+      <tr><td class="num-col">3.3</td><td class="feature-name">Instant product search API</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">Meilisearch (free self-hosted)</span></td><td class="notes-cell">Meilisearch full-text search</td></tr>
+      <tr><td class="num-col">3.4</td><td class="feature-name">Checkout API (COD + gateways)</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-txfee">bKash/SSLCommerz (txn fees)</span></td><td class="notes-cell">Full flow API ready</td></tr>
+      <tr><td class="num-col">3.5</td><td class="feature-name">OTP for COD verification</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">SMS gateway (pay-per-use)</span></td><td class="notes-cell">Redis TTL-based</td></tr>
+      <tr><td class="num-col">3.6</td><td class="feature-name">Order tracking API</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Public order lookup</td></tr>
+      <tr><td class="num-col">3.7</td><td class="feature-name">Responsive storefront UI (Next.js)</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">SSR/ISR, sub-1s load target</td></tr>
+      <tr><td class="num-col">3.8</td><td class="feature-name">One-page checkout UI</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Full checkout form</td></tr>
+      <tr><td class="num-col">3.9</td><td class="feature-name">Product filtering UI</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Price, size, category filters</td></tr>
+      <tr><td class="num-col">3.10</td><td class="feature-name">CDN edge caching (Cloudflare)</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-infra">Infra</span></td><td><span class="cost-badge cb-freetier">Cloudflare (Free plan)</span></td><td class="notes-cell">Static assets + ISR pages</td></tr>
+      <tr><td class="num-col">3.11</td><td class="feature-name">Incremental Static Regeneration</td><td><span class="status s-high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — High</span></td><td><span class="layer-badge lb-fe">Frontend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Next.js ISR for fast loads</td></tr>
+      <tr><td class="num-col">3.12</td><td class="feature-name">Product reviews &amp; ratings</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Customer testimonials</td></tr>
     </tbody>
   </table>
+  </div>
   </div>
 </div>
 
 <!-- ==================== SYSTEM & SECURITY ==================== -->
-<div class="section section-st-security">
+<div class="section">
   <div class="section-title" onclick="toggleSection(this)">
-    System & Security <span class="count">(Infrastructure / Cross-cutting)</span>
+    <span><span class="label">System &amp; Security</span><span class="count">(21 features)</span></span>
+    <span class="arrow">▼</span>
   </div>
   <div class="section-content">
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:40px">#</th><th>Feature</th><th style="width:105px">Status</th><th style="width:90px">Layer</th><th style="width:170px">3rd Party / Cost</th><th>Notes</th></tr>
+      <tr><th style="width:36px">#</th><th>Feature</th><th style="width:90px">Status</th><th style="width:76px">Layer</th><th style="width:150px">Dependencies / Cost</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td class="num">4.1</td><td>DB-per-tenant isolation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">PostgreSQL / Supabase (free tier)</span></td><td>Separate PostgreSQL DB per vendor</td></tr>
-      <tr><td class="num">4.2</td><td>Subdomain tenant resolution</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Auto-detect from Host header</td></tr>
-      <tr><td class="num">4.3</td><td>Custom domain resolution</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Fallback customDomain lookup</td></tr>
-      <tr><td class="num">4.4</td><td>Global rate limiting</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>NestJS ThrottlerModule (100 req/min)</td></tr>
-      <tr><td class="num">4.5</td><td>Per-plan traffic quota</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-free">Redis (self-hosted OSS)</span></td><td>Custom TrafficThrottleMiddleware</td></tr>
-      <tr><td class="num">4.6</td><td>JWT authentication</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Passport JWT, 1d expiry</td></tr>
-      <tr><td class="num">4.7</td><td>Password hashing (bcrypt)</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>10 rounds</td></tr>
-      <tr><td class="num">4.8</td><td>Anti-fraud — email/phone blocklist</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>BlockedContact model</td></tr>
-      <tr><td class="num">4.9</td><td>Anti-fraud — device fingerprint</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">FingerprintJS (20K/mo free)</span></td><td>BlockedFingerprint model</td></tr>
-      <tr><td class="num">4.10</td><td>Anti-fraud — velocity check</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-free">Redis (self-hosted OSS)</span></td><td>Max 3 orders per fingerprint per 5 min</td></tr>
-      <tr><td class="num">4.11</td><td>BullMQ background job queue</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-free">BullMQ + Redis (OSS)</span></td><td>Redis-backed CSV import queue</td></tr>
-      <tr><td class="num">4.12</td><td>Swagger API documentation</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-none">—</span></td><td>Available at <code>/api</code></td></tr>
-      <tr><td class="num">4.13</td><td>Cloudinary image storage</td><td><span class="status status-done">✅ Implemented</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-freetier">Cloudinary (25GB free)</span></td><td>Stream upload</td></tr>
-      <tr><td class="num">4.14</td><td>CAPTCHA for login & forms</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-both">Both</span></td><td><span class="cost cost-free">reCAPTCHA / Turnstile (free)</span></td><td>Brute-force protection</td></tr>
-      <tr><td class="num">4.15</td><td>WAF (Web Application Firewall)</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td><span class="cost cost-freetier">Cloudflare (Free WAF)</span></td><td>AWS WAF / Cloudflare</td></tr>
-      <tr><td class="num">4.16</td><td>Automated backups & restore</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td><span class="cost cost-freetier">DB provider dependent (free tier)</span></td><td>DB backup strategy</td></tr>
-      <tr><td class="num">4.17</td><td>Rate limiting per store / API key</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-be">Backend</span></td><td><span class="cost cost-free">Redis (self-hosted OSS)</span></td><td>API key-based throttling</td></tr>
-      <tr><td class="num">4.18</td><td>ELK / CloudWatch logging</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td><span class="cost cost-freetier">ELK (free self-hosted), CloudWatch (free tier)</span></td><td>Centralized logging</td></tr>
-      <tr><td class="num">4.19</td><td>CI/CD pipeline</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td><span class="cost cost-freetier">GitHub Actions (2000 min/mo free)</span></td><td>GitHub Actions / automated deploy</td></tr>
-      <tr><td class="num">4.20</td><td>Docker containerization</td><td><span class="status status-medium"><span class="priority-dot" style="background:#f59e0b"></span>Due — Medium</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td><span class="cost cost-free">Docker (free OSS)</span></td><td>Dockerfile + compose exist, deployment pending</td></tr>
-      <tr><td class="num">4.21</td><td>Kubernetes auto-scaling</td><td><span class="status status-roadmap">🧭 Roadmap</span></td><td><span class="layer layer-infra">Infrastructure</span></td><td><span class="cost cost-paid">EKS / Fargate (cluster cost)</span></td><td>EKS / Fargate orchestration</td></tr>
+      <tr><td class="num-col">4.1</td><td class="feature-name">DB-per-tenant isolation</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">PostgreSQL / Supabase (free tier)</span></td><td class="notes-cell">Separate PostgreSQL DB per vendor</td></tr>
+      <tr><td class="num-col">4.2</td><td class="feature-name">Subdomain tenant resolution</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Auto-detect from Host header</td></tr>
+      <tr><td class="num-col">4.3</td><td class="feature-name">Custom domain resolution</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Fallback customDomain lookup</td></tr>
+      <tr><td class="num-col">4.4</td><td class="feature-name">Global rate limiting</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">NestJS ThrottlerModule (100 req/min)</td></tr>
+      <tr><td class="num-col">4.5</td><td class="feature-name">Per-plan traffic quota</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-free">Redis (self-hosted OSS)</span></td><td class="notes-cell">Custom TrafficThrottleMiddleware</td></tr>
+      <tr><td class="num-col">4.6</td><td class="feature-name">JWT authentication</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Passport JWT, 1d expiry</td></tr>
+      <tr><td class="num-col">4.7</td><td class="feature-name">Password hashing (bcrypt)</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">10 rounds</td></tr>
+      <tr><td class="num-col">4.8</td><td class="feature-name">Anti-fraud — email/phone blocklist</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">BlockedContact model</td></tr>
+      <tr><td class="num-col">4.9</td><td class="feature-name">Anti-fraud — device fingerprint</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">FingerprintJS (20K/mo free)</span></td><td class="notes-cell">BlockedFingerprint model</td></tr>
+      <tr><td class="num-col">4.10</td><td class="feature-name">Anti-fraud — velocity check</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-free">Redis (self-hosted OSS)</span></td><td class="notes-cell">Max 3 orders per fingerprint per 5 min</td></tr>
+      <tr><td class="num-col">4.11</td><td class="feature-name">BullMQ background job queue</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-free">BullMQ + Redis (OSS)</span></td><td class="notes-cell">Redis-backed CSV import queue</td></tr>
+      <tr><td class="num-col">4.12</td><td class="feature-name">Swagger API documentation</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-none">—</span></td><td class="notes-cell">Available at <code>/api</code></td></tr>
+      <tr><td class="num-col">4.13</td><td class="feature-name">Cloudinary image storage</td><td><span class="status s-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-freetier">Cloudinary (25GB free)</span></td><td class="notes-cell">Stream upload</td></tr>
+      <tr><td class="num-col">4.14</td><td class="feature-name">CAPTCHA for login &amp; forms</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-both">Both</span></td><td><span class="cost-badge cb-free">reCAPTCHA / Turnstile (free)</span></td><td class="notes-cell">Brute-force protection</td></tr>
+      <tr><td class="num-col">4.15</td><td class="feature-name">WAF (Web Application Firewall)</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-infra">Infra</span></td><td><span class="cost-badge cb-freetier">Cloudflare (Free WAF)</span></td><td class="notes-cell">AWS WAF / Cloudflare</td></tr>
+      <tr><td class="num-col">4.16</td><td class="feature-name">Automated backups &amp; restore</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-infra">Infra</span></td><td><span class="cost-badge cb-freetier">DB provider (free tier)</span></td><td class="notes-cell">DB backup strategy</td></tr>
+      <tr><td class="num-col">4.17</td><td class="feature-name">Rate limiting per store / API key</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-be">Backend</span></td><td><span class="cost-badge cb-free">Redis (self-hosted OSS)</span></td><td class="notes-cell">API key-based throttling</td></tr>
+      <tr><td class="num-col">4.18</td><td class="feature-name">ELK / CloudWatch logging</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-infra">Infra</span></td><td><span class="cost-badge cb-freetier">ELK (free), CloudWatch (free tier)</span></td><td class="notes-cell">Centralized logging</td></tr>
+      <tr><td class="num-col">4.19</td><td class="feature-name">CI/CD pipeline</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-infra">Infra</span></td><td><span class="cost-badge cb-freetier">GitHub Actions (2000 min/mo free)</span></td><td class="notes-cell">GitHub Actions / automated deploy</td></tr>
+      <tr><td class="num-col">4.20</td><td class="feature-name">Docker containerization</td><td><span class="status s-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Due — Medium</span></td><td><span class="layer-badge lb-infra">Infra</span></td><td><span class="cost-badge cb-free">Docker (free OSS)</span></td><td class="notes-cell">Dockerfile + compose exist, deployment pending</td></tr>
+      <tr><td class="num-col">4.21</td><td class="feature-name">Kubernetes auto-scaling</td><td><span class="status s-roadmap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Roadmap</span></td><td><span class="layer-badge lb-infra">Infra</span></td><td><span class="cost-badge cb-paid">EKS / Fargate (cluster cost)</span></td><td class="notes-cell">EKS / Fargate orchestration</td></tr>
     </tbody>
   </table>
+  </div>
   </div>
 </div>
 
@@ -412,9 +529,9 @@
 <script>
   function toggleTheme() {
     document.body.classList.toggle('light-mode');
-    const btn = document.getElementById('themeToggle');
+    const label = document.getElementById('themeLabel');
     const isLight = document.body.classList.contains('light-mode');
-    btn.textContent = isLight ? '☀️ Light' : '🌙 Dark';
+    label.textContent = isLight ? 'Light' : 'Dark';
     localStorage.setItem('ecomize-theme', isLight ? 'light' : 'dark');
   }
 
@@ -429,7 +546,7 @@
   (function() {
     if (localStorage.getItem('ecomize-theme') === 'light') {
       document.body.classList.add('light-mode');
-      document.getElementById('themeToggle').textContent = '☀️ Light';
+      document.getElementById('themeLabel').textContent = 'Light';
     }
     document.querySelectorAll('.section-content').forEach(function(el) {
       el.style.maxHeight = el.scrollHeight + 'px';
