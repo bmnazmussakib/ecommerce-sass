@@ -191,6 +191,7 @@ exports.Prisma.SupplyBatchScalarFieldEnum = {
 
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
+  customerId: 'customerId',
   customerName: 'customerName',
   customerEmail: 'customerEmail',
   customerPhone: 'customerPhone',
@@ -265,6 +266,16 @@ exports.Prisma.FlashSaleProductScalarFieldEnum = {
   salePrice: 'salePrice',
   limitQuantity: 'limitQuantity',
   soldQuantity: 'soldQuantity'
+};
+
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  address: 'address',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -356,7 +367,8 @@ exports.Prisma.ModelName = {
   Coupon: 'Coupon',
   Integration: 'Integration',
   FlashSale: 'FlashSale',
-  FlashSaleProduct: 'FlashSaleProduct'
+  FlashSaleProduct: 'FlashSaleProduct',
+  Customer: 'Customer'
 };
 
 /**

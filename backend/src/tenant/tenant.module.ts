@@ -12,6 +12,7 @@ import { UploadModule } from './upload/upload.module';
 import { SearchModule } from './search/search.module';
 import { SupplyBatchModule } from './supply-batch/supply-batch.module';
 import { FlashSaleModule } from './flash-sale/flash-sale.module';
+import { CustomerModule } from './customer/customer.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { FlashSaleModule } from './flash-sale/flash-sale.module';
     UploadModule,
     SearchModule,
     SupplyBatchModule,
-    FlashSaleModule
+    FlashSaleModule,
+    CustomerModule
   ]
 })
 export class TenantModule {}

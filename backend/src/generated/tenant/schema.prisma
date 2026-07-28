@@ -107,6 +107,8 @@ model SupplyBatch {
 
 model Order {
   id              String         @id @default(uuid())
+  customerId      String?
+  customer        Customer?      @relation(fields: [customerId], references: [id], onDelete: SetNull)
   customerName    String
   customerEmail   String?
   customerPhone   String
@@ -227,4 +229,15 @@ model FlashSaleProduct {
   soldQuantity     Int            @default(0)
 
   @@unique([flashSaleId, productVariantId])
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  name      String
+  email     String?
+  phone     String   @unique
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
 }

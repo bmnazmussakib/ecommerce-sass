@@ -157,8 +157,34 @@ export class OrderService {
       const taxPaid = priceBeforeTax.mul(taxRatePercent).div(100);
       const totalPrice = priceBeforeTax.add(taxPaid).add(shippingCharge);
 
+      // Upsert Customer profile based on phone number
+      let customer = await tx.customer.findUnique({
+        where: { phone: dto.customerPhone }
+      });
+
+      if (customer) {
+        customer = await tx.customer.update({
+          where: { id: customer.id },
+          data: {
+            name: dto.customerName,
+            email: dto.customerEmail || customer.email,
+            address: dto.shippingAddress || customer.address
+          }
+        });
+      } else {
+        customer = await tx.customer.create({
+          data: {
+            name: dto.customerName,
+            email: dto.customerEmail,
+            phone: dto.customerPhone,
+            address: dto.shippingAddress
+          }
+        });
+      }
+
       const order = await tx.order.create({
         data: {
+          customerId: customer.id,
           customerName: dto.customerName,
           customerEmail: dto.customerEmail,
           customerPhone: dto.customerPhone,
