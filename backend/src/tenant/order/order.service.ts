@@ -1,12 +1,26 @@
-import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { TENANT_PRISMA_CLIENT } from '../../core/database/tenant-connection.provider';
-import { PrismaClient as TenantPrismaClient, Prisma } from '@prisma/tenant-client';
-import { CreateOrderDto, UpdateOrderStatusDto, RefundOrderDto } from './dto/order.dto';
+import {
+  PrismaClient as TenantPrismaClient,
+  Prisma,
+} from '@prisma/tenant-client';
+import {
+  CreateOrderDto,
+  UpdateOrderStatusDto,
+  RefundOrderDto,
+} from './dto/order.dto';
 import { BkashService } from '../integration/adapters/bkash.service';
 import { SslCommerzService } from '../integration/adapters/sslcommerz.service';
 import { SteadfastService } from '../integration/adapters/steadfast.service';
 import { PathaoService } from '../integration/adapters/pathao.service';
 import { ShippingService } from '../shipping/shipping.service';
+import { DigitalProductService } from '../digital-product/digital-product.service';
+import { WebhookService } from '../webhook/webhook.service';
 
 @Injectable()
 export class OrderService {
@@ -17,6 +31,8 @@ export class OrderService {
     private readonly steadfastService: SteadfastService,
     private readonly pathaoService: PathaoService,
     private readonly shippingService: ShippingService,
+    private readonly digitalProductService: DigitalProductService,
+    private readonly webhookService: WebhookService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -35,16 +51,21 @@ export class OrderService {
     });
 
     if (blockList) {
-      throw new BadRequestException('Order rejected. Contact support for assistance.');
+      throw new BadRequestException(
+        'Order rejected. Contact support for assistance.',
+      );
     }
 
     // 2. Check Device Fingerprint Blocklist
     if (dto.fingerprint) {
-      const blockedFingerprint = await this.prisma.blockedFingerprint.findUnique({
-        where: { fingerprint: dto.fingerprint },
-      });
+      const blockedFingerprint =
+        await this.prisma.blockedFingerprint.findUnique({
+          where: { fingerprint: dto.fingerprint },
+        });
       if (blockedFingerprint) {
-        throw new BadRequestException('Order rejected. Suspicious activity detected.');
+        throw new BadRequestException(
+          'Order rejected. Suspicious activity detected.',
+        );
       }
 
       // 3. Velocity check: Max 3 orders within 5 minutes from same device signature
@@ -57,25 +78,31 @@ export class OrderService {
       });
 
       if (recentOrdersCount >= 3) {
-        throw new BadRequestException('Too many orders placed. Please try again later.');
+        throw new BadRequestException(
+          'Too many orders placed. Please try again later.',
+        );
       }
     }
-
 
     return await this.prisma.$transaction(async (tx) => {
       let subTotal = new Prisma.Decimal(0);
       const orderItemsData = [];
+      let allDigital = true;
 
       for (const item of dto.items) {
         const variant = await tx.productVariant.findUnique({
           where: { id: item.variantId },
-          include: { product: true }
+          include: { product: true },
         });
 
-        if (!variant) throw new NotFoundException(`Variant ${item.variantId} not found`);
-        if (variant.stock < item.quantity) {
-          throw new BadRequestException(`Insufficient stock for ${variant.product.title}`);
+        if (!variant)
+          throw new NotFoundException(`Variant ${item.variantId} not found`);
+        if (!variant.isDigital && variant.stock < item.quantity) {
+          throw new BadRequestException(
+            `Insufficient stock for ${variant.product.title}`,
+          );
         }
+        if (!variant.isDigital) allDigital = false;
 
         // Check if there is an active flash sale for this variant
         const now = new Date();
@@ -92,10 +119,12 @@ export class OrderService {
 
         let itemPrice = variant.price;
         if (activeFlashSaleProd) {
-          const availableFlashSaleQty = activeFlashSaleProd.limitQuantity - activeFlashSaleProd.soldQuantity;
+          const availableFlashSaleQty =
+            activeFlashSaleProd.limitQuantity -
+            activeFlashSaleProd.soldQuantity;
           if (availableFlashSaleQty < item.quantity) {
             throw new BadRequestException(
-              `Requested quantity (${item.quantity}) exceeds available flash sale limit (${availableFlashSaleQty}) for ${variant.product.title}`
+              `Requested quantity (${item.quantity}) exceeds available flash sale limit (${availableFlashSaleQty}) for ${variant.product.title}`,
             );
           }
 
@@ -115,13 +144,13 @@ export class OrderService {
         // Deduct stock
         await tx.productVariant.update({
           where: { id: variant.id },
-          data: { stock: { decrement: item.quantity } }
+          data: { stock: { decrement: item.quantity } },
         });
 
         orderItemsData.push({
           variantId: variant.id,
           quantity: item.quantity,
-          price: itemPrice
+          price: itemPrice,
         });
       }
 
@@ -129,7 +158,9 @@ export class OrderService {
       let couponUsed = null;
 
       if (dto.couponCode) {
-        const coupon = await tx.coupon.findUnique({ where: { code: dto.couponCode } });
+        const coupon = await tx.coupon.findUnique({
+          where: { code: dto.couponCode },
+        });
         if (!coupon || !coupon.isActive) {
           throw new BadRequestException('Invalid or expired coupon');
         }
@@ -137,7 +168,9 @@ export class OrderService {
           throw new BadRequestException('Coupon is not active currently');
         }
         if (subTotal.lessThan(coupon.minOrderValue)) {
-          throw new BadRequestException(`Minimum order value of ${coupon.minOrderValue} required for this coupon`);
+          throw new BadRequestException(
+            `Minimum order value of ${coupon.minOrderValue} required for this coupon`,
+          );
         }
 
         if (coupon.type === 'PERCENTAGE') {
@@ -148,20 +181,25 @@ export class OrderService {
         couponUsed = coupon.id;
       }
 
-      // Calculate shipping based on zones & rates
-      const shippingCharge = await this.shippingService.calculateShipping(dto.shippingAddress, subTotal);
+      // Calculate shipping: 0 for all-digital orders, otherwise zone-based
+      const shippingCharge = allDigital
+        ? new Prisma.Decimal(0)
+        : await this.shippingService.calculateShipping(
+            dto.shippingAddress,
+            subTotal,
+          );
 
       // Fetch store settings to get taxRate
       const settings = await tx.storeSetting.findFirst();
       const taxRatePercent = settings?.taxRate ? Number(settings.taxRate) : 0;
-      
+
       const priceBeforeTax = subTotal.sub(discount);
       const taxPaid = priceBeforeTax.mul(taxRatePercent).div(100);
       const totalPrice = priceBeforeTax.add(taxPaid).add(shippingCharge);
 
       // Upsert Customer profile based on phone number
       let customer = await tx.customer.findUnique({
-        where: { phone: dto.customerPhone }
+        where: { phone: dto.customerPhone },
       });
 
       if (customer) {
@@ -170,8 +208,8 @@ export class OrderService {
           data: {
             name: dto.customerName,
             email: dto.customerEmail || customer.email,
-            address: dto.shippingAddress || customer.address
-          }
+            address: dto.shippingAddress || customer.address,
+          },
         });
       } else {
         customer = await tx.customer.create({
@@ -179,8 +217,8 @@ export class OrderService {
             name: dto.customerName,
             email: dto.customerEmail,
             phone: dto.customerPhone,
-            address: dto.shippingAddress
-          }
+            address: dto.shippingAddress,
+          },
         });
       }
 
@@ -197,22 +235,23 @@ export class OrderService {
           totalPrice,
           fingerprint: dto.fingerprint,
           orderItems: {
-            create: orderItemsData
-          }
+            create: orderItemsData,
+          },
         },
-        include: { orderItems: true }
+        include: { orderItems: true },
       });
-
 
       let bkashURL: string | null = null;
       let sslczGatewayUrl: string | null = null;
 
       if (dto.paymentMethod === 'BKASH') {
         const integration = await tx.integration.findUnique({
-          where: { provider: 'BKASH' }
+          where: { provider: 'BKASH' },
         });
         if (!integration || !integration.isActive) {
-          throw new BadRequestException('bKash integration is not configured or active');
+          throw new BadRequestException(
+            'bKash integration is not configured or active',
+          );
         }
 
         const keys = integration.keysJson as any;
@@ -223,15 +262,17 @@ export class OrderService {
           order.id,
           totalPrice.toNumber(),
           keys,
-          callbackUrl
+          callbackUrl,
         );
         bkashURL = paymentRes.bkashURL;
       } else if (dto.paymentMethod === 'CARD') {
         const integration = await tx.integration.findUnique({
-          where: { provider: 'SSLCOMMERZ' }
+          where: { provider: 'SSLCOMMERZ' },
         });
         if (!integration || !integration.isActive) {
-          throw new BadRequestException('SSLCommerz integration is not configured or active');
+          throw new BadRequestException(
+            'SSLCommerz integration is not configured or active',
+          );
         }
 
         const keys = integration.keysJson as any;
@@ -252,8 +293,27 @@ export class OrderService {
         });
       }
 
+      // Dispatch webhook
+      void this.webhookService.dispatch('order.placed', {
+        orderId: order.id,
+        customerName: dto.customerName,
+        customerPhone: dto.customerPhone,
+        totalPrice: totalPrice.toNumber(),
+        paymentMethod: dto.paymentMethod,
+      });
+
+      // Auto-generate download tokens for COD digital orders
+      let digitalDownloads = null;
+      if (allDigital && !bkashURL && !sslczGatewayUrl) {
+        digitalDownloads =
+          await this.digitalProductService.generateDownloadTokens(order.id);
+      }
+
       return {
-        message: bkashURL || sslczGatewayUrl ? 'Redirect to Payment Gateway' : 'Order placed successfully',
+        message:
+          bkashURL || sslczGatewayUrl
+            ? 'Redirect to Payment Gateway'
+            : 'Order placed successfully',
         orderId: order.id,
         subTotal,
         discount,
@@ -261,15 +321,17 @@ export class OrderService {
         taxPaid,
         totalPrice,
         paymentUrl: bkashURL || sslczGatewayUrl,
+        digitalDownloads,
       };
     });
   }
 
-
   async verifyBkashPayment(orderId: string, paymentID: string, status: string) {
-    console.log(`Verifying bKash Payment: orderId=${orderId}, paymentID=${paymentID}, status=${status}`);
+    console.log(
+      `Verifying bKash Payment: orderId=${orderId}, paymentID=${paymentID}, status=${status}`,
+    );
     const order = await this.prisma.order.findUnique({
-      where: { id: orderId }
+      where: { id: orderId },
     });
     if (!order) throw new NotFoundException('Order not found');
 
@@ -277,36 +339,61 @@ export class OrderService {
       console.log(`Payment status was not success: ${status}`);
       await this.prisma.order.update({
         where: { id: orderId },
-        data: { paymentStatus: 'FAILED' }
+        data: { paymentStatus: 'FAILED' },
       });
-      return { orderId, success: false, reason: `bKash redirected with status: ${status}` };
+      return {
+        orderId,
+        success: false,
+        reason: `bKash redirected with status: ${status}`,
+      };
     }
 
     const integration = await this.prisma.integration.findUnique({
-      where: { provider: 'BKASH' }
+      where: { provider: 'BKASH' },
     });
     if (!integration || !integration.isActive) {
-      throw new BadRequestException('bKash integration is not active or configured');
+      throw new BadRequestException(
+        'bKash integration is not active or configured',
+      );
     }
 
     const keys = integration.keysJson as any;
     try {
       const token = await this.bkashService.grantToken(keys);
       console.log(`Granted token for execution: ${token.substring(0, 15)}...`);
-      const executeRes = await this.bkashService.executePayment(token, paymentID, keys);
-      console.log('bKash execute payment response:', JSON.stringify(executeRes, null, 2));
-      
+      const executeRes = await this.bkashService.executePayment(
+        token,
+        paymentID,
+        keys,
+      );
+      console.log(
+        'bKash execute payment response:',
+        JSON.stringify(executeRes, null, 2),
+      );
+
       if (executeRes.statusCode === '0000') {
         await this.prisma.order.update({
           where: { id: orderId },
-          data: { paymentStatus: 'PAID' }
+          data: { paymentStatus: 'PAID' },
         });
-        return { orderId, success: true };
+        void this.webhookService.dispatch('payment.confirmed', {
+          orderId,
+          paymentMethod: 'BKASH',
+          paymentStatus: 'PAID',
+        });
+        let digitalDownloads = null;
+        try {
+          digitalDownloads =
+            await this.digitalProductService.generateDownloadTokens(orderId);
+        } catch {}
+        return { orderId, success: true, digitalDownloads };
       } else {
-        console.log(`bKash returned status code: ${executeRes.statusCode} - ${executeRes.statusMessage}`);
+        console.log(
+          `bKash returned status code: ${executeRes.statusCode} - ${executeRes.statusMessage}`,
+        );
         await this.prisma.order.update({
           where: { id: orderId },
-          data: { paymentStatus: 'FAILED' }
+          data: { paymentStatus: 'FAILED' },
         });
         return { orderId, success: false, reason: executeRes.statusMessage };
       }
@@ -314,26 +401,36 @@ export class OrderService {
       console.error('Error in bKash verification execution:', error);
       await this.prisma.order.update({
         where: { id: orderId },
-        data: { paymentStatus: 'FAILED' }
+        data: { paymentStatus: 'FAILED' },
       });
       throw error;
     }
   }
 
-  async verifySslCommerzPayment(orderId: string, valId: string, status: string) {
-    const order = await this.prisma.order.findUnique({ where: { id: orderId } });
+  async verifySslCommerzPayment(
+    orderId: string,
+    valId: string,
+    status: string,
+  ) {
+    const order = await this.prisma.order.findUnique({
+      where: { id: orderId },
+    });
     if (!order) throw new NotFoundException('Order not found');
 
     if (status !== 'success' || !valId) {
       await this.prisma.order.update({
         where: { id: orderId },
-        data: { paymentStatus: 'FAILED' }
+        data: { paymentStatus: 'FAILED' },
       });
-      return { success: false, orderId, reason: `Payment status failed: ${status}` };
+      return {
+        success: false,
+        orderId,
+        reason: `Payment status failed: ${status}`,
+      };
     }
 
     const integration = await this.prisma.integration.findUnique({
-      where: { provider: 'SSLCOMMERZ' }
+      where: { provider: 'SSLCOMMERZ' },
     });
 
     if (!integration || !integration.isActive) {
@@ -346,22 +443,36 @@ export class OrderService {
     if (isValid) {
       await this.prisma.order.update({
         where: { id: orderId },
-        data: { paymentStatus: 'PAID' }
+        data: { paymentStatus: 'PAID' },
       });
-      return { success: true, orderId };
+      void this.webhookService.dispatch('payment.confirmed', {
+        orderId,
+        paymentMethod: 'CARD',
+        paymentStatus: 'PAID',
+      });
+      let digitalDownloads = null;
+      try {
+        digitalDownloads =
+          await this.digitalProductService.generateDownloadTokens(orderId);
+      } catch {}
+      return { success: true, orderId, digitalDownloads };
     } else {
       await this.prisma.order.update({
         where: { id: orderId },
-        data: { paymentStatus: 'FAILED' }
+        data: { paymentStatus: 'FAILED' },
       });
-      return { success: false, orderId, reason: 'Payment validation failed at SSLCommerz' };
+      return {
+        success: false,
+        orderId,
+        reason: 'Payment validation failed at SSLCommerz',
+      };
     }
   }
 
   async findAll() {
     return this.prisma.order.findMany({
       orderBy: { createdAt: 'desc' },
-      include: { orderItems: true }
+      include: { orderItems: true },
     });
   }
 
@@ -370,9 +481,9 @@ export class OrderService {
       where: { id },
       include: {
         orderItems: {
-          include: { variant: { include: { product: true } } }
-        }
-      }
+          include: { variant: { include: { product: true } } },
+        },
+      },
     });
     if (!order) throw new NotFoundException('Order not found');
     return order;
@@ -380,26 +491,42 @@ export class OrderService {
 
   async updateStatus(id: string, dto: UpdateOrderStatusDto) {
     const order = await this.findOne(id);
-    return this.prisma.order.update({
+    const updated = await this.prisma.order.update({
       where: { id },
-      data: { ...dto }
+      data: { ...dto },
     });
+    void this.webhookService.dispatch('order.status_changed', {
+      orderId: id,
+      previousPaymentStatus: order.paymentStatus,
+      previousShippingStatus: order.shippingStatus,
+      newPaymentStatus: updated.paymentStatus,
+      newShippingStatus: updated.shippingStatus,
+    });
+    return updated;
   }
 
-  async fulfillOrder(orderId: string, courier: 'STEADFAST' | 'PATHAO', metadata?: any) {
+  async fulfillOrder(
+    orderId: string,
+    courier: 'STEADFAST' | 'PATHAO',
+    metadata?: any,
+  ) {
     const order = await this.prisma.order.findUnique({
       where: { id: orderId },
-      include: { orderItems: { include: { variant: { include: { product: true } } } } }
+      include: {
+        orderItems: { include: { variant: { include: { product: true } } } },
+      },
     });
 
     if (!order) throw new NotFoundException('Order not found');
 
     const integration = await this.prisma.integration.findUnique({
-      where: { provider: courier as any }
+      where: { provider: courier as any },
     });
 
     if (!integration || !integration.isActive) {
-      throw new BadRequestException(`${courier} integration is not configured or active`);
+      throw new BadRequestException(
+        `${courier} integration is not configured or active`,
+      );
     }
 
     const keys = integration.keysJson as any;
@@ -425,7 +552,10 @@ export class OrderService {
         recipient_city: metadata?.recipient_city,
         recipient_zone: metadata?.recipient_zone,
         recipient_area: metadata?.recipient_area,
-        item_quantity: order.orderItems.reduce((acc, item) => acc + item.quantity, 0),
+        item_quantity: order.orderItems.reduce(
+          (acc, item) => acc + item.quantity,
+          0,
+        ),
         item_weight: metadata?.item_weight || 0.5,
         amount_to_collect: order.totalPrice.toNumber(),
         special_instruction: metadata?.special_instruction,
@@ -440,7 +570,7 @@ export class OrderService {
         awbCode,
         trackingUrl,
         shippingStatus: 'SHIPPED',
-      }
+      },
     });
   }
 
@@ -448,8 +578,8 @@ export class OrderService {
     const order = await this.prisma.order.findUnique({
       where: { id: orderId },
       include: {
-        orderItems: { include: { variant: { include: { product: true } } } }
-      }
+        orderItems: { include: { variant: { include: { product: true } } } },
+      },
     });
 
     if (!order) throw new NotFoundException('Order not found');
@@ -457,32 +587,40 @@ export class OrderService {
     const eligibleStatuses: string[] = ['PAID', 'DELIVERED'];
     if (!eligibleStatuses.includes(order.paymentStatus)) {
       throw new BadRequestException(
-        `Cannot refund order with payment status: ${order.paymentStatus}. Order must be PAID or DELIVERED.`
+        `Cannot refund order with payment status: ${order.paymentStatus}. Order must be PAID or DELIVERED.`,
       );
     }
 
     // Determine which items to restock
-    const itemsToReturn = dto.items && dto.items.length > 0
-      ? dto.items
-      : order.orderItems.map(i => ({ variantId: i.variantId, quantity: i.quantity }));
+    const itemsToReturn =
+      dto.items && dto.items.length > 0
+        ? dto.items
+        : order.orderItems.map((i) => ({
+            variantId: i.variantId,
+            quantity: i.quantity,
+          }));
 
     return await this.prisma.$transaction(async (tx) => {
       for (const returnItem of itemsToReturn) {
         // Validate quantity against original order
-        const original = order.orderItems.find(i => i.variantId === returnItem.variantId);
+        const original = order.orderItems.find(
+          (i) => i.variantId === returnItem.variantId,
+        );
         if (!original) {
-          throw new BadRequestException(`Variant ${returnItem.variantId} not found in this order`);
+          throw new BadRequestException(
+            `Variant ${returnItem.variantId} not found in this order`,
+          );
         }
         if (returnItem.quantity > original.quantity) {
           throw new BadRequestException(
-            `Return quantity (${returnItem.quantity}) exceeds ordered quantity (${original.quantity}) for variant ${returnItem.variantId}`
+            `Return quantity (${returnItem.quantity}) exceeds ordered quantity (${original.quantity}) for variant ${returnItem.variantId}`,
           );
         }
 
         // Restock
         await tx.productVariant.update({
           where: { id: returnItem.variantId },
-          data: { stock: { increment: returnItem.quantity } }
+          data: { stock: { increment: returnItem.quantity } },
         });
       }
 
@@ -494,7 +632,13 @@ export class OrderService {
           shippingStatus: 'RETURNED',
           awbCode: order.awbCode ? `${order.awbCode} [REFUNDED]` : undefined,
         },
-        include: { orderItems: true }
+        include: { orderItems: true },
+      });
+
+      void this.webhookService.dispatch('order.refunded', {
+        orderId,
+        reason: dto.reason || 'Not specified',
+        paymentStatus: updated.paymentStatus,
       });
 
       return {
@@ -508,4 +652,3 @@ export class OrderService {
     });
   }
 }
-

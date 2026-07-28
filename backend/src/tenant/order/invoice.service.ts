@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import PDFDocument = require('pdfkit');
 import { Response } from 'express';
 
-
 @Injectable()
 export class InvoiceService {
   generateInvoicePdf(order: any, res: Response) {
@@ -10,7 +9,10 @@ export class InvoiceService {
 
     // Stream PDF directly to Express response
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename=invoice-${order.id.substring(0, 8)}.pdf`);
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename=invoice-${order.id.substring(0, 8)}.pdf`,
+    );
     doc.pipe(res);
 
     // 1. Header Section
@@ -20,7 +22,11 @@ export class InvoiceService {
       .text('Ecomize SaaS Platform', 50, 57)
       .fontSize(10)
       .text('Merchant Storefront Invoice', 50, 80)
-      .text(`Invoice Date: ${new Date(order.createdAt).toLocaleDateString()}`, 50, 95)
+      .text(
+        `Invoice Date: ${new Date(order.createdAt).toLocaleDateString()}`,
+        50,
+        95,
+      )
       .text(`Order ID: ${order.id}`, 50, 110)
       .moveDown();
 
@@ -70,9 +76,18 @@ export class InvoiceService {
       subtotal += itemTotal;
 
       doc.text(`${productName} (${sku})`, 50, position, { width: 280 });
-      doc.text(item.quantity.toString(), 350, position, { width: 50, align: 'right' });
-      doc.text(Number(item.price).toFixed(2), 400, position, { width: 80, align: 'right' });
-      doc.text(itemTotal.toFixed(2), 480, position, { width: 80, align: 'right' });
+      doc.text(item.quantity.toString(), 350, position, {
+        width: 50,
+        align: 'right',
+      });
+      doc.text(Number(item.price).toFixed(2), 400, position, {
+        width: 80,
+        align: 'right',
+      });
+      doc.text(itemTotal.toFixed(2), 480, position, {
+        width: 80,
+        align: 'right',
+      });
 
       position += 25;
     }
@@ -95,7 +110,10 @@ export class InvoiceService {
 
     position += 15;
     doc.text('Discount:', 380, position, { width: 100, align: 'right' });
-    doc.text(discount > 0 ? `-${discount.toFixed(2)}` : '0.00', 480, position, { width: 80, align: 'right' });
+    doc.text(discount > 0 ? `-${discount.toFixed(2)}` : '0.00', 480, position, {
+      width: 80,
+      align: 'right',
+    });
 
     position += 15;
     doc.text('Tax (VAT/GST):', 380, position, { width: 100, align: 'right' });

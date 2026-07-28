@@ -179,7 +179,19 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   stock: 'stock',
   size: 'size',
   color: 'color',
-  weight: 'weight'
+  weight: 'weight',
+  isDigital: 'isDigital',
+  fileUrl: 'fileUrl'
+};
+
+exports.Prisma.DigitalDownloadScalarFieldEnum = {
+  id: 'id',
+  variantId: 'variantId',
+  orderId: 'orderId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  downloadedAt: 'downloadedAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SupplyBatchScalarFieldEnum = {
@@ -276,6 +288,16 @@ exports.Prisma.CustomerScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   address: 'address',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WebhookScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  events: 'events',
+  secret: 'secret',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -382,6 +404,7 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   Product: 'Product',
   ProductVariant: 'ProductVariant',
+  DigitalDownload: 'DigitalDownload',
   SupplyBatch: 'SupplyBatch',
   Order: 'Order',
   BlockedFingerprint: 'BlockedFingerprint',
@@ -392,6 +415,7 @@ exports.Prisma.ModelName = {
   FlashSale: 'FlashSale',
   FlashSaleProduct: 'FlashSaleProduct',
   Customer: 'Customer',
+  Webhook: 'Webhook',
   ShippingZone: 'ShippingZone',
   ShippingRate: 'ShippingRate'
 };

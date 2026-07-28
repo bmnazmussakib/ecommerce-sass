@@ -1,7 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsEmail, IsOptional, IsEnum, IsArray, ValidateNested, IsNumber, Min } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsOptional,
+  IsEnum,
+  IsArray,
+  ValidateNested,
+  IsNumber,
+  Min,
+} from 'class-validator';
 import { Type } from 'class-transformer';
-import { PaymentMethod, PaymentStatus, ShippingStatus } from '@prisma/tenant-client';
+import {
+  PaymentMethod,
+  PaymentStatus,
+  ShippingStatus,
+} from '@prisma/tenant-client';
 
 export class OrderItemDto {
   @ApiProperty({ example: 'variant-uuid' })
@@ -105,7 +118,8 @@ export class RefundOrderDto {
   @ApiProperty({
     type: [RefundItemDto],
     required: false,
-    description: 'Specific items to return. If omitted, all order items are restocked.',
+    description:
+      'Specific items to return. If omitted, all order items are restocked.',
   })
   @IsOptional()
   @IsArray()
@@ -113,4 +127,3 @@ export class RefundOrderDto {
   @Type(() => RefundItemDto)
   items?: RefundItemDto[];
 }
-

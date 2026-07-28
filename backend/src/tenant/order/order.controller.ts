@@ -1,7 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, UseGuards, Req, Query, Res } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiHeader, ApiOperation } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  UseGuards,
+  Req,
+  Query,
+  Res,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiHeader,
+  ApiOperation,
+} from '@nestjs/swagger';
 import { OrderService } from './order.service';
-import { CreateOrderDto, UpdateOrderStatusDto, FulfillOrderDto, RefundOrderDto } from './dto/order.dto';
+import {
+  CreateOrderDto,
+  UpdateOrderStatusDto,
+  FulfillOrderDto,
+  RefundOrderDto,
+} from './dto/order.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
@@ -20,8 +41,13 @@ export class OrderController {
 
   @Post('checkout')
   @UseGuards(StoreClosedGuard)
-  @ApiOperation({ summary: 'Place a new order (Public API) — blocked when store is closed' })
-  checkout(@Body() createOrderDto: CreateOrderDto, @Req() req: express.Request) {
+  @ApiOperation({
+    summary: 'Place a new order (Public API) — blocked when store is closed',
+  })
+  checkout(
+    @Body() createOrderDto: CreateOrderDto,
+    @Req() req: express.Request,
+  ) {
     const tenantId = (req.headers['x-tenant-id'] as string) || 'default';
     // Use APP_URL env var for public callback URL (set to ngrok URL in local dev)
     const protocol = req.secure ? 'https' : 'http';
@@ -36,23 +62,30 @@ export class OrderController {
     @Query('orderId') orderId: string,
     @Query('paymentID') paymentID: string,
     @Query('status') status: string,
-    @Res() res: express.Response
+    @Res() res: express.Response,
   ) {
     try {
-      const result = await this.orderService.verifyBkashPayment(orderId, paymentID, status);
+      const result = await this.orderService.verifyBkashPayment(
+        orderId,
+        paymentID,
+        status,
+      );
       if (result.success) {
-        return res.json({ message: 'Payment successful', orderId: result.orderId });
+        return res.json({
+          message: 'Payment successful',
+          orderId: result.orderId,
+        });
       } else {
-        return res.status(400).json({ 
-          message: 'Payment failed', 
-          orderId: result.orderId, 
-          reason: (result as any).reason 
+        return res.status(400).json({
+          message: 'Payment failed',
+          orderId: result.orderId,
+          reason: (result as any).reason,
         });
       }
     } catch (err: any) {
-      return res.status(500).json({ 
-        message: 'Payment verification failed with server error', 
-        error: err.message 
+      return res.status(500).json({
+        message: 'Payment verification failed with server error',
+        error: err.message,
       });
     }
   }
@@ -63,21 +96,30 @@ export class OrderController {
     @Query('orderId') orderId: string,
     @Query('status') status: string,
     @Body() body: any,
-    @Res() res: express.Response
+    @Res() res: express.Response,
   ) {
     try {
       const valId = body.val_id;
-      const result = await this.orderService.verifySslCommerzPayment(orderId, valId, status);
+      const result = await this.orderService.verifySslCommerzPayment(
+        orderId,
+        valId,
+        status,
+      );
       if (result.success) {
-        return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-success?orderId=${orderId}`);
+        return res.redirect(
+          `${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-success?orderId=${orderId}`,
+        );
       } else {
-        return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-failed?orderId=${orderId}&reason=${result.reason}`);
+        return res.redirect(
+          `${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-failed?orderId=${orderId}&reason=${result.reason}`,
+        );
       }
     } catch (err: any) {
-      return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-failed?orderId=${orderId}&error=${err.message}`);
+      return res.redirect(
+        `${process.env.FRONTEND_URL || 'http://localhost:8889'}/payment-failed?orderId=${orderId}&error=${err.message}`,
+      );
     }
   }
-
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
@@ -109,7 +151,10 @@ export class OrderController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Patch(':id/status')
   @ApiOperation({ summary: 'Update order payment/shipping status (Admin)' })
-  updateStatus(@Param('id') id: string, @Body() updateOrderStatusDto: UpdateOrderStatusDto) {
+  updateStatus(
+    @Param('id') id: string,
+    @Body() updateOrderStatusDto: UpdateOrderStatusDto,
+  ) {
     return this.orderService.updateStatus(id, updateOrderStatusDto);
   }
 
@@ -117,23 +162,26 @@ export class OrderController {
   @Roles('OWNER', 'ADMIN')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Post(':id/fulfill')
-  @ApiOperation({ summary: 'Fulfill order using Steadfast/Pathao Courier (Admin)' })
-  fulfill(
-    @Param('id') id: string,
-    @Body() fulfillDto: FulfillOrderDto,
-  ) {
-    return this.orderService.fulfillOrder(id, fulfillDto.courier, fulfillDto.metadata);
+  @ApiOperation({
+    summary: 'Fulfill order using Steadfast/Pathao Courier (Admin)',
+  })
+  fulfill(@Param('id') id: string, @Body() fulfillDto: FulfillOrderDto) {
+    return this.orderService.fulfillOrder(
+      id,
+      fulfillDto.courier,
+      fulfillDto.metadata,
+    );
   }
 
   @ApiBearerAuth()
   @Roles('OWNER', 'ADMIN')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Post(':id/refund')
-  @ApiOperation({ summary: 'Refund/return an order — restocks items and marks as REFUNDED (Admin)' })
-  refundOrder(
-    @Param('id') id: string,
-    @Body() refundDto: RefundOrderDto,
-  ) {
+  @ApiOperation({
+    summary:
+      'Refund/return an order — restocks items and marks as REFUNDED (Admin)',
+  })
+  refundOrder(@Param('id') id: string, @Body() refundDto: RefundOrderDto) {
     return this.orderService.refundOrder(id, refundDto);
   }
 }

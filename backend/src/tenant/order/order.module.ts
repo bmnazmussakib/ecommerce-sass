@@ -6,11 +6,18 @@ import { IntegrationModule } from '../integration/integration.module';
 import { InvoiceService } from './invoice.service';
 import { StoreClosedGuard } from '../settings/store-closed.guard';
 import { ShippingModule } from '../shipping/shipping.module';
+import { DigitalProductModule } from '../digital-product/digital-product.module';
+import { WebhookModule } from '../webhook/webhook.module';
 
 @Module({
-  imports: [DatabaseModule, IntegrationModule, ShippingModule],
+  imports: [
+    DatabaseModule,
+    IntegrationModule,
+    ShippingModule,
+    DigitalProductModule,
+    WebhookModule,
+  ],
   controllers: [OrderController],
   providers: [OrderService, InvoiceService, StoreClosedGuard],
 })
 export class OrderModule {}
-

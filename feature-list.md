@@ -71,14 +71,14 @@
 | 2.28 | Flash sales & advanced promos | ✅ Done | Backend | — | — | Time-bound sales events with stock allocation & override pricing |
 | 2.29 | Email marketing integration | 🔜 Due | B/E + F/E | Low | Mailchimp (500 contacts free) | Campaign management |
 | 2.30 | SEO management (meta, sitemap, OG) | 🔜 Due | Backend | Low | — | Per-page SEO editor |
-| 2.31 | Customer list & CRUD | 🔜 Due | Backend | Medium | — | Customer records with segmentation |
-| 2.32 | Enable/disable store toggle | 🔜 Due | Backend | Medium | — | Pause/resume storefront visibility |
-| 2.33 | Digital product support | 🔜 Due | Backend | Medium | — | File delivery for digital downloads |
+| 2.31 | Customer list & CRUD | ✅ Done | Backend | — | — | Customer records with segmentation |
+| 2.32 | Enable/disable store toggle | ✅ Done | Backend | — | — | Pause/resume storefront via PATCH toggle-store + StoreClosedGuard |
+| 2.33 | Digital product support | ✅ Done | Backend | — | — | isDigital flag, file upload, one-time download token with 7-day expiry |
 | 2.34 | Low-stock alerts | 🔜 Due | Backend | Medium | Email/SMS provider (free tier) | Notify when stock below threshold |
-| 2.35 | Shipping zones & rates | 🔜 Due | Backend | Medium | — | Zone-based shipping cost config |
+| 2.35 | Shipping zones & rates | ✅ Done | Backend | — | — | Zone-based shipping cost config with rate tiers |
 | 2.36 | Redx courier integration | 🔜 Due | Backend | Medium | Redx API (courier fees) | Courier booking with AWB generation |
-| 2.37 | Webhook configuration | 🔜 Due | Backend | Medium | — | Event-driven webhook calls |
-| 2.38 | Data export — CSV/JSON | 🔜 Due | Backend | Medium | — | Export products, orders, customers |
+| 2.37 | Webhook configuration | ✅ Done | Backend | — | — | Event-driven webhook with retry + HMAC signing |
+| 2.38 | Data export — CSV/JSON | ✅ Done | Backend | — | — | Export products, orders, customers as CSV or JSON via GET /api/tenant/export |
 | 2.39 | Product scheduling — launch later | 🔜 Due | Backend | Low | — | Schedule product publish date |
 | 2.40 | BOGO offers | 🔜 Due | Backend | Low | — | Buy-one-get-one promotion engine |
 | 2.41 | Tax rules by region | 🔜 Due | Backend | Low | — | Tax config per region |
@@ -149,9 +149,9 @@
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
 | Super Admin | 20 | 1 | 3 | 0 |
-| Vendor Panel | 24 | 2 | 20 | 7 |
+| Vendor Panel | 30 | 2 | 14 | 7 |
 | Storefront | 6 (Backend only) | 5 | 0 | 1 |
 | System & Security | 13 | 0 | 7 | 1 |
-| **Total** | **63** | **8** | **30** | **9** |
+| **Total** | **69** | **8** | **24** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.

@@ -44,6 +44,11 @@ export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
  */
 export type ProductVariant = $Result.DefaultSelection<Prisma.$ProductVariantPayload>
 /**
+ * Model DigitalDownload
+ * 
+ */
+export type DigitalDownload = $Result.DefaultSelection<Prisma.$DigitalDownloadPayload>
+/**
  * Model SupplyBatch
  * 
  */
@@ -93,6 +98,11 @@ export type FlashSaleProduct = $Result.DefaultSelection<Prisma.$FlashSaleProduct
  * 
  */
 export type Customer = $Result.DefaultSelection<Prisma.$CustomerPayload>
+/**
+ * Model Webhook
+ * 
+ */
+export type Webhook = $Result.DefaultSelection<Prisma.$WebhookPayload>
 /**
  * Model ShippingZone
  * 
@@ -394,6 +404,16 @@ export class PrismaClient<
   get productVariant(): Prisma.ProductVariantDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.digitalDownload`: Exposes CRUD operations for the **DigitalDownload** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DigitalDownloads
+    * const digitalDownloads = await prisma.digitalDownload.findMany()
+    * ```
+    */
+  get digitalDownload(): Prisma.DigitalDownloadDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.supplyBatch`: Exposes CRUD operations for the **SupplyBatch** model.
     * Example usage:
     * ```ts
@@ -492,6 +512,16 @@ export class PrismaClient<
     * ```
     */
   get customer(): Prisma.CustomerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.webhook`: Exposes CRUD operations for the **Webhook** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Webhooks
+    * const webhooks = await prisma.webhook.findMany()
+    * ```
+    */
+  get webhook(): Prisma.WebhookDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.shippingZone`: Exposes CRUD operations for the **ShippingZone** model.
@@ -958,6 +988,7 @@ export namespace Prisma {
     Category: 'Category',
     Product: 'Product',
     ProductVariant: 'ProductVariant',
+    DigitalDownload: 'DigitalDownload',
     SupplyBatch: 'SupplyBatch',
     Order: 'Order',
     BlockedFingerprint: 'BlockedFingerprint',
@@ -968,6 +999,7 @@ export namespace Prisma {
     FlashSale: 'FlashSale',
     FlashSaleProduct: 'FlashSaleProduct',
     Customer: 'Customer',
+    Webhook: 'Webhook',
     ShippingZone: 'ShippingZone',
     ShippingRate: 'ShippingRate'
   };
@@ -985,7 +1017,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "shippingZone" | "shippingRate"
+      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1430,6 +1462,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ProductVariantCountArgs<ExtArgs>
             result: $Utils.Optional<ProductVariantCountAggregateOutputType> | number
+          }
+        }
+      }
+      DigitalDownload: {
+        payload: Prisma.$DigitalDownloadPayload<ExtArgs>
+        fields: Prisma.DigitalDownloadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DigitalDownloadFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DigitalDownloadFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>
+          }
+          findFirst: {
+            args: Prisma.DigitalDownloadFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DigitalDownloadFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>
+          }
+          findMany: {
+            args: Prisma.DigitalDownloadFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>[]
+          }
+          create: {
+            args: Prisma.DigitalDownloadCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>
+          }
+          createMany: {
+            args: Prisma.DigitalDownloadCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DigitalDownloadCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>[]
+          }
+          delete: {
+            args: Prisma.DigitalDownloadDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>
+          }
+          update: {
+            args: Prisma.DigitalDownloadUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>
+          }
+          deleteMany: {
+            args: Prisma.DigitalDownloadDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DigitalDownloadUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DigitalDownloadUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>[]
+          }
+          upsert: {
+            args: Prisma.DigitalDownloadUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DigitalDownloadPayload>
+          }
+          aggregate: {
+            args: Prisma.DigitalDownloadAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDigitalDownload>
+          }
+          groupBy: {
+            args: Prisma.DigitalDownloadGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DigitalDownloadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DigitalDownloadCountArgs<ExtArgs>
+            result: $Utils.Optional<DigitalDownloadCountAggregateOutputType> | number
           }
         }
       }
@@ -2173,6 +2279,80 @@ export namespace Prisma {
           }
         }
       }
+      Webhook: {
+        payload: Prisma.$WebhookPayload<ExtArgs>
+        fields: Prisma.WebhookFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WebhookFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WebhookFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          findFirst: {
+            args: Prisma.WebhookFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WebhookFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          findMany: {
+            args: Prisma.WebhookFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>[]
+          }
+          create: {
+            args: Prisma.WebhookCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          createMany: {
+            args: Prisma.WebhookCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WebhookCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>[]
+          }
+          delete: {
+            args: Prisma.WebhookDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          update: {
+            args: Prisma.WebhookUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          deleteMany: {
+            args: Prisma.WebhookDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WebhookUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WebhookUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>[]
+          }
+          upsert: {
+            args: Prisma.WebhookUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          aggregate: {
+            args: Prisma.WebhookAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWebhook>
+          }
+          groupBy: {
+            args: Prisma.WebhookGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WebhookGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WebhookCountArgs<ExtArgs>
+            result: $Utils.Optional<WebhookCountAggregateOutputType> | number
+          }
+        }
+      }
       ShippingZone: {
         payload: Prisma.$ShippingZonePayload<ExtArgs>
         fields: Prisma.ShippingZoneFieldRefs
@@ -2411,6 +2591,7 @@ export namespace Prisma {
     category?: CategoryOmit
     product?: ProductOmit
     productVariant?: ProductVariantOmit
+    digitalDownload?: DigitalDownloadOmit
     supplyBatch?: SupplyBatchOmit
     order?: OrderOmit
     blockedFingerprint?: BlockedFingerprintOmit
@@ -2421,6 +2602,7 @@ export namespace Prisma {
     flashSale?: FlashSaleOmit
     flashSaleProduct?: FlashSaleProductOmit
     customer?: CustomerOmit
+    webhook?: WebhookOmit
     shippingZone?: ShippingZoneOmit
     shippingRate?: ShippingRateOmit
   }
@@ -2622,12 +2804,14 @@ export namespace Prisma {
     orderItems: number
     batches: number
     flashSaleProducts: number
+    digitalDownloads: number
   }
 
   export type ProductVariantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | ProductVariantCountOutputTypeCountOrderItemsArgs
     batches?: boolean | ProductVariantCountOutputTypeCountBatchesArgs
     flashSaleProducts?: boolean | ProductVariantCountOutputTypeCountFlashSaleProductsArgs
+    digitalDownloads?: boolean | ProductVariantCountOutputTypeCountDigitalDownloadsArgs
   }
 
   // Custom InputTypes
@@ -2662,6 +2846,13 @@ export namespace Prisma {
     where?: FlashSaleProductWhereInput
   }
 
+  /**
+   * ProductVariantCountOutputType without action
+   */
+  export type ProductVariantCountOutputTypeCountDigitalDownloadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DigitalDownloadWhereInput
+  }
+
 
   /**
    * Count Type OrderCountOutputType
@@ -2669,10 +2860,12 @@ export namespace Prisma {
 
   export type OrderCountOutputType = {
     orderItems: number
+    digitalDownloads: number
   }
 
   export type OrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | OrderCountOutputTypeCountOrderItemsArgs
+    digitalDownloads?: boolean | OrderCountOutputTypeCountDigitalDownloadsArgs
   }
 
   // Custom InputTypes
@@ -2691,6 +2884,13 @@ export namespace Prisma {
    */
   export type OrderCountOutputTypeCountOrderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderItemWhereInput
+  }
+
+  /**
+   * OrderCountOutputType without action
+   */
+  export type OrderCountOutputTypeCountDigitalDownloadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DigitalDownloadWhereInput
   }
 
 
@@ -8316,6 +8516,8 @@ export namespace Prisma {
     size: string | null
     color: string | null
     weight: Decimal | null
+    isDigital: boolean | null
+    fileUrl: string | null
   }
 
   export type ProductVariantMaxAggregateOutputType = {
@@ -8327,6 +8529,8 @@ export namespace Prisma {
     size: string | null
     color: string | null
     weight: Decimal | null
+    isDigital: boolean | null
+    fileUrl: string | null
   }
 
   export type ProductVariantCountAggregateOutputType = {
@@ -8338,6 +8542,8 @@ export namespace Prisma {
     size: number
     color: number
     weight: number
+    isDigital: number
+    fileUrl: number
     _all: number
   }
 
@@ -8363,6 +8569,8 @@ export namespace Prisma {
     size?: true
     color?: true
     weight?: true
+    isDigital?: true
+    fileUrl?: true
   }
 
   export type ProductVariantMaxAggregateInputType = {
@@ -8374,6 +8582,8 @@ export namespace Prisma {
     size?: true
     color?: true
     weight?: true
+    isDigital?: true
+    fileUrl?: true
   }
 
   export type ProductVariantCountAggregateInputType = {
@@ -8385,6 +8595,8 @@ export namespace Prisma {
     size?: true
     color?: true
     weight?: true
+    isDigital?: true
+    fileUrl?: true
     _all?: true
   }
 
@@ -8483,6 +8695,8 @@ export namespace Prisma {
     size: string | null
     color: string | null
     weight: Decimal | null
+    isDigital: boolean
+    fileUrl: string | null
     _count: ProductVariantCountAggregateOutputType | null
     _avg: ProductVariantAvgAggregateOutputType | null
     _sum: ProductVariantSumAggregateOutputType | null
@@ -8513,10 +8727,13 @@ export namespace Prisma {
     size?: boolean
     color?: boolean
     weight?: boolean
+    isDigital?: boolean
+    fileUrl?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
     orderItems?: boolean | ProductVariant$orderItemsArgs<ExtArgs>
     batches?: boolean | ProductVariant$batchesArgs<ExtArgs>
     flashSaleProducts?: boolean | ProductVariant$flashSaleProductsArgs<ExtArgs>
+    digitalDownloads?: boolean | ProductVariant$digitalDownloadsArgs<ExtArgs>
     _count?: boolean | ProductVariantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productVariant"]>
 
@@ -8529,6 +8746,8 @@ export namespace Prisma {
     size?: boolean
     color?: boolean
     weight?: boolean
+    isDigital?: boolean
+    fileUrl?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productVariant"]>
 
@@ -8541,6 +8760,8 @@ export namespace Prisma {
     size?: boolean
     color?: boolean
     weight?: boolean
+    isDigital?: boolean
+    fileUrl?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productVariant"]>
 
@@ -8553,14 +8774,17 @@ export namespace Prisma {
     size?: boolean
     color?: boolean
     weight?: boolean
+    isDigital?: boolean
+    fileUrl?: boolean
   }
 
-  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "sku" | "price" | "stock" | "size" | "color" | "weight", ExtArgs["result"]["productVariant"]>
+  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "sku" | "price" | "stock" | "size" | "color" | "weight" | "isDigital" | "fileUrl", ExtArgs["result"]["productVariant"]>
   export type ProductVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     orderItems?: boolean | ProductVariant$orderItemsArgs<ExtArgs>
     batches?: boolean | ProductVariant$batchesArgs<ExtArgs>
     flashSaleProducts?: boolean | ProductVariant$flashSaleProductsArgs<ExtArgs>
+    digitalDownloads?: boolean | ProductVariant$digitalDownloadsArgs<ExtArgs>
     _count?: boolean | ProductVariantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductVariantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8577,6 +8801,7 @@ export namespace Prisma {
       orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
       batches: Prisma.$SupplyBatchPayload<ExtArgs>[]
       flashSaleProducts: Prisma.$FlashSaleProductPayload<ExtArgs>[]
+      digitalDownloads: Prisma.$DigitalDownloadPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8587,6 +8812,8 @@ export namespace Prisma {
       size: string | null
       color: string | null
       weight: Prisma.Decimal | null
+      isDigital: boolean
+      fileUrl: string | null
     }, ExtArgs["result"]["productVariant"]>
     composites: {}
   }
@@ -8985,6 +9212,7 @@ export namespace Prisma {
     orderItems<T extends ProductVariant$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, ProductVariant$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     batches<T extends ProductVariant$batchesArgs<ExtArgs> = {}>(args?: Subset<T, ProductVariant$batchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplyBatchPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     flashSaleProducts<T extends ProductVariant$flashSaleProductsArgs<ExtArgs> = {}>(args?: Subset<T, ProductVariant$flashSaleProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashSaleProductPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    digitalDownloads<T extends ProductVariant$digitalDownloadsArgs<ExtArgs> = {}>(args?: Subset<T, ProductVariant$digitalDownloadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9022,6 +9250,8 @@ export namespace Prisma {
     readonly size: FieldRef<"ProductVariant", 'String'>
     readonly color: FieldRef<"ProductVariant", 'String'>
     readonly weight: FieldRef<"ProductVariant", 'Decimal'>
+    readonly isDigital: FieldRef<"ProductVariant", 'Boolean'>
+    readonly fileUrl: FieldRef<"ProductVariant", 'String'>
   }
     
 
@@ -9478,6 +9708,30 @@ export namespace Prisma {
   }
 
   /**
+   * ProductVariant.digitalDownloads
+   */
+  export type ProductVariant$digitalDownloadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    where?: DigitalDownloadWhereInput
+    orderBy?: DigitalDownloadOrderByWithRelationInput | DigitalDownloadOrderByWithRelationInput[]
+    cursor?: DigitalDownloadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DigitalDownloadScalarFieldEnum | DigitalDownloadScalarFieldEnum[]
+  }
+
+  /**
    * ProductVariant without action
    */
   export type ProductVariantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9493,6 +9747,1086 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProductVariantInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DigitalDownload
+   */
+
+  export type AggregateDigitalDownload = {
+    _count: DigitalDownloadCountAggregateOutputType | null
+    _min: DigitalDownloadMinAggregateOutputType | null
+    _max: DigitalDownloadMaxAggregateOutputType | null
+  }
+
+  export type DigitalDownloadMinAggregateOutputType = {
+    id: string | null
+    variantId: string | null
+    orderId: string | null
+    token: string | null
+    expiresAt: Date | null
+    downloadedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type DigitalDownloadMaxAggregateOutputType = {
+    id: string | null
+    variantId: string | null
+    orderId: string | null
+    token: string | null
+    expiresAt: Date | null
+    downloadedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type DigitalDownloadCountAggregateOutputType = {
+    id: number
+    variantId: number
+    orderId: number
+    token: number
+    expiresAt: number
+    downloadedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DigitalDownloadMinAggregateInputType = {
+    id?: true
+    variantId?: true
+    orderId?: true
+    token?: true
+    expiresAt?: true
+    downloadedAt?: true
+    createdAt?: true
+  }
+
+  export type DigitalDownloadMaxAggregateInputType = {
+    id?: true
+    variantId?: true
+    orderId?: true
+    token?: true
+    expiresAt?: true
+    downloadedAt?: true
+    createdAt?: true
+  }
+
+  export type DigitalDownloadCountAggregateInputType = {
+    id?: true
+    variantId?: true
+    orderId?: true
+    token?: true
+    expiresAt?: true
+    downloadedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DigitalDownloadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DigitalDownload to aggregate.
+     */
+    where?: DigitalDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DigitalDownloads to fetch.
+     */
+    orderBy?: DigitalDownloadOrderByWithRelationInput | DigitalDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DigitalDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DigitalDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DigitalDownloads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DigitalDownloads
+    **/
+    _count?: true | DigitalDownloadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DigitalDownloadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DigitalDownloadMaxAggregateInputType
+  }
+
+  export type GetDigitalDownloadAggregateType<T extends DigitalDownloadAggregateArgs> = {
+        [P in keyof T & keyof AggregateDigitalDownload]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDigitalDownload[P]>
+      : GetScalarType<T[P], AggregateDigitalDownload[P]>
+  }
+
+
+
+
+  export type DigitalDownloadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DigitalDownloadWhereInput
+    orderBy?: DigitalDownloadOrderByWithAggregationInput | DigitalDownloadOrderByWithAggregationInput[]
+    by: DigitalDownloadScalarFieldEnum[] | DigitalDownloadScalarFieldEnum
+    having?: DigitalDownloadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DigitalDownloadCountAggregateInputType | true
+    _min?: DigitalDownloadMinAggregateInputType
+    _max?: DigitalDownloadMaxAggregateInputType
+  }
+
+  export type DigitalDownloadGroupByOutputType = {
+    id: string
+    variantId: string
+    orderId: string
+    token: string
+    expiresAt: Date
+    downloadedAt: Date | null
+    createdAt: Date
+    _count: DigitalDownloadCountAggregateOutputType | null
+    _min: DigitalDownloadMinAggregateOutputType | null
+    _max: DigitalDownloadMaxAggregateOutputType | null
+  }
+
+  type GetDigitalDownloadGroupByPayload<T extends DigitalDownloadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DigitalDownloadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DigitalDownloadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DigitalDownloadGroupByOutputType[P]>
+            : GetScalarType<T[P], DigitalDownloadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DigitalDownloadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    variantId?: boolean
+    orderId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    downloadedAt?: boolean
+    createdAt?: boolean
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["digitalDownload"]>
+
+  export type DigitalDownloadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    variantId?: boolean
+    orderId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    downloadedAt?: boolean
+    createdAt?: boolean
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["digitalDownload"]>
+
+  export type DigitalDownloadSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    variantId?: boolean
+    orderId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    downloadedAt?: boolean
+    createdAt?: boolean
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["digitalDownload"]>
+
+  export type DigitalDownloadSelectScalar = {
+    id?: boolean
+    variantId?: boolean
+    orderId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    downloadedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type DigitalDownloadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "variantId" | "orderId" | "token" | "expiresAt" | "downloadedAt" | "createdAt", ExtArgs["result"]["digitalDownload"]>
+  export type DigitalDownloadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }
+  export type DigitalDownloadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }
+  export type DigitalDownloadIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }
+
+  export type $DigitalDownloadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DigitalDownload"
+    objects: {
+      variant: Prisma.$ProductVariantPayload<ExtArgs>
+      order: Prisma.$OrderPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      variantId: string
+      orderId: string
+      token: string
+      expiresAt: Date
+      downloadedAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["digitalDownload"]>
+    composites: {}
+  }
+
+  type DigitalDownloadGetPayload<S extends boolean | null | undefined | DigitalDownloadDefaultArgs> = $Result.GetResult<Prisma.$DigitalDownloadPayload, S>
+
+  type DigitalDownloadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DigitalDownloadFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DigitalDownloadCountAggregateInputType | true
+    }
+
+  export interface DigitalDownloadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DigitalDownload'], meta: { name: 'DigitalDownload' } }
+    /**
+     * Find zero or one DigitalDownload that matches the filter.
+     * @param {DigitalDownloadFindUniqueArgs} args - Arguments to find a DigitalDownload
+     * @example
+     * // Get one DigitalDownload
+     * const digitalDownload = await prisma.digitalDownload.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DigitalDownloadFindUniqueArgs>(args: SelectSubset<T, DigitalDownloadFindUniqueArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one DigitalDownload that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DigitalDownloadFindUniqueOrThrowArgs} args - Arguments to find a DigitalDownload
+     * @example
+     * // Get one DigitalDownload
+     * const digitalDownload = await prisma.digitalDownload.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DigitalDownloadFindUniqueOrThrowArgs>(args: SelectSubset<T, DigitalDownloadFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first DigitalDownload that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DigitalDownloadFindFirstArgs} args - Arguments to find a DigitalDownload
+     * @example
+     * // Get one DigitalDownload
+     * const digitalDownload = await prisma.digitalDownload.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DigitalDownloadFindFirstArgs>(args?: SelectSubset<T, DigitalDownloadFindFirstArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first DigitalDownload that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DigitalDownloadFindFirstOrThrowArgs} args - Arguments to find a DigitalDownload
+     * @example
+     * // Get one DigitalDownload
+     * const digitalDownload = await prisma.digitalDownload.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DigitalDownloadFindFirstOrThrowArgs>(args?: SelectSubset<T, DigitalDownloadFindFirstOrThrowArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more DigitalDownloads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DigitalDownloadFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DigitalDownloads
+     * const digitalDownloads = await prisma.digitalDownload.findMany()
+     * 
+     * // Get first 10 DigitalDownloads
+     * const digitalDownloads = await prisma.digitalDownload.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const digitalDownloadWithIdOnly = await prisma.digitalDownload.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DigitalDownloadFindManyArgs>(args?: SelectSubset<T, DigitalDownloadFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a DigitalDownload.
+     * @param {DigitalDownloadCreateArgs} args - Arguments to create a DigitalDownload.
+     * @example
+     * // Create one DigitalDownload
+     * const DigitalDownload = await prisma.digitalDownload.create({
+     *   data: {
+     *     // ... data to create a DigitalDownload
+     *   }
+     * })
+     * 
+     */
+    create<T extends DigitalDownloadCreateArgs>(args: SelectSubset<T, DigitalDownloadCreateArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many DigitalDownloads.
+     * @param {DigitalDownloadCreateManyArgs} args - Arguments to create many DigitalDownloads.
+     * @example
+     * // Create many DigitalDownloads
+     * const digitalDownload = await prisma.digitalDownload.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DigitalDownloadCreateManyArgs>(args?: SelectSubset<T, DigitalDownloadCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DigitalDownloads and returns the data saved in the database.
+     * @param {DigitalDownloadCreateManyAndReturnArgs} args - Arguments to create many DigitalDownloads.
+     * @example
+     * // Create many DigitalDownloads
+     * const digitalDownload = await prisma.digitalDownload.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DigitalDownloads and only return the `id`
+     * const digitalDownloadWithIdOnly = await prisma.digitalDownload.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DigitalDownloadCreateManyAndReturnArgs>(args?: SelectSubset<T, DigitalDownloadCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a DigitalDownload.
+     * @param {DigitalDownloadDeleteArgs} args - Arguments to delete one DigitalDownload.
+     * @example
+     * // Delete one DigitalDownload
+     * const DigitalDownload = await prisma.digitalDownload.delete({
+     *   where: {
+     *     // ... filter to delete one DigitalDownload
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DigitalDownloadDeleteArgs>(args: SelectSubset<T, DigitalDownloadDeleteArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one DigitalDownload.
+     * @param {DigitalDownloadUpdateArgs} args - Arguments to update one DigitalDownload.
+     * @example
+     * // Update one DigitalDownload
+     * const digitalDownload = await prisma.digitalDownload.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DigitalDownloadUpdateArgs>(args: SelectSubset<T, DigitalDownloadUpdateArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more DigitalDownloads.
+     * @param {DigitalDownloadDeleteManyArgs} args - Arguments to filter DigitalDownloads to delete.
+     * @example
+     * // Delete a few DigitalDownloads
+     * const { count } = await prisma.digitalDownload.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DigitalDownloadDeleteManyArgs>(args?: SelectSubset<T, DigitalDownloadDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DigitalDownloads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DigitalDownloadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DigitalDownloads
+     * const digitalDownload = await prisma.digitalDownload.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DigitalDownloadUpdateManyArgs>(args: SelectSubset<T, DigitalDownloadUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DigitalDownloads and returns the data updated in the database.
+     * @param {DigitalDownloadUpdateManyAndReturnArgs} args - Arguments to update many DigitalDownloads.
+     * @example
+     * // Update many DigitalDownloads
+     * const digitalDownload = await prisma.digitalDownload.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DigitalDownloads and only return the `id`
+     * const digitalDownloadWithIdOnly = await prisma.digitalDownload.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DigitalDownloadUpdateManyAndReturnArgs>(args: SelectSubset<T, DigitalDownloadUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one DigitalDownload.
+     * @param {DigitalDownloadUpsertArgs} args - Arguments to update or create a DigitalDownload.
+     * @example
+     * // Update or create a DigitalDownload
+     * const digitalDownload = await prisma.digitalDownload.upsert({
+     *   create: {
+     *     // ... data to create a DigitalDownload
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DigitalDownload we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DigitalDownloadUpsertArgs>(args: SelectSubset<T, DigitalDownloadUpsertArgs<ExtArgs>>): Prisma__DigitalDownloadClient<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of DigitalDownloads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DigitalDownloadCountArgs} args - Arguments to filter DigitalDownloads to count.
+     * @example
+     * // Count the number of DigitalDownloads
+     * const count = await prisma.digitalDownload.count({
+     *   where: {
+     *     // ... the filter for the DigitalDownloads we want to count
+     *   }
+     * })
+    **/
+    count<T extends DigitalDownloadCountArgs>(
+      args?: Subset<T, DigitalDownloadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DigitalDownloadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DigitalDownload.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DigitalDownloadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DigitalDownloadAggregateArgs>(args: Subset<T, DigitalDownloadAggregateArgs>): Prisma.PrismaPromise<GetDigitalDownloadAggregateType<T>>
+
+    /**
+     * Group by DigitalDownload.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DigitalDownloadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DigitalDownloadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DigitalDownloadGroupByArgs['orderBy'] }
+        : { orderBy?: DigitalDownloadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DigitalDownloadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDigitalDownloadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DigitalDownload model
+   */
+  readonly fields: DigitalDownloadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DigitalDownload.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DigitalDownloadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    variant<T extends ProductVariantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductVariantDefaultArgs<ExtArgs>>): Prisma__ProductVariantClient<$Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    order<T extends OrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrderDefaultArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DigitalDownload model
+   */ 
+  interface DigitalDownloadFieldRefs {
+    readonly id: FieldRef<"DigitalDownload", 'String'>
+    readonly variantId: FieldRef<"DigitalDownload", 'String'>
+    readonly orderId: FieldRef<"DigitalDownload", 'String'>
+    readonly token: FieldRef<"DigitalDownload", 'String'>
+    readonly expiresAt: FieldRef<"DigitalDownload", 'DateTime'>
+    readonly downloadedAt: FieldRef<"DigitalDownload", 'DateTime'>
+    readonly createdAt: FieldRef<"DigitalDownload", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DigitalDownload findUnique
+   */
+  export type DigitalDownloadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which DigitalDownload to fetch.
+     */
+    where: DigitalDownloadWhereUniqueInput
+  }
+
+  /**
+   * DigitalDownload findUniqueOrThrow
+   */
+  export type DigitalDownloadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which DigitalDownload to fetch.
+     */
+    where: DigitalDownloadWhereUniqueInput
+  }
+
+  /**
+   * DigitalDownload findFirst
+   */
+  export type DigitalDownloadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which DigitalDownload to fetch.
+     */
+    where?: DigitalDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DigitalDownloads to fetch.
+     */
+    orderBy?: DigitalDownloadOrderByWithRelationInput | DigitalDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DigitalDownloads.
+     */
+    cursor?: DigitalDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DigitalDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DigitalDownloads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DigitalDownloads.
+     */
+    distinct?: DigitalDownloadScalarFieldEnum | DigitalDownloadScalarFieldEnum[]
+  }
+
+  /**
+   * DigitalDownload findFirstOrThrow
+   */
+  export type DigitalDownloadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which DigitalDownload to fetch.
+     */
+    where?: DigitalDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DigitalDownloads to fetch.
+     */
+    orderBy?: DigitalDownloadOrderByWithRelationInput | DigitalDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DigitalDownloads.
+     */
+    cursor?: DigitalDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DigitalDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DigitalDownloads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DigitalDownloads.
+     */
+    distinct?: DigitalDownloadScalarFieldEnum | DigitalDownloadScalarFieldEnum[]
+  }
+
+  /**
+   * DigitalDownload findMany
+   */
+  export type DigitalDownloadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * Filter, which DigitalDownloads to fetch.
+     */
+    where?: DigitalDownloadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DigitalDownloads to fetch.
+     */
+    orderBy?: DigitalDownloadOrderByWithRelationInput | DigitalDownloadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DigitalDownloads.
+     */
+    cursor?: DigitalDownloadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DigitalDownloads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DigitalDownloads.
+     */
+    skip?: number
+    distinct?: DigitalDownloadScalarFieldEnum | DigitalDownloadScalarFieldEnum[]
+  }
+
+  /**
+   * DigitalDownload create
+   */
+  export type DigitalDownloadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DigitalDownload.
+     */
+    data: XOR<DigitalDownloadCreateInput, DigitalDownloadUncheckedCreateInput>
+  }
+
+  /**
+   * DigitalDownload createMany
+   */
+  export type DigitalDownloadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DigitalDownloads.
+     */
+    data: DigitalDownloadCreateManyInput | DigitalDownloadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DigitalDownload createManyAndReturn
+   */
+  export type DigitalDownloadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * The data used to create many DigitalDownloads.
+     */
+    data: DigitalDownloadCreateManyInput | DigitalDownloadCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DigitalDownload update
+   */
+  export type DigitalDownloadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DigitalDownload.
+     */
+    data: XOR<DigitalDownloadUpdateInput, DigitalDownloadUncheckedUpdateInput>
+    /**
+     * Choose, which DigitalDownload to update.
+     */
+    where: DigitalDownloadWhereUniqueInput
+  }
+
+  /**
+   * DigitalDownload updateMany
+   */
+  export type DigitalDownloadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DigitalDownloads.
+     */
+    data: XOR<DigitalDownloadUpdateManyMutationInput, DigitalDownloadUncheckedUpdateManyInput>
+    /**
+     * Filter which DigitalDownloads to update
+     */
+    where?: DigitalDownloadWhereInput
+  }
+
+  /**
+   * DigitalDownload updateManyAndReturn
+   */
+  export type DigitalDownloadUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * The data used to update DigitalDownloads.
+     */
+    data: XOR<DigitalDownloadUpdateManyMutationInput, DigitalDownloadUncheckedUpdateManyInput>
+    /**
+     * Filter which DigitalDownloads to update
+     */
+    where?: DigitalDownloadWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DigitalDownload upsert
+   */
+  export type DigitalDownloadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DigitalDownload to update in case it exists.
+     */
+    where: DigitalDownloadWhereUniqueInput
+    /**
+     * In case the DigitalDownload found by the `where` argument doesn't exist, create a new DigitalDownload with this data.
+     */
+    create: XOR<DigitalDownloadCreateInput, DigitalDownloadUncheckedCreateInput>
+    /**
+     * In case the DigitalDownload was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DigitalDownloadUpdateInput, DigitalDownloadUncheckedUpdateInput>
+  }
+
+  /**
+   * DigitalDownload delete
+   */
+  export type DigitalDownloadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    /**
+     * Filter which DigitalDownload to delete.
+     */
+    where: DigitalDownloadWhereUniqueInput
+  }
+
+  /**
+   * DigitalDownload deleteMany
+   */
+  export type DigitalDownloadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DigitalDownloads to delete
+     */
+    where?: DigitalDownloadWhereInput
+  }
+
+  /**
+   * DigitalDownload without action
+   */
+  export type DigitalDownloadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
   }
 
 
@@ -10897,6 +12231,7 @@ export namespace Prisma {
     createdAt?: boolean
     customer?: boolean | Order$customerArgs<ExtArgs>
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
+    digitalDownloads?: boolean | Order$digitalDownloadsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
@@ -10963,6 +12298,7 @@ export namespace Prisma {
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     customer?: boolean | Order$customerArgs<ExtArgs>
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
+    digitalDownloads?: boolean | Order$digitalDownloadsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10977,6 +12313,7 @@ export namespace Prisma {
     objects: {
       customer: Prisma.$CustomerPayload<ExtArgs> | null
       orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
+      digitalDownloads: Prisma.$DigitalDownloadPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -11391,6 +12728,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     customer<T extends Order$customerArgs<ExtArgs> = {}>(args?: Subset<T, Order$customerArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     orderItems<T extends Order$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Order$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    digitalDownloads<T extends Order$digitalDownloadsArgs<ExtArgs> = {}>(args?: Subset<T, Order$digitalDownloadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DigitalDownloadPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11860,6 +13198,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderItemScalarFieldEnum | OrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * Order.digitalDownloads
+   */
+  export type Order$digitalDownloadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DigitalDownload
+     */
+    select?: DigitalDownloadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DigitalDownload
+     */
+    omit?: DigitalDownloadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DigitalDownloadInclude<ExtArgs> | null
+    where?: DigitalDownloadWhereInput
+    orderBy?: DigitalDownloadOrderByWithRelationInput | DigitalDownloadOrderByWithRelationInput[]
+    cursor?: DigitalDownloadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DigitalDownloadScalarFieldEnum | DigitalDownloadScalarFieldEnum[]
   }
 
   /**
@@ -20230,6 +21592,1011 @@ export namespace Prisma {
 
 
   /**
+   * Model Webhook
+   */
+
+  export type AggregateWebhook = {
+    _count: WebhookCountAggregateOutputType | null
+    _min: WebhookMinAggregateOutputType | null
+    _max: WebhookMaxAggregateOutputType | null
+  }
+
+  export type WebhookMinAggregateOutputType = {
+    id: string | null
+    url: string | null
+    secret: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WebhookMaxAggregateOutputType = {
+    id: string | null
+    url: string | null
+    secret: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WebhookCountAggregateOutputType = {
+    id: number
+    url: number
+    events: number
+    secret: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WebhookMinAggregateInputType = {
+    id?: true
+    url?: true
+    secret?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WebhookMaxAggregateInputType = {
+    id?: true
+    url?: true
+    secret?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WebhookCountAggregateInputType = {
+    id?: true
+    url?: true
+    events?: true
+    secret?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WebhookAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Webhook to aggregate.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Webhooks
+    **/
+    _count?: true | WebhookCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WebhookMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WebhookMaxAggregateInputType
+  }
+
+  export type GetWebhookAggregateType<T extends WebhookAggregateArgs> = {
+        [P in keyof T & keyof AggregateWebhook]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWebhook[P]>
+      : GetScalarType<T[P], AggregateWebhook[P]>
+  }
+
+
+
+
+  export type WebhookGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WebhookWhereInput
+    orderBy?: WebhookOrderByWithAggregationInput | WebhookOrderByWithAggregationInput[]
+    by: WebhookScalarFieldEnum[] | WebhookScalarFieldEnum
+    having?: WebhookScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WebhookCountAggregateInputType | true
+    _min?: WebhookMinAggregateInputType
+    _max?: WebhookMaxAggregateInputType
+  }
+
+  export type WebhookGroupByOutputType = {
+    id: string
+    url: string
+    events: string[]
+    secret: string | null
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: WebhookCountAggregateOutputType | null
+    _min: WebhookMinAggregateOutputType | null
+    _max: WebhookMaxAggregateOutputType | null
+  }
+
+  type GetWebhookGroupByPayload<T extends WebhookGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WebhookGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WebhookGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WebhookGroupByOutputType[P]>
+            : GetScalarType<T[P], WebhookGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WebhookSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    events?: boolean
+    secret?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["webhook"]>
+
+  export type WebhookSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    events?: boolean
+    secret?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["webhook"]>
+
+  export type WebhookSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    events?: boolean
+    secret?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["webhook"]>
+
+  export type WebhookSelectScalar = {
+    id?: boolean
+    url?: boolean
+    events?: boolean
+    secret?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WebhookOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "events" | "secret" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["webhook"]>
+
+  export type $WebhookPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Webhook"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      url: string
+      events: string[]
+      secret: string | null
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["webhook"]>
+    composites: {}
+  }
+
+  type WebhookGetPayload<S extends boolean | null | undefined | WebhookDefaultArgs> = $Result.GetResult<Prisma.$WebhookPayload, S>
+
+  type WebhookCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WebhookFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WebhookCountAggregateInputType | true
+    }
+
+  export interface WebhookDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Webhook'], meta: { name: 'Webhook' } }
+    /**
+     * Find zero or one Webhook that matches the filter.
+     * @param {WebhookFindUniqueArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WebhookFindUniqueArgs>(args: SelectSubset<T, WebhookFindUniqueArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Webhook that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WebhookFindUniqueOrThrowArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WebhookFindUniqueOrThrowArgs>(args: SelectSubset<T, WebhookFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Webhook that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookFindFirstArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WebhookFindFirstArgs>(args?: SelectSubset<T, WebhookFindFirstArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Webhook that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookFindFirstOrThrowArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WebhookFindFirstOrThrowArgs>(args?: SelectSubset<T, WebhookFindFirstOrThrowArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Webhooks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Webhooks
+     * const webhooks = await prisma.webhook.findMany()
+     * 
+     * // Get first 10 Webhooks
+     * const webhooks = await prisma.webhook.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const webhookWithIdOnly = await prisma.webhook.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WebhookFindManyArgs>(args?: SelectSubset<T, WebhookFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Webhook.
+     * @param {WebhookCreateArgs} args - Arguments to create a Webhook.
+     * @example
+     * // Create one Webhook
+     * const Webhook = await prisma.webhook.create({
+     *   data: {
+     *     // ... data to create a Webhook
+     *   }
+     * })
+     * 
+     */
+    create<T extends WebhookCreateArgs>(args: SelectSubset<T, WebhookCreateArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Webhooks.
+     * @param {WebhookCreateManyArgs} args - Arguments to create many Webhooks.
+     * @example
+     * // Create many Webhooks
+     * const webhook = await prisma.webhook.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WebhookCreateManyArgs>(args?: SelectSubset<T, WebhookCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Webhooks and returns the data saved in the database.
+     * @param {WebhookCreateManyAndReturnArgs} args - Arguments to create many Webhooks.
+     * @example
+     * // Create many Webhooks
+     * const webhook = await prisma.webhook.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Webhooks and only return the `id`
+     * const webhookWithIdOnly = await prisma.webhook.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WebhookCreateManyAndReturnArgs>(args?: SelectSubset<T, WebhookCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Webhook.
+     * @param {WebhookDeleteArgs} args - Arguments to delete one Webhook.
+     * @example
+     * // Delete one Webhook
+     * const Webhook = await prisma.webhook.delete({
+     *   where: {
+     *     // ... filter to delete one Webhook
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WebhookDeleteArgs>(args: SelectSubset<T, WebhookDeleteArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Webhook.
+     * @param {WebhookUpdateArgs} args - Arguments to update one Webhook.
+     * @example
+     * // Update one Webhook
+     * const webhook = await prisma.webhook.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WebhookUpdateArgs>(args: SelectSubset<T, WebhookUpdateArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Webhooks.
+     * @param {WebhookDeleteManyArgs} args - Arguments to filter Webhooks to delete.
+     * @example
+     * // Delete a few Webhooks
+     * const { count } = await prisma.webhook.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WebhookDeleteManyArgs>(args?: SelectSubset<T, WebhookDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Webhooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Webhooks
+     * const webhook = await prisma.webhook.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WebhookUpdateManyArgs>(args: SelectSubset<T, WebhookUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Webhooks and returns the data updated in the database.
+     * @param {WebhookUpdateManyAndReturnArgs} args - Arguments to update many Webhooks.
+     * @example
+     * // Update many Webhooks
+     * const webhook = await prisma.webhook.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Webhooks and only return the `id`
+     * const webhookWithIdOnly = await prisma.webhook.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WebhookUpdateManyAndReturnArgs>(args: SelectSubset<T, WebhookUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Webhook.
+     * @param {WebhookUpsertArgs} args - Arguments to update or create a Webhook.
+     * @example
+     * // Update or create a Webhook
+     * const webhook = await prisma.webhook.upsert({
+     *   create: {
+     *     // ... data to create a Webhook
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Webhook we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WebhookUpsertArgs>(args: SelectSubset<T, WebhookUpsertArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Webhooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookCountArgs} args - Arguments to filter Webhooks to count.
+     * @example
+     * // Count the number of Webhooks
+     * const count = await prisma.webhook.count({
+     *   where: {
+     *     // ... the filter for the Webhooks we want to count
+     *   }
+     * })
+    **/
+    count<T extends WebhookCountArgs>(
+      args?: Subset<T, WebhookCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WebhookCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Webhook.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WebhookAggregateArgs>(args: Subset<T, WebhookAggregateArgs>): Prisma.PrismaPromise<GetWebhookAggregateType<T>>
+
+    /**
+     * Group by Webhook.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WebhookGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WebhookGroupByArgs['orderBy'] }
+        : { orderBy?: WebhookGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WebhookGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWebhookGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Webhook model
+   */
+  readonly fields: WebhookFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Webhook.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WebhookClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Webhook model
+   */ 
+  interface WebhookFieldRefs {
+    readonly id: FieldRef<"Webhook", 'String'>
+    readonly url: FieldRef<"Webhook", 'String'>
+    readonly events: FieldRef<"Webhook", 'String[]'>
+    readonly secret: FieldRef<"Webhook", 'String'>
+    readonly isActive: FieldRef<"Webhook", 'Boolean'>
+    readonly createdAt: FieldRef<"Webhook", 'DateTime'>
+    readonly updatedAt: FieldRef<"Webhook", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Webhook findUnique
+   */
+  export type WebhookFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook findUniqueOrThrow
+   */
+  export type WebhookFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook findFirst
+   */
+  export type WebhookFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Webhooks.
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Webhooks.
+     */
+    distinct?: WebhookScalarFieldEnum | WebhookScalarFieldEnum[]
+  }
+
+  /**
+   * Webhook findFirstOrThrow
+   */
+  export type WebhookFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Webhooks.
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Webhooks.
+     */
+    distinct?: WebhookScalarFieldEnum | WebhookScalarFieldEnum[]
+  }
+
+  /**
+   * Webhook findMany
+   */
+  export type WebhookFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Filter, which Webhooks to fetch.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Webhooks.
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    distinct?: WebhookScalarFieldEnum | WebhookScalarFieldEnum[]
+  }
+
+  /**
+   * Webhook create
+   */
+  export type WebhookCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Webhook.
+     */
+    data: XOR<WebhookCreateInput, WebhookUncheckedCreateInput>
+  }
+
+  /**
+   * Webhook createMany
+   */
+  export type WebhookCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Webhooks.
+     */
+    data: WebhookCreateManyInput | WebhookCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Webhook createManyAndReturn
+   */
+  export type WebhookCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * The data used to create many Webhooks.
+     */
+    data: WebhookCreateManyInput | WebhookCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Webhook update
+   */
+  export type WebhookUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Webhook.
+     */
+    data: XOR<WebhookUpdateInput, WebhookUncheckedUpdateInput>
+    /**
+     * Choose, which Webhook to update.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook updateMany
+   */
+  export type WebhookUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Webhooks.
+     */
+    data: XOR<WebhookUpdateManyMutationInput, WebhookUncheckedUpdateManyInput>
+    /**
+     * Filter which Webhooks to update
+     */
+    where?: WebhookWhereInput
+  }
+
+  /**
+   * Webhook updateManyAndReturn
+   */
+  export type WebhookUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * The data used to update Webhooks.
+     */
+    data: XOR<WebhookUpdateManyMutationInput, WebhookUncheckedUpdateManyInput>
+    /**
+     * Filter which Webhooks to update
+     */
+    where?: WebhookWhereInput
+  }
+
+  /**
+   * Webhook upsert
+   */
+  export type WebhookUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Webhook to update in case it exists.
+     */
+    where: WebhookWhereUniqueInput
+    /**
+     * In case the Webhook found by the `where` argument doesn't exist, create a new Webhook with this data.
+     */
+    create: XOR<WebhookCreateInput, WebhookUncheckedCreateInput>
+    /**
+     * In case the Webhook was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WebhookUpdateInput, WebhookUncheckedUpdateInput>
+  }
+
+  /**
+   * Webhook delete
+   */
+  export type WebhookDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Filter which Webhook to delete.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook deleteMany
+   */
+  export type WebhookDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Webhooks to delete
+     */
+    where?: WebhookWhereInput
+  }
+
+  /**
+   * Webhook without action
+   */
+  export type WebhookDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model ShippingZone
    */
 
@@ -22523,10 +24890,25 @@ export namespace Prisma {
     stock: 'stock',
     size: 'size',
     color: 'color',
-    weight: 'weight'
+    weight: 'weight',
+    isDigital: 'isDigital',
+    fileUrl: 'fileUrl'
   };
 
   export type ProductVariantScalarFieldEnum = (typeof ProductVariantScalarFieldEnum)[keyof typeof ProductVariantScalarFieldEnum]
+
+
+  export const DigitalDownloadScalarFieldEnum: {
+    id: 'id',
+    variantId: 'variantId',
+    orderId: 'orderId',
+    token: 'token',
+    expiresAt: 'expiresAt',
+    downloadedAt: 'downloadedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type DigitalDownloadScalarFieldEnum = (typeof DigitalDownloadScalarFieldEnum)[keyof typeof DigitalDownloadScalarFieldEnum]
 
 
   export const SupplyBatchScalarFieldEnum: {
@@ -22655,6 +25037,19 @@ export namespace Prisma {
   };
 
   export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+  export const WebhookScalarFieldEnum: {
+    id: 'id',
+    url: 'url',
+    events: 'events',
+    secret: 'secret',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WebhookScalarFieldEnum = (typeof WebhookScalarFieldEnum)[keyof typeof WebhookScalarFieldEnum]
 
 
   export const ShippingZoneScalarFieldEnum: {
@@ -23278,10 +25673,13 @@ export namespace Prisma {
     size?: StringNullableFilter<"ProductVariant"> | string | null
     color?: StringNullableFilter<"ProductVariant"> | string | null
     weight?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFilter<"ProductVariant"> | boolean
+    fileUrl?: StringNullableFilter<"ProductVariant"> | string | null
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     orderItems?: OrderItemListRelationFilter
     batches?: SupplyBatchListRelationFilter
     flashSaleProducts?: FlashSaleProductListRelationFilter
+    digitalDownloads?: DigitalDownloadListRelationFilter
   }
 
   export type ProductVariantOrderByWithRelationInput = {
@@ -23293,10 +25691,13 @@ export namespace Prisma {
     size?: SortOrderInput | SortOrder
     color?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
+    isDigital?: SortOrder
+    fileUrl?: SortOrderInput | SortOrder
     product?: ProductOrderByWithRelationInput
     orderItems?: OrderItemOrderByRelationAggregateInput
     batches?: SupplyBatchOrderByRelationAggregateInput
     flashSaleProducts?: FlashSaleProductOrderByRelationAggregateInput
+    digitalDownloads?: DigitalDownloadOrderByRelationAggregateInput
   }
 
   export type ProductVariantWhereUniqueInput = Prisma.AtLeast<{
@@ -23311,10 +25712,13 @@ export namespace Prisma {
     size?: StringNullableFilter<"ProductVariant"> | string | null
     color?: StringNullableFilter<"ProductVariant"> | string | null
     weight?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFilter<"ProductVariant"> | boolean
+    fileUrl?: StringNullableFilter<"ProductVariant"> | string | null
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     orderItems?: OrderItemListRelationFilter
     batches?: SupplyBatchListRelationFilter
     flashSaleProducts?: FlashSaleProductListRelationFilter
+    digitalDownloads?: DigitalDownloadListRelationFilter
   }, "id" | "sku">
 
   export type ProductVariantOrderByWithAggregationInput = {
@@ -23326,6 +25730,8 @@ export namespace Prisma {
     size?: SortOrderInput | SortOrder
     color?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
+    isDigital?: SortOrder
+    fileUrl?: SortOrderInput | SortOrder
     _count?: ProductVariantCountOrderByAggregateInput
     _avg?: ProductVariantAvgOrderByAggregateInput
     _max?: ProductVariantMaxOrderByAggregateInput
@@ -23345,6 +25751,76 @@ export namespace Prisma {
     size?: StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
     color?: StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
     weight?: DecimalNullableWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolWithAggregatesFilter<"ProductVariant"> | boolean
+    fileUrl?: StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
+  }
+
+  export type DigitalDownloadWhereInput = {
+    AND?: DigitalDownloadWhereInput | DigitalDownloadWhereInput[]
+    OR?: DigitalDownloadWhereInput[]
+    NOT?: DigitalDownloadWhereInput | DigitalDownloadWhereInput[]
+    id?: StringFilter<"DigitalDownload"> | string
+    variantId?: StringFilter<"DigitalDownload"> | string
+    orderId?: StringFilter<"DigitalDownload"> | string
+    token?: StringFilter<"DigitalDownload"> | string
+    expiresAt?: DateTimeFilter<"DigitalDownload"> | Date | string
+    downloadedAt?: DateTimeNullableFilter<"DigitalDownload"> | Date | string | null
+    createdAt?: DateTimeFilter<"DigitalDownload"> | Date | string
+    variant?: XOR<ProductVariantScalarRelationFilter, ProductVariantWhereInput>
+    order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
+  }
+
+  export type DigitalDownloadOrderByWithRelationInput = {
+    id?: SortOrder
+    variantId?: SortOrder
+    orderId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    downloadedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    variant?: ProductVariantOrderByWithRelationInput
+    order?: OrderOrderByWithRelationInput
+  }
+
+  export type DigitalDownloadWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: DigitalDownloadWhereInput | DigitalDownloadWhereInput[]
+    OR?: DigitalDownloadWhereInput[]
+    NOT?: DigitalDownloadWhereInput | DigitalDownloadWhereInput[]
+    variantId?: StringFilter<"DigitalDownload"> | string
+    orderId?: StringFilter<"DigitalDownload"> | string
+    expiresAt?: DateTimeFilter<"DigitalDownload"> | Date | string
+    downloadedAt?: DateTimeNullableFilter<"DigitalDownload"> | Date | string | null
+    createdAt?: DateTimeFilter<"DigitalDownload"> | Date | string
+    variant?: XOR<ProductVariantScalarRelationFilter, ProductVariantWhereInput>
+    order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
+  }, "id" | "token">
+
+  export type DigitalDownloadOrderByWithAggregationInput = {
+    id?: SortOrder
+    variantId?: SortOrder
+    orderId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    downloadedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: DigitalDownloadCountOrderByAggregateInput
+    _max?: DigitalDownloadMaxOrderByAggregateInput
+    _min?: DigitalDownloadMinOrderByAggregateInput
+  }
+
+  export type DigitalDownloadScalarWhereWithAggregatesInput = {
+    AND?: DigitalDownloadScalarWhereWithAggregatesInput | DigitalDownloadScalarWhereWithAggregatesInput[]
+    OR?: DigitalDownloadScalarWhereWithAggregatesInput[]
+    NOT?: DigitalDownloadScalarWhereWithAggregatesInput | DigitalDownloadScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DigitalDownload"> | string
+    variantId?: StringWithAggregatesFilter<"DigitalDownload"> | string
+    orderId?: StringWithAggregatesFilter<"DigitalDownload"> | string
+    token?: StringWithAggregatesFilter<"DigitalDownload"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"DigitalDownload"> | Date | string
+    downloadedAt?: DateTimeNullableWithAggregatesFilter<"DigitalDownload"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"DigitalDownload"> | Date | string
   }
 
   export type SupplyBatchWhereInput = {
@@ -23434,6 +25910,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     customer?: XOR<CustomerNullableScalarRelationFilter, CustomerWhereInput> | null
     orderItems?: OrderItemListRelationFilter
+    digitalDownloads?: DigitalDownloadListRelationFilter
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -23455,6 +25932,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     customer?: CustomerOrderByWithRelationInput
     orderItems?: OrderItemOrderByRelationAggregateInput
+    digitalDownloads?: DigitalDownloadOrderByRelationAggregateInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -23479,6 +25957,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string
     customer?: XOR<CustomerNullableScalarRelationFilter, CustomerWhereInput> | null
     orderItems?: OrderItemListRelationFilter
+    digitalDownloads?: DigitalDownloadListRelationFilter
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
@@ -23996,6 +26475,68 @@ export namespace Prisma {
     address?: StringNullableWithAggregatesFilter<"Customer"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
+  }
+
+  export type WebhookWhereInput = {
+    AND?: WebhookWhereInput | WebhookWhereInput[]
+    OR?: WebhookWhereInput[]
+    NOT?: WebhookWhereInput | WebhookWhereInput[]
+    id?: StringFilter<"Webhook"> | string
+    url?: StringFilter<"Webhook"> | string
+    events?: StringNullableListFilter<"Webhook">
+    secret?: StringNullableFilter<"Webhook"> | string | null
+    isActive?: BoolFilter<"Webhook"> | boolean
+    createdAt?: DateTimeFilter<"Webhook"> | Date | string
+    updatedAt?: DateTimeFilter<"Webhook"> | Date | string
+  }
+
+  export type WebhookOrderByWithRelationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    events?: SortOrder
+    secret?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WebhookWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: WebhookWhereInput | WebhookWhereInput[]
+    OR?: WebhookWhereInput[]
+    NOT?: WebhookWhereInput | WebhookWhereInput[]
+    url?: StringFilter<"Webhook"> | string
+    events?: StringNullableListFilter<"Webhook">
+    secret?: StringNullableFilter<"Webhook"> | string | null
+    isActive?: BoolFilter<"Webhook"> | boolean
+    createdAt?: DateTimeFilter<"Webhook"> | Date | string
+    updatedAt?: DateTimeFilter<"Webhook"> | Date | string
+  }, "id">
+
+  export type WebhookOrderByWithAggregationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    events?: SortOrder
+    secret?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WebhookCountOrderByAggregateInput
+    _max?: WebhookMaxOrderByAggregateInput
+    _min?: WebhookMinOrderByAggregateInput
+  }
+
+  export type WebhookScalarWhereWithAggregatesInput = {
+    AND?: WebhookScalarWhereWithAggregatesInput | WebhookScalarWhereWithAggregatesInput[]
+    OR?: WebhookScalarWhereWithAggregatesInput[]
+    NOT?: WebhookScalarWhereWithAggregatesInput | WebhookScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Webhook"> | string
+    url?: StringWithAggregatesFilter<"Webhook"> | string
+    events?: StringNullableListFilter<"Webhook">
+    secret?: StringNullableWithAggregatesFilter<"Webhook"> | string | null
+    isActive?: BoolWithAggregatesFilter<"Webhook"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Webhook"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Webhook"> | Date | string
   }
 
   export type ShippingZoneWhereInput = {
@@ -24535,10 +27076,13 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     product: ProductCreateNestedOneWithoutVariantsInput
     orderItems?: OrderItemCreateNestedManyWithoutVariantInput
     batches?: SupplyBatchCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantUncheckedCreateInput = {
@@ -24550,9 +27094,12 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVariantInput
     batches?: SupplyBatchUncheckedCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantUpdateInput = {
@@ -24563,10 +27110,13 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
     orderItems?: OrderItemUpdateManyWithoutVariantNestedInput
     batches?: SupplyBatchUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutVariantNestedInput
   }
 
   export type ProductVariantUncheckedUpdateInput = {
@@ -24578,9 +27128,12 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: OrderItemUncheckedUpdateManyWithoutVariantNestedInput
     batches?: SupplyBatchUncheckedUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutVariantNestedInput
   }
 
   export type ProductVariantCreateManyInput = {
@@ -24592,6 +27145,8 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
   }
 
   export type ProductVariantUpdateManyMutationInput = {
@@ -24602,6 +27157,8 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProductVariantUncheckedUpdateManyInput = {
@@ -24613,6 +27170,76 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DigitalDownloadCreateInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
+    variant: ProductVariantCreateNestedOneWithoutDigitalDownloadsInput
+    order: OrderCreateNestedOneWithoutDigitalDownloadsInput
+  }
+
+  export type DigitalDownloadUncheckedCreateInput = {
+    id?: string
+    variantId: string
+    orderId: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DigitalDownloadUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variant?: ProductVariantUpdateOneRequiredWithoutDigitalDownloadsNestedInput
+    order?: OrderUpdateOneRequiredWithoutDigitalDownloadsNestedInput
+  }
+
+  export type DigitalDownloadUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    variantId?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DigitalDownloadCreateManyInput = {
+    id?: string
+    variantId: string
+    orderId: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DigitalDownloadUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DigitalDownloadUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    variantId?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupplyBatchCreateInput = {
@@ -24694,6 +27321,7 @@ export namespace Prisma {
     createdAt?: Date | string
     customer?: CustomerCreateNestedOneWithoutOrdersInput
     orderItems?: OrderItemCreateNestedManyWithoutOrderInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -24714,6 +27342,7 @@ export namespace Prisma {
     fingerprint?: string | null
     createdAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUpdateInput = {
@@ -24734,6 +27363,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customer?: CustomerUpdateOneWithoutOrdersNestedInput
     orderItems?: OrderItemUpdateManyWithoutOrderNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -24754,6 +27384,7 @@ export namespace Prisma {
     fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderCreateManyInput = {
@@ -25302,6 +27933,76 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookCreateInput = {
+    id?: string
+    url: string
+    events?: WebhookCreateeventsInput | string[]
+    secret?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WebhookUncheckedCreateInput = {
+    id?: string
+    url: string
+    events?: WebhookCreateeventsInput | string[]
+    secret?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WebhookUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookCreateManyInput = {
+    id?: string
+    url: string
+    events?: WebhookCreateeventsInput | string[]
+    secret?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WebhookUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    secret?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25951,11 +28652,21 @@ export namespace Prisma {
     none?: FlashSaleProductWhereInput
   }
 
+  export type DigitalDownloadListRelationFilter = {
+    every?: DigitalDownloadWhereInput
+    some?: DigitalDownloadWhereInput
+    none?: DigitalDownloadWhereInput
+  }
+
   export type OrderItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type FlashSaleProductOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DigitalDownloadOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25968,6 +28679,8 @@ export namespace Prisma {
     size?: SortOrder
     color?: SortOrder
     weight?: SortOrder
+    isDigital?: SortOrder
+    fileUrl?: SortOrder
   }
 
   export type ProductVariantAvgOrderByAggregateInput = {
@@ -25985,6 +28698,8 @@ export namespace Prisma {
     size?: SortOrder
     color?: SortOrder
     weight?: SortOrder
+    isDigital?: SortOrder
+    fileUrl?: SortOrder
   }
 
   export type ProductVariantMinOrderByAggregateInput = {
@@ -25996,6 +28711,8 @@ export namespace Prisma {
     size?: SortOrder
     color?: SortOrder
     weight?: SortOrder
+    isDigital?: SortOrder
+    fileUrl?: SortOrder
   }
 
   export type ProductVariantSumOrderByAggregateInput = {
@@ -26020,14 +28737,74 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type SupplierScalarRelationFilter = {
-    is?: SupplierWhereInput
-    isNot?: SupplierWhereInput
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type ProductVariantScalarRelationFilter = {
     is?: ProductVariantWhereInput
     isNot?: ProductVariantWhereInput
+  }
+
+  export type OrderScalarRelationFilter = {
+    is?: OrderWhereInput
+    isNot?: OrderWhereInput
+  }
+
+  export type DigitalDownloadCountOrderByAggregateInput = {
+    id?: SortOrder
+    variantId?: SortOrder
+    orderId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    downloadedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DigitalDownloadMaxOrderByAggregateInput = {
+    id?: SortOrder
+    variantId?: SortOrder
+    orderId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    downloadedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DigitalDownloadMinOrderByAggregateInput = {
+    id?: SortOrder
+    variantId?: SortOrder
+    orderId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    downloadedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type SupplierScalarRelationFilter = {
+    is?: SupplierWhereInput
+    isNot?: SupplierWhereInput
   }
 
   export type SupplyBatchCountOrderByAggregateInput = {
@@ -26235,11 +29012,6 @@ export namespace Prisma {
     type?: SortOrder
     reason?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type OrderScalarRelationFilter = {
-    is?: OrderWhereInput
-    isNot?: OrderWhereInput
   }
 
   export type OrderItemCountOrderByAggregateInput = {
@@ -26497,6 +29269,34 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
+  }
+
+  export type WebhookCountOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    events?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WebhookMaxOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WebhookMinOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ShippingRateListRelationFilter = {
@@ -26852,6 +29652,13 @@ export namespace Prisma {
     connect?: FlashSaleProductWhereUniqueInput | FlashSaleProductWhereUniqueInput[]
   }
 
+  export type DigitalDownloadCreateNestedManyWithoutVariantInput = {
+    create?: XOR<DigitalDownloadCreateWithoutVariantInput, DigitalDownloadUncheckedCreateWithoutVariantInput> | DigitalDownloadCreateWithoutVariantInput[] | DigitalDownloadUncheckedCreateWithoutVariantInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutVariantInput | DigitalDownloadCreateOrConnectWithoutVariantInput[]
+    createMany?: DigitalDownloadCreateManyVariantInputEnvelope
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+  }
+
   export type OrderItemUncheckedCreateNestedManyWithoutVariantInput = {
     create?: XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput> | OrderItemCreateWithoutVariantInput[] | OrderItemUncheckedCreateWithoutVariantInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutVariantInput | OrderItemCreateOrConnectWithoutVariantInput[]
@@ -26871,6 +29678,13 @@ export namespace Prisma {
     connectOrCreate?: FlashSaleProductCreateOrConnectWithoutVariantInput | FlashSaleProductCreateOrConnectWithoutVariantInput[]
     createMany?: FlashSaleProductCreateManyVariantInputEnvelope
     connect?: FlashSaleProductWhereUniqueInput | FlashSaleProductWhereUniqueInput[]
+  }
+
+  export type DigitalDownloadUncheckedCreateNestedManyWithoutVariantInput = {
+    create?: XOR<DigitalDownloadCreateWithoutVariantInput, DigitalDownloadUncheckedCreateWithoutVariantInput> | DigitalDownloadCreateWithoutVariantInput[] | DigitalDownloadUncheckedCreateWithoutVariantInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutVariantInput | DigitalDownloadCreateOrConnectWithoutVariantInput[]
+    createMany?: DigitalDownloadCreateManyVariantInputEnvelope
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -26931,6 +29745,20 @@ export namespace Prisma {
     deleteMany?: FlashSaleProductScalarWhereInput | FlashSaleProductScalarWhereInput[]
   }
 
+  export type DigitalDownloadUpdateManyWithoutVariantNestedInput = {
+    create?: XOR<DigitalDownloadCreateWithoutVariantInput, DigitalDownloadUncheckedCreateWithoutVariantInput> | DigitalDownloadCreateWithoutVariantInput[] | DigitalDownloadUncheckedCreateWithoutVariantInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutVariantInput | DigitalDownloadCreateOrConnectWithoutVariantInput[]
+    upsert?: DigitalDownloadUpsertWithWhereUniqueWithoutVariantInput | DigitalDownloadUpsertWithWhereUniqueWithoutVariantInput[]
+    createMany?: DigitalDownloadCreateManyVariantInputEnvelope
+    set?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    disconnect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    delete?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    update?: DigitalDownloadUpdateWithWhereUniqueWithoutVariantInput | DigitalDownloadUpdateWithWhereUniqueWithoutVariantInput[]
+    updateMany?: DigitalDownloadUpdateManyWithWhereWithoutVariantInput | DigitalDownloadUpdateManyWithWhereWithoutVariantInput[]
+    deleteMany?: DigitalDownloadScalarWhereInput | DigitalDownloadScalarWhereInput[]
+  }
+
   export type OrderItemUncheckedUpdateManyWithoutVariantNestedInput = {
     create?: XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput> | OrderItemCreateWithoutVariantInput[] | OrderItemUncheckedCreateWithoutVariantInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutVariantInput | OrderItemCreateOrConnectWithoutVariantInput[]
@@ -26971,6 +29799,52 @@ export namespace Prisma {
     update?: FlashSaleProductUpdateWithWhereUniqueWithoutVariantInput | FlashSaleProductUpdateWithWhereUniqueWithoutVariantInput[]
     updateMany?: FlashSaleProductUpdateManyWithWhereWithoutVariantInput | FlashSaleProductUpdateManyWithWhereWithoutVariantInput[]
     deleteMany?: FlashSaleProductScalarWhereInput | FlashSaleProductScalarWhereInput[]
+  }
+
+  export type DigitalDownloadUncheckedUpdateManyWithoutVariantNestedInput = {
+    create?: XOR<DigitalDownloadCreateWithoutVariantInput, DigitalDownloadUncheckedCreateWithoutVariantInput> | DigitalDownloadCreateWithoutVariantInput[] | DigitalDownloadUncheckedCreateWithoutVariantInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutVariantInput | DigitalDownloadCreateOrConnectWithoutVariantInput[]
+    upsert?: DigitalDownloadUpsertWithWhereUniqueWithoutVariantInput | DigitalDownloadUpsertWithWhereUniqueWithoutVariantInput[]
+    createMany?: DigitalDownloadCreateManyVariantInputEnvelope
+    set?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    disconnect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    delete?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    update?: DigitalDownloadUpdateWithWhereUniqueWithoutVariantInput | DigitalDownloadUpdateWithWhereUniqueWithoutVariantInput[]
+    updateMany?: DigitalDownloadUpdateManyWithWhereWithoutVariantInput | DigitalDownloadUpdateManyWithWhereWithoutVariantInput[]
+    deleteMany?: DigitalDownloadScalarWhereInput | DigitalDownloadScalarWhereInput[]
+  }
+
+  export type ProductVariantCreateNestedOneWithoutDigitalDownloadsInput = {
+    create?: XOR<ProductVariantCreateWithoutDigitalDownloadsInput, ProductVariantUncheckedCreateWithoutDigitalDownloadsInput>
+    connectOrCreate?: ProductVariantCreateOrConnectWithoutDigitalDownloadsInput
+    connect?: ProductVariantWhereUniqueInput
+  }
+
+  export type OrderCreateNestedOneWithoutDigitalDownloadsInput = {
+    create?: XOR<OrderCreateWithoutDigitalDownloadsInput, OrderUncheckedCreateWithoutDigitalDownloadsInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutDigitalDownloadsInput
+    connect?: OrderWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type ProductVariantUpdateOneRequiredWithoutDigitalDownloadsNestedInput = {
+    create?: XOR<ProductVariantCreateWithoutDigitalDownloadsInput, ProductVariantUncheckedCreateWithoutDigitalDownloadsInput>
+    connectOrCreate?: ProductVariantCreateOrConnectWithoutDigitalDownloadsInput
+    upsert?: ProductVariantUpsertWithoutDigitalDownloadsInput
+    connect?: ProductVariantWhereUniqueInput
+    update?: XOR<XOR<ProductVariantUpdateToOneWithWhereWithoutDigitalDownloadsInput, ProductVariantUpdateWithoutDigitalDownloadsInput>, ProductVariantUncheckedUpdateWithoutDigitalDownloadsInput>
+  }
+
+  export type OrderUpdateOneRequiredWithoutDigitalDownloadsNestedInput = {
+    create?: XOR<OrderCreateWithoutDigitalDownloadsInput, OrderUncheckedCreateWithoutDigitalDownloadsInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutDigitalDownloadsInput
+    upsert?: OrderUpsertWithoutDigitalDownloadsInput
+    connect?: OrderWhereUniqueInput
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutDigitalDownloadsInput, OrderUpdateWithoutDigitalDownloadsInput>, OrderUncheckedUpdateWithoutDigitalDownloadsInput>
   }
 
   export type SupplierCreateNestedOneWithoutBatchesInput = {
@@ -27014,11 +29888,25 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
+  export type DigitalDownloadCreateNestedManyWithoutOrderInput = {
+    create?: XOR<DigitalDownloadCreateWithoutOrderInput, DigitalDownloadUncheckedCreateWithoutOrderInput> | DigitalDownloadCreateWithoutOrderInput[] | DigitalDownloadUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutOrderInput | DigitalDownloadCreateOrConnectWithoutOrderInput[]
+    createMany?: DigitalDownloadCreateManyOrderInputEnvelope
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+  }
+
   export type OrderItemUncheckedCreateNestedManyWithoutOrderInput = {
     create?: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput> | OrderItemCreateWithoutOrderInput[] | OrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[]
     createMany?: OrderItemCreateManyOrderInputEnvelope
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
+  }
+
+  export type DigitalDownloadUncheckedCreateNestedManyWithoutOrderInput = {
+    create?: XOR<DigitalDownloadCreateWithoutOrderInput, DigitalDownloadUncheckedCreateWithoutOrderInput> | DigitalDownloadCreateWithoutOrderInput[] | DigitalDownloadUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutOrderInput | DigitalDownloadCreateOrConnectWithoutOrderInput[]
+    createMany?: DigitalDownloadCreateManyOrderInputEnvelope
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
   }
 
   export type EnumPaymentMethodFieldUpdateOperationsInput = {
@@ -27057,6 +29945,20 @@ export namespace Prisma {
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
   }
 
+  export type DigitalDownloadUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<DigitalDownloadCreateWithoutOrderInput, DigitalDownloadUncheckedCreateWithoutOrderInput> | DigitalDownloadCreateWithoutOrderInput[] | DigitalDownloadUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutOrderInput | DigitalDownloadCreateOrConnectWithoutOrderInput[]
+    upsert?: DigitalDownloadUpsertWithWhereUniqueWithoutOrderInput | DigitalDownloadUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: DigitalDownloadCreateManyOrderInputEnvelope
+    set?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    disconnect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    delete?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    update?: DigitalDownloadUpdateWithWhereUniqueWithoutOrderInput | DigitalDownloadUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: DigitalDownloadUpdateManyWithWhereWithoutOrderInput | DigitalDownloadUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: DigitalDownloadScalarWhereInput | DigitalDownloadScalarWhereInput[]
+  }
+
   export type OrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
     create?: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput> | OrderItemCreateWithoutOrderInput[] | OrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[]
@@ -27069,6 +29971,20 @@ export namespace Prisma {
     update?: OrderItemUpdateWithWhereUniqueWithoutOrderInput | OrderItemUpdateWithWhereUniqueWithoutOrderInput[]
     updateMany?: OrderItemUpdateManyWithWhereWithoutOrderInput | OrderItemUpdateManyWithWhereWithoutOrderInput[]
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
+  }
+
+  export type DigitalDownloadUncheckedUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<DigitalDownloadCreateWithoutOrderInput, DigitalDownloadUncheckedCreateWithoutOrderInput> | DigitalDownloadCreateWithoutOrderInput[] | DigitalDownloadUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: DigitalDownloadCreateOrConnectWithoutOrderInput | DigitalDownloadCreateOrConnectWithoutOrderInput[]
+    upsert?: DigitalDownloadUpsertWithWhereUniqueWithoutOrderInput | DigitalDownloadUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: DigitalDownloadCreateManyOrderInputEnvelope
+    set?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    disconnect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    delete?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    connect?: DigitalDownloadWhereUniqueInput | DigitalDownloadWhereUniqueInput[]
+    update?: DigitalDownloadUpdateWithWhereUniqueWithoutOrderInput | DigitalDownloadUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: DigitalDownloadUpdateManyWithWhereWithoutOrderInput | DigitalDownloadUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: DigitalDownloadScalarWhereInput | DigitalDownloadScalarWhereInput[]
   }
 
   export type OrderCreateNestedOneWithoutOrderItemsInput = {
@@ -27217,6 +30133,15 @@ export namespace Prisma {
     update?: OrderUpdateWithWhereUniqueWithoutCustomerInput | OrderUpdateWithWhereUniqueWithoutCustomerInput[]
     updateMany?: OrderUpdateManyWithWhereWithoutCustomerInput | OrderUpdateManyWithWhereWithoutCustomerInput[]
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
+  }
+
+  export type WebhookCreateeventsInput = {
+    set: string[]
+  }
+
+  export type WebhookUpdateeventsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ShippingZoneCreatecountriesInput = {
@@ -27550,6 +30475,31 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
@@ -27894,9 +30844,12 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     orderItems?: OrderItemCreateNestedManyWithoutVariantInput
     batches?: SupplyBatchCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantUncheckedCreateWithoutProductInput = {
@@ -27907,9 +30860,12 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVariantInput
     batches?: SupplyBatchUncheckedCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantCreateOrConnectWithoutProductInput = {
@@ -27979,6 +30935,8 @@ export namespace Prisma {
     size?: StringNullableFilter<"ProductVariant"> | string | null
     color?: StringNullableFilter<"ProductVariant"> | string | null
     weight?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFilter<"ProductVariant"> | boolean
+    fileUrl?: StringNullableFilter<"ProductVariant"> | string | null
   }
 
   export type ProductCreateWithoutVariantsInput = {
@@ -28083,6 +31041,34 @@ export namespace Prisma {
 
   export type FlashSaleProductCreateManyVariantInputEnvelope = {
     data: FlashSaleProductCreateManyVariantInput | FlashSaleProductCreateManyVariantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DigitalDownloadCreateWithoutVariantInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
+    order: OrderCreateNestedOneWithoutDigitalDownloadsInput
+  }
+
+  export type DigitalDownloadUncheckedCreateWithoutVariantInput = {
+    id?: string
+    orderId: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DigitalDownloadCreateOrConnectWithoutVariantInput = {
+    where: DigitalDownloadWhereUniqueInput
+    create: XOR<DigitalDownloadCreateWithoutVariantInput, DigitalDownloadUncheckedCreateWithoutVariantInput>
+  }
+
+  export type DigitalDownloadCreateManyVariantInputEnvelope = {
+    data: DigitalDownloadCreateManyVariantInput | DigitalDownloadCreateManyVariantInput[]
     skipDuplicates?: boolean
   }
 
@@ -28192,6 +31178,211 @@ export namespace Prisma {
     soldQuantity?: IntFilter<"FlashSaleProduct"> | number
   }
 
+  export type DigitalDownloadUpsertWithWhereUniqueWithoutVariantInput = {
+    where: DigitalDownloadWhereUniqueInput
+    update: XOR<DigitalDownloadUpdateWithoutVariantInput, DigitalDownloadUncheckedUpdateWithoutVariantInput>
+    create: XOR<DigitalDownloadCreateWithoutVariantInput, DigitalDownloadUncheckedCreateWithoutVariantInput>
+  }
+
+  export type DigitalDownloadUpdateWithWhereUniqueWithoutVariantInput = {
+    where: DigitalDownloadWhereUniqueInput
+    data: XOR<DigitalDownloadUpdateWithoutVariantInput, DigitalDownloadUncheckedUpdateWithoutVariantInput>
+  }
+
+  export type DigitalDownloadUpdateManyWithWhereWithoutVariantInput = {
+    where: DigitalDownloadScalarWhereInput
+    data: XOR<DigitalDownloadUpdateManyMutationInput, DigitalDownloadUncheckedUpdateManyWithoutVariantInput>
+  }
+
+  export type DigitalDownloadScalarWhereInput = {
+    AND?: DigitalDownloadScalarWhereInput | DigitalDownloadScalarWhereInput[]
+    OR?: DigitalDownloadScalarWhereInput[]
+    NOT?: DigitalDownloadScalarWhereInput | DigitalDownloadScalarWhereInput[]
+    id?: StringFilter<"DigitalDownload"> | string
+    variantId?: StringFilter<"DigitalDownload"> | string
+    orderId?: StringFilter<"DigitalDownload"> | string
+    token?: StringFilter<"DigitalDownload"> | string
+    expiresAt?: DateTimeFilter<"DigitalDownload"> | Date | string
+    downloadedAt?: DateTimeNullableFilter<"DigitalDownload"> | Date | string | null
+    createdAt?: DateTimeFilter<"DigitalDownload"> | Date | string
+  }
+
+  export type ProductVariantCreateWithoutDigitalDownloadsInput = {
+    id?: string
+    sku: string
+    price: Decimal | DecimalJsLike | number | string
+    stock?: number
+    size?: string | null
+    color?: string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
+    product: ProductCreateNestedOneWithoutVariantsInput
+    orderItems?: OrderItemCreateNestedManyWithoutVariantInput
+    batches?: SupplyBatchCreateNestedManyWithoutVariantInput
+    flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutVariantInput
+  }
+
+  export type ProductVariantUncheckedCreateWithoutDigitalDownloadsInput = {
+    id?: string
+    productId: string
+    sku: string
+    price: Decimal | DecimalJsLike | number | string
+    stock?: number
+    size?: string | null
+    color?: string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutVariantInput
+    batches?: SupplyBatchUncheckedCreateNestedManyWithoutVariantInput
+    flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutVariantInput
+  }
+
+  export type ProductVariantCreateOrConnectWithoutDigitalDownloadsInput = {
+    where: ProductVariantWhereUniqueInput
+    create: XOR<ProductVariantCreateWithoutDigitalDownloadsInput, ProductVariantUncheckedCreateWithoutDigitalDownloadsInput>
+  }
+
+  export type OrderCreateWithoutDigitalDownloadsInput = {
+    id?: string
+    customerName: string
+    customerEmail?: string | null
+    customerPhone: string
+    shippingAddress: string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    shippingCharge: Decimal | DecimalJsLike | number | string
+    taxPaid?: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    shippingStatus?: $Enums.ShippingStatus
+    awbCode?: string | null
+    trackingUrl?: string | null
+    fingerprint?: string | null
+    createdAt?: Date | string
+    customer?: CustomerCreateNestedOneWithoutOrdersInput
+    orderItems?: OrderItemCreateNestedManyWithoutOrderInput
+  }
+
+  export type OrderUncheckedCreateWithoutDigitalDownloadsInput = {
+    id?: string
+    customerId?: string | null
+    customerName: string
+    customerEmail?: string | null
+    customerPhone: string
+    shippingAddress: string
+    totalPrice: Decimal | DecimalJsLike | number | string
+    shippingCharge: Decimal | DecimalJsLike | number | string
+    taxPaid?: Decimal | DecimalJsLike | number | string
+    paymentMethod?: $Enums.PaymentMethod
+    paymentStatus?: $Enums.PaymentStatus
+    shippingStatus?: $Enums.ShippingStatus
+    awbCode?: string | null
+    trackingUrl?: string | null
+    fingerprint?: string | null
+    createdAt?: Date | string
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type OrderCreateOrConnectWithoutDigitalDownloadsInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutDigitalDownloadsInput, OrderUncheckedCreateWithoutDigitalDownloadsInput>
+  }
+
+  export type ProductVariantUpsertWithoutDigitalDownloadsInput = {
+    update: XOR<ProductVariantUpdateWithoutDigitalDownloadsInput, ProductVariantUncheckedUpdateWithoutDigitalDownloadsInput>
+    create: XOR<ProductVariantCreateWithoutDigitalDownloadsInput, ProductVariantUncheckedCreateWithoutDigitalDownloadsInput>
+    where?: ProductVariantWhereInput
+  }
+
+  export type ProductVariantUpdateToOneWithWhereWithoutDigitalDownloadsInput = {
+    where?: ProductVariantWhereInput
+    data: XOR<ProductVariantUpdateWithoutDigitalDownloadsInput, ProductVariantUncheckedUpdateWithoutDigitalDownloadsInput>
+  }
+
+  export type ProductVariantUpdateWithoutDigitalDownloadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock?: IntFieldUpdateOperationsInput | number
+    size?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
+    orderItems?: OrderItemUpdateManyWithoutVariantNestedInput
+    batches?: SupplyBatchUpdateManyWithoutVariantNestedInput
+    flashSaleProducts?: FlashSaleProductUpdateManyWithoutVariantNestedInput
+  }
+
+  export type ProductVariantUncheckedUpdateWithoutDigitalDownloadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock?: IntFieldUpdateOperationsInput | number
+    size?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    orderItems?: OrderItemUncheckedUpdateManyWithoutVariantNestedInput
+    batches?: SupplyBatchUncheckedUpdateManyWithoutVariantNestedInput
+    flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutVariantNestedInput
+  }
+
+  export type OrderUpsertWithoutDigitalDownloadsInput = {
+    update: XOR<OrderUpdateWithoutDigitalDownloadsInput, OrderUncheckedUpdateWithoutDigitalDownloadsInput>
+    create: XOR<OrderCreateWithoutDigitalDownloadsInput, OrderUncheckedCreateWithoutDigitalDownloadsInput>
+    where?: OrderWhereInput
+  }
+
+  export type OrderUpdateToOneWithWhereWithoutDigitalDownloadsInput = {
+    where?: OrderWhereInput
+    data: XOR<OrderUpdateWithoutDigitalDownloadsInput, OrderUncheckedUpdateWithoutDigitalDownloadsInput>
+  }
+
+  export type OrderUpdateWithoutDigitalDownloadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: StringFieldUpdateOperationsInput | string
+    shippingAddress?: StringFieldUpdateOperationsInput | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
+    awbCode?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customer?: CustomerUpdateOneWithoutOrdersNestedInput
+    orderItems?: OrderItemUpdateManyWithoutOrderNestedInput
+  }
+
+  export type OrderUncheckedUpdateWithoutDigitalDownloadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    customerId?: NullableStringFieldUpdateOperationsInput | string | null
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    customerPhone?: StringFieldUpdateOperationsInput | string
+    shippingAddress?: StringFieldUpdateOperationsInput | string
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    shippingCharge?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    taxPaid?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    shippingStatus?: EnumShippingStatusFieldUpdateOperationsInput | $Enums.ShippingStatus
+    awbCode?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
   export type SupplierCreateWithoutBatchesInput = {
     id?: string
     name: string
@@ -28221,9 +31412,12 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     product: ProductCreateNestedOneWithoutVariantsInput
     orderItems?: OrderItemCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantUncheckedCreateWithoutBatchesInput = {
@@ -28235,8 +31429,11 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantCreateOrConnectWithoutBatchesInput = {
@@ -28290,9 +31487,12 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
     orderItems?: OrderItemUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutVariantNestedInput
   }
 
   export type ProductVariantUncheckedUpdateWithoutBatchesInput = {
@@ -28304,8 +31504,11 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: OrderItemUncheckedUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutVariantNestedInput
   }
 
   export type CustomerCreateWithoutOrdersInput = {
@@ -28357,6 +31560,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DigitalDownloadCreateWithoutOrderInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
+    variant: ProductVariantCreateNestedOneWithoutDigitalDownloadsInput
+  }
+
+  export type DigitalDownloadUncheckedCreateWithoutOrderInput = {
+    id?: string
+    variantId: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DigitalDownloadCreateOrConnectWithoutOrderInput = {
+    where: DigitalDownloadWhereUniqueInput
+    create: XOR<DigitalDownloadCreateWithoutOrderInput, DigitalDownloadUncheckedCreateWithoutOrderInput>
+  }
+
+  export type DigitalDownloadCreateManyOrderInputEnvelope = {
+    data: DigitalDownloadCreateManyOrderInput | DigitalDownloadCreateManyOrderInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CustomerUpsertWithoutOrdersInput = {
     update: XOR<CustomerUpdateWithoutOrdersInput, CustomerUncheckedUpdateWithoutOrdersInput>
     create: XOR<CustomerCreateWithoutOrdersInput, CustomerUncheckedCreateWithoutOrdersInput>
@@ -28404,6 +31635,22 @@ export namespace Prisma {
     data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutOrderInput>
   }
 
+  export type DigitalDownloadUpsertWithWhereUniqueWithoutOrderInput = {
+    where: DigitalDownloadWhereUniqueInput
+    update: XOR<DigitalDownloadUpdateWithoutOrderInput, DigitalDownloadUncheckedUpdateWithoutOrderInput>
+    create: XOR<DigitalDownloadCreateWithoutOrderInput, DigitalDownloadUncheckedCreateWithoutOrderInput>
+  }
+
+  export type DigitalDownloadUpdateWithWhereUniqueWithoutOrderInput = {
+    where: DigitalDownloadWhereUniqueInput
+    data: XOR<DigitalDownloadUpdateWithoutOrderInput, DigitalDownloadUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type DigitalDownloadUpdateManyWithWhereWithoutOrderInput = {
+    where: DigitalDownloadScalarWhereInput
+    data: XOR<DigitalDownloadUpdateManyMutationInput, DigitalDownloadUncheckedUpdateManyWithoutOrderInput>
+  }
+
   export type OrderCreateWithoutOrderItemsInput = {
     id?: string
     customerName: string
@@ -28421,6 +31668,7 @@ export namespace Prisma {
     fingerprint?: string | null
     createdAt?: Date | string
     customer?: CustomerCreateNestedOneWithoutOrdersInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutOrderItemsInput = {
@@ -28440,6 +31688,7 @@ export namespace Prisma {
     trackingUrl?: string | null
     fingerprint?: string | null
     createdAt?: Date | string
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutOrderItemsInput = {
@@ -28455,9 +31704,12 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     product: ProductCreateNestedOneWithoutVariantsInput
     batches?: SupplyBatchCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantUncheckedCreateWithoutOrderItemsInput = {
@@ -28469,8 +31721,11 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     batches?: SupplyBatchUncheckedCreateNestedManyWithoutVariantInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantCreateOrConnectWithoutOrderItemsInput = {
@@ -28506,6 +31761,7 @@ export namespace Prisma {
     fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customer?: CustomerUpdateOneWithoutOrdersNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutOrderItemsInput = {
@@ -28525,6 +31781,7 @@ export namespace Prisma {
     trackingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type ProductVariantUpsertWithoutOrderItemsInput = {
@@ -28546,9 +31803,12 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
     batches?: SupplyBatchUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutVariantNestedInput
   }
 
   export type ProductVariantUncheckedUpdateWithoutOrderItemsInput = {
@@ -28560,8 +31820,11 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     batches?: SupplyBatchUncheckedUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutVariantNestedInput
   }
 
   export type FlashSaleProductCreateWithoutFlashSaleInput = {
@@ -28639,9 +31902,12 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     product: ProductCreateNestedOneWithoutVariantsInput
     orderItems?: OrderItemCreateNestedManyWithoutVariantInput
     batches?: SupplyBatchCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantUncheckedCreateWithoutFlashSaleProductsInput = {
@@ -28653,8 +31919,11 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVariantInput
     batches?: SupplyBatchUncheckedCreateNestedManyWithoutVariantInput
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutVariantInput
   }
 
   export type ProductVariantCreateOrConnectWithoutFlashSaleProductsInput = {
@@ -28712,9 +31981,12 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
     orderItems?: OrderItemUpdateManyWithoutVariantNestedInput
     batches?: SupplyBatchUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutVariantNestedInput
   }
 
   export type ProductVariantUncheckedUpdateWithoutFlashSaleProductsInput = {
@@ -28726,8 +31998,11 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: OrderItemUncheckedUpdateManyWithoutVariantNestedInput
     batches?: SupplyBatchUncheckedUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutVariantNestedInput
   }
 
   export type OrderCreateWithoutCustomerInput = {
@@ -28747,6 +32022,7 @@ export namespace Prisma {
     fingerprint?: string | null
     createdAt?: Date | string
     orderItems?: OrderItemCreateNestedManyWithoutOrderInput
+    digitalDownloads?: DigitalDownloadCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutCustomerInput = {
@@ -28766,6 +32042,7 @@ export namespace Prisma {
     fingerprint?: string | null
     createdAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
+    digitalDownloads?: DigitalDownloadUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutCustomerInput = {
@@ -29050,6 +32327,8 @@ export namespace Prisma {
     size?: string | null
     color?: string | null
     weight?: Decimal | DecimalJsLike | number | string | null
+    isDigital?: boolean
+    fileUrl?: string | null
   }
 
   export type ProductVariantUpdateWithoutProductInput = {
@@ -29060,9 +32339,12 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: OrderItemUpdateManyWithoutVariantNestedInput
     batches?: SupplyBatchUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutVariantNestedInput
   }
 
   export type ProductVariantUncheckedUpdateWithoutProductInput = {
@@ -29073,9 +32355,12 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: OrderItemUncheckedUpdateManyWithoutVariantNestedInput
     batches?: SupplyBatchUncheckedUpdateManyWithoutVariantNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutVariantNestedInput
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutVariantNestedInput
   }
 
   export type ProductVariantUncheckedUpdateManyWithoutProductInput = {
@@ -29086,6 +32371,8 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isDigital?: BoolFieldUpdateOperationsInput | boolean
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrderItemCreateManyVariantInput = {
@@ -29109,6 +32396,15 @@ export namespace Prisma {
     salePrice: Decimal | DecimalJsLike | number | string
     limitQuantity: number
     soldQuantity?: number
+  }
+
+  export type DigitalDownloadCreateManyVariantInput = {
+    id?: string
+    orderId: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
   }
 
   export type OrderItemUpdateWithoutVariantInput = {
@@ -29180,11 +32476,47 @@ export namespace Prisma {
     soldQuantity?: IntFieldUpdateOperationsInput | number
   }
 
+  export type DigitalDownloadUpdateWithoutVariantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneRequiredWithoutDigitalDownloadsNestedInput
+  }
+
+  export type DigitalDownloadUncheckedUpdateWithoutVariantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DigitalDownloadUncheckedUpdateManyWithoutVariantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type OrderItemCreateManyOrderInput = {
     id?: string
     variantId: string
     quantity: number
     price: Decimal | DecimalJsLike | number | string
+  }
+
+  export type DigitalDownloadCreateManyOrderInput = {
+    id?: string
+    variantId: string
+    token: string
+    expiresAt: Date | string
+    downloadedAt?: Date | string | null
+    createdAt?: Date | string
   }
 
   export type OrderItemUpdateWithoutOrderInput = {
@@ -29206,6 +32538,33 @@ export namespace Prisma {
     variantId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type DigitalDownloadUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    variant?: ProductVariantUpdateOneRequiredWithoutDigitalDownloadsNestedInput
+  }
+
+  export type DigitalDownloadUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    variantId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DigitalDownloadUncheckedUpdateManyWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    variantId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    downloadedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FlashSaleProductCreateManyFlashSaleInput = {
@@ -29275,6 +32634,7 @@ export namespace Prisma {
     fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUpdateManyWithoutOrderNestedInput
+    digitalDownloads?: DigitalDownloadUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutCustomerInput = {
@@ -29294,6 +32654,7 @@ export namespace Prisma {
     fingerprint?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    digitalDownloads?: DigitalDownloadUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutCustomerInput = {

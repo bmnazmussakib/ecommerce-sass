@@ -14,6 +14,9 @@ import { SupplyBatchModule } from './supply-batch/supply-batch.module';
 import { FlashSaleModule } from './flash-sale/flash-sale.module';
 import { CustomerModule } from './customer/customer.module';
 import { ShippingModule } from './shipping/shipping.module';
+import { DataExportModule } from './data-export/data-export.module';
+import { DigitalProductModule } from './digital-product/digital-product.module';
+import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
   imports: [
@@ -32,6 +35,9 @@ import { ShippingModule } from './shipping/shipping.module';
     FlashSaleModule,
     CustomerModule,
     ShippingModule,
+    DataExportModule,
+    DigitalProductModule,
+    WebhookModule,
   ]
 })
 export class TenantModule {}
