@@ -5,9 +5,10 @@ import { DatabaseModule } from '../../core/database/database.module';
 import { IntegrationModule } from '../integration/integration.module';
 import { InvoiceService } from './invoice.service';
 import { StoreClosedGuard } from '../settings/store-closed.guard';
+import { ShippingModule } from '../shipping/shipping.module';
 
 @Module({
-  imports: [DatabaseModule, IntegrationModule],
+  imports: [DatabaseModule, IntegrationModule, ShippingModule],
   controllers: [OrderController],
   providers: [OrderService, InvoiceService, StoreClosedGuard],
 })

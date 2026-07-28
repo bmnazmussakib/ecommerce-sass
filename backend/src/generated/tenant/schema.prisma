@@ -243,3 +243,26 @@ model Customer {
   updatedAt DateTime @updatedAt
   orders    Order[]
 }
+
+model ShippingZone {
+  id        String         @id @default(uuid())
+  name      String
+  countries String[] // e.g. ["Bangladesh"]
+  regions   String[] // e.g. ["Dhaka", "Chattogram"]
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  rates     ShippingRate[]
+}
+
+model ShippingRate {
+  id            String       @id @default(uuid())
+  zoneId        String
+  zone          ShippingZone @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+  minOrderValue Decimal?     @db.Decimal(10, 2) // null = no minimum
+  maxOrderValue Decimal?     @db.Decimal(10, 2) // null = no maximum
+  rate          Decimal      @db.Decimal(10, 2)
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}

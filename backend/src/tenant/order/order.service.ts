@@ -6,6 +6,7 @@ import { BkashService } from '../integration/adapters/bkash.service';
 import { SslCommerzService } from '../integration/adapters/sslcommerz.service';
 import { SteadfastService } from '../integration/adapters/steadfast.service';
 import { PathaoService } from '../integration/adapters/pathao.service';
+import { ShippingService } from '../shipping/shipping.service';
 
 @Injectable()
 export class OrderService {
@@ -15,6 +16,7 @@ export class OrderService {
     private readonly sslCommerzService: SslCommerzService,
     private readonly steadfastService: SteadfastService,
     private readonly pathaoService: PathaoService,
+    private readonly shippingService: ShippingService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -146,8 +148,8 @@ export class OrderService {
         couponUsed = coupon.id;
       }
 
-      // Flat shipping charge
-      const shippingCharge = new Prisma.Decimal(100);
+      // Calculate shipping based on zones & rates
+      const shippingCharge = await this.shippingService.calculateShipping(dto.shippingAddress, subTotal);
 
       // Fetch store settings to get taxRate
       const settings = await tx.storeSetting.findFirst();

@@ -280,6 +280,27 @@ exports.Prisma.CustomerScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ShippingZoneScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  countries: 'countries',
+  regions: 'regions',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShippingRateScalarFieldEnum = {
+  id: 'id',
+  zoneId: 'zoneId',
+  minOrderValue: 'minOrderValue',
+  maxOrderValue: 'maxOrderValue',
+  rate: 'rate',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -370,7 +391,9 @@ exports.Prisma.ModelName = {
   Integration: 'Integration',
   FlashSale: 'FlashSale',
   FlashSaleProduct: 'FlashSaleProduct',
-  Customer: 'Customer'
+  Customer: 'Customer',
+  ShippingZone: 'ShippingZone',
+  ShippingRate: 'ShippingRate'
 };
 
 /**

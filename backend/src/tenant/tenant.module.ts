@@ -13,6 +13,7 @@ import { SearchModule } from './search/search.module';
 import { SupplyBatchModule } from './supply-batch/supply-batch.module';
 import { FlashSaleModule } from './flash-sale/flash-sale.module';
 import { CustomerModule } from './customer/customer.module';
+import { ShippingModule } from './shipping/shipping.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { CustomerModule } from './customer/customer.module';
     SearchModule,
     SupplyBatchModule,
     FlashSaleModule,
-    CustomerModule
+    CustomerModule,
+    ShippingModule,
   ]
 })
 export class TenantModule {}
