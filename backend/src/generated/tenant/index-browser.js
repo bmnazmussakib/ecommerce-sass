@@ -126,6 +126,8 @@ exports.Prisma.StoreSettingScalarFieldEnum = {
   taxRate: 'taxRate',
   customCss: 'customCss',
   customJs: 'customJs',
+  isStoreOpen: 'isStoreOpen',
+  maintenanceMessage: 'maintenanceMessage',
   updatedAt: 'updatedAt'
 };
 

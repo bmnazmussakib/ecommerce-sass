@@ -4,11 +4,12 @@ import { OrderController } from './order.controller';
 import { DatabaseModule } from '../../core/database/database.module';
 import { IntegrationModule } from '../integration/integration.module';
 import { InvoiceService } from './invoice.service';
+import { StoreClosedGuard } from '../settings/store-closed.guard';
 
 @Module({
   imports: [DatabaseModule, IntegrationModule],
   controllers: [OrderController],
-  providers: [OrderService, InvoiceService],
+  providers: [OrderService, InvoiceService, StoreClosedGuard],
 })
 export class OrderModule {}
 

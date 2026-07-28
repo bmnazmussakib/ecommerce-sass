@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsHexColor, IsObject } from 'class-validator';
+import { IsString, IsOptional, IsHexColor, IsObject, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateSettingsDto {
@@ -35,4 +35,25 @@ export class UpdateSettingsDto {
   @IsString()
   @IsOptional()
   customJs?: string;
+
+  @ApiProperty({ description: 'Store open/closed toggle', required: false })
+  @IsBoolean()
+  @IsOptional()
+  isStoreOpen?: boolean;
+
+  @ApiProperty({ description: 'Message shown to customers when store is closed', required: false })
+  @IsString()
+  @IsOptional()
+  maintenanceMessage?: string;
+}
+
+export class ToggleStoreDto {
+  @ApiProperty({ description: 'true = open, false = closed', example: false })
+  @IsBoolean()
+  isStoreOpen!: boolean;
+
+  @ApiProperty({ description: 'Message shown when closed', required: false, example: "We are closed for maintenance. Back at 9AM!" })
+  @IsString()
+  @IsOptional()
+  maintenanceMessage?: string;
 }

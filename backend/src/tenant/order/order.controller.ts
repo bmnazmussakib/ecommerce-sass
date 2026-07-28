@@ -6,6 +6,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { InvoiceService } from './invoice.service';
+import { StoreClosedGuard } from '../settings/store-closed.guard';
 import * as express from 'express';
 
 @ApiTags('Tenant - Orders')
@@ -18,7 +19,8 @@ export class OrderController {
   ) {}
 
   @Post('checkout')
-  @ApiOperation({ summary: 'Place a new order (Public API)' })
+  @UseGuards(StoreClosedGuard)
+  @ApiOperation({ summary: 'Place a new order (Public API) — blocked when store is closed' })
   checkout(@Body() createOrderDto: CreateOrderDto, @Req() req: express.Request) {
     const tenantId = (req.headers['x-tenant-id'] as string) || 'default';
     // Use APP_URL env var for public callback URL (set to ngrok URL in local dev)

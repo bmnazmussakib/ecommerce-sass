@@ -1,7 +1,7 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { TENANT_PRISMA_CLIENT } from '../../core/database/tenant-connection.provider';
 import { PrismaClient as TenantPrismaClient } from '@prisma/tenant-client';
-import { UpdateSettingsDto } from './dto/settings.dto';
+import { UpdateSettingsDto, ToggleStoreDto } from './dto/settings.dto';
 
 @Injectable()
 export class SettingsService {
@@ -34,5 +34,31 @@ export class SettingsService {
       where: { id: settings.id },
       data: updateDto as any,
     });
+  }
+
+  async getStoreStatus() {
+    const settings = await this.getSettings();
+    return {
+      isStoreOpen: settings.isStoreOpen,
+      maintenanceMessage: settings.maintenanceMessage,
+      storeName: settings.storeName,
+    };
+  }
+
+  async toggleStore(dto: ToggleStoreDto) {
+    const settings = await this.getSettings();
+    const updated = await this.prisma.storeSetting.update({
+      where: { id: settings.id },
+      data: {
+        isStoreOpen: dto.isStoreOpen,
+        ...(dto.maintenanceMessage !== undefined && { maintenanceMessage: dto.maintenanceMessage }),
+      },
+    });
+    return {
+      isStoreOpen: updated.isStoreOpen,
+      maintenanceMessage: updated.maintenanceMessage,
+      storeName: updated.storeName,
+      message: updated.isStoreOpen ? '✅ Store is now OPEN' : '🔒 Store is now CLOSED',
+    };
   }
 }

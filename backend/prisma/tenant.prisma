@@ -10,15 +10,17 @@ generator client {
 }
 
 model StoreSetting {
-  id            String   @id @default(uuid())
-  storeName     String
-  logoUrl       String?
-  brandColor    String   @default("#4F46E5")
-  themeConfig   Json
-  taxRate       Decimal  @default(0.00) @db.Decimal(5, 2) // Tax percentage e.g. 15.00 for 15%
-  customCss     String?
-  customJs      String?
-  updatedAt     DateTime @updatedAt
+  id                   String   @id @default(uuid())
+  storeName            String
+  logoUrl              String?
+  brandColor           String   @default("#4F46E5")
+  themeConfig          Json
+  taxRate              Decimal  @default(0.00) @db.Decimal(5, 2)
+  customCss            String?
+  customJs             String?
+  isStoreOpen          Boolean  @default(true)
+  maintenanceMessage   String?  @default("We'll be back soon! Store is temporarily closed.")
+  updatedAt            DateTime @updatedAt
 }
 
 model Staff {

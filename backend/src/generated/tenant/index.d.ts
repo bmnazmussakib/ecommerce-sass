@@ -2606,6 +2606,8 @@ export namespace Prisma {
     taxRate: Decimal | null
     customCss: string | null
     customJs: string | null
+    isStoreOpen: boolean | null
+    maintenanceMessage: string | null
     updatedAt: Date | null
   }
 
@@ -2617,6 +2619,8 @@ export namespace Prisma {
     taxRate: Decimal | null
     customCss: string | null
     customJs: string | null
+    isStoreOpen: boolean | null
+    maintenanceMessage: string | null
     updatedAt: Date | null
   }
 
@@ -2629,6 +2633,8 @@ export namespace Prisma {
     taxRate: number
     customCss: number
     customJs: number
+    isStoreOpen: number
+    maintenanceMessage: number
     updatedAt: number
     _all: number
   }
@@ -2650,6 +2656,8 @@ export namespace Prisma {
     taxRate?: true
     customCss?: true
     customJs?: true
+    isStoreOpen?: true
+    maintenanceMessage?: true
     updatedAt?: true
   }
 
@@ -2661,6 +2669,8 @@ export namespace Prisma {
     taxRate?: true
     customCss?: true
     customJs?: true
+    isStoreOpen?: true
+    maintenanceMessage?: true
     updatedAt?: true
   }
 
@@ -2673,6 +2683,8 @@ export namespace Prisma {
     taxRate?: true
     customCss?: true
     customJs?: true
+    isStoreOpen?: true
+    maintenanceMessage?: true
     updatedAt?: true
     _all?: true
   }
@@ -2772,6 +2784,8 @@ export namespace Prisma {
     taxRate: Decimal
     customCss: string | null
     customJs: string | null
+    isStoreOpen: boolean
+    maintenanceMessage: string | null
     updatedAt: Date
     _count: StoreSettingCountAggregateOutputType | null
     _avg: StoreSettingAvgAggregateOutputType | null
@@ -2803,6 +2817,8 @@ export namespace Prisma {
     taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
+    isStoreOpen?: boolean
+    maintenanceMessage?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["storeSetting"]>
 
@@ -2815,6 +2831,8 @@ export namespace Prisma {
     taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
+    isStoreOpen?: boolean
+    maintenanceMessage?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["storeSetting"]>
 
@@ -2827,6 +2845,8 @@ export namespace Prisma {
     taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
+    isStoreOpen?: boolean
+    maintenanceMessage?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["storeSetting"]>
 
@@ -2839,10 +2859,12 @@ export namespace Prisma {
     taxRate?: boolean
     customCss?: boolean
     customJs?: boolean
+    isStoreOpen?: boolean
+    maintenanceMessage?: boolean
     updatedAt?: boolean
   }
 
-  export type StoreSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeName" | "logoUrl" | "brandColor" | "themeConfig" | "taxRate" | "customCss" | "customJs" | "updatedAt", ExtArgs["result"]["storeSetting"]>
+  export type StoreSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeName" | "logoUrl" | "brandColor" | "themeConfig" | "taxRate" | "customCss" | "customJs" | "isStoreOpen" | "maintenanceMessage" | "updatedAt", ExtArgs["result"]["storeSetting"]>
 
   export type $StoreSettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "StoreSetting"
@@ -2856,6 +2878,8 @@ export namespace Prisma {
       taxRate: Prisma.Decimal
       customCss: string | null
       customJs: string | null
+      isStoreOpen: boolean
+      maintenanceMessage: string | null
       updatedAt: Date
     }, ExtArgs["result"]["storeSetting"]>
     composites: {}
@@ -3288,6 +3312,8 @@ export namespace Prisma {
     readonly taxRate: FieldRef<"StoreSetting", 'Decimal'>
     readonly customCss: FieldRef<"StoreSetting", 'String'>
     readonly customJs: FieldRef<"StoreSetting", 'String'>
+    readonly isStoreOpen: FieldRef<"StoreSetting", 'Boolean'>
+    readonly maintenanceMessage: FieldRef<"StoreSetting", 'String'>
     readonly updatedAt: FieldRef<"StoreSetting", 'DateTime'>
   }
     
@@ -20013,6 +20039,8 @@ export namespace Prisma {
     taxRate: 'taxRate',
     customCss: 'customCss',
     customJs: 'customJs',
+    isStoreOpen: 'isStoreOpen',
+    maintenanceMessage: 'maintenanceMessage',
     updatedAt: 'updatedAt'
   };
 
@@ -20294,6 +20322,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -20318,13 +20353,6 @@ export namespace Prisma {
    * Reference to a field of type 'StaffRole[]'
    */
   export type ListEnumStaffRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StaffRole[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -20455,6 +20483,8 @@ export namespace Prisma {
     taxRate?: DecimalFilter<"StoreSetting"> | Decimal | DecimalJsLike | number | string
     customCss?: StringNullableFilter<"StoreSetting"> | string | null
     customJs?: StringNullableFilter<"StoreSetting"> | string | null
+    isStoreOpen?: BoolFilter<"StoreSetting"> | boolean
+    maintenanceMessage?: StringNullableFilter<"StoreSetting"> | string | null
     updatedAt?: DateTimeFilter<"StoreSetting"> | Date | string
   }
 
@@ -20467,6 +20497,8 @@ export namespace Prisma {
     taxRate?: SortOrder
     customCss?: SortOrderInput | SortOrder
     customJs?: SortOrderInput | SortOrder
+    isStoreOpen?: SortOrder
+    maintenanceMessage?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
   }
 
@@ -20482,6 +20514,8 @@ export namespace Prisma {
     taxRate?: DecimalFilter<"StoreSetting"> | Decimal | DecimalJsLike | number | string
     customCss?: StringNullableFilter<"StoreSetting"> | string | null
     customJs?: StringNullableFilter<"StoreSetting"> | string | null
+    isStoreOpen?: BoolFilter<"StoreSetting"> | boolean
+    maintenanceMessage?: StringNullableFilter<"StoreSetting"> | string | null
     updatedAt?: DateTimeFilter<"StoreSetting"> | Date | string
   }, "id">
 
@@ -20494,6 +20528,8 @@ export namespace Prisma {
     taxRate?: SortOrder
     customCss?: SortOrderInput | SortOrder
     customJs?: SortOrderInput | SortOrder
+    isStoreOpen?: SortOrder
+    maintenanceMessage?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
     _count?: StoreSettingCountOrderByAggregateInput
     _avg?: StoreSettingAvgOrderByAggregateInput
@@ -20514,6 +20550,8 @@ export namespace Prisma {
     taxRate?: DecimalWithAggregatesFilter<"StoreSetting"> | Decimal | DecimalJsLike | number | string
     customCss?: StringNullableWithAggregatesFilter<"StoreSetting"> | string | null
     customJs?: StringNullableWithAggregatesFilter<"StoreSetting"> | string | null
+    isStoreOpen?: BoolWithAggregatesFilter<"StoreSetting"> | boolean
+    maintenanceMessage?: StringNullableWithAggregatesFilter<"StoreSetting"> | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"StoreSetting"> | Date | string
   }
 
@@ -21526,6 +21564,8 @@ export namespace Prisma {
     taxRate?: Decimal | DecimalJsLike | number | string
     customCss?: string | null
     customJs?: string | null
+    isStoreOpen?: boolean
+    maintenanceMessage?: string | null
     updatedAt?: Date | string
   }
 
@@ -21538,6 +21578,8 @@ export namespace Prisma {
     taxRate?: Decimal | DecimalJsLike | number | string
     customCss?: string | null
     customJs?: string | null
+    isStoreOpen?: boolean
+    maintenanceMessage?: string | null
     updatedAt?: Date | string
   }
 
@@ -21550,6 +21592,8 @@ export namespace Prisma {
     taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
+    isStoreOpen?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceMessage?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -21562,6 +21606,8 @@ export namespace Prisma {
     taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
+    isStoreOpen?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceMessage?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -21574,6 +21620,8 @@ export namespace Prisma {
     taxRate?: Decimal | DecimalJsLike | number | string
     customCss?: string | null
     customJs?: string | null
+    isStoreOpen?: boolean
+    maintenanceMessage?: string | null
     updatedAt?: Date | string
   }
 
@@ -21586,6 +21634,8 @@ export namespace Prisma {
     taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
+    isStoreOpen?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceMessage?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -21598,6 +21648,8 @@ export namespace Prisma {
     taxRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     customCss?: NullableStringFieldUpdateOperationsInput | string | null
     customJs?: NullableStringFieldUpdateOperationsInput | string | null
+    isStoreOpen?: BoolFieldUpdateOperationsInput | boolean
+    maintenanceMessage?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -22737,6 +22789,11 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -22762,6 +22819,8 @@ export namespace Prisma {
     taxRate?: SortOrder
     customCss?: SortOrder
     customJs?: SortOrder
+    isStoreOpen?: SortOrder
+    maintenanceMessage?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -22777,6 +22836,8 @@ export namespace Prisma {
     taxRate?: SortOrder
     customCss?: SortOrder
     customJs?: SortOrder
+    isStoreOpen?: SortOrder
+    maintenanceMessage?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -22788,6 +22849,8 @@ export namespace Prisma {
     taxRate?: SortOrder
     customCss?: SortOrder
     customJs?: SortOrder
+    isStoreOpen?: SortOrder
+    maintenanceMessage?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -22872,6 +22935,14 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -22891,11 +22962,6 @@ export namespace Prisma {
     in?: $Enums.StaffRole[] | ListEnumStaffRoleFieldRefInput<$PrismaModel>
     notIn?: $Enums.StaffRole[] | ListEnumStaffRoleFieldRefInput<$PrismaModel>
     not?: NestedEnumStaffRoleFilter<$PrismaModel> | $Enums.StaffRole
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type StaffCountOrderByAggregateInput = {
@@ -22942,14 +23008,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStaffRoleFilter<$PrismaModel>
     _max?: NestedEnumStaffRoleFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type SupplyBatchListRelationFilter = {
@@ -23719,16 +23777,16 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
 
   export type EnumStaffRoleFieldUpdateOperationsInput = {
     set?: $Enums.StaffRole
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type SupplyBatchCreateNestedManyWithoutSupplierInput = {
@@ -24376,6 +24434,11 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -24481,6 +24544,14 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -24502,11 +24573,6 @@ export namespace Prisma {
     not?: NestedEnumStaffRoleFilter<$PrismaModel> | $Enums.StaffRole
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedEnumStaffRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.StaffRole | EnumStaffRoleFieldRefInput<$PrismaModel>
     in?: $Enums.StaffRole[] | ListEnumStaffRoleFieldRefInput<$PrismaModel>
@@ -24515,14 +24581,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStaffRoleFilter<$PrismaModel>
     _max?: NestedEnumStaffRoleFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
