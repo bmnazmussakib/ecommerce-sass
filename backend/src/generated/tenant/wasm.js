@@ -248,6 +248,25 @@ exports.Prisma.IntegrationScalarFieldEnum = {
   isActive: 'isActive'
 };
 
+exports.Prisma.FlashSaleScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.FlashSaleProductScalarFieldEnum = {
+  id: 'id',
+  flashSaleId: 'flashSaleId',
+  productVariantId: 'productVariantId',
+  salePrice: 'salePrice',
+  limitQuantity: 'limitQuantity',
+  soldQuantity: 'soldQuantity'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -335,7 +354,9 @@ exports.Prisma.ModelName = {
   BlockedContact: 'BlockedContact',
   OrderItem: 'OrderItem',
   Coupon: 'Coupon',
-  Integration: 'Integration'
+  Integration: 'Integration',
+  FlashSale: 'FlashSale',
+  FlashSaleProduct: 'FlashSaleProduct'
 };
 
 /**

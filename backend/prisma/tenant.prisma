@@ -89,8 +89,9 @@ model ProductVariant {
   size       String?
   color      String?
   weight     Decimal?      @db.Decimal(6, 2)
-  orderItems OrderItem[]
-  batches    SupplyBatch[]
+  orderItems        OrderItem[]
+  batches           SupplyBatch[]
+  flashSaleProducts FlashSaleProduct[]
 }
 
 model SupplyBatch {
@@ -202,4 +203,28 @@ enum IntProviderType {
   STEADFAST
   FB_PIXEL
   GA4
+}
+
+model FlashSale {
+  id          String             @id @default(uuid())
+  title       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  isActive    Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  products    FlashSaleProduct[]
+}
+
+model FlashSaleProduct {
+  id               String         @id @default(uuid())
+  flashSaleId      String
+  flashSale        FlashSale      @relation(fields: [flashSaleId], references: [id], onDelete: Cascade)
+  productVariantId String
+  variant          ProductVariant @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
+  salePrice        Decimal        @db.Decimal(10, 2)
+  limitQuantity    Int
+  soldQuantity     Int            @default(0)
+
+  @@unique([flashSaleId, productVariantId])
 }

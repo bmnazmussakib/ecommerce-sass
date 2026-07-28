@@ -68,7 +68,7 @@
 | 2.25 | Role-based authorization | ✅ Done | Backend | — | — | OWNER/ADMIN/STAFF guards with RolesGuard |
 | 2.26 | Order refund & return handling | ✅ Done | Backend | — | — | Full return/refund workflow with auto-restock & status updates |
 | 2.27 | Abandoned cart recovery | 🔜 Due | B/E + F/E | Medium | Email/SMS provider (free tier) | Email/SMS reminders |
-| 2.28 | Flash sales & advanced promos | 🔜 Due | Backend | Low | — | Time-bound sales events |
+| 2.28 | Flash sales & advanced promos | ✅ Done | Backend | — | — | Time-bound sales events with stock allocation & override pricing |
 | 2.29 | Email marketing integration | 🔜 Due | B/E + F/E | Low | Mailchimp (500 contacts free) | Campaign management |
 | 2.30 | SEO management (meta, sitemap, OG) | 🔜 Due | Backend | Low | — | Per-page SEO editor |
 | 2.31 | Customer list & CRUD | 🔜 Due | Backend | Medium | — | Customer records with segmentation |
@@ -149,9 +149,9 @@
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
 | Super Admin | 20 | 1 | 3 | 0 |
-| Vendor Panel | 23 | 2 | 21 | 7 |
+| Vendor Panel | 24 | 2 | 20 | 7 |
 | Storefront | 6 (Backend only) | 5 | 0 | 1 |
 | System & Security | 13 | 0 | 7 | 1 |
-| **Total** | **62** | **8** | **31** | **9** |
+| **Total** | **63** | **8** | **30** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.

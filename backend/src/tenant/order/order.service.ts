@@ -75,7 +75,39 @@ export class OrderService {
           throw new BadRequestException(`Insufficient stock for ${variant.product.title}`);
         }
 
-        const itemTotal = variant.price.mul(item.quantity);
+        // Check if there is an active flash sale for this variant
+        const now = new Date();
+        const activeFlashSaleProd = await tx.flashSaleProduct.findFirst({
+          where: {
+            productVariantId: variant.id,
+            flashSale: {
+              isActive: true,
+              startDate: { lte: now },
+              endDate: { gte: now },
+            },
+          },
+        });
+
+        let itemPrice = variant.price;
+        if (activeFlashSaleProd) {
+          const availableFlashSaleQty = activeFlashSaleProd.limitQuantity - activeFlashSaleProd.soldQuantity;
+          if (availableFlashSaleQty < item.quantity) {
+            throw new BadRequestException(
+              `Requested quantity (${item.quantity}) exceeds available flash sale limit (${availableFlashSaleQty}) for ${variant.product.title}`
+            );
+          }
+
+          // Override price with flash sale price
+          itemPrice = activeFlashSaleProd.salePrice;
+
+          // Increment soldQuantity in flash sale
+          await tx.flashSaleProduct.update({
+            where: { id: activeFlashSaleProd.id },
+            data: { soldQuantity: { increment: item.quantity } },
+          });
+        }
+
+        const itemTotal = itemPrice.mul(item.quantity);
         subTotal = subTotal.add(itemTotal);
 
         // Deduct stock
@@ -87,7 +119,7 @@ export class OrderService {
         orderItemsData.push({
           variantId: variant.id,
           quantity: item.quantity,
-          price: variant.price
+          price: itemPrice
         });
       }
 

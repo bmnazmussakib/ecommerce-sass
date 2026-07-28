@@ -11,6 +11,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { UploadModule } from './upload/upload.module';
 import { SearchModule } from './search/search.module';
 import { SupplyBatchModule } from './supply-batch/supply-batch.module';
+import { FlashSaleModule } from './flash-sale/flash-sale.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { SupplyBatchModule } from './supply-batch/supply-batch.module';
     AnalyticsModule,
     UploadModule,
     SearchModule,
-    SupplyBatchModule
+    SupplyBatchModule,
+    FlashSaleModule
   ]
 })
 export class TenantModule {}
