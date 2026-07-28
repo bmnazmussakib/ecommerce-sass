@@ -10,6 +10,7 @@ import { IntegrationModule } from './integration/integration.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { UploadModule } from './upload/upload.module';
 import { SearchModule } from './search/search.module';
+import { SupplyBatchModule } from './supply-batch/supply-batch.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { SearchModule } from './search/search.module';
     IntegrationModule,
     AnalyticsModule,
     UploadModule,
-    SearchModule
+    SearchModule,
+    SupplyBatchModule
   ]
 })
 export class TenantModule {}

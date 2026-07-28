@@ -85,3 +85,32 @@ export class FulfillOrderDto {
   metadata?: any;
 }
 
+export class RefundItemDto {
+  @ApiProperty({ example: 'variant-uuid' })
+  @IsString()
+  variantId!: string;
+
+  @ApiProperty({ example: 1, description: 'Quantity to return and restock' })
+  @IsNumber()
+  @Min(1)
+  quantity!: number;
+}
+
+export class RefundOrderDto {
+  @ApiProperty({ example: 'Customer returned damaged item', required: false })
+  @IsOptional()
+  @IsString()
+  reason?: string;
+
+  @ApiProperty({
+    type: [RefundItemDto],
+    required: false,
+    description: 'Specific items to return. If omitted, all order items are restocked.',
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => RefundItemDto)
+  items?: RefundItemDto[];
+}
+

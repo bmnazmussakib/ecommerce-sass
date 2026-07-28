@@ -303,7 +303,8 @@ exports.ShippingStatus = exports.$Enums.ShippingStatus = {
   PROCESSING: 'PROCESSING',
   SHIPPED: 'SHIPPED',
   DELIVERED: 'DELIVERED',
-  CANCELLED: 'CANCELLED'
+  CANCELLED: 'CANCELLED',
+  RETURNED: 'RETURNED'
 };
 
 exports.CouponType = exports.$Enums.CouponType = {

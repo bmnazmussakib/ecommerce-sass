@@ -126,7 +126,8 @@ export const ShippingStatus: {
   PROCESSING: 'PROCESSING',
   SHIPPED: 'SHIPPED',
   DELIVERED: 'DELIVERED',
-  CANCELLED: 'CANCELLED'
+  CANCELLED: 'CANCELLED',
+  RETURNED: 'RETURNED'
 };
 
 export type ShippingStatus = (typeof ShippingStatus)[keyof typeof ShippingStatus]

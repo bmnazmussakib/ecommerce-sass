@@ -1,7 +1,7 @@
 import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
 import { TENANT_PRISMA_CLIENT } from '../../core/database/tenant-connection.provider';
 import { PrismaClient as TenantPrismaClient, Prisma } from '@prisma/tenant-client';
-import { CreateOrderDto, UpdateOrderStatusDto } from './dto/order.dto';
+import { CreateOrderDto, UpdateOrderStatusDto, RefundOrderDto } from './dto/order.dto';
 import { BkashService } from '../integration/adapters/bkash.service';
 import { SslCommerzService } from '../integration/adapters/sslcommerz.service';
 import { SteadfastService } from '../integration/adapters/steadfast.service';
@@ -381,6 +381,70 @@ export class OrderService {
         trackingUrl,
         shippingStatus: 'SHIPPED',
       }
+    });
+  }
+
+  async refundOrder(orderId: string, dto: RefundOrderDto) {
+    const order = await this.prisma.order.findUnique({
+      where: { id: orderId },
+      include: {
+        orderItems: { include: { variant: { include: { product: true } } } }
+      }
+    });
+
+    if (!order) throw new NotFoundException('Order not found');
+
+    const eligibleStatuses: string[] = ['PAID', 'DELIVERED'];
+    if (!eligibleStatuses.includes(order.paymentStatus)) {
+      throw new BadRequestException(
+        `Cannot refund order with payment status: ${order.paymentStatus}. Order must be PAID or DELIVERED.`
+      );
+    }
+
+    // Determine which items to restock
+    const itemsToReturn = dto.items && dto.items.length > 0
+      ? dto.items
+      : order.orderItems.map(i => ({ variantId: i.variantId, quantity: i.quantity }));
+
+    return await this.prisma.$transaction(async (tx) => {
+      for (const returnItem of itemsToReturn) {
+        // Validate quantity against original order
+        const original = order.orderItems.find(i => i.variantId === returnItem.variantId);
+        if (!original) {
+          throw new BadRequestException(`Variant ${returnItem.variantId} not found in this order`);
+        }
+        if (returnItem.quantity > original.quantity) {
+          throw new BadRequestException(
+            `Return quantity (${returnItem.quantity}) exceeds ordered quantity (${original.quantity}) for variant ${returnItem.variantId}`
+          );
+        }
+
+        // Restock
+        await tx.productVariant.update({
+          where: { id: returnItem.variantId },
+          data: { stock: { increment: returnItem.quantity } }
+        });
+      }
+
+      // Update order status
+      const updated = await tx.order.update({
+        where: { id: orderId },
+        data: {
+          paymentStatus: 'REFUNDED',
+          shippingStatus: 'RETURNED',
+          awbCode: order.awbCode ? `${order.awbCode} [REFUNDED]` : undefined,
+        },
+        include: { orderItems: true }
+      });
+
+      return {
+        message: 'Order refunded successfully',
+        orderId: updated.id,
+        refundReason: dto.reason || 'Not specified',
+        restockedItems: itemsToReturn,
+        paymentStatus: updated.paymentStatus,
+        shippingStatus: updated.shippingStatus,
+      };
     });
   }
 }

@@ -62,11 +62,11 @@
 | 2.19 | Integrations key management | ✅ Done | Backend | — | — | Store API keys per provider |
 | 2.20 | Analytics dashboard | ✅ Done | Backend | — | — | Revenue, sales chart, top products |
 | 2.21 | Image upload to Cloudinary | ✅ Done | Backend | — | Cloudinary (25GB free) | Product/store images |
-| 2.22 | SupplyBatch (stock entry & costing) | 🔜 Due | Backend | Medium | — | Schema exists, no endpoints |
+| 2.22 | SupplyBatch (stock entry & costing) | ✅ Done | Backend | — | — | CRUD endpoints, automatic stock entries and weighted average costing |
 | 2.23 | NAGAD payment integration | 🔜 Due | Backend | Medium | Nagad API (txn fees) | Schema has NAGAD enum |
 | 2.24 | FB Pixel / GA4 / GTM tracking | 🔜 Due | Backend | Medium | FB/Google APIs (free) | Schema has enums, no implementation |
 | 2.25 | Role-based authorization | ✅ Done | Backend | — | — | OWNER/ADMIN/STAFF guards with RolesGuard |
-| 2.26 | Order refund & return handling | 🔜 Due | Backend | Medium | — | Full return workflow |
+| 2.26 | Order refund & return handling | ✅ Done | Backend | — | — | Full return/refund workflow with auto-restock & status updates |
 | 2.27 | Abandoned cart recovery | 🔜 Due | B/E + F/E | Medium | Email/SMS provider (free tier) | Email/SMS reminders |
 | 2.28 | Flash sales & advanced promos | 🔜 Due | Backend | Low | — | Time-bound sales events |
 | 2.29 | Email marketing integration | 🔜 Due | B/E + F/E | Low | Mailchimp (500 contacts free) | Campaign management |
@@ -149,9 +149,9 @@
 | Category | ✅ Implemented | 🔜 Due (High) | 🔜 Due (Med/Low) | 🧭 Roadmap |
 |----------|---------------|----------------|-------------------|-----------|
 | Super Admin | 20 | 1 | 3 | 0 |
-| Vendor Panel | 22 | 2 | 22 | 7 |
+| Vendor Panel | 23 | 2 | 21 | 7 |
 | Storefront | 6 (Backend only) | 5 | 0 | 1 |
 | System & Security | 13 | 0 | 7 | 1 |
-| **Total** | **61** | **8** | **32** | **9** |
+| **Total** | **62** | **8** | **31** | **9** |
 
 > **Note:** "Layer" indicates where work is needed. "Backend" = NestJS API. "Frontend" = Next.js UI. "Infrastructure" = DevOps/deployment.

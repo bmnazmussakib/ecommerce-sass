@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, UseGuards, Req, Query, Res } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiHeader, ApiOperation } from '@nestjs/swagger';
 import { OrderService } from './order.service';
-import { CreateOrderDto, UpdateOrderStatusDto, FulfillOrderDto } from './dto/order.dto';
+import { CreateOrderDto, UpdateOrderStatusDto, FulfillOrderDto, RefundOrderDto } from './dto/order.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
@@ -121,5 +121,17 @@ export class OrderController {
     @Body() fulfillDto: FulfillOrderDto,
   ) {
     return this.orderService.fulfillOrder(id, fulfillDto.courier, fulfillDto.metadata);
+  }
+
+  @ApiBearerAuth()
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Post(':id/refund')
+  @ApiOperation({ summary: 'Refund/return an order — restocks items and marks as REFUNDED (Admin)' })
+  refundOrder(
+    @Param('id') id: string,
+    @Body() refundDto: RefundOrderDto,
+  ) {
+    return this.orderService.refundOrder(id, refundDto);
   }
 }
