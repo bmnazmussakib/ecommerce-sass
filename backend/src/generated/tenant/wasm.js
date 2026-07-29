@@ -324,6 +324,18 @@ exports.Prisma.ShippingRateScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TaxRuleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  country: 'country',
+  region: 'region',
+  rate: 'rate',
+  priority: 'priority',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -419,7 +431,8 @@ exports.Prisma.ModelName = {
   Customer: 'Customer',
   Webhook: 'Webhook',
   ShippingZone: 'ShippingZone',
-  ShippingRate: 'ShippingRate'
+  ShippingRate: 'ShippingRate',
+  TaxRule: 'TaxRule'
 };
 
 /**

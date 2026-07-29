@@ -21,6 +21,7 @@ import { PathaoService } from '../integration/adapters/pathao.service';
 import { ShippingService } from '../shipping/shipping.service';
 import { DigitalProductService } from '../digital-product/digital-product.service';
 import { WebhookService } from '../webhook/webhook.service';
+import { TaxRuleService } from '../tax-rule/tax-rule.service';
 
 @Injectable()
 export class OrderService {
@@ -33,6 +34,7 @@ export class OrderService {
     private readonly shippingService: ShippingService,
     private readonly digitalProductService: DigitalProductService,
     private readonly webhookService: WebhookService,
+    private readonly taxRuleService: TaxRuleService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -189,9 +191,17 @@ export class OrderService {
             subTotal,
           );
 
-      // Fetch store settings to get taxRate
+      // Calculate dynamic tax based on shipping address region, fallback to store settings
+      const matchedTaxRate = await this.taxRuleService.findMatchingTaxRate(
+        dto.shippingAddress,
+      );
       const settings = await tx.storeSetting.findFirst();
-      const taxRatePercent = settings?.taxRate ? Number(settings.taxRate) : 0;
+      const taxRatePercent =
+        matchedTaxRate !== null
+          ? matchedTaxRate
+          : settings?.taxRate
+            ? Number(settings.taxRate)
+            : 0;
 
       const priceBeforeTax = subTotal.sub(discount);
       const taxPaid = priceBeforeTax.mul(taxRatePercent).div(100);

@@ -81,7 +81,7 @@
 | 2.38 | Data export — CSV/JSON | ✅ Done | Backend | — | — | Export products, orders, customers as CSV or JSON via GET /api/tenant/export |
 | 2.39 | Product scheduling — launch later | ✅ Done | Backend | — | — | Schedule product publish date |
 | 2.40 | BOGO offers | 🔜 Due | Backend | Low | — | Buy-one-get-one promotion engine |
-| 2.41 | Tax rules by region | 🔜 Due | Backend | Low | — | Tax config per region |
+| 2.41 | Tax rules by region | ✅ Done | Backend | — | — | Regional tax rule management & checkout calculation |
 | 2.42 | Social media links & auto-sharing | 🔜 Due | Both | Low | Free | FB/Twitter/WhatsApp sharing config |
 | 2.43 | Popup campaigns & exit intent | 🔜 Due | Both | Low | — | Marketing popups with exit detection |
 | 2.44 | Contact form | 🔜 Due | Backend | Low | — | Customer inquiry form handling |

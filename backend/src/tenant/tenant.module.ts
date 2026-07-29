@@ -17,6 +17,7 @@ import { ShippingModule } from './shipping/shipping.module';
 import { DataExportModule } from './data-export/data-export.module';
 import { DigitalProductModule } from './digital-product/digital-product.module';
 import { WebhookModule } from './webhook/webhook.module';
+import { TaxRuleModule } from './tax-rule/tax-rule.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { WebhookModule } from './webhook/webhook.module';
     DataExportModule,
     DigitalProductModule,
     WebhookModule,
+    TaxRuleModule,
   ]
 })
 export class TenantModule {}
