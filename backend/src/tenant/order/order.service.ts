@@ -23,6 +23,7 @@ import { DigitalProductService } from '../digital-product/digital-product.servic
 import { WebhookService } from '../webhook/webhook.service';
 import { TaxRuleService } from '../tax-rule/tax-rule.service';
 import { BogoOfferService } from '../bogo-offer/bogo-offer.service';
+import { AffiliateService } from '../affiliate/affiliate.service';
 
 @Injectable()
 export class OrderService {
@@ -37,6 +38,7 @@ export class OrderService {
     private readonly webhookService: WebhookService,
     private readonly taxRuleService: TaxRuleService,
     private readonly bogoOfferService: BogoOfferService,
+    private readonly affiliateService: AffiliateService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -262,6 +264,14 @@ export class OrderService {
         },
         include: { orderItems: true },
       });
+
+      if (dto.affiliateCode) {
+        await this.affiliateService.trackConversion(
+          dto.affiliateCode,
+          order.id,
+          Number(totalPrice),
+        );
+      }
 
       let bkashURL: string | null = null;
       let sslczGatewayUrl: string | null = null;

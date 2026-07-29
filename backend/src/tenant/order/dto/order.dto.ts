@@ -71,6 +71,11 @@ export class CreateOrderDto {
   @IsString()
   couponCode?: string;
 
+  @ApiProperty({ example: 'RAHIM10', required: false })
+  @IsOptional()
+  @IsString()
+  affiliateCode?: string;
+
   @ApiProperty({ type: [OrderItemDto] })
   @IsArray()
   @ValidateNested({ each: true })

@@ -23,6 +23,7 @@ import { SeoModule } from './seo/seo.module';
 import { SocialModule } from './social/social.module';
 import { PopupCampaignModule } from './popup-campaign/popup-campaign.module';
 import { ContactInquiryModule } from './contact-inquiry/contact-inquiry.module';
+import { AffiliateModule } from './affiliate/affiliate.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { ContactInquiryModule } from './contact-inquiry/contact-inquiry.module';
     SocialModule,
     PopupCampaignModule,
     ContactInquiryModule,
+    AffiliateModule,
   ]
 })
 export class TenantModule {}

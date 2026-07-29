@@ -410,6 +410,40 @@ exports.Prisma.ContactInquiryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AffiliatePartnerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  code: 'code',
+  commissionRate: 'commissionRate',
+  totalEarnings: 'totalEarnings',
+  paidEarnings: 'paidEarnings',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AffiliateConversionScalarFieldEnum = {
+  id: 'id',
+  affiliateId: 'affiliateId',
+  orderId: 'orderId',
+  orderAmount: 'orderAmount',
+  commissionAmount: 'commissionAmount',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AffiliatePayoutScalarFieldEnum = {
+  id: 'id',
+  affiliateId: 'affiliateId',
+  amount: 'amount',
+  paymentMethod: 'paymentMethod',
+  reference: 'reference',
+  notes: 'notes',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -498,6 +532,17 @@ exports.InquiryStatus = exports.$Enums.InquiryStatus = {
   ARCHIVED: 'ARCHIVED'
 };
 
+exports.AffiliateStatus = exports.$Enums.AffiliateStatus = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED'
+};
+
+exports.ConversionStatus = exports.$Enums.ConversionStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
 exports.Prisma.ModelName = {
   StoreSetting: 'StoreSetting',
   Staff: 'Staff',
@@ -524,7 +569,10 @@ exports.Prisma.ModelName = {
   SeoSetting: 'SeoSetting',
   SocialSetting: 'SocialSetting',
   PopupCampaign: 'PopupCampaign',
-  ContactInquiry: 'ContactInquiry'
+  ContactInquiry: 'ContactInquiry',
+  AffiliatePartner: 'AffiliatePartner',
+  AffiliateConversion: 'AffiliateConversion',
+  AffiliatePayout: 'AffiliatePayout'
 };
 
 /**
