@@ -90,7 +90,7 @@
 | 2.46 | Vendor dashboard UI | 🔜 Due | Frontend | High | — | Full merchant dashboard |
 | 2.47 | Drag-and-drop storefront builder | 🔜 Due | Frontend | High | GrapesJS (open source) | Section-based page builder |
 | 2.48 | Live chat widget | 🧭 Roadmap | Frontend | Low | Tawk.to / Crisp (free tier) | Customer engagement |
-| 2.49 | Multi-language support | 🧭 Roadmap | Frontend | Low | i18n libraries (open source) | i18n per store |
+| 2.49 | Multi-language support | ✅ Done | B/E + F/E | — | — | StoreLanguage schema, active language selection & UI translation dictionary management |
 | 2.50 | Affiliate system | ✅ Done | B/E + F/E | — | — | Referral links, commission tracking, payout management & checkout integration |
 | 2.51 | Loyalty points system | ✅ Done | Backend | — | — | Customer reward points earning, checkout redemption discount & transaction history |
 | 2.52 | Multi-warehouse stock support | ✅ Done | Backend | — | — | Warehouse management, location stock assignment, inter-hub transfer & variant stock breakdown |

@@ -486,6 +486,17 @@ exports.Prisma.WarehouseStockScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.StoreLanguageScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  isDefault: 'isDefault',
+  isActive: 'isActive',
+  translations: 'translations',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -624,7 +635,8 @@ exports.Prisma.ModelName = {
   LoyaltySetting: 'LoyaltySetting',
   LoyaltyTransaction: 'LoyaltyTransaction',
   Warehouse: 'Warehouse',
-  WarehouseStock: 'WarehouseStock'
+  WarehouseStock: 'WarehouseStock',
+  StoreLanguage: 'StoreLanguage'
 };
 
 /**

@@ -178,6 +178,11 @@ export type Warehouse = $Result.DefaultSelection<Prisma.$WarehousePayload>
  * 
  */
 export type WarehouseStock = $Result.DefaultSelection<Prisma.$WarehouseStockPayload>
+/**
+ * Model StoreLanguage
+ * 
+ */
+export type StoreLanguage = $Result.DefaultSelection<Prisma.$StoreLanguagePayload>
 
 /**
  * Enums
@@ -803,6 +808,16 @@ export class PrismaClient<
     * ```
     */
   get warehouseStock(): Prisma.WarehouseStockDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.storeLanguage`: Exposes CRUD operations for the **StoreLanguage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StoreLanguages
+    * const storeLanguages = await prisma.storeLanguage.findMany()
+    * ```
+    */
+  get storeLanguage(): Prisma.StoreLanguageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1275,7 +1290,8 @@ export namespace Prisma {
     LoyaltySetting: 'LoyaltySetting',
     LoyaltyTransaction: 'LoyaltyTransaction',
     Warehouse: 'Warehouse',
-    WarehouseStock: 'WarehouseStock'
+    WarehouseStock: 'WarehouseStock',
+    StoreLanguage: 'StoreLanguage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1291,7 +1307,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule" | "bogoOffer" | "seoSetting" | "socialSetting" | "popupCampaign" | "contactInquiry" | "affiliatePartner" | "affiliateConversion" | "affiliatePayout" | "loyaltySetting" | "loyaltyTransaction" | "warehouse" | "warehouseStock"
+      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule" | "bogoOffer" | "seoSetting" | "socialSetting" | "popupCampaign" | "contactInquiry" | "affiliatePartner" | "affiliateConversion" | "affiliatePayout" | "loyaltySetting" | "loyaltyTransaction" | "warehouse" | "warehouseStock" | "storeLanguage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3737,6 +3753,80 @@ export namespace Prisma {
           }
         }
       }
+      StoreLanguage: {
+        payload: Prisma.$StoreLanguagePayload<ExtArgs>
+        fields: Prisma.StoreLanguageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StoreLanguageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StoreLanguageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>
+          }
+          findFirst: {
+            args: Prisma.StoreLanguageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StoreLanguageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>
+          }
+          findMany: {
+            args: Prisma.StoreLanguageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>[]
+          }
+          create: {
+            args: Prisma.StoreLanguageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>
+          }
+          createMany: {
+            args: Prisma.StoreLanguageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StoreLanguageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>[]
+          }
+          delete: {
+            args: Prisma.StoreLanguageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>
+          }
+          update: {
+            args: Prisma.StoreLanguageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>
+          }
+          deleteMany: {
+            args: Prisma.StoreLanguageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StoreLanguageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StoreLanguageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>[]
+          }
+          upsert: {
+            args: Prisma.StoreLanguageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLanguagePayload>
+          }
+          aggregate: {
+            args: Prisma.StoreLanguageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStoreLanguage>
+          }
+          groupBy: {
+            args: Prisma.StoreLanguageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StoreLanguageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StoreLanguageCountArgs<ExtArgs>
+            result: $Utils.Optional<StoreLanguageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3854,6 +3944,7 @@ export namespace Prisma {
     loyaltyTransaction?: LoyaltyTransactionOmit
     warehouse?: WarehouseOmit
     warehouseStock?: WarehouseStockOmit
+    storeLanguage?: StoreLanguageOmit
   }
 
   /* Types for Logging */
@@ -40554,6 +40645,1024 @@ export namespace Prisma {
 
 
   /**
+   * Model StoreLanguage
+   */
+
+  export type AggregateStoreLanguage = {
+    _count: StoreLanguageCountAggregateOutputType | null
+    _min: StoreLanguageMinAggregateOutputType | null
+    _max: StoreLanguageMaxAggregateOutputType | null
+  }
+
+  export type StoreLanguageMinAggregateOutputType = {
+    id: string | null
+    code: string | null
+    name: string | null
+    isDefault: boolean | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StoreLanguageMaxAggregateOutputType = {
+    id: string | null
+    code: string | null
+    name: string | null
+    isDefault: boolean | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StoreLanguageCountAggregateOutputType = {
+    id: number
+    code: number
+    name: number
+    isDefault: number
+    isActive: number
+    translations: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StoreLanguageMinAggregateInputType = {
+    id?: true
+    code?: true
+    name?: true
+    isDefault?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StoreLanguageMaxAggregateInputType = {
+    id?: true
+    code?: true
+    name?: true
+    isDefault?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StoreLanguageCountAggregateInputType = {
+    id?: true
+    code?: true
+    name?: true
+    isDefault?: true
+    isActive?: true
+    translations?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StoreLanguageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StoreLanguage to aggregate.
+     */
+    where?: StoreLanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLanguages to fetch.
+     */
+    orderBy?: StoreLanguageOrderByWithRelationInput | StoreLanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StoreLanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLanguages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLanguages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StoreLanguages
+    **/
+    _count?: true | StoreLanguageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StoreLanguageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StoreLanguageMaxAggregateInputType
+  }
+
+  export type GetStoreLanguageAggregateType<T extends StoreLanguageAggregateArgs> = {
+        [P in keyof T & keyof AggregateStoreLanguage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStoreLanguage[P]>
+      : GetScalarType<T[P], AggregateStoreLanguage[P]>
+  }
+
+
+
+
+  export type StoreLanguageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoreLanguageWhereInput
+    orderBy?: StoreLanguageOrderByWithAggregationInput | StoreLanguageOrderByWithAggregationInput[]
+    by: StoreLanguageScalarFieldEnum[] | StoreLanguageScalarFieldEnum
+    having?: StoreLanguageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StoreLanguageCountAggregateInputType | true
+    _min?: StoreLanguageMinAggregateInputType
+    _max?: StoreLanguageMaxAggregateInputType
+  }
+
+  export type StoreLanguageGroupByOutputType = {
+    id: string
+    code: string
+    name: string
+    isDefault: boolean
+    isActive: boolean
+    translations: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    _count: StoreLanguageCountAggregateOutputType | null
+    _min: StoreLanguageMinAggregateOutputType | null
+    _max: StoreLanguageMaxAggregateOutputType | null
+  }
+
+  type GetStoreLanguageGroupByPayload<T extends StoreLanguageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StoreLanguageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StoreLanguageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StoreLanguageGroupByOutputType[P]>
+            : GetScalarType<T[P], StoreLanguageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StoreLanguageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    name?: boolean
+    isDefault?: boolean
+    isActive?: boolean
+    translations?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["storeLanguage"]>
+
+  export type StoreLanguageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    name?: boolean
+    isDefault?: boolean
+    isActive?: boolean
+    translations?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["storeLanguage"]>
+
+  export type StoreLanguageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    name?: boolean
+    isDefault?: boolean
+    isActive?: boolean
+    translations?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["storeLanguage"]>
+
+  export type StoreLanguageSelectScalar = {
+    id?: boolean
+    code?: boolean
+    name?: boolean
+    isDefault?: boolean
+    isActive?: boolean
+    translations?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StoreLanguageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "isDefault" | "isActive" | "translations" | "createdAt" | "updatedAt", ExtArgs["result"]["storeLanguage"]>
+
+  export type $StoreLanguagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StoreLanguage"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      code: string
+      name: string
+      isDefault: boolean
+      isActive: boolean
+      translations: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["storeLanguage"]>
+    composites: {}
+  }
+
+  type StoreLanguageGetPayload<S extends boolean | null | undefined | StoreLanguageDefaultArgs> = $Result.GetResult<Prisma.$StoreLanguagePayload, S>
+
+  type StoreLanguageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StoreLanguageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StoreLanguageCountAggregateInputType | true
+    }
+
+  export interface StoreLanguageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StoreLanguage'], meta: { name: 'StoreLanguage' } }
+    /**
+     * Find zero or one StoreLanguage that matches the filter.
+     * @param {StoreLanguageFindUniqueArgs} args - Arguments to find a StoreLanguage
+     * @example
+     * // Get one StoreLanguage
+     * const storeLanguage = await prisma.storeLanguage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StoreLanguageFindUniqueArgs>(args: SelectSubset<T, StoreLanguageFindUniqueArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one StoreLanguage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StoreLanguageFindUniqueOrThrowArgs} args - Arguments to find a StoreLanguage
+     * @example
+     * // Get one StoreLanguage
+     * const storeLanguage = await prisma.storeLanguage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StoreLanguageFindUniqueOrThrowArgs>(args: SelectSubset<T, StoreLanguageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first StoreLanguage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLanguageFindFirstArgs} args - Arguments to find a StoreLanguage
+     * @example
+     * // Get one StoreLanguage
+     * const storeLanguage = await prisma.storeLanguage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StoreLanguageFindFirstArgs>(args?: SelectSubset<T, StoreLanguageFindFirstArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first StoreLanguage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLanguageFindFirstOrThrowArgs} args - Arguments to find a StoreLanguage
+     * @example
+     * // Get one StoreLanguage
+     * const storeLanguage = await prisma.storeLanguage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StoreLanguageFindFirstOrThrowArgs>(args?: SelectSubset<T, StoreLanguageFindFirstOrThrowArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more StoreLanguages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLanguageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StoreLanguages
+     * const storeLanguages = await prisma.storeLanguage.findMany()
+     * 
+     * // Get first 10 StoreLanguages
+     * const storeLanguages = await prisma.storeLanguage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const storeLanguageWithIdOnly = await prisma.storeLanguage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StoreLanguageFindManyArgs>(args?: SelectSubset<T, StoreLanguageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a StoreLanguage.
+     * @param {StoreLanguageCreateArgs} args - Arguments to create a StoreLanguage.
+     * @example
+     * // Create one StoreLanguage
+     * const StoreLanguage = await prisma.storeLanguage.create({
+     *   data: {
+     *     // ... data to create a StoreLanguage
+     *   }
+     * })
+     * 
+     */
+    create<T extends StoreLanguageCreateArgs>(args: SelectSubset<T, StoreLanguageCreateArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many StoreLanguages.
+     * @param {StoreLanguageCreateManyArgs} args - Arguments to create many StoreLanguages.
+     * @example
+     * // Create many StoreLanguages
+     * const storeLanguage = await prisma.storeLanguage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StoreLanguageCreateManyArgs>(args?: SelectSubset<T, StoreLanguageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StoreLanguages and returns the data saved in the database.
+     * @param {StoreLanguageCreateManyAndReturnArgs} args - Arguments to create many StoreLanguages.
+     * @example
+     * // Create many StoreLanguages
+     * const storeLanguage = await prisma.storeLanguage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StoreLanguages and only return the `id`
+     * const storeLanguageWithIdOnly = await prisma.storeLanguage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StoreLanguageCreateManyAndReturnArgs>(args?: SelectSubset<T, StoreLanguageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a StoreLanguage.
+     * @param {StoreLanguageDeleteArgs} args - Arguments to delete one StoreLanguage.
+     * @example
+     * // Delete one StoreLanguage
+     * const StoreLanguage = await prisma.storeLanguage.delete({
+     *   where: {
+     *     // ... filter to delete one StoreLanguage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StoreLanguageDeleteArgs>(args: SelectSubset<T, StoreLanguageDeleteArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one StoreLanguage.
+     * @param {StoreLanguageUpdateArgs} args - Arguments to update one StoreLanguage.
+     * @example
+     * // Update one StoreLanguage
+     * const storeLanguage = await prisma.storeLanguage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StoreLanguageUpdateArgs>(args: SelectSubset<T, StoreLanguageUpdateArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more StoreLanguages.
+     * @param {StoreLanguageDeleteManyArgs} args - Arguments to filter StoreLanguages to delete.
+     * @example
+     * // Delete a few StoreLanguages
+     * const { count } = await prisma.storeLanguage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StoreLanguageDeleteManyArgs>(args?: SelectSubset<T, StoreLanguageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StoreLanguages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLanguageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StoreLanguages
+     * const storeLanguage = await prisma.storeLanguage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StoreLanguageUpdateManyArgs>(args: SelectSubset<T, StoreLanguageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StoreLanguages and returns the data updated in the database.
+     * @param {StoreLanguageUpdateManyAndReturnArgs} args - Arguments to update many StoreLanguages.
+     * @example
+     * // Update many StoreLanguages
+     * const storeLanguage = await prisma.storeLanguage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StoreLanguages and only return the `id`
+     * const storeLanguageWithIdOnly = await prisma.storeLanguage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StoreLanguageUpdateManyAndReturnArgs>(args: SelectSubset<T, StoreLanguageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one StoreLanguage.
+     * @param {StoreLanguageUpsertArgs} args - Arguments to update or create a StoreLanguage.
+     * @example
+     * // Update or create a StoreLanguage
+     * const storeLanguage = await prisma.storeLanguage.upsert({
+     *   create: {
+     *     // ... data to create a StoreLanguage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StoreLanguage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StoreLanguageUpsertArgs>(args: SelectSubset<T, StoreLanguageUpsertArgs<ExtArgs>>): Prisma__StoreLanguageClient<$Result.GetResult<Prisma.$StoreLanguagePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of StoreLanguages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLanguageCountArgs} args - Arguments to filter StoreLanguages to count.
+     * @example
+     * // Count the number of StoreLanguages
+     * const count = await prisma.storeLanguage.count({
+     *   where: {
+     *     // ... the filter for the StoreLanguages we want to count
+     *   }
+     * })
+    **/
+    count<T extends StoreLanguageCountArgs>(
+      args?: Subset<T, StoreLanguageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StoreLanguageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StoreLanguage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLanguageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StoreLanguageAggregateArgs>(args: Subset<T, StoreLanguageAggregateArgs>): Prisma.PrismaPromise<GetStoreLanguageAggregateType<T>>
+
+    /**
+     * Group by StoreLanguage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLanguageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StoreLanguageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StoreLanguageGroupByArgs['orderBy'] }
+        : { orderBy?: StoreLanguageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StoreLanguageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStoreLanguageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StoreLanguage model
+   */
+  readonly fields: StoreLanguageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StoreLanguage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StoreLanguageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StoreLanguage model
+   */ 
+  interface StoreLanguageFieldRefs {
+    readonly id: FieldRef<"StoreLanguage", 'String'>
+    readonly code: FieldRef<"StoreLanguage", 'String'>
+    readonly name: FieldRef<"StoreLanguage", 'String'>
+    readonly isDefault: FieldRef<"StoreLanguage", 'Boolean'>
+    readonly isActive: FieldRef<"StoreLanguage", 'Boolean'>
+    readonly translations: FieldRef<"StoreLanguage", 'Json'>
+    readonly createdAt: FieldRef<"StoreLanguage", 'DateTime'>
+    readonly updatedAt: FieldRef<"StoreLanguage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StoreLanguage findUnique
+   */
+  export type StoreLanguageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * Filter, which StoreLanguage to fetch.
+     */
+    where: StoreLanguageWhereUniqueInput
+  }
+
+  /**
+   * StoreLanguage findUniqueOrThrow
+   */
+  export type StoreLanguageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * Filter, which StoreLanguage to fetch.
+     */
+    where: StoreLanguageWhereUniqueInput
+  }
+
+  /**
+   * StoreLanguage findFirst
+   */
+  export type StoreLanguageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * Filter, which StoreLanguage to fetch.
+     */
+    where?: StoreLanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLanguages to fetch.
+     */
+    orderBy?: StoreLanguageOrderByWithRelationInput | StoreLanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StoreLanguages.
+     */
+    cursor?: StoreLanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLanguages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLanguages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StoreLanguages.
+     */
+    distinct?: StoreLanguageScalarFieldEnum | StoreLanguageScalarFieldEnum[]
+  }
+
+  /**
+   * StoreLanguage findFirstOrThrow
+   */
+  export type StoreLanguageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * Filter, which StoreLanguage to fetch.
+     */
+    where?: StoreLanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLanguages to fetch.
+     */
+    orderBy?: StoreLanguageOrderByWithRelationInput | StoreLanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StoreLanguages.
+     */
+    cursor?: StoreLanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLanguages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLanguages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StoreLanguages.
+     */
+    distinct?: StoreLanguageScalarFieldEnum | StoreLanguageScalarFieldEnum[]
+  }
+
+  /**
+   * StoreLanguage findMany
+   */
+  export type StoreLanguageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * Filter, which StoreLanguages to fetch.
+     */
+    where?: StoreLanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLanguages to fetch.
+     */
+    orderBy?: StoreLanguageOrderByWithRelationInput | StoreLanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StoreLanguages.
+     */
+    cursor?: StoreLanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLanguages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLanguages.
+     */
+    skip?: number
+    distinct?: StoreLanguageScalarFieldEnum | StoreLanguageScalarFieldEnum[]
+  }
+
+  /**
+   * StoreLanguage create
+   */
+  export type StoreLanguageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * The data needed to create a StoreLanguage.
+     */
+    data: XOR<StoreLanguageCreateInput, StoreLanguageUncheckedCreateInput>
+  }
+
+  /**
+   * StoreLanguage createMany
+   */
+  export type StoreLanguageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StoreLanguages.
+     */
+    data: StoreLanguageCreateManyInput | StoreLanguageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StoreLanguage createManyAndReturn
+   */
+  export type StoreLanguageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * The data used to create many StoreLanguages.
+     */
+    data: StoreLanguageCreateManyInput | StoreLanguageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StoreLanguage update
+   */
+  export type StoreLanguageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * The data needed to update a StoreLanguage.
+     */
+    data: XOR<StoreLanguageUpdateInput, StoreLanguageUncheckedUpdateInput>
+    /**
+     * Choose, which StoreLanguage to update.
+     */
+    where: StoreLanguageWhereUniqueInput
+  }
+
+  /**
+   * StoreLanguage updateMany
+   */
+  export type StoreLanguageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StoreLanguages.
+     */
+    data: XOR<StoreLanguageUpdateManyMutationInput, StoreLanguageUncheckedUpdateManyInput>
+    /**
+     * Filter which StoreLanguages to update
+     */
+    where?: StoreLanguageWhereInput
+  }
+
+  /**
+   * StoreLanguage updateManyAndReturn
+   */
+  export type StoreLanguageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * The data used to update StoreLanguages.
+     */
+    data: XOR<StoreLanguageUpdateManyMutationInput, StoreLanguageUncheckedUpdateManyInput>
+    /**
+     * Filter which StoreLanguages to update
+     */
+    where?: StoreLanguageWhereInput
+  }
+
+  /**
+   * StoreLanguage upsert
+   */
+  export type StoreLanguageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * The filter to search for the StoreLanguage to update in case it exists.
+     */
+    where: StoreLanguageWhereUniqueInput
+    /**
+     * In case the StoreLanguage found by the `where` argument doesn't exist, create a new StoreLanguage with this data.
+     */
+    create: XOR<StoreLanguageCreateInput, StoreLanguageUncheckedCreateInput>
+    /**
+     * In case the StoreLanguage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StoreLanguageUpdateInput, StoreLanguageUncheckedUpdateInput>
+  }
+
+  /**
+   * StoreLanguage delete
+   */
+  export type StoreLanguageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+    /**
+     * Filter which StoreLanguage to delete.
+     */
+    where: StoreLanguageWhereUniqueInput
+  }
+
+  /**
+   * StoreLanguage deleteMany
+   */
+  export type StoreLanguageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StoreLanguages to delete
+     */
+    where?: StoreLanguageWhereInput
+  }
+
+  /**
+   * StoreLanguage without action
+   */
+  export type StoreLanguageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLanguage
+     */
+    select?: StoreLanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLanguage
+     */
+    omit?: StoreLanguageOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -41033,6 +42142,20 @@ export namespace Prisma {
   };
 
   export type WarehouseStockScalarFieldEnum = (typeof WarehouseStockScalarFieldEnum)[keyof typeof WarehouseStockScalarFieldEnum]
+
+
+  export const StoreLanguageScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    name: 'name',
+    isDefault: 'isDefault',
+    isActive: 'isActive',
+    translations: 'translations',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StoreLanguageScalarFieldEnum = (typeof StoreLanguageScalarFieldEnum)[keyof typeof StoreLanguageScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -43724,6 +44847,73 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"WarehouseStock"> | Date | string
   }
 
+  export type StoreLanguageWhereInput = {
+    AND?: StoreLanguageWhereInput | StoreLanguageWhereInput[]
+    OR?: StoreLanguageWhereInput[]
+    NOT?: StoreLanguageWhereInput | StoreLanguageWhereInput[]
+    id?: StringFilter<"StoreLanguage"> | string
+    code?: StringFilter<"StoreLanguage"> | string
+    name?: StringFilter<"StoreLanguage"> | string
+    isDefault?: BoolFilter<"StoreLanguage"> | boolean
+    isActive?: BoolFilter<"StoreLanguage"> | boolean
+    translations?: JsonFilter<"StoreLanguage">
+    createdAt?: DateTimeFilter<"StoreLanguage"> | Date | string
+    updatedAt?: DateTimeFilter<"StoreLanguage"> | Date | string
+  }
+
+  export type StoreLanguageOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    isActive?: SortOrder
+    translations?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StoreLanguageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    AND?: StoreLanguageWhereInput | StoreLanguageWhereInput[]
+    OR?: StoreLanguageWhereInput[]
+    NOT?: StoreLanguageWhereInput | StoreLanguageWhereInput[]
+    name?: StringFilter<"StoreLanguage"> | string
+    isDefault?: BoolFilter<"StoreLanguage"> | boolean
+    isActive?: BoolFilter<"StoreLanguage"> | boolean
+    translations?: JsonFilter<"StoreLanguage">
+    createdAt?: DateTimeFilter<"StoreLanguage"> | Date | string
+    updatedAt?: DateTimeFilter<"StoreLanguage"> | Date | string
+  }, "id" | "code">
+
+  export type StoreLanguageOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    isActive?: SortOrder
+    translations?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StoreLanguageCountOrderByAggregateInput
+    _max?: StoreLanguageMaxOrderByAggregateInput
+    _min?: StoreLanguageMinOrderByAggregateInput
+  }
+
+  export type StoreLanguageScalarWhereWithAggregatesInput = {
+    AND?: StoreLanguageScalarWhereWithAggregatesInput | StoreLanguageScalarWhereWithAggregatesInput[]
+    OR?: StoreLanguageScalarWhereWithAggregatesInput[]
+    NOT?: StoreLanguageScalarWhereWithAggregatesInput | StoreLanguageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StoreLanguage"> | string
+    code?: StringWithAggregatesFilter<"StoreLanguage"> | string
+    name?: StringWithAggregatesFilter<"StoreLanguage"> | string
+    isDefault?: BoolWithAggregatesFilter<"StoreLanguage"> | boolean
+    isActive?: BoolWithAggregatesFilter<"StoreLanguage"> | boolean
+    translations?: JsonWithAggregatesFilter<"StoreLanguage">
+    createdAt?: DateTimeWithAggregatesFilter<"StoreLanguage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StoreLanguage"> | Date | string
+  }
+
   export type StoreSettingCreateInput = {
     id?: string
     storeName: string
@@ -46361,6 +47551,83 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type StoreLanguageCreateInput = {
+    id?: string
+    code: string
+    name: string
+    isDefault?: boolean
+    isActive?: boolean
+    translations?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StoreLanguageUncheckedCreateInput = {
+    id?: string
+    code: string
+    name: string
+    isDefault?: boolean
+    isActive?: boolean
+    translations?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StoreLanguageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    translations?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoreLanguageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    translations?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoreLanguageCreateManyInput = {
+    id?: string
+    code: string
+    name: string
+    isDefault?: boolean
+    isActive?: boolean
+    translations?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StoreLanguageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    translations?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoreLanguageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    translations?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -48319,6 +49586,37 @@ export namespace Prisma {
 
   export type WarehouseStockSumOrderByAggregateInput = {
     stock?: SortOrder
+  }
+
+  export type StoreLanguageCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    isActive?: SortOrder
+    translations?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StoreLanguageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StoreLanguageMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    name?: SortOrder
+    isDefault?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

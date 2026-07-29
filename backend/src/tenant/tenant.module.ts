@@ -26,6 +26,7 @@ import { ContactInquiryModule } from './contact-inquiry/contact-inquiry.module';
 import { AffiliateModule } from './affiliate/affiliate.module';
 import { LoyaltyModule } from './loyalty/loyalty.module';
 import { WarehouseModule } from './warehouse/warehouse.module';
+import { LanguageModule } from './language/language.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { WarehouseModule } from './warehouse/warehouse.module';
     AffiliateModule,
     LoyaltyModule,
     WarehouseModule,
+    LanguageModule,
   ]
 })
 export class TenantModule {}
