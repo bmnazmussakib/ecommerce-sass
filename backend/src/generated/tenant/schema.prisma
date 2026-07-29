@@ -512,3 +512,15 @@ model StoreLanguage {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model CaptchaSetting {
+  id                  String   @id @default(uuid())
+  provider            String   @default("MATH") // "RECAPTCHA_V2", "RECAPTCHA_V3", "TURNSTILE", "MATH"
+  siteKey             String?
+  secretKey           String?
+  enableOnLogin       Boolean  @default(false)
+  enableOnCheckout    Boolean  @default(false)
+  enableOnContactForm Boolean  @default(true)
+  isEnabled           Boolean  @default(true)
+  updatedAt           DateTime @updatedAt
+}

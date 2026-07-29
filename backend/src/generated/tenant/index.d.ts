@@ -183,6 +183,11 @@ export type WarehouseStock = $Result.DefaultSelection<Prisma.$WarehouseStockPayl
  * 
  */
 export type StoreLanguage = $Result.DefaultSelection<Prisma.$StoreLanguagePayload>
+/**
+ * Model CaptchaSetting
+ * 
+ */
+export type CaptchaSetting = $Result.DefaultSelection<Prisma.$CaptchaSettingPayload>
 
 /**
  * Enums
@@ -818,6 +823,16 @@ export class PrismaClient<
     * ```
     */
   get storeLanguage(): Prisma.StoreLanguageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.captchaSetting`: Exposes CRUD operations for the **CaptchaSetting** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CaptchaSettings
+    * const captchaSettings = await prisma.captchaSetting.findMany()
+    * ```
+    */
+  get captchaSetting(): Prisma.CaptchaSettingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1291,7 +1306,8 @@ export namespace Prisma {
     LoyaltyTransaction: 'LoyaltyTransaction',
     Warehouse: 'Warehouse',
     WarehouseStock: 'WarehouseStock',
-    StoreLanguage: 'StoreLanguage'
+    StoreLanguage: 'StoreLanguage',
+    CaptchaSetting: 'CaptchaSetting'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1307,7 +1323,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule" | "bogoOffer" | "seoSetting" | "socialSetting" | "popupCampaign" | "contactInquiry" | "affiliatePartner" | "affiliateConversion" | "affiliatePayout" | "loyaltySetting" | "loyaltyTransaction" | "warehouse" | "warehouseStock" | "storeLanguage"
+      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule" | "bogoOffer" | "seoSetting" | "socialSetting" | "popupCampaign" | "contactInquiry" | "affiliatePartner" | "affiliateConversion" | "affiliatePayout" | "loyaltySetting" | "loyaltyTransaction" | "warehouse" | "warehouseStock" | "storeLanguage" | "captchaSetting"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3827,6 +3843,80 @@ export namespace Prisma {
           }
         }
       }
+      CaptchaSetting: {
+        payload: Prisma.$CaptchaSettingPayload<ExtArgs>
+        fields: Prisma.CaptchaSettingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CaptchaSettingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CaptchaSettingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>
+          }
+          findFirst: {
+            args: Prisma.CaptchaSettingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CaptchaSettingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>
+          }
+          findMany: {
+            args: Prisma.CaptchaSettingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>[]
+          }
+          create: {
+            args: Prisma.CaptchaSettingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>
+          }
+          createMany: {
+            args: Prisma.CaptchaSettingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CaptchaSettingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>[]
+          }
+          delete: {
+            args: Prisma.CaptchaSettingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>
+          }
+          update: {
+            args: Prisma.CaptchaSettingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>
+          }
+          deleteMany: {
+            args: Prisma.CaptchaSettingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CaptchaSettingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CaptchaSettingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>[]
+          }
+          upsert: {
+            args: Prisma.CaptchaSettingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CaptchaSettingPayload>
+          }
+          aggregate: {
+            args: Prisma.CaptchaSettingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCaptchaSetting>
+          }
+          groupBy: {
+            args: Prisma.CaptchaSettingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CaptchaSettingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CaptchaSettingCountArgs<ExtArgs>
+            result: $Utils.Optional<CaptchaSettingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3945,6 +4035,7 @@ export namespace Prisma {
     warehouse?: WarehouseOmit
     warehouseStock?: WarehouseStockOmit
     storeLanguage?: StoreLanguageOmit
+    captchaSetting?: CaptchaSettingOmit
   }
 
   /* Types for Logging */
@@ -41663,6 +41754,1041 @@ export namespace Prisma {
 
 
   /**
+   * Model CaptchaSetting
+   */
+
+  export type AggregateCaptchaSetting = {
+    _count: CaptchaSettingCountAggregateOutputType | null
+    _min: CaptchaSettingMinAggregateOutputType | null
+    _max: CaptchaSettingMaxAggregateOutputType | null
+  }
+
+  export type CaptchaSettingMinAggregateOutputType = {
+    id: string | null
+    provider: string | null
+    siteKey: string | null
+    secretKey: string | null
+    enableOnLogin: boolean | null
+    enableOnCheckout: boolean | null
+    enableOnContactForm: boolean | null
+    isEnabled: boolean | null
+    updatedAt: Date | null
+  }
+
+  export type CaptchaSettingMaxAggregateOutputType = {
+    id: string | null
+    provider: string | null
+    siteKey: string | null
+    secretKey: string | null
+    enableOnLogin: boolean | null
+    enableOnCheckout: boolean | null
+    enableOnContactForm: boolean | null
+    isEnabled: boolean | null
+    updatedAt: Date | null
+  }
+
+  export type CaptchaSettingCountAggregateOutputType = {
+    id: number
+    provider: number
+    siteKey: number
+    secretKey: number
+    enableOnLogin: number
+    enableOnCheckout: number
+    enableOnContactForm: number
+    isEnabled: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CaptchaSettingMinAggregateInputType = {
+    id?: true
+    provider?: true
+    siteKey?: true
+    secretKey?: true
+    enableOnLogin?: true
+    enableOnCheckout?: true
+    enableOnContactForm?: true
+    isEnabled?: true
+    updatedAt?: true
+  }
+
+  export type CaptchaSettingMaxAggregateInputType = {
+    id?: true
+    provider?: true
+    siteKey?: true
+    secretKey?: true
+    enableOnLogin?: true
+    enableOnCheckout?: true
+    enableOnContactForm?: true
+    isEnabled?: true
+    updatedAt?: true
+  }
+
+  export type CaptchaSettingCountAggregateInputType = {
+    id?: true
+    provider?: true
+    siteKey?: true
+    secretKey?: true
+    enableOnLogin?: true
+    enableOnCheckout?: true
+    enableOnContactForm?: true
+    isEnabled?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CaptchaSettingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CaptchaSetting to aggregate.
+     */
+    where?: CaptchaSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaptchaSettings to fetch.
+     */
+    orderBy?: CaptchaSettingOrderByWithRelationInput | CaptchaSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CaptchaSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaptchaSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaptchaSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CaptchaSettings
+    **/
+    _count?: true | CaptchaSettingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CaptchaSettingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CaptchaSettingMaxAggregateInputType
+  }
+
+  export type GetCaptchaSettingAggregateType<T extends CaptchaSettingAggregateArgs> = {
+        [P in keyof T & keyof AggregateCaptchaSetting]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCaptchaSetting[P]>
+      : GetScalarType<T[P], AggregateCaptchaSetting[P]>
+  }
+
+
+
+
+  export type CaptchaSettingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CaptchaSettingWhereInput
+    orderBy?: CaptchaSettingOrderByWithAggregationInput | CaptchaSettingOrderByWithAggregationInput[]
+    by: CaptchaSettingScalarFieldEnum[] | CaptchaSettingScalarFieldEnum
+    having?: CaptchaSettingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CaptchaSettingCountAggregateInputType | true
+    _min?: CaptchaSettingMinAggregateInputType
+    _max?: CaptchaSettingMaxAggregateInputType
+  }
+
+  export type CaptchaSettingGroupByOutputType = {
+    id: string
+    provider: string
+    siteKey: string | null
+    secretKey: string | null
+    enableOnLogin: boolean
+    enableOnCheckout: boolean
+    enableOnContactForm: boolean
+    isEnabled: boolean
+    updatedAt: Date
+    _count: CaptchaSettingCountAggregateOutputType | null
+    _min: CaptchaSettingMinAggregateOutputType | null
+    _max: CaptchaSettingMaxAggregateOutputType | null
+  }
+
+  type GetCaptchaSettingGroupByPayload<T extends CaptchaSettingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CaptchaSettingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CaptchaSettingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CaptchaSettingGroupByOutputType[P]>
+            : GetScalarType<T[P], CaptchaSettingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CaptchaSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    provider?: boolean
+    siteKey?: boolean
+    secretKey?: boolean
+    enableOnLogin?: boolean
+    enableOnCheckout?: boolean
+    enableOnContactForm?: boolean
+    isEnabled?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["captchaSetting"]>
+
+  export type CaptchaSettingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    provider?: boolean
+    siteKey?: boolean
+    secretKey?: boolean
+    enableOnLogin?: boolean
+    enableOnCheckout?: boolean
+    enableOnContactForm?: boolean
+    isEnabled?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["captchaSetting"]>
+
+  export type CaptchaSettingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    provider?: boolean
+    siteKey?: boolean
+    secretKey?: boolean
+    enableOnLogin?: boolean
+    enableOnCheckout?: boolean
+    enableOnContactForm?: boolean
+    isEnabled?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["captchaSetting"]>
+
+  export type CaptchaSettingSelectScalar = {
+    id?: boolean
+    provider?: boolean
+    siteKey?: boolean
+    secretKey?: boolean
+    enableOnLogin?: boolean
+    enableOnCheckout?: boolean
+    enableOnContactForm?: boolean
+    isEnabled?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CaptchaSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "provider" | "siteKey" | "secretKey" | "enableOnLogin" | "enableOnCheckout" | "enableOnContactForm" | "isEnabled" | "updatedAt", ExtArgs["result"]["captchaSetting"]>
+
+  export type $CaptchaSettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CaptchaSetting"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      provider: string
+      siteKey: string | null
+      secretKey: string | null
+      enableOnLogin: boolean
+      enableOnCheckout: boolean
+      enableOnContactForm: boolean
+      isEnabled: boolean
+      updatedAt: Date
+    }, ExtArgs["result"]["captchaSetting"]>
+    composites: {}
+  }
+
+  type CaptchaSettingGetPayload<S extends boolean | null | undefined | CaptchaSettingDefaultArgs> = $Result.GetResult<Prisma.$CaptchaSettingPayload, S>
+
+  type CaptchaSettingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CaptchaSettingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CaptchaSettingCountAggregateInputType | true
+    }
+
+  export interface CaptchaSettingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CaptchaSetting'], meta: { name: 'CaptchaSetting' } }
+    /**
+     * Find zero or one CaptchaSetting that matches the filter.
+     * @param {CaptchaSettingFindUniqueArgs} args - Arguments to find a CaptchaSetting
+     * @example
+     * // Get one CaptchaSetting
+     * const captchaSetting = await prisma.captchaSetting.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CaptchaSettingFindUniqueArgs>(args: SelectSubset<T, CaptchaSettingFindUniqueArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one CaptchaSetting that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CaptchaSettingFindUniqueOrThrowArgs} args - Arguments to find a CaptchaSetting
+     * @example
+     * // Get one CaptchaSetting
+     * const captchaSetting = await prisma.captchaSetting.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CaptchaSettingFindUniqueOrThrowArgs>(args: SelectSubset<T, CaptchaSettingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CaptchaSetting that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaptchaSettingFindFirstArgs} args - Arguments to find a CaptchaSetting
+     * @example
+     * // Get one CaptchaSetting
+     * const captchaSetting = await prisma.captchaSetting.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CaptchaSettingFindFirstArgs>(args?: SelectSubset<T, CaptchaSettingFindFirstArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first CaptchaSetting that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaptchaSettingFindFirstOrThrowArgs} args - Arguments to find a CaptchaSetting
+     * @example
+     * // Get one CaptchaSetting
+     * const captchaSetting = await prisma.captchaSetting.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CaptchaSettingFindFirstOrThrowArgs>(args?: SelectSubset<T, CaptchaSettingFindFirstOrThrowArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more CaptchaSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaptchaSettingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CaptchaSettings
+     * const captchaSettings = await prisma.captchaSetting.findMany()
+     * 
+     * // Get first 10 CaptchaSettings
+     * const captchaSettings = await prisma.captchaSetting.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const captchaSettingWithIdOnly = await prisma.captchaSetting.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CaptchaSettingFindManyArgs>(args?: SelectSubset<T, CaptchaSettingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a CaptchaSetting.
+     * @param {CaptchaSettingCreateArgs} args - Arguments to create a CaptchaSetting.
+     * @example
+     * // Create one CaptchaSetting
+     * const CaptchaSetting = await prisma.captchaSetting.create({
+     *   data: {
+     *     // ... data to create a CaptchaSetting
+     *   }
+     * })
+     * 
+     */
+    create<T extends CaptchaSettingCreateArgs>(args: SelectSubset<T, CaptchaSettingCreateArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many CaptchaSettings.
+     * @param {CaptchaSettingCreateManyArgs} args - Arguments to create many CaptchaSettings.
+     * @example
+     * // Create many CaptchaSettings
+     * const captchaSetting = await prisma.captchaSetting.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CaptchaSettingCreateManyArgs>(args?: SelectSubset<T, CaptchaSettingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CaptchaSettings and returns the data saved in the database.
+     * @param {CaptchaSettingCreateManyAndReturnArgs} args - Arguments to create many CaptchaSettings.
+     * @example
+     * // Create many CaptchaSettings
+     * const captchaSetting = await prisma.captchaSetting.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CaptchaSettings and only return the `id`
+     * const captchaSettingWithIdOnly = await prisma.captchaSetting.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CaptchaSettingCreateManyAndReturnArgs>(args?: SelectSubset<T, CaptchaSettingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a CaptchaSetting.
+     * @param {CaptchaSettingDeleteArgs} args - Arguments to delete one CaptchaSetting.
+     * @example
+     * // Delete one CaptchaSetting
+     * const CaptchaSetting = await prisma.captchaSetting.delete({
+     *   where: {
+     *     // ... filter to delete one CaptchaSetting
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CaptchaSettingDeleteArgs>(args: SelectSubset<T, CaptchaSettingDeleteArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one CaptchaSetting.
+     * @param {CaptchaSettingUpdateArgs} args - Arguments to update one CaptchaSetting.
+     * @example
+     * // Update one CaptchaSetting
+     * const captchaSetting = await prisma.captchaSetting.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CaptchaSettingUpdateArgs>(args: SelectSubset<T, CaptchaSettingUpdateArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more CaptchaSettings.
+     * @param {CaptchaSettingDeleteManyArgs} args - Arguments to filter CaptchaSettings to delete.
+     * @example
+     * // Delete a few CaptchaSettings
+     * const { count } = await prisma.captchaSetting.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CaptchaSettingDeleteManyArgs>(args?: SelectSubset<T, CaptchaSettingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CaptchaSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaptchaSettingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CaptchaSettings
+     * const captchaSetting = await prisma.captchaSetting.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CaptchaSettingUpdateManyArgs>(args: SelectSubset<T, CaptchaSettingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CaptchaSettings and returns the data updated in the database.
+     * @param {CaptchaSettingUpdateManyAndReturnArgs} args - Arguments to update many CaptchaSettings.
+     * @example
+     * // Update many CaptchaSettings
+     * const captchaSetting = await prisma.captchaSetting.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CaptchaSettings and only return the `id`
+     * const captchaSettingWithIdOnly = await prisma.captchaSetting.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CaptchaSettingUpdateManyAndReturnArgs>(args: SelectSubset<T, CaptchaSettingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one CaptchaSetting.
+     * @param {CaptchaSettingUpsertArgs} args - Arguments to update or create a CaptchaSetting.
+     * @example
+     * // Update or create a CaptchaSetting
+     * const captchaSetting = await prisma.captchaSetting.upsert({
+     *   create: {
+     *     // ... data to create a CaptchaSetting
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CaptchaSetting we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CaptchaSettingUpsertArgs>(args: SelectSubset<T, CaptchaSettingUpsertArgs<ExtArgs>>): Prisma__CaptchaSettingClient<$Result.GetResult<Prisma.$CaptchaSettingPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of CaptchaSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaptchaSettingCountArgs} args - Arguments to filter CaptchaSettings to count.
+     * @example
+     * // Count the number of CaptchaSettings
+     * const count = await prisma.captchaSetting.count({
+     *   where: {
+     *     // ... the filter for the CaptchaSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends CaptchaSettingCountArgs>(
+      args?: Subset<T, CaptchaSettingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CaptchaSettingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CaptchaSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaptchaSettingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CaptchaSettingAggregateArgs>(args: Subset<T, CaptchaSettingAggregateArgs>): Prisma.PrismaPromise<GetCaptchaSettingAggregateType<T>>
+
+    /**
+     * Group by CaptchaSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CaptchaSettingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CaptchaSettingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CaptchaSettingGroupByArgs['orderBy'] }
+        : { orderBy?: CaptchaSettingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CaptchaSettingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCaptchaSettingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CaptchaSetting model
+   */
+  readonly fields: CaptchaSettingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CaptchaSetting.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CaptchaSettingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CaptchaSetting model
+   */ 
+  interface CaptchaSettingFieldRefs {
+    readonly id: FieldRef<"CaptchaSetting", 'String'>
+    readonly provider: FieldRef<"CaptchaSetting", 'String'>
+    readonly siteKey: FieldRef<"CaptchaSetting", 'String'>
+    readonly secretKey: FieldRef<"CaptchaSetting", 'String'>
+    readonly enableOnLogin: FieldRef<"CaptchaSetting", 'Boolean'>
+    readonly enableOnCheckout: FieldRef<"CaptchaSetting", 'Boolean'>
+    readonly enableOnContactForm: FieldRef<"CaptchaSetting", 'Boolean'>
+    readonly isEnabled: FieldRef<"CaptchaSetting", 'Boolean'>
+    readonly updatedAt: FieldRef<"CaptchaSetting", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CaptchaSetting findUnique
+   */
+  export type CaptchaSettingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which CaptchaSetting to fetch.
+     */
+    where: CaptchaSettingWhereUniqueInput
+  }
+
+  /**
+   * CaptchaSetting findUniqueOrThrow
+   */
+  export type CaptchaSettingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which CaptchaSetting to fetch.
+     */
+    where: CaptchaSettingWhereUniqueInput
+  }
+
+  /**
+   * CaptchaSetting findFirst
+   */
+  export type CaptchaSettingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which CaptchaSetting to fetch.
+     */
+    where?: CaptchaSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaptchaSettings to fetch.
+     */
+    orderBy?: CaptchaSettingOrderByWithRelationInput | CaptchaSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CaptchaSettings.
+     */
+    cursor?: CaptchaSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaptchaSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaptchaSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CaptchaSettings.
+     */
+    distinct?: CaptchaSettingScalarFieldEnum | CaptchaSettingScalarFieldEnum[]
+  }
+
+  /**
+   * CaptchaSetting findFirstOrThrow
+   */
+  export type CaptchaSettingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which CaptchaSetting to fetch.
+     */
+    where?: CaptchaSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaptchaSettings to fetch.
+     */
+    orderBy?: CaptchaSettingOrderByWithRelationInput | CaptchaSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CaptchaSettings.
+     */
+    cursor?: CaptchaSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaptchaSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaptchaSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CaptchaSettings.
+     */
+    distinct?: CaptchaSettingScalarFieldEnum | CaptchaSettingScalarFieldEnum[]
+  }
+
+  /**
+   * CaptchaSetting findMany
+   */
+  export type CaptchaSettingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which CaptchaSettings to fetch.
+     */
+    where?: CaptchaSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CaptchaSettings to fetch.
+     */
+    orderBy?: CaptchaSettingOrderByWithRelationInput | CaptchaSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CaptchaSettings.
+     */
+    cursor?: CaptchaSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CaptchaSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CaptchaSettings.
+     */
+    skip?: number
+    distinct?: CaptchaSettingScalarFieldEnum | CaptchaSettingScalarFieldEnum[]
+  }
+
+  /**
+   * CaptchaSetting create
+   */
+  export type CaptchaSettingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a CaptchaSetting.
+     */
+    data: XOR<CaptchaSettingCreateInput, CaptchaSettingUncheckedCreateInput>
+  }
+
+  /**
+   * CaptchaSetting createMany
+   */
+  export type CaptchaSettingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CaptchaSettings.
+     */
+    data: CaptchaSettingCreateManyInput | CaptchaSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CaptchaSetting createManyAndReturn
+   */
+  export type CaptchaSettingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * The data used to create many CaptchaSettings.
+     */
+    data: CaptchaSettingCreateManyInput | CaptchaSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CaptchaSetting update
+   */
+  export type CaptchaSettingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a CaptchaSetting.
+     */
+    data: XOR<CaptchaSettingUpdateInput, CaptchaSettingUncheckedUpdateInput>
+    /**
+     * Choose, which CaptchaSetting to update.
+     */
+    where: CaptchaSettingWhereUniqueInput
+  }
+
+  /**
+   * CaptchaSetting updateMany
+   */
+  export type CaptchaSettingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CaptchaSettings.
+     */
+    data: XOR<CaptchaSettingUpdateManyMutationInput, CaptchaSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which CaptchaSettings to update
+     */
+    where?: CaptchaSettingWhereInput
+  }
+
+  /**
+   * CaptchaSetting updateManyAndReturn
+   */
+  export type CaptchaSettingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * The data used to update CaptchaSettings.
+     */
+    data: XOR<CaptchaSettingUpdateManyMutationInput, CaptchaSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which CaptchaSettings to update
+     */
+    where?: CaptchaSettingWhereInput
+  }
+
+  /**
+   * CaptchaSetting upsert
+   */
+  export type CaptchaSettingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the CaptchaSetting to update in case it exists.
+     */
+    where: CaptchaSettingWhereUniqueInput
+    /**
+     * In case the CaptchaSetting found by the `where` argument doesn't exist, create a new CaptchaSetting with this data.
+     */
+    create: XOR<CaptchaSettingCreateInput, CaptchaSettingUncheckedCreateInput>
+    /**
+     * In case the CaptchaSetting was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CaptchaSettingUpdateInput, CaptchaSettingUncheckedUpdateInput>
+  }
+
+  /**
+   * CaptchaSetting delete
+   */
+  export type CaptchaSettingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+    /**
+     * Filter which CaptchaSetting to delete.
+     */
+    where: CaptchaSettingWhereUniqueInput
+  }
+
+  /**
+   * CaptchaSetting deleteMany
+   */
+  export type CaptchaSettingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CaptchaSettings to delete
+     */
+    where?: CaptchaSettingWhereInput
+  }
+
+  /**
+   * CaptchaSetting without action
+   */
+  export type CaptchaSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CaptchaSetting
+     */
+    select?: CaptchaSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CaptchaSetting
+     */
+    omit?: CaptchaSettingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -42156,6 +43282,21 @@ export namespace Prisma {
   };
 
   export type StoreLanguageScalarFieldEnum = (typeof StoreLanguageScalarFieldEnum)[keyof typeof StoreLanguageScalarFieldEnum]
+
+
+  export const CaptchaSettingScalarFieldEnum: {
+    id: 'id',
+    provider: 'provider',
+    siteKey: 'siteKey',
+    secretKey: 'secretKey',
+    enableOnLogin: 'enableOnLogin',
+    enableOnCheckout: 'enableOnCheckout',
+    enableOnContactForm: 'enableOnContactForm',
+    isEnabled: 'isEnabled',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CaptchaSettingScalarFieldEnum = (typeof CaptchaSettingScalarFieldEnum)[keyof typeof CaptchaSettingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -44914,6 +46055,78 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"StoreLanguage"> | Date | string
   }
 
+  export type CaptchaSettingWhereInput = {
+    AND?: CaptchaSettingWhereInput | CaptchaSettingWhereInput[]
+    OR?: CaptchaSettingWhereInput[]
+    NOT?: CaptchaSettingWhereInput | CaptchaSettingWhereInput[]
+    id?: StringFilter<"CaptchaSetting"> | string
+    provider?: StringFilter<"CaptchaSetting"> | string
+    siteKey?: StringNullableFilter<"CaptchaSetting"> | string | null
+    secretKey?: StringNullableFilter<"CaptchaSetting"> | string | null
+    enableOnLogin?: BoolFilter<"CaptchaSetting"> | boolean
+    enableOnCheckout?: BoolFilter<"CaptchaSetting"> | boolean
+    enableOnContactForm?: BoolFilter<"CaptchaSetting"> | boolean
+    isEnabled?: BoolFilter<"CaptchaSetting"> | boolean
+    updatedAt?: DateTimeFilter<"CaptchaSetting"> | Date | string
+  }
+
+  export type CaptchaSettingOrderByWithRelationInput = {
+    id?: SortOrder
+    provider?: SortOrder
+    siteKey?: SortOrderInput | SortOrder
+    secretKey?: SortOrderInput | SortOrder
+    enableOnLogin?: SortOrder
+    enableOnCheckout?: SortOrder
+    enableOnContactForm?: SortOrder
+    isEnabled?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CaptchaSettingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CaptchaSettingWhereInput | CaptchaSettingWhereInput[]
+    OR?: CaptchaSettingWhereInput[]
+    NOT?: CaptchaSettingWhereInput | CaptchaSettingWhereInput[]
+    provider?: StringFilter<"CaptchaSetting"> | string
+    siteKey?: StringNullableFilter<"CaptchaSetting"> | string | null
+    secretKey?: StringNullableFilter<"CaptchaSetting"> | string | null
+    enableOnLogin?: BoolFilter<"CaptchaSetting"> | boolean
+    enableOnCheckout?: BoolFilter<"CaptchaSetting"> | boolean
+    enableOnContactForm?: BoolFilter<"CaptchaSetting"> | boolean
+    isEnabled?: BoolFilter<"CaptchaSetting"> | boolean
+    updatedAt?: DateTimeFilter<"CaptchaSetting"> | Date | string
+  }, "id">
+
+  export type CaptchaSettingOrderByWithAggregationInput = {
+    id?: SortOrder
+    provider?: SortOrder
+    siteKey?: SortOrderInput | SortOrder
+    secretKey?: SortOrderInput | SortOrder
+    enableOnLogin?: SortOrder
+    enableOnCheckout?: SortOrder
+    enableOnContactForm?: SortOrder
+    isEnabled?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CaptchaSettingCountOrderByAggregateInput
+    _max?: CaptchaSettingMaxOrderByAggregateInput
+    _min?: CaptchaSettingMinOrderByAggregateInput
+  }
+
+  export type CaptchaSettingScalarWhereWithAggregatesInput = {
+    AND?: CaptchaSettingScalarWhereWithAggregatesInput | CaptchaSettingScalarWhereWithAggregatesInput[]
+    OR?: CaptchaSettingScalarWhereWithAggregatesInput[]
+    NOT?: CaptchaSettingScalarWhereWithAggregatesInput | CaptchaSettingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CaptchaSetting"> | string
+    provider?: StringWithAggregatesFilter<"CaptchaSetting"> | string
+    siteKey?: StringNullableWithAggregatesFilter<"CaptchaSetting"> | string | null
+    secretKey?: StringNullableWithAggregatesFilter<"CaptchaSetting"> | string | null
+    enableOnLogin?: BoolWithAggregatesFilter<"CaptchaSetting"> | boolean
+    enableOnCheckout?: BoolWithAggregatesFilter<"CaptchaSetting"> | boolean
+    enableOnContactForm?: BoolWithAggregatesFilter<"CaptchaSetting"> | boolean
+    isEnabled?: BoolWithAggregatesFilter<"CaptchaSetting"> | boolean
+    updatedAt?: DateTimeWithAggregatesFilter<"CaptchaSetting"> | Date | string
+  }
+
   export type StoreSettingCreateInput = {
     id?: string
     storeName: string
@@ -47628,6 +48841,90 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CaptchaSettingCreateInput = {
+    id?: string
+    provider?: string
+    siteKey?: string | null
+    secretKey?: string | null
+    enableOnLogin?: boolean
+    enableOnCheckout?: boolean
+    enableOnContactForm?: boolean
+    isEnabled?: boolean
+    updatedAt?: Date | string
+  }
+
+  export type CaptchaSettingUncheckedCreateInput = {
+    id?: string
+    provider?: string
+    siteKey?: string | null
+    secretKey?: string | null
+    enableOnLogin?: boolean
+    enableOnCheckout?: boolean
+    enableOnContactForm?: boolean
+    isEnabled?: boolean
+    updatedAt?: Date | string
+  }
+
+  export type CaptchaSettingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    siteKey?: NullableStringFieldUpdateOperationsInput | string | null
+    secretKey?: NullableStringFieldUpdateOperationsInput | string | null
+    enableOnLogin?: BoolFieldUpdateOperationsInput | boolean
+    enableOnCheckout?: BoolFieldUpdateOperationsInput | boolean
+    enableOnContactForm?: BoolFieldUpdateOperationsInput | boolean
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaptchaSettingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    siteKey?: NullableStringFieldUpdateOperationsInput | string | null
+    secretKey?: NullableStringFieldUpdateOperationsInput | string | null
+    enableOnLogin?: BoolFieldUpdateOperationsInput | boolean
+    enableOnCheckout?: BoolFieldUpdateOperationsInput | boolean
+    enableOnContactForm?: BoolFieldUpdateOperationsInput | boolean
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaptchaSettingCreateManyInput = {
+    id?: string
+    provider?: string
+    siteKey?: string | null
+    secretKey?: string | null
+    enableOnLogin?: boolean
+    enableOnCheckout?: boolean
+    enableOnContactForm?: boolean
+    isEnabled?: boolean
+    updatedAt?: Date | string
+  }
+
+  export type CaptchaSettingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    siteKey?: NullableStringFieldUpdateOperationsInput | string | null
+    secretKey?: NullableStringFieldUpdateOperationsInput | string | null
+    enableOnLogin?: BoolFieldUpdateOperationsInput | boolean
+    enableOnCheckout?: BoolFieldUpdateOperationsInput | boolean
+    enableOnContactForm?: BoolFieldUpdateOperationsInput | boolean
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CaptchaSettingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    siteKey?: NullableStringFieldUpdateOperationsInput | string | null
+    secretKey?: NullableStringFieldUpdateOperationsInput | string | null
+    enableOnLogin?: BoolFieldUpdateOperationsInput | boolean
+    enableOnCheckout?: BoolFieldUpdateOperationsInput | boolean
+    enableOnContactForm?: BoolFieldUpdateOperationsInput | boolean
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -49616,6 +50913,42 @@ export namespace Prisma {
     isDefault?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CaptchaSettingCountOrderByAggregateInput = {
+    id?: SortOrder
+    provider?: SortOrder
+    siteKey?: SortOrder
+    secretKey?: SortOrder
+    enableOnLogin?: SortOrder
+    enableOnCheckout?: SortOrder
+    enableOnContactForm?: SortOrder
+    isEnabled?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CaptchaSettingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    provider?: SortOrder
+    siteKey?: SortOrder
+    secretKey?: SortOrder
+    enableOnLogin?: SortOrder
+    enableOnCheckout?: SortOrder
+    enableOnContactForm?: SortOrder
+    isEnabled?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CaptchaSettingMinOrderByAggregateInput = {
+    id?: SortOrder
+    provider?: SortOrder
+    siteKey?: SortOrder
+    secretKey?: SortOrder
+    enableOnLogin?: SortOrder
+    enableOnCheckout?: SortOrder
+    enableOnContactForm?: SortOrder
+    isEnabled?: SortOrder
     updatedAt?: SortOrder
   }
 

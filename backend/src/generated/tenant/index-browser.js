@@ -497,6 +497,18 @@ exports.Prisma.StoreLanguageScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CaptchaSettingScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  siteKey: 'siteKey',
+  secretKey: 'secretKey',
+  enableOnLogin: 'enableOnLogin',
+  enableOnCheckout: 'enableOnCheckout',
+  enableOnContactForm: 'enableOnContactForm',
+  isEnabled: 'isEnabled',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -636,7 +648,8 @@ exports.Prisma.ModelName = {
   LoyaltyTransaction: 'LoyaltyTransaction',
   Warehouse: 'Warehouse',
   WarehouseStock: 'WarehouseStock',
-  StoreLanguage: 'StoreLanguage'
+  StoreLanguage: 'StoreLanguage',
+  CaptchaSetting: 'CaptchaSetting'
 };
 
 /**

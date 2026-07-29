@@ -95,6 +95,7 @@
 | 2.51 | Loyalty points system | ✅ Done | Backend | — | — | Customer reward points earning, checkout redemption discount & transaction history |
 | 2.52 | Multi-warehouse stock support | ✅ Done | Backend | — | — | Warehouse management, location stock assignment, inter-hub transfer & variant stock breakdown |
 | 2.53 | Mobile app / PWA generation | 🧭 Roadmap | Frontend | Low | PWA (free), App store ($99/yr) | For premium vendors |
+| 2.54 | CAPTCHA for login & forms | ✅ Done | B/E + F/E | — | Google reCAPTCHA / Turnstile (free) | CaptchaSetting model, multi-provider engine (reCAPTCHA, Turnstile, Math CAPTCHA) & form integration |
 
 ---
 

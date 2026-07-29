@@ -27,6 +27,7 @@ import { AffiliateModule } from './affiliate/affiliate.module';
 import { LoyaltyModule } from './loyalty/loyalty.module';
 import { WarehouseModule } from './warehouse/warehouse.module';
 import { LanguageModule } from './language/language.module';
+import { CaptchaModule } from './captcha/captcha.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { LanguageModule } from './language/language.module';
     LoyaltyModule,
     WarehouseModule,
     LanguageModule,
+    CaptchaModule,
   ]
 })
 export class TenantModule {}

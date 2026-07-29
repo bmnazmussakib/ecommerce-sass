@@ -30,6 +30,16 @@ export class CreateContactInquiryDto {
   @ApiProperty({ example: 'Hello, I would like to know the status of my order.' })
   @IsString()
   message!: string;
+
+  @ApiProperty({ required: false, description: 'CAPTCHA token for verification' })
+  @IsString()
+  @IsOptional()
+  captchaToken?: string;
+
+  @ApiProperty({ required: false, description: 'CAPTCHA math answer if using Math provider' })
+  @IsString()
+  @IsOptional()
+  captchaAnswer?: string;
 }
 
 export class UpdateContactInquiryDto {

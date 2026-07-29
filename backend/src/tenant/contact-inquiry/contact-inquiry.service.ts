@@ -6,15 +6,25 @@ import {
   UpdateContactInquiryDto,
 } from './dto/contact-inquiry.dto';
 
+import { CaptchaService } from '../captcha/captcha.service';
+
 @Injectable()
 export class ContactInquiryService {
   constructor(
     @Inject(TENANT_PRISMA_CLIENT) private readonly prisma: TenantPrismaClient,
+    private readonly captchaService: CaptchaService,
   ) {}
 
   async create(dto: CreateContactInquiryDto) {
+    await this.captchaService.verifyForAction(
+      'CONTACT',
+      dto.captchaToken,
+      dto.captchaAnswer,
+    );
+
+    const { captchaToken, captchaAnswer, ...data } = dto;
     return this.prisma.contactInquiry.create({
-      data: dto,
+      data,
     });
   }
 
