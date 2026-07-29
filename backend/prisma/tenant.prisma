@@ -524,3 +524,14 @@ model CaptchaSetting {
   isEnabled           Boolean  @default(true)
   updatedAt           DateTime @updatedAt
 }
+
+model ApiKey {
+  id         String    @id @default(uuid())
+  name       String    // e.g. "Zapier Integration Key"
+  key        String    @unique // e.g. "ek_live_..."
+  rateLimit  Int       @default(100) // requests per minute
+  isActive   Boolean   @default(true)
+  lastUsedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}

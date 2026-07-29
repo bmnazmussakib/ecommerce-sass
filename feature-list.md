@@ -19,7 +19,7 @@
 | 1.7 | Admin role-based access | ✅ Done | Backend | — | — | Permission system for admin staff |
 | 1.8 | Subscription billing (SSLCommerz) | ✅ Done | Backend | — | SSLCommerz API (txn fees) | Gateway payment with callback verification |
 | 1.9 | Subscription CRUD | ✅ Done | Backend | — | — | Assign plans, upgrade/downgrade via billing flow |
-| 1.10 | Multi-currency plan pricing | 🔜 Due | Backend | Low | — | Set pricing in multiple currencies per plan |
+| 1.10 | Multi-currency plan pricing | ✅ Done | B/E + F/E | — | — | PlanPricing model in master schema, multi-currency rates & fallback resolution |
 | 1.11 | Admin store data access | ✅ Done | Backend | — | — | View vendor products, orders, customers |
 | 1.12 | GlobalTheme management | ✅ Done | Backend | — | Cloudinary (free 25GB) | Full CRUD with upload/activate/deactivate |
 | 1.13 | Vendor onboarding workflow | ✅ Done | Backend | — | — | Automatic DB provisioning, status management, staff registry |
@@ -135,10 +135,10 @@
 | 4.11 | BullMQ background job queue | ✅ Done | Backend | — | BullMQ + Redis (free OSS) | CSV import queue |
 | 4.12 | Swagger API documentation | ✅ Done | Backend | — | — | `/api` endpoint |
 | 4.13 | Cloudinary image storage | ✅ Done | Backend | — | Cloudinary (25GB free) | Product/store image upload |
-| 4.14 | CAPTCHA for login & forms | 🔜 Due | B/E + F/E | Medium | reCAPTCHA / Turnstile (free) | Brute-force protection |
+| 4.14 | CAPTCHA for login & forms | ✅ Done | B/E + F/E | — | reCAPTCHA / Turnstile (free) | CaptchaSetting model, multi-provider engine (reCAPTCHA, Turnstile, Math CAPTCHA) & form integration |
 | 4.15 | WAF | 🔜 Due | Infrastructure | Medium | Cloudflare (Free WAF) | AWS WAF / Cloudflare |
 | 4.16 | Automated backups & restore | 🔜 Due | Infrastructure | Medium | DB provider dependent (free tier) | DB backup strategy |
-| 4.17 | Rate limiting per store / API key | 🔜 Due | Backend | Medium | Redis (free self-hosted) | API key-based throttling |
+| 4.17 | Rate limiting per store / API key | ✅ Done | Backend | — | — | ApiKey model, secure prefix generation, sliding 1-min window ApiKeyGuard throttling & key CRUD |
 | 4.18 | ELK / CloudWatch logging | 🔜 Due | Infrastructure | Medium | ELK (free self-hosted), CloudWatch (free tier) | Centralized logging |
 | 4.19 | CI/CD pipeline | 🔜 Due | Infrastructure | Medium | GitHub Actions (2000 min/mo free) | Automated testing + deployment |
 | 4.20 | Docker containerization | 🔜 Due | Infrastructure | Medium | Docker (free OSS) | Dockerfile + compose exist, deployment pending |

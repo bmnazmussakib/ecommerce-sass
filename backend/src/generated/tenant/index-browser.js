@@ -509,6 +509,17 @@ exports.Prisma.CaptchaSettingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ApiKeyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  key: 'key',
+  rateLimit: 'rateLimit',
+  isActive: 'isActive',
+  lastUsedAt: 'lastUsedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -649,7 +660,8 @@ exports.Prisma.ModelName = {
   Warehouse: 'Warehouse',
   WarehouseStock: 'WarehouseStock',
   StoreLanguage: 'StoreLanguage',
-  CaptchaSetting: 'CaptchaSetting'
+  CaptchaSetting: 'CaptchaSetting',
+  ApiKey: 'ApiKey'
 };
 
 /**
