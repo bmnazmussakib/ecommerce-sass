@@ -1,6 +1,9 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsString, IsEnum, IsNumber, IsBoolean, IsDateString, IsOptional, Min } from 'class-validator';
-import { CouponType } from '@prisma/tenant-client';
+export enum CouponType {
+  PERCENTAGE = 'PERCENTAGE',
+  FLAT = 'FLAT',
+}
 
 export class CreateCouponDto {
   @ApiProperty({ example: 'SUMMER20' })

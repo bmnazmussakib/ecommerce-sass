@@ -21,6 +21,7 @@ import { TaxRuleModule } from './tax-rule/tax-rule.module';
 import { BogoOfferModule } from './bogo-offer/bogo-offer.module';
 import { SeoModule } from './seo/seo.module';
 import { SocialModule } from './social/social.module';
+import { PopupCampaignModule } from './popup-campaign/popup-campaign.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { SocialModule } from './social/social.module';
     BogoOfferModule,
     SeoModule,
     SocialModule,
+    PopupCampaignModule,
   ]
 })
 export class TenantModule {}

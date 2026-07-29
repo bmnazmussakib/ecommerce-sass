@@ -353,3 +353,26 @@ model SocialSetting {
   autoShareMessage   String?  @default("Check out this product!")
   updatedAt          DateTime @updatedAt
 }
+
+enum PopupTriggerType {
+  EXIT_INTENT
+  TIMED_DELAY
+  PAGE_SCROLL
+}
+
+model PopupCampaign {
+  id            String           @id @default(uuid())
+  title         String           // Internal campaign name
+  headline      String           // e.g. "Wait! Don't Leave Yet!"
+  content       String?          // Body text / description
+  imageUrl      String?          // Optional banner/image URL
+  ctaText       String?          // e.g. "Claim 10% Discount"
+  ctaLink       String?          // Target URL or redirect
+  triggerType   PopupTriggerType @default(EXIT_INTENT)
+  delaySeconds  Int              @default(5)  // For TIMED_DELAY
+  scrollPercent Int              @default(50) // For PAGE_SCROLL
+  couponCode    String?          // Optional promo code displayed to user
+  isActive      Boolean          @default(true)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}

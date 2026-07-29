@@ -380,6 +380,23 @@ exports.Prisma.SocialSettingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PopupCampaignScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  headline: 'headline',
+  content: 'content',
+  imageUrl: 'imageUrl',
+  ctaText: 'ctaText',
+  ctaLink: 'ctaLink',
+  triggerType: 'triggerType',
+  delaySeconds: 'delaySeconds',
+  scrollPercent: 'scrollPercent',
+  couponCode: 'couponCode',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -455,6 +472,12 @@ exports.IntProviderType = exports.$Enums.IntProviderType = {
   GA4: 'GA4'
 };
 
+exports.PopupTriggerType = exports.$Enums.PopupTriggerType = {
+  EXIT_INTENT: 'EXIT_INTENT',
+  TIMED_DELAY: 'TIMED_DELAY',
+  PAGE_SCROLL: 'PAGE_SCROLL'
+};
+
 exports.Prisma.ModelName = {
   StoreSetting: 'StoreSetting',
   Staff: 'Staff',
@@ -479,7 +502,8 @@ exports.Prisma.ModelName = {
   TaxRule: 'TaxRule',
   BogoOffer: 'BogoOffer',
   SeoSetting: 'SeoSetting',
-  SocialSetting: 'SocialSetting'
+  SocialSetting: 'SocialSetting',
+  PopupCampaign: 'PopupCampaign'
 };
 
 /**

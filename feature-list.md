@@ -83,7 +83,7 @@
 | 2.40 | BOGO offers | ✅ Done | Backend | — | — | Buy-one-get-one promotion engine |
 | 2.41 | Tax rules by region | ✅ Done | Backend | — | — | Regional tax rule management & checkout calculation |
 | 2.42 | Social media links & auto-sharing | ✅ Done | Both | — | Free | FB/Twitter/WhatsApp/LinkedIn sharing links & profile config |
-| 2.43 | Popup campaigns & exit intent | 🔜 Due | Both | Low | — | Marketing popups with exit detection |
+| 2.43 | Popup campaigns & exit intent | ✅ Done | Both | — | — | Marketing popups with exit intent, timed delay & scroll trigger engine |
 | 2.44 | Contact form | 🔜 Due | Backend | Low | — | Customer inquiry form handling |
 | 2.45 | Heatmaps & session replays | 🧭 Roadmap | Both | Low | Hotjar/Clarity (free tier) | Visitor behavior analytics |
 | 2.46 | Vendor dashboard UI | 🔜 Due | Frontend | High | — | Full merchant dashboard |
