@@ -79,7 +79,7 @@
 | 2.36 | Redx courier integration | 🔜 Due | Backend | Medium | Redx API (courier fees) | Courier booking with AWB generation |
 | 2.37 | Webhook configuration | ✅ Done | Backend | — | — | Event-driven webhook with retry + HMAC signing |
 | 2.38 | Data export — CSV/JSON | ✅ Done | Backend | — | — | Export products, orders, customers as CSV or JSON via GET /api/tenant/export |
-| 2.39 | Product scheduling — launch later | 🔜 Due | Backend | Low | — | Schedule product publish date |
+| 2.39 | Product scheduling — launch later | ✅ Done | Backend | — | — | Schedule product publish date |
 | 2.40 | BOGO offers | 🔜 Due | Backend | Low | — | Buy-one-get-one promotion engine |
 | 2.41 | Tax rules by region | 🔜 Due | Backend | Low | — | Tax config per region |
 | 2.42 | Social media links & auto-sharing | 🔜 Due | Both | Low | Free | FB/Twitter/WhatsApp sharing config |

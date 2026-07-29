@@ -130,7 +130,8 @@ export type StaffRole = (typeof StaffRole)[keyof typeof StaffRole]
 export const ProductStatus: {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
-  OUT_OF_STOCK: 'OUT_OF_STOCK'
+  OUT_OF_STOCK: 'OUT_OF_STOCK',
+  SCHEDULED: 'SCHEDULED'
 };
 
 export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
@@ -7327,6 +7328,7 @@ export namespace Prisma {
     basePrice: Decimal | null
     comparePrice: Decimal | null
     status: $Enums.ProductStatus | null
+    publishedAt: Date | null
     categoryId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7339,6 +7341,7 @@ export namespace Prisma {
     basePrice: Decimal | null
     comparePrice: Decimal | null
     status: $Enums.ProductStatus | null
+    publishedAt: Date | null
     categoryId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7351,6 +7354,7 @@ export namespace Prisma {
     basePrice: number
     comparePrice: number
     status: number
+    publishedAt: number
     categoryId: number
     createdAt: number
     updatedAt: number
@@ -7375,6 +7379,7 @@ export namespace Prisma {
     basePrice?: true
     comparePrice?: true
     status?: true
+    publishedAt?: true
     categoryId?: true
     createdAt?: true
     updatedAt?: true
@@ -7387,6 +7392,7 @@ export namespace Prisma {
     basePrice?: true
     comparePrice?: true
     status?: true
+    publishedAt?: true
     categoryId?: true
     createdAt?: true
     updatedAt?: true
@@ -7399,6 +7405,7 @@ export namespace Prisma {
     basePrice?: true
     comparePrice?: true
     status?: true
+    publishedAt?: true
     categoryId?: true
     createdAt?: true
     updatedAt?: true
@@ -7498,6 +7505,7 @@ export namespace Prisma {
     basePrice: Decimal
     comparePrice: Decimal | null
     status: $Enums.ProductStatus
+    publishedAt: Date | null
     categoryId: string | null
     createdAt: Date
     updatedAt: Date
@@ -7529,6 +7537,7 @@ export namespace Prisma {
     basePrice?: boolean
     comparePrice?: boolean
     status?: boolean
+    publishedAt?: boolean
     categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -7544,6 +7553,7 @@ export namespace Prisma {
     basePrice?: boolean
     comparePrice?: boolean
     status?: boolean
+    publishedAt?: boolean
     categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -7557,6 +7567,7 @@ export namespace Prisma {
     basePrice?: boolean
     comparePrice?: boolean
     status?: boolean
+    publishedAt?: boolean
     categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -7570,12 +7581,13 @@ export namespace Prisma {
     basePrice?: boolean
     comparePrice?: boolean
     status?: boolean
+    publishedAt?: boolean
     categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "basePrice" | "comparePrice" | "status" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "basePrice" | "comparePrice" | "status" | "publishedAt" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | Product$categoryArgs<ExtArgs>
     variants?: boolean | Product$variantsArgs<ExtArgs>
@@ -7601,6 +7613,7 @@ export namespace Prisma {
       basePrice: Prisma.Decimal
       comparePrice: Prisma.Decimal | null
       status: $Enums.ProductStatus
+      publishedAt: Date | null
       categoryId: string | null
       createdAt: Date
       updatedAt: Date
@@ -8035,6 +8048,7 @@ export namespace Prisma {
     readonly basePrice: FieldRef<"Product", 'Decimal'>
     readonly comparePrice: FieldRef<"Product", 'Decimal'>
     readonly status: FieldRef<"Product", 'ProductStatus'>
+    readonly publishedAt: FieldRef<"Product", 'DateTime'>
     readonly categoryId: FieldRef<"Product", 'String'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
@@ -24874,6 +24888,7 @@ export namespace Prisma {
     basePrice: 'basePrice',
     comparePrice: 'comparePrice',
     status: 'status',
+    publishedAt: 'publishedAt',
     categoryId: 'categoryId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -25591,6 +25606,7 @@ export namespace Prisma {
     basePrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     comparePrice?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
+    publishedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     categoryId?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -25605,6 +25621,7 @@ export namespace Prisma {
     basePrice?: SortOrder
     comparePrice?: SortOrderInput | SortOrder
     status?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
     categoryId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -25622,6 +25639,7 @@ export namespace Prisma {
     basePrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     comparePrice?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
+    publishedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     categoryId?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -25636,6 +25654,7 @@ export namespace Prisma {
     basePrice?: SortOrder
     comparePrice?: SortOrderInput | SortOrder
     status?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
     categoryId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -25656,6 +25675,7 @@ export namespace Prisma {
     basePrice?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
     comparePrice?: DecimalNullableWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusWithAggregatesFilter<"Product"> | $Enums.ProductStatus
+    publishedAt?: DateTimeNullableWithAggregatesFilter<"Product"> | Date | string | null
     categoryId?: StringNullableWithAggregatesFilter<"Product"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -26988,6 +27008,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category?: CategoryCreateNestedOneWithoutProductsInput
@@ -27001,6 +27022,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27014,6 +27036,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneWithoutProductsNestedInput
@@ -27027,6 +27050,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27040,6 +27064,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27052,6 +27077,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27063,6 +27089,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28542,6 +28569,17 @@ export namespace Prisma {
     not?: NestedEnumProductStatusFilter<$PrismaModel> | $Enums.ProductStatus
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type ProductVariantListRelationFilter = {
     every?: ProductVariantWhereInput
     some?: ProductVariantWhereInput
@@ -28559,6 +28597,7 @@ export namespace Prisma {
     basePrice?: SortOrder
     comparePrice?: SortOrder
     status?: SortOrder
+    publishedAt?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28576,6 +28615,7 @@ export namespace Prisma {
     basePrice?: SortOrder
     comparePrice?: SortOrder
     status?: SortOrder
+    publishedAt?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28588,6 +28628,7 @@ export namespace Prisma {
     basePrice?: SortOrder
     comparePrice?: SortOrder
     status?: SortOrder
+    publishedAt?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28622,6 +28663,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProductStatusFilter<$PrismaModel>
     _max?: NestedEnumProductStatusFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -28737,17 +28792,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type ProductVariantScalarRelationFilter = {
     is?: ProductVariantWhereInput
     isNot?: ProductVariantWhereInput
@@ -28786,20 +28830,6 @@ export namespace Prisma {
     expiresAt?: SortOrder
     downloadedAt?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type SupplierScalarRelationFilter = {
@@ -29587,6 +29617,10 @@ export namespace Prisma {
     set?: $Enums.ProductStatus
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type CategoryUpdateOneWithoutProductsNestedInput = {
     create?: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutProductsInput
@@ -29825,10 +29859,6 @@ export namespace Prisma {
     create?: XOR<OrderCreateWithoutDigitalDownloadsInput, OrderUncheckedCreateWithoutDigitalDownloadsInput>
     connectOrCreate?: OrderCreateOrConnectWithoutDigitalDownloadsInput
     connect?: OrderWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type ProductVariantUpdateOneRequiredWithoutDigitalDownloadsNestedInput = {
@@ -30424,6 +30454,17 @@ export namespace Prisma {
     not?: NestedEnumProductStatusFilter<$PrismaModel> | $Enums.ProductStatus
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -30448,6 +30489,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProductStatusFilter<$PrismaModel>
     _max?: NestedEnumProductStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -30475,31 +30530,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
@@ -30699,6 +30729,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     variants?: ProductVariantCreateNestedManyWithoutProductInput
@@ -30711,6 +30742,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
@@ -30808,6 +30840,7 @@ export namespace Prisma {
     basePrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     comparePrice?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
+    publishedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     categoryId?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -30946,6 +30979,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category?: CategoryCreateNestedOneWithoutProductsInput
@@ -30958,6 +30992,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31090,6 +31125,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneWithoutProductsNestedInput
@@ -31102,6 +31138,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32255,6 +32292,7 @@ export namespace Prisma {
     basePrice: Decimal | DecimalJsLike | number | string
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     status?: $Enums.ProductStatus
+    publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -32291,6 +32329,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
@@ -32303,6 +32342,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
@@ -32315,6 +32355,7 @@ export namespace Prisma {
     basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

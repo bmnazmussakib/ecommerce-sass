@@ -166,6 +166,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   basePrice: 'basePrice',
   comparePrice: 'comparePrice',
   status: 'status',
+  publishedAt: 'publishedAt',
   categoryId: 'categoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -356,7 +357,8 @@ exports.StaffRole = exports.$Enums.StaffRole = {
 exports.ProductStatus = exports.$Enums.ProductStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
-  OUT_OF_STOCK: 'OUT_OF_STOCK'
+  OUT_OF_STOCK: 'OUT_OF_STOCK',
+  SCHEDULED: 'SCHEDULED'
 };
 
 exports.PaymentMethod = exports.$Enums.PaymentMethod = {

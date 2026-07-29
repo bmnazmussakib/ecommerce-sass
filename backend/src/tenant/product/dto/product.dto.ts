@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEnum, IsNumber, IsArray, ValidateNested } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsNumber, IsArray, ValidateNested, IsDateString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -6,6 +6,7 @@ export enum ProductStatus {
   DRAFT = 'DRAFT',
   ACTIVE = 'ACTIVE',
   OUT_OF_STOCK = 'OUT_OF_STOCK',
+  SCHEDULED = 'SCHEDULED',
 }
 
 export class ProductVariantDto {
@@ -56,6 +57,11 @@ export class CreateProductDto {
   @IsOptional()
   status?: ProductStatus;
 
+  @ApiProperty({ required: false, example: '2026-08-01T00:00:00.000Z' })
+  @IsDateString()
+  @IsOptional()
+  publishedAt?: string;
+
   @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
@@ -94,6 +100,11 @@ export class UpdateProductDto {
   @IsEnum(ProductStatus)
   @IsOptional()
   status?: ProductStatus;
+
+  @ApiProperty({ required: false, example: '2026-08-01T00:00:00.000Z' })
+  @IsDateString()
+  @IsOptional()
+  publishedAt?: string;
 
   @ApiProperty({ required: false })
   @IsString()

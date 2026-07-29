@@ -37,12 +37,43 @@ export class ProductService {
   }
 
 
+  async checkAndPublishScheduledProducts(tenantId: string = 'default') {
+    const now = new Date();
+    const dueProducts = await this.prisma.product.findMany({
+      where: {
+        status: 'SCHEDULED',
+        publishedAt: {
+          lte: now,
+        },
+      },
+      include: { category: true, variants: true },
+    });
+
+    if (dueProducts.length === 0) {
+      return { publishedCount: 0, products: [] };
+    }
+
+    const updatedProducts = [];
+    for (const product of dueProducts) {
+      const updated = await this.prisma.product.update({
+        where: { id: product.id },
+        data: { status: 'ACTIVE' },
+        include: { category: true, variants: true },
+      });
+      await this.meilisearchService.syncProduct(tenantId, updated);
+      updatedProducts.push(updated);
+    }
+
+    return { publishedCount: updatedProducts.length, products: updatedProducts };
+  }
+
   async create(createProductDto: CreateProductDto, tenantId: string = 'default') {
-    const { variants, ...productData } = createProductDto;
+    const { variants, publishedAt, ...productData } = createProductDto;
     
     const product = await this.prisma.product.create({
       data: {
         ...productData,
+        publishedAt: publishedAt ? new Date(publishedAt) : undefined,
         variants: variants ? {
           create: variants,
         } : undefined,
@@ -56,7 +87,8 @@ export class ProductService {
     return product;
   }
 
-  async findAll() {
+  async findAll(tenantId: string = 'default') {
+    await this.checkAndPublishScheduledProducts(tenantId);
     return this.prisma.product.findMany({
       include: { category: true, variants: true },
     });
@@ -73,9 +105,13 @@ export class ProductService {
 
   async update(id: string, updateProductDto: UpdateProductDto, tenantId: string = 'default') {
     await this.findOne(id);
+    const { publishedAt, ...productData } = updateProductDto;
     const product = await this.prisma.product.update({
       where: { id },
-      data: updateProductDto,
+      data: {
+        ...productData,
+        publishedAt: publishedAt ? new Date(publishedAt) : undefined,
+      },
       include: { category: true, variants: true },
     });
 

@@ -68,6 +68,7 @@ model Product {
   basePrice     Decimal          @db.Decimal(10, 2)
   comparePrice  Decimal?         @db.Decimal(10, 2)
   status        ProductStatus    @default(DRAFT)
+  publishedAt   DateTime?
   categoryId    String?
   category      Category?        @relation(fields: [categoryId], references: [id])
   createdAt     DateTime         @default(now())
@@ -79,6 +80,7 @@ enum ProductStatus {
   DRAFT
   ACTIVE
   OUT_OF_STOCK
+  SCHEDULED
 }
 
 model ProductVariant {

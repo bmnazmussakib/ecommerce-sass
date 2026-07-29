@@ -72,10 +72,21 @@ export class ProductController {
     return this.productService.search(query, tenantId);
   }
 
+  @ApiBearerAuth()
+  @Roles('OWNER', 'ADMIN')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Post('publish-scheduled')
+  @ApiOperation({ summary: 'Check and publish scheduled products due for release' })
+  publishScheduled(@Req() req: any) {
+    const tenantId = req.headers['x-tenant-id'] || 'default';
+    return this.productService.checkAndPublishScheduledProducts(tenantId);
+  }
+
   @Get()
   @ApiOperation({ summary: 'Get all products' })
-  findAll() {
-    return this.productService.findAll();
+  findAll(@Req() req: any) {
+    const tenantId = req.headers['x-tenant-id'] || 'default';
+    return this.productService.findAll(tenantId);
   }
 
   @Get(':id')
