@@ -128,6 +128,11 @@ export type BogoOffer = $Result.DefaultSelection<Prisma.$BogoOfferPayload>
  * 
  */
 export type SeoSetting = $Result.DefaultSelection<Prisma.$SeoSettingPayload>
+/**
+ * Model SocialSetting
+ * 
+ */
+export type SocialSetting = $Result.DefaultSelection<Prisma.$SocialSettingPayload>
 
 /**
  * Enums
@@ -588,6 +593,16 @@ export class PrismaClient<
     * ```
     */
   get seoSetting(): Prisma.SeoSettingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.socialSetting`: Exposes CRUD operations for the **SocialSetting** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SocialSettings
+    * const socialSettings = await prisma.socialSetting.findMany()
+    * ```
+    */
+  get socialSetting(): Prisma.SocialSettingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1050,7 +1065,8 @@ export namespace Prisma {
     ShippingRate: 'ShippingRate',
     TaxRule: 'TaxRule',
     BogoOffer: 'BogoOffer',
-    SeoSetting: 'SeoSetting'
+    SeoSetting: 'SeoSetting',
+    SocialSetting: 'SocialSetting'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1066,7 +1082,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule" | "bogoOffer" | "seoSetting"
+      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule" | "bogoOffer" | "seoSetting" | "socialSetting"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2772,6 +2788,80 @@ export namespace Prisma {
           }
         }
       }
+      SocialSetting: {
+        payload: Prisma.$SocialSettingPayload<ExtArgs>
+        fields: Prisma.SocialSettingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SocialSettingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SocialSettingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>
+          }
+          findFirst: {
+            args: Prisma.SocialSettingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SocialSettingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>
+          }
+          findMany: {
+            args: Prisma.SocialSettingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>[]
+          }
+          create: {
+            args: Prisma.SocialSettingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>
+          }
+          createMany: {
+            args: Prisma.SocialSettingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SocialSettingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>[]
+          }
+          delete: {
+            args: Prisma.SocialSettingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>
+          }
+          update: {
+            args: Prisma.SocialSettingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>
+          }
+          deleteMany: {
+            args: Prisma.SocialSettingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SocialSettingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SocialSettingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>[]
+          }
+          upsert: {
+            args: Prisma.SocialSettingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SocialSettingPayload>
+          }
+          aggregate: {
+            args: Prisma.SocialSettingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSocialSetting>
+          }
+          groupBy: {
+            args: Prisma.SocialSettingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SocialSettingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SocialSettingCountArgs<ExtArgs>
+            result: $Utils.Optional<SocialSettingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2879,6 +2969,7 @@ export namespace Prisma {
     taxRule?: TaxRuleOmit
     bogoOffer?: BogoOfferOmit
     seoSetting?: SeoSettingOmit
+    socialSetting?: SocialSettingOmit
   }
 
   /* Types for Logging */
@@ -28350,6 +28441,1067 @@ export namespace Prisma {
 
 
   /**
+   * Model SocialSetting
+   */
+
+  export type AggregateSocialSetting = {
+    _count: SocialSettingCountAggregateOutputType | null
+    _min: SocialSettingMinAggregateOutputType | null
+    _max: SocialSettingMaxAggregateOutputType | null
+  }
+
+  export type SocialSettingMinAggregateOutputType = {
+    id: string | null
+    facebookUrl: string | null
+    instagramUrl: string | null
+    twitterUrl: string | null
+    whatsappNumber: string | null
+    youtubeUrl: string | null
+    linkedinUrl: string | null
+    pinterestUrl: string | null
+    enableShareButtons: boolean | null
+    autoShareMessage: string | null
+    updatedAt: Date | null
+  }
+
+  export type SocialSettingMaxAggregateOutputType = {
+    id: string | null
+    facebookUrl: string | null
+    instagramUrl: string | null
+    twitterUrl: string | null
+    whatsappNumber: string | null
+    youtubeUrl: string | null
+    linkedinUrl: string | null
+    pinterestUrl: string | null
+    enableShareButtons: boolean | null
+    autoShareMessage: string | null
+    updatedAt: Date | null
+  }
+
+  export type SocialSettingCountAggregateOutputType = {
+    id: number
+    facebookUrl: number
+    instagramUrl: number
+    twitterUrl: number
+    whatsappNumber: number
+    youtubeUrl: number
+    linkedinUrl: number
+    pinterestUrl: number
+    enableShareButtons: number
+    autoShareMessage: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SocialSettingMinAggregateInputType = {
+    id?: true
+    facebookUrl?: true
+    instagramUrl?: true
+    twitterUrl?: true
+    whatsappNumber?: true
+    youtubeUrl?: true
+    linkedinUrl?: true
+    pinterestUrl?: true
+    enableShareButtons?: true
+    autoShareMessage?: true
+    updatedAt?: true
+  }
+
+  export type SocialSettingMaxAggregateInputType = {
+    id?: true
+    facebookUrl?: true
+    instagramUrl?: true
+    twitterUrl?: true
+    whatsappNumber?: true
+    youtubeUrl?: true
+    linkedinUrl?: true
+    pinterestUrl?: true
+    enableShareButtons?: true
+    autoShareMessage?: true
+    updatedAt?: true
+  }
+
+  export type SocialSettingCountAggregateInputType = {
+    id?: true
+    facebookUrl?: true
+    instagramUrl?: true
+    twitterUrl?: true
+    whatsappNumber?: true
+    youtubeUrl?: true
+    linkedinUrl?: true
+    pinterestUrl?: true
+    enableShareButtons?: true
+    autoShareMessage?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SocialSettingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SocialSetting to aggregate.
+     */
+    where?: SocialSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SocialSettings to fetch.
+     */
+    orderBy?: SocialSettingOrderByWithRelationInput | SocialSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SocialSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SocialSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SocialSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SocialSettings
+    **/
+    _count?: true | SocialSettingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SocialSettingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SocialSettingMaxAggregateInputType
+  }
+
+  export type GetSocialSettingAggregateType<T extends SocialSettingAggregateArgs> = {
+        [P in keyof T & keyof AggregateSocialSetting]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSocialSetting[P]>
+      : GetScalarType<T[P], AggregateSocialSetting[P]>
+  }
+
+
+
+
+  export type SocialSettingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SocialSettingWhereInput
+    orderBy?: SocialSettingOrderByWithAggregationInput | SocialSettingOrderByWithAggregationInput[]
+    by: SocialSettingScalarFieldEnum[] | SocialSettingScalarFieldEnum
+    having?: SocialSettingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SocialSettingCountAggregateInputType | true
+    _min?: SocialSettingMinAggregateInputType
+    _max?: SocialSettingMaxAggregateInputType
+  }
+
+  export type SocialSettingGroupByOutputType = {
+    id: string
+    facebookUrl: string | null
+    instagramUrl: string | null
+    twitterUrl: string | null
+    whatsappNumber: string | null
+    youtubeUrl: string | null
+    linkedinUrl: string | null
+    pinterestUrl: string | null
+    enableShareButtons: boolean
+    autoShareMessage: string | null
+    updatedAt: Date
+    _count: SocialSettingCountAggregateOutputType | null
+    _min: SocialSettingMinAggregateOutputType | null
+    _max: SocialSettingMaxAggregateOutputType | null
+  }
+
+  type GetSocialSettingGroupByPayload<T extends SocialSettingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SocialSettingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SocialSettingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SocialSettingGroupByOutputType[P]>
+            : GetScalarType<T[P], SocialSettingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SocialSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facebookUrl?: boolean
+    instagramUrl?: boolean
+    twitterUrl?: boolean
+    whatsappNumber?: boolean
+    youtubeUrl?: boolean
+    linkedinUrl?: boolean
+    pinterestUrl?: boolean
+    enableShareButtons?: boolean
+    autoShareMessage?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["socialSetting"]>
+
+  export type SocialSettingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facebookUrl?: boolean
+    instagramUrl?: boolean
+    twitterUrl?: boolean
+    whatsappNumber?: boolean
+    youtubeUrl?: boolean
+    linkedinUrl?: boolean
+    pinterestUrl?: boolean
+    enableShareButtons?: boolean
+    autoShareMessage?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["socialSetting"]>
+
+  export type SocialSettingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facebookUrl?: boolean
+    instagramUrl?: boolean
+    twitterUrl?: boolean
+    whatsappNumber?: boolean
+    youtubeUrl?: boolean
+    linkedinUrl?: boolean
+    pinterestUrl?: boolean
+    enableShareButtons?: boolean
+    autoShareMessage?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["socialSetting"]>
+
+  export type SocialSettingSelectScalar = {
+    id?: boolean
+    facebookUrl?: boolean
+    instagramUrl?: boolean
+    twitterUrl?: boolean
+    whatsappNumber?: boolean
+    youtubeUrl?: boolean
+    linkedinUrl?: boolean
+    pinterestUrl?: boolean
+    enableShareButtons?: boolean
+    autoShareMessage?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SocialSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "facebookUrl" | "instagramUrl" | "twitterUrl" | "whatsappNumber" | "youtubeUrl" | "linkedinUrl" | "pinterestUrl" | "enableShareButtons" | "autoShareMessage" | "updatedAt", ExtArgs["result"]["socialSetting"]>
+
+  export type $SocialSettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SocialSetting"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      facebookUrl: string | null
+      instagramUrl: string | null
+      twitterUrl: string | null
+      whatsappNumber: string | null
+      youtubeUrl: string | null
+      linkedinUrl: string | null
+      pinterestUrl: string | null
+      enableShareButtons: boolean
+      autoShareMessage: string | null
+      updatedAt: Date
+    }, ExtArgs["result"]["socialSetting"]>
+    composites: {}
+  }
+
+  type SocialSettingGetPayload<S extends boolean | null | undefined | SocialSettingDefaultArgs> = $Result.GetResult<Prisma.$SocialSettingPayload, S>
+
+  type SocialSettingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SocialSettingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SocialSettingCountAggregateInputType | true
+    }
+
+  export interface SocialSettingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SocialSetting'], meta: { name: 'SocialSetting' } }
+    /**
+     * Find zero or one SocialSetting that matches the filter.
+     * @param {SocialSettingFindUniqueArgs} args - Arguments to find a SocialSetting
+     * @example
+     * // Get one SocialSetting
+     * const socialSetting = await prisma.socialSetting.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SocialSettingFindUniqueArgs>(args: SelectSubset<T, SocialSettingFindUniqueArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one SocialSetting that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SocialSettingFindUniqueOrThrowArgs} args - Arguments to find a SocialSetting
+     * @example
+     * // Get one SocialSetting
+     * const socialSetting = await prisma.socialSetting.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SocialSettingFindUniqueOrThrowArgs>(args: SelectSubset<T, SocialSettingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SocialSetting that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SocialSettingFindFirstArgs} args - Arguments to find a SocialSetting
+     * @example
+     * // Get one SocialSetting
+     * const socialSetting = await prisma.socialSetting.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SocialSettingFindFirstArgs>(args?: SelectSubset<T, SocialSettingFindFirstArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first SocialSetting that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SocialSettingFindFirstOrThrowArgs} args - Arguments to find a SocialSetting
+     * @example
+     * // Get one SocialSetting
+     * const socialSetting = await prisma.socialSetting.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SocialSettingFindFirstOrThrowArgs>(args?: SelectSubset<T, SocialSettingFindFirstOrThrowArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more SocialSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SocialSettingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SocialSettings
+     * const socialSettings = await prisma.socialSetting.findMany()
+     * 
+     * // Get first 10 SocialSettings
+     * const socialSettings = await prisma.socialSetting.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const socialSettingWithIdOnly = await prisma.socialSetting.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SocialSettingFindManyArgs>(args?: SelectSubset<T, SocialSettingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a SocialSetting.
+     * @param {SocialSettingCreateArgs} args - Arguments to create a SocialSetting.
+     * @example
+     * // Create one SocialSetting
+     * const SocialSetting = await prisma.socialSetting.create({
+     *   data: {
+     *     // ... data to create a SocialSetting
+     *   }
+     * })
+     * 
+     */
+    create<T extends SocialSettingCreateArgs>(args: SelectSubset<T, SocialSettingCreateArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many SocialSettings.
+     * @param {SocialSettingCreateManyArgs} args - Arguments to create many SocialSettings.
+     * @example
+     * // Create many SocialSettings
+     * const socialSetting = await prisma.socialSetting.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SocialSettingCreateManyArgs>(args?: SelectSubset<T, SocialSettingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SocialSettings and returns the data saved in the database.
+     * @param {SocialSettingCreateManyAndReturnArgs} args - Arguments to create many SocialSettings.
+     * @example
+     * // Create many SocialSettings
+     * const socialSetting = await prisma.socialSetting.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SocialSettings and only return the `id`
+     * const socialSettingWithIdOnly = await prisma.socialSetting.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SocialSettingCreateManyAndReturnArgs>(args?: SelectSubset<T, SocialSettingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a SocialSetting.
+     * @param {SocialSettingDeleteArgs} args - Arguments to delete one SocialSetting.
+     * @example
+     * // Delete one SocialSetting
+     * const SocialSetting = await prisma.socialSetting.delete({
+     *   where: {
+     *     // ... filter to delete one SocialSetting
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SocialSettingDeleteArgs>(args: SelectSubset<T, SocialSettingDeleteArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one SocialSetting.
+     * @param {SocialSettingUpdateArgs} args - Arguments to update one SocialSetting.
+     * @example
+     * // Update one SocialSetting
+     * const socialSetting = await prisma.socialSetting.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SocialSettingUpdateArgs>(args: SelectSubset<T, SocialSettingUpdateArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more SocialSettings.
+     * @param {SocialSettingDeleteManyArgs} args - Arguments to filter SocialSettings to delete.
+     * @example
+     * // Delete a few SocialSettings
+     * const { count } = await prisma.socialSetting.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SocialSettingDeleteManyArgs>(args?: SelectSubset<T, SocialSettingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SocialSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SocialSettingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SocialSettings
+     * const socialSetting = await prisma.socialSetting.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SocialSettingUpdateManyArgs>(args: SelectSubset<T, SocialSettingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SocialSettings and returns the data updated in the database.
+     * @param {SocialSettingUpdateManyAndReturnArgs} args - Arguments to update many SocialSettings.
+     * @example
+     * // Update many SocialSettings
+     * const socialSetting = await prisma.socialSetting.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SocialSettings and only return the `id`
+     * const socialSettingWithIdOnly = await prisma.socialSetting.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SocialSettingUpdateManyAndReturnArgs>(args: SelectSubset<T, SocialSettingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one SocialSetting.
+     * @param {SocialSettingUpsertArgs} args - Arguments to update or create a SocialSetting.
+     * @example
+     * // Update or create a SocialSetting
+     * const socialSetting = await prisma.socialSetting.upsert({
+     *   create: {
+     *     // ... data to create a SocialSetting
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SocialSetting we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SocialSettingUpsertArgs>(args: SelectSubset<T, SocialSettingUpsertArgs<ExtArgs>>): Prisma__SocialSettingClient<$Result.GetResult<Prisma.$SocialSettingPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of SocialSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SocialSettingCountArgs} args - Arguments to filter SocialSettings to count.
+     * @example
+     * // Count the number of SocialSettings
+     * const count = await prisma.socialSetting.count({
+     *   where: {
+     *     // ... the filter for the SocialSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends SocialSettingCountArgs>(
+      args?: Subset<T, SocialSettingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SocialSettingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SocialSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SocialSettingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SocialSettingAggregateArgs>(args: Subset<T, SocialSettingAggregateArgs>): Prisma.PrismaPromise<GetSocialSettingAggregateType<T>>
+
+    /**
+     * Group by SocialSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SocialSettingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SocialSettingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SocialSettingGroupByArgs['orderBy'] }
+        : { orderBy?: SocialSettingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SocialSettingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSocialSettingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SocialSetting model
+   */
+  readonly fields: SocialSettingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SocialSetting.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SocialSettingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SocialSetting model
+   */ 
+  interface SocialSettingFieldRefs {
+    readonly id: FieldRef<"SocialSetting", 'String'>
+    readonly facebookUrl: FieldRef<"SocialSetting", 'String'>
+    readonly instagramUrl: FieldRef<"SocialSetting", 'String'>
+    readonly twitterUrl: FieldRef<"SocialSetting", 'String'>
+    readonly whatsappNumber: FieldRef<"SocialSetting", 'String'>
+    readonly youtubeUrl: FieldRef<"SocialSetting", 'String'>
+    readonly linkedinUrl: FieldRef<"SocialSetting", 'String'>
+    readonly pinterestUrl: FieldRef<"SocialSetting", 'String'>
+    readonly enableShareButtons: FieldRef<"SocialSetting", 'Boolean'>
+    readonly autoShareMessage: FieldRef<"SocialSetting", 'String'>
+    readonly updatedAt: FieldRef<"SocialSetting", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SocialSetting findUnique
+   */
+  export type SocialSettingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which SocialSetting to fetch.
+     */
+    where: SocialSettingWhereUniqueInput
+  }
+
+  /**
+   * SocialSetting findUniqueOrThrow
+   */
+  export type SocialSettingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which SocialSetting to fetch.
+     */
+    where: SocialSettingWhereUniqueInput
+  }
+
+  /**
+   * SocialSetting findFirst
+   */
+  export type SocialSettingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which SocialSetting to fetch.
+     */
+    where?: SocialSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SocialSettings to fetch.
+     */
+    orderBy?: SocialSettingOrderByWithRelationInput | SocialSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SocialSettings.
+     */
+    cursor?: SocialSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SocialSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SocialSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SocialSettings.
+     */
+    distinct?: SocialSettingScalarFieldEnum | SocialSettingScalarFieldEnum[]
+  }
+
+  /**
+   * SocialSetting findFirstOrThrow
+   */
+  export type SocialSettingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which SocialSetting to fetch.
+     */
+    where?: SocialSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SocialSettings to fetch.
+     */
+    orderBy?: SocialSettingOrderByWithRelationInput | SocialSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SocialSettings.
+     */
+    cursor?: SocialSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SocialSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SocialSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SocialSettings.
+     */
+    distinct?: SocialSettingScalarFieldEnum | SocialSettingScalarFieldEnum[]
+  }
+
+  /**
+   * SocialSetting findMany
+   */
+  export type SocialSettingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which SocialSettings to fetch.
+     */
+    where?: SocialSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SocialSettings to fetch.
+     */
+    orderBy?: SocialSettingOrderByWithRelationInput | SocialSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SocialSettings.
+     */
+    cursor?: SocialSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SocialSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SocialSettings.
+     */
+    skip?: number
+    distinct?: SocialSettingScalarFieldEnum | SocialSettingScalarFieldEnum[]
+  }
+
+  /**
+   * SocialSetting create
+   */
+  export type SocialSettingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a SocialSetting.
+     */
+    data: XOR<SocialSettingCreateInput, SocialSettingUncheckedCreateInput>
+  }
+
+  /**
+   * SocialSetting createMany
+   */
+  export type SocialSettingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SocialSettings.
+     */
+    data: SocialSettingCreateManyInput | SocialSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SocialSetting createManyAndReturn
+   */
+  export type SocialSettingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * The data used to create many SocialSettings.
+     */
+    data: SocialSettingCreateManyInput | SocialSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SocialSetting update
+   */
+  export type SocialSettingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a SocialSetting.
+     */
+    data: XOR<SocialSettingUpdateInput, SocialSettingUncheckedUpdateInput>
+    /**
+     * Choose, which SocialSetting to update.
+     */
+    where: SocialSettingWhereUniqueInput
+  }
+
+  /**
+   * SocialSetting updateMany
+   */
+  export type SocialSettingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SocialSettings.
+     */
+    data: XOR<SocialSettingUpdateManyMutationInput, SocialSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which SocialSettings to update
+     */
+    where?: SocialSettingWhereInput
+  }
+
+  /**
+   * SocialSetting updateManyAndReturn
+   */
+  export type SocialSettingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * The data used to update SocialSettings.
+     */
+    data: XOR<SocialSettingUpdateManyMutationInput, SocialSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which SocialSettings to update
+     */
+    where?: SocialSettingWhereInput
+  }
+
+  /**
+   * SocialSetting upsert
+   */
+  export type SocialSettingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the SocialSetting to update in case it exists.
+     */
+    where: SocialSettingWhereUniqueInput
+    /**
+     * In case the SocialSetting found by the `where` argument doesn't exist, create a new SocialSetting with this data.
+     */
+    create: XOR<SocialSettingCreateInput, SocialSettingUncheckedCreateInput>
+    /**
+     * In case the SocialSetting was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SocialSettingUpdateInput, SocialSettingUncheckedUpdateInput>
+  }
+
+  /**
+   * SocialSetting delete
+   */
+  export type SocialSettingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+    /**
+     * Filter which SocialSetting to delete.
+     */
+    where: SocialSettingWhereUniqueInput
+  }
+
+  /**
+   * SocialSetting deleteMany
+   */
+  export type SocialSettingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SocialSettings to delete
+     */
+    where?: SocialSettingWhereInput
+  }
+
+  /**
+   * SocialSetting without action
+   */
+  export type SocialSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SocialSetting
+     */
+    select?: SocialSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SocialSetting
+     */
+    omit?: SocialSettingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -28679,6 +29831,23 @@ export namespace Prisma {
   };
 
   export type SeoSettingScalarFieldEnum = (typeof SeoSettingScalarFieldEnum)[keyof typeof SeoSettingScalarFieldEnum]
+
+
+  export const SocialSettingScalarFieldEnum: {
+    id: 'id',
+    facebookUrl: 'facebookUrl',
+    instagramUrl: 'instagramUrl',
+    twitterUrl: 'twitterUrl',
+    whatsappNumber: 'whatsappNumber',
+    youtubeUrl: 'youtubeUrl',
+    linkedinUrl: 'linkedinUrl',
+    pinterestUrl: 'pinterestUrl',
+    enableShareButtons: 'enableShareButtons',
+    autoShareMessage: 'autoShareMessage',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SocialSettingScalarFieldEnum = (typeof SocialSettingScalarFieldEnum)[keyof typeof SocialSettingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -30533,6 +31702,88 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"SeoSetting"> | Date | string
   }
 
+  export type SocialSettingWhereInput = {
+    AND?: SocialSettingWhereInput | SocialSettingWhereInput[]
+    OR?: SocialSettingWhereInput[]
+    NOT?: SocialSettingWhereInput | SocialSettingWhereInput[]
+    id?: StringFilter<"SocialSetting"> | string
+    facebookUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    instagramUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    twitterUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    whatsappNumber?: StringNullableFilter<"SocialSetting"> | string | null
+    youtubeUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    linkedinUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    pinterestUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    enableShareButtons?: BoolFilter<"SocialSetting"> | boolean
+    autoShareMessage?: StringNullableFilter<"SocialSetting"> | string | null
+    updatedAt?: DateTimeFilter<"SocialSetting"> | Date | string
+  }
+
+  export type SocialSettingOrderByWithRelationInput = {
+    id?: SortOrder
+    facebookUrl?: SortOrderInput | SortOrder
+    instagramUrl?: SortOrderInput | SortOrder
+    twitterUrl?: SortOrderInput | SortOrder
+    whatsappNumber?: SortOrderInput | SortOrder
+    youtubeUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrderInput | SortOrder
+    pinterestUrl?: SortOrderInput | SortOrder
+    enableShareButtons?: SortOrder
+    autoShareMessage?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SocialSettingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SocialSettingWhereInput | SocialSettingWhereInput[]
+    OR?: SocialSettingWhereInput[]
+    NOT?: SocialSettingWhereInput | SocialSettingWhereInput[]
+    facebookUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    instagramUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    twitterUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    whatsappNumber?: StringNullableFilter<"SocialSetting"> | string | null
+    youtubeUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    linkedinUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    pinterestUrl?: StringNullableFilter<"SocialSetting"> | string | null
+    enableShareButtons?: BoolFilter<"SocialSetting"> | boolean
+    autoShareMessage?: StringNullableFilter<"SocialSetting"> | string | null
+    updatedAt?: DateTimeFilter<"SocialSetting"> | Date | string
+  }, "id">
+
+  export type SocialSettingOrderByWithAggregationInput = {
+    id?: SortOrder
+    facebookUrl?: SortOrderInput | SortOrder
+    instagramUrl?: SortOrderInput | SortOrder
+    twitterUrl?: SortOrderInput | SortOrder
+    whatsappNumber?: SortOrderInput | SortOrder
+    youtubeUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrderInput | SortOrder
+    pinterestUrl?: SortOrderInput | SortOrder
+    enableShareButtons?: SortOrder
+    autoShareMessage?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: SocialSettingCountOrderByAggregateInput
+    _max?: SocialSettingMaxOrderByAggregateInput
+    _min?: SocialSettingMinOrderByAggregateInput
+  }
+
+  export type SocialSettingScalarWhereWithAggregatesInput = {
+    AND?: SocialSettingScalarWhereWithAggregatesInput | SocialSettingScalarWhereWithAggregatesInput[]
+    OR?: SocialSettingScalarWhereWithAggregatesInput[]
+    NOT?: SocialSettingScalarWhereWithAggregatesInput | SocialSettingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SocialSetting"> | string
+    facebookUrl?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    instagramUrl?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    twitterUrl?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    whatsappNumber?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    youtubeUrl?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    linkedinUrl?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    pinterestUrl?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    enableShareButtons?: BoolWithAggregatesFilter<"SocialSetting"> | boolean
+    autoShareMessage?: StringNullableWithAggregatesFilter<"SocialSetting"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"SocialSetting"> | Date | string
+  }
+
   export type StoreSettingCreateInput = {
     id?: string
     storeName: string
@@ -32315,6 +33566,104 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SocialSettingCreateInput = {
+    id?: string
+    facebookUrl?: string | null
+    instagramUrl?: string | null
+    twitterUrl?: string | null
+    whatsappNumber?: string | null
+    youtubeUrl?: string | null
+    linkedinUrl?: string | null
+    pinterestUrl?: string | null
+    enableShareButtons?: boolean
+    autoShareMessage?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type SocialSettingUncheckedCreateInput = {
+    id?: string
+    facebookUrl?: string | null
+    instagramUrl?: string | null
+    twitterUrl?: string | null
+    whatsappNumber?: string | null
+    youtubeUrl?: string | null
+    linkedinUrl?: string | null
+    pinterestUrl?: string | null
+    enableShareButtons?: boolean
+    autoShareMessage?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type SocialSettingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pinterestUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    enableShareButtons?: BoolFieldUpdateOperationsInput | boolean
+    autoShareMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SocialSettingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pinterestUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    enableShareButtons?: BoolFieldUpdateOperationsInput | boolean
+    autoShareMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SocialSettingCreateManyInput = {
+    id?: string
+    facebookUrl?: string | null
+    instagramUrl?: string | null
+    twitterUrl?: string | null
+    whatsappNumber?: string | null
+    youtubeUrl?: string | null
+    linkedinUrl?: string | null
+    pinterestUrl?: string | null
+    enableShareButtons?: boolean
+    autoShareMessage?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type SocialSettingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pinterestUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    enableShareButtons?: BoolFieldUpdateOperationsInput | boolean
+    autoShareMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SocialSettingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    twitterUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pinterestUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    enableShareButtons?: BoolFieldUpdateOperationsInput | boolean
+    autoShareMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -33691,6 +35040,48 @@ export namespace Prisma {
     canonicalUrl?: SortOrder
     noIndex?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SocialSettingCountOrderByAggregateInput = {
+    id?: SortOrder
+    facebookUrl?: SortOrder
+    instagramUrl?: SortOrder
+    twitterUrl?: SortOrder
+    whatsappNumber?: SortOrder
+    youtubeUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    pinterestUrl?: SortOrder
+    enableShareButtons?: SortOrder
+    autoShareMessage?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SocialSettingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    facebookUrl?: SortOrder
+    instagramUrl?: SortOrder
+    twitterUrl?: SortOrder
+    whatsappNumber?: SortOrder
+    youtubeUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    pinterestUrl?: SortOrder
+    enableShareButtons?: SortOrder
+    autoShareMessage?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SocialSettingMinOrderByAggregateInput = {
+    id?: SortOrder
+    facebookUrl?: SortOrder
+    instagramUrl?: SortOrder
+    twitterUrl?: SortOrder
+    whatsappNumber?: SortOrder
+    youtubeUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    pinterestUrl?: SortOrder
+    enableShareButtons?: SortOrder
+    autoShareMessage?: SortOrder
     updatedAt?: SortOrder
   }
 

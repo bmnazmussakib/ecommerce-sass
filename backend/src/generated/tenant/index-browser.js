@@ -366,6 +366,20 @@ exports.Prisma.SeoSettingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SocialSettingScalarFieldEnum = {
+  id: 'id',
+  facebookUrl: 'facebookUrl',
+  instagramUrl: 'instagramUrl',
+  twitterUrl: 'twitterUrl',
+  whatsappNumber: 'whatsappNumber',
+  youtubeUrl: 'youtubeUrl',
+  linkedinUrl: 'linkedinUrl',
+  pinterestUrl: 'pinterestUrl',
+  enableShareButtons: 'enableShareButtons',
+  autoShareMessage: 'autoShareMessage',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -464,7 +478,8 @@ exports.Prisma.ModelName = {
   ShippingRate: 'ShippingRate',
   TaxRule: 'TaxRule',
   BogoOffer: 'BogoOffer',
-  SeoSetting: 'SeoSetting'
+  SeoSetting: 'SeoSetting',
+  SocialSetting: 'SocialSetting'
 };
 
 /**

@@ -20,6 +20,7 @@ import { WebhookModule } from './webhook/webhook.module';
 import { TaxRuleModule } from './tax-rule/tax-rule.module';
 import { BogoOfferModule } from './bogo-offer/bogo-offer.module';
 import { SeoModule } from './seo/seo.module';
+import { SocialModule } from './social/social.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { SeoModule } from './seo/seo.module';
     TaxRuleModule,
     BogoOfferModule,
     SeoModule,
+    SocialModule,
   ]
 })
 export class TenantModule {}
