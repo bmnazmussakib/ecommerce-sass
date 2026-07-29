@@ -70,7 +70,7 @@
 | 2.27 | Abandoned cart recovery | 🔜 Due | B/E + F/E | Medium | Email/SMS provider (free tier) | Email/SMS reminders |
 | 2.28 | Flash sales & advanced promos | ✅ Done | Backend | — | — | Time-bound sales events with stock allocation & override pricing |
 | 2.29 | Email marketing integration | 🔜 Due | B/E + F/E | Low | Mailchimp (500 contacts free) | Campaign management |
-| 2.30 | SEO management (meta, sitemap, OG) | 🔜 Due | Backend | Low | — | Per-page SEO editor |
+| 2.30 | SEO management (meta, sitemap, OG) | ✅ Done | Backend | — | — | Per-page SEO editor, dynamic sitemap.xml & Open Graph meta APIs |
 | 2.31 | Customer list & CRUD | ✅ Done | Backend | — | — | Customer records with segmentation |
 | 2.32 | Enable/disable store toggle | ✅ Done | Backend | — | — | Pause/resume storefront via PATCH toggle-store + StoreClosedGuard |
 | 2.33 | Digital product support | ✅ Done | Backend | — | — | isDigital flag, file upload, one-time download token with 7-day expiry |

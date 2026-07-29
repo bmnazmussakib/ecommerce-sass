@@ -19,6 +19,7 @@ import { DigitalProductModule } from './digital-product/digital-product.module';
 import { WebhookModule } from './webhook/webhook.module';
 import { TaxRuleModule } from './tax-rule/tax-rule.module';
 import { BogoOfferModule } from './bogo-offer/bogo-offer.module';
+import { SeoModule } from './seo/seo.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { BogoOfferModule } from './bogo-offer/bogo-offer.module';
     WebhookModule,
     TaxRuleModule,
     BogoOfferModule,
+    SeoModule,
   ]
 })
 export class TenantModule {}

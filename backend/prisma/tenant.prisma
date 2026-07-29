@@ -324,3 +324,18 @@ model BogoOffer {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+model SeoSetting {
+  id              String   @id @default(uuid())
+  pagePath        String   @unique // e.g. "/", "/about", "/products", "/contact"
+  metaTitle       String
+  metaDescription String?
+  metaKeywords    String?  // comma-separated keywords
+  ogTitle         String?
+  ogDescription   String?
+  ogImage         String?
+  canonicalUrl    String?
+  noIndex         Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

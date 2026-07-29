@@ -351,6 +351,21 @@ exports.Prisma.BogoOfferScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SeoSettingScalarFieldEnum = {
+  id: 'id',
+  pagePath: 'pagePath',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  metaKeywords: 'metaKeywords',
+  ogTitle: 'ogTitle',
+  ogDescription: 'ogDescription',
+  ogImage: 'ogImage',
+  canonicalUrl: 'canonicalUrl',
+  noIndex: 'noIndex',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -448,7 +463,8 @@ exports.Prisma.ModelName = {
   ShippingZone: 'ShippingZone',
   ShippingRate: 'ShippingRate',
   TaxRule: 'TaxRule',
-  BogoOffer: 'BogoOffer'
+  BogoOffer: 'BogoOffer',
+  SeoSetting: 'SeoSetting'
 };
 
 /**
