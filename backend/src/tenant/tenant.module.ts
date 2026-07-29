@@ -25,6 +25,7 @@ import { PopupCampaignModule } from './popup-campaign/popup-campaign.module';
 import { ContactInquiryModule } from './contact-inquiry/contact-inquiry.module';
 import { AffiliateModule } from './affiliate/affiliate.module';
 import { LoyaltyModule } from './loyalty/loyalty.module';
+import { WarehouseModule } from './warehouse/warehouse.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { LoyaltyModule } from './loyalty/loyalty.module';
     ContactInquiryModule,
     AffiliateModule,
     LoyaltyModule,
+    WarehouseModule,
   ]
 })
 export class TenantModule {}

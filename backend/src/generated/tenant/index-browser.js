@@ -464,6 +464,28 @@ exports.Prisma.LoyaltyTransactionScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.WarehouseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  address: 'address',
+  city: 'city',
+  phone: 'phone',
+  isPrimary: 'isPrimary',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WarehouseStockScalarFieldEnum = {
+  id: 'id',
+  warehouseId: 'warehouseId',
+  variantId: 'variantId',
+  stock: 'stock',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -600,7 +622,9 @@ exports.Prisma.ModelName = {
   AffiliateConversion: 'AffiliateConversion',
   AffiliatePayout: 'AffiliatePayout',
   LoyaltySetting: 'LoyaltySetting',
-  LoyaltyTransaction: 'LoyaltyTransaction'
+  LoyaltyTransaction: 'LoyaltyTransaction',
+  Warehouse: 'Warehouse',
+  WarehouseStock: 'WarehouseStock'
 };
 
 /**

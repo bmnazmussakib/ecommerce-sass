@@ -99,6 +99,7 @@ model ProductVariant {
   batches           SupplyBatch[]
   flashSaleProducts FlashSaleProduct[]
   digitalDownloads  DigitalDownload[]
+  warehouseStocks   WarehouseStock[]
 }
 
 model DigitalDownload {
@@ -472,4 +473,31 @@ model LoyaltyTransaction {
   description String?
   orderId     String?
   createdAt   DateTime               @default(now())
+}
+
+model Warehouse {
+  id        String           @id @default(uuid())
+  name      String // e.g. "Dhaka Central Hub"
+  code      String           @unique // e.g. "WH-DHK-01"
+  address   String?
+  city      String?
+  phone     String?
+  isPrimary Boolean          @default(false)
+  isActive  Boolean          @default(true)
+  stocks    WarehouseStock[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+}
+
+model WarehouseStock {
+  id          String         @id @default(uuid())
+  warehouseId String
+  warehouse   Warehouse      @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  variantId   String
+  variant     ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  stock       Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@unique([warehouseId, variantId])
 }
