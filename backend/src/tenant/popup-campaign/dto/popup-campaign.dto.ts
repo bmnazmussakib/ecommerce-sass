@@ -8,7 +8,12 @@ import {
   Max,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { PopupTriggerType } from '@prisma/tenant-client';
+
+export enum PopupTriggerType {
+  EXIT_INTENT = 'EXIT_INTENT',
+  TIMED_DELAY = 'TIMED_DELAY',
+  PAGE_SCROLL = 'PAGE_SCROLL',
+}
 
 export class CreatePopupCampaignDto {
   @ApiProperty({ example: 'Summer Exit Sale' })

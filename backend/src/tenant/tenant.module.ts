@@ -22,6 +22,7 @@ import { BogoOfferModule } from './bogo-offer/bogo-offer.module';
 import { SeoModule } from './seo/seo.module';
 import { SocialModule } from './social/social.module';
 import { PopupCampaignModule } from './popup-campaign/popup-campaign.module';
+import { ContactInquiryModule } from './contact-inquiry/contact-inquiry.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { PopupCampaignModule } from './popup-campaign/popup-campaign.module';
     SeoModule,
     SocialModule,
     PopupCampaignModule,
+    ContactInquiryModule,
   ]
 })
 export class TenantModule {}

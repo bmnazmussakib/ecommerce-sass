@@ -397,6 +397,19 @@ exports.Prisma.PopupCampaignScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ContactInquiryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  subject: 'subject',
+  message: 'message',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -478,6 +491,13 @@ exports.PopupTriggerType = exports.$Enums.PopupTriggerType = {
   PAGE_SCROLL: 'PAGE_SCROLL'
 };
 
+exports.InquiryStatus = exports.$Enums.InquiryStatus = {
+  NEW: 'NEW',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED',
+  ARCHIVED: 'ARCHIVED'
+};
+
 exports.Prisma.ModelName = {
   StoreSetting: 'StoreSetting',
   Staff: 'Staff',
@@ -503,7 +523,8 @@ exports.Prisma.ModelName = {
   BogoOffer: 'BogoOffer',
   SeoSetting: 'SeoSetting',
   SocialSetting: 'SocialSetting',
-  PopupCampaign: 'PopupCampaign'
+  PopupCampaign: 'PopupCampaign',
+  ContactInquiry: 'ContactInquiry'
 };
 
 /**

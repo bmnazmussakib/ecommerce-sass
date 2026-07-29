@@ -376,3 +376,23 @@ model PopupCampaign {
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
 }
+
+enum InquiryStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  ARCHIVED
+}
+
+model ContactInquiry {
+  id        String        @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  status    InquiryStatus @default(NEW)
+  notes     String?       // Internal merchant notes
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}

@@ -10,11 +10,28 @@ import {
   Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import {
-  PaymentMethod,
-  PaymentStatus,
-  ShippingStatus,
-} from '@prisma/tenant-client';
+export enum PaymentMethod {
+  COD = 'COD',
+  BKASH = 'BKASH',
+  NAGAD = 'NAGAD',
+  CARD = 'CARD',
+}
+
+export enum PaymentStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  FAILED = 'FAILED',
+  REFUNDED = 'REFUNDED',
+}
+
+export enum ShippingStatus {
+  PENDING = 'PENDING',
+  PROCESSING = 'PROCESSING',
+  SHIPPED = 'SHIPPED',
+  DELIVERED = 'DELIVERED',
+  CANCELLED = 'CANCELLED',
+  RETURNED = 'RETURNED',
+}
 
 export class OrderItemDto {
   @ApiProperty({ example: 'variant-uuid' })
