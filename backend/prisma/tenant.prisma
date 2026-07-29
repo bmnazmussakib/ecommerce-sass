@@ -255,14 +255,16 @@ model FlashSaleProduct {
 }
 
 model Customer {
-  id        String   @id @default(uuid())
-  name      String
-  email     String?
-  phone     String   @unique
-  address   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orders    Order[]
+  id                  String               @id @default(uuid())
+  name                String
+  email               String?
+  phone               String               @unique
+  address             String?
+  loyaltyPoints       Int                  @default(0)
+  loyaltyTransactions LoyaltyTransaction[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  orders              Order[]
 }
 
 model Webhook {
@@ -444,4 +446,30 @@ model AffiliatePayout {
   reference     String?          // TxID / ref
   notes         String?
   createdAt     DateTime         @default(now())
+}
+
+enum LoyaltyTransactionType {
+  EARNED
+  REDEEMED
+  ADJUSTMENT
+}
+
+model LoyaltySetting {
+  id                 String   @id @default(uuid())
+  pointsPerCurrency  Decimal  @default(0.10) @db.Decimal(5, 2) // e.g. 0.1 points per BDT (10 pts per 100 BDT)
+  redemptionRate     Decimal  @default(0.10) @db.Decimal(5, 2) // e.g. 1 point = 0.10 BDT discount (100 pts = 10 BDT)
+  minPointsToRedeem Int      @default(100)
+  isEnabled          Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+}
+
+model LoyaltyTransaction {
+  id          String                 @id @default(uuid())
+  customerId  String
+  customer    Customer               @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  points      Int                    // positive for earned/added, negative for redeemed/subtracted
+  type        LoyaltyTransactionType @default(EARNED)
+  description String?
+  orderId     String?
+  createdAt   DateTime               @default(now())
 }

@@ -76,6 +76,12 @@ export class CreateOrderDto {
   @IsString()
   affiliateCode?: string;
 
+  @ApiProperty({ example: 100, required: false, description: 'Loyalty points to redeem for checkout discount' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  redeemPoints?: number;
+
   @ApiProperty({ type: [OrderItemDto] })
   @IsArray()
   @ValidateNested({ each: true })

@@ -289,6 +289,7 @@ exports.Prisma.CustomerScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   address: 'address',
+  loyaltyPoints: 'loyaltyPoints',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -444,6 +445,25 @@ exports.Prisma.AffiliatePayoutScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.LoyaltySettingScalarFieldEnum = {
+  id: 'id',
+  pointsPerCurrency: 'pointsPerCurrency',
+  redemptionRate: 'redemptionRate',
+  minPointsToRedeem: 'minPointsToRedeem',
+  isEnabled: 'isEnabled',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LoyaltyTransactionScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  points: 'points',
+  type: 'type',
+  description: 'description',
+  orderId: 'orderId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -543,6 +563,12 @@ exports.ConversionStatus = exports.$Enums.ConversionStatus = {
   REJECTED: 'REJECTED'
 };
 
+exports.LoyaltyTransactionType = exports.$Enums.LoyaltyTransactionType = {
+  EARNED: 'EARNED',
+  REDEEMED: 'REDEEMED',
+  ADJUSTMENT: 'ADJUSTMENT'
+};
+
 exports.Prisma.ModelName = {
   StoreSetting: 'StoreSetting',
   Staff: 'Staff',
@@ -572,7 +598,9 @@ exports.Prisma.ModelName = {
   ContactInquiry: 'ContactInquiry',
   AffiliatePartner: 'AffiliatePartner',
   AffiliateConversion: 'AffiliateConversion',
-  AffiliatePayout: 'AffiliatePayout'
+  AffiliatePayout: 'AffiliatePayout',
+  LoyaltySetting: 'LoyaltySetting',
+  LoyaltyTransaction: 'LoyaltyTransaction'
 };
 
 /**

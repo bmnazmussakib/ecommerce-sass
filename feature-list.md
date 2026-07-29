@@ -91,7 +91,7 @@
 | 2.48 | Live chat widget | 🧭 Roadmap | Frontend | Low | Tawk.to / Crisp (free tier) | Customer engagement |
 | 2.49 | Multi-language support | 🧭 Roadmap | Frontend | Low | i18n libraries (open source) | i18n per store |
 | 2.50 | Affiliate system | ✅ Done | B/E + F/E | — | — | Referral links, commission tracking, payout management & checkout integration |
-| 2.51 | Loyalty points system | 🧭 Roadmap | Backend | Low | — | Customer rewards |
+| 2.51 | Loyalty points system | ✅ Done | Backend | — | — | Customer reward points earning, checkout redemption discount & transaction history |
 | 2.52 | Multi-warehouse stock support | 🧭 Roadmap | Backend | Low | — | Premium feature |
 | 2.53 | Mobile app / PWA generation | 🧭 Roadmap | Frontend | Low | PWA (free), App store ($99/yr) | For premium vendors |
 

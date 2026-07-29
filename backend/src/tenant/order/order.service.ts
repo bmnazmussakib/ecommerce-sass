@@ -24,6 +24,7 @@ import { WebhookService } from '../webhook/webhook.service';
 import { TaxRuleService } from '../tax-rule/tax-rule.service';
 import { BogoOfferService } from '../bogo-offer/bogo-offer.service';
 import { AffiliateService } from '../affiliate/affiliate.service';
+import { LoyaltyService } from '../loyalty/loyalty.service';
 
 @Injectable()
 export class OrderService {
@@ -39,6 +40,7 @@ export class OrderService {
     private readonly taxRuleService: TaxRuleService,
     private readonly bogoOfferService: BogoOfferService,
     private readonly affiliateService: AffiliateService,
+    private readonly loyaltyService: LoyaltyService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -272,6 +274,21 @@ export class OrderService {
           Number(totalPrice),
         );
       }
+
+      if (dto.redeemPoints && dto.redeemPoints > 0) {
+        await this.loyaltyService.processPointsRedemption(
+          customer.id,
+          order.id,
+          dto.redeemPoints,
+        );
+      }
+
+      // Automatically credit earned loyalty points on order completion
+      await this.loyaltyService.earnPointsForOrder(
+        customer.id,
+        order.id,
+        Number(totalPrice),
+      );
 
       let bkashURL: string | null = null;
       let sslczGatewayUrl: string | null = null;

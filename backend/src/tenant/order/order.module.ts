@@ -11,6 +11,7 @@ import { WebhookModule } from '../webhook/webhook.module';
 import { TaxRuleModule } from '../tax-rule/tax-rule.module';
 import { BogoOfferModule } from '../bogo-offer/bogo-offer.module';
 import { AffiliateModule } from '../affiliate/affiliate.module';
+import { LoyaltyModule } from '../loyalty/loyalty.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AffiliateModule } from '../affiliate/affiliate.module';
     TaxRuleModule,
     BogoOfferModule,
     AffiliateModule,
+    LoyaltyModule,
   ],
   controllers: [OrderController],
   providers: [OrderService, InvoiceService, StoreClosedGuard],
