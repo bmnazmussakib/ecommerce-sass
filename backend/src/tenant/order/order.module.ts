@@ -9,6 +9,7 @@ import { ShippingModule } from '../shipping/shipping.module';
 import { DigitalProductModule } from '../digital-product/digital-product.module';
 import { WebhookModule } from '../webhook/webhook.module';
 import { TaxRuleModule } from '../tax-rule/tax-rule.module';
+import { BogoOfferModule } from '../bogo-offer/bogo-offer.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TaxRuleModule } from '../tax-rule/tax-rule.module';
     DigitalProductModule,
     WebhookModule,
     TaxRuleModule,
+    BogoOfferModule,
   ],
   controllers: [OrderController],
   providers: [OrderService, InvoiceService, StoreClosedGuard],

@@ -80,7 +80,7 @@
 | 2.37 | Webhook configuration | ✅ Done | Backend | — | — | Event-driven webhook with retry + HMAC signing |
 | 2.38 | Data export — CSV/JSON | ✅ Done | Backend | — | — | Export products, orders, customers as CSV or JSON via GET /api/tenant/export |
 | 2.39 | Product scheduling — launch later | ✅ Done | Backend | — | — | Schedule product publish date |
-| 2.40 | BOGO offers | 🔜 Due | Backend | Low | — | Buy-one-get-one promotion engine |
+| 2.40 | BOGO offers | ✅ Done | Backend | — | — | Buy-one-get-one promotion engine |
 | 2.41 | Tax rules by region | ✅ Done | Backend | — | — | Regional tax rule management & checkout calculation |
 | 2.42 | Social media links & auto-sharing | 🔜 Due | Both | Low | Free | FB/Twitter/WhatsApp sharing config |
 | 2.43 | Popup campaigns & exit intent | 🔜 Due | Both | Low | — | Marketing popups with exit detection |

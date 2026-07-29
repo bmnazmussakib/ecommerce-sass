@@ -336,6 +336,21 @@ exports.Prisma.TaxRuleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BogoOfferScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  buyVariantId: 'buyVariantId',
+  buyQuantity: 'buyQuantity',
+  getVariantId: 'getVariantId',
+  getQuantity: 'getQuantity',
+  discountPercent: 'discountPercent',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -432,7 +447,8 @@ exports.Prisma.ModelName = {
   Webhook: 'Webhook',
   ShippingZone: 'ShippingZone',
   ShippingRate: 'ShippingRate',
-  TaxRule: 'TaxRule'
+  TaxRule: 'TaxRule',
+  BogoOffer: 'BogoOffer'
 };
 
 /**

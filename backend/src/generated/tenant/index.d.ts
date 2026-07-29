@@ -118,6 +118,11 @@ export type ShippingRate = $Result.DefaultSelection<Prisma.$ShippingRatePayload>
  * 
  */
 export type TaxRule = $Result.DefaultSelection<Prisma.$TaxRulePayload>
+/**
+ * Model BogoOffer
+ * 
+ */
+export type BogoOffer = $Result.DefaultSelection<Prisma.$BogoOfferPayload>
 
 /**
  * Enums
@@ -558,6 +563,16 @@ export class PrismaClient<
     * ```
     */
   get taxRule(): Prisma.TaxRuleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bogoOffer`: Exposes CRUD operations for the **BogoOffer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BogoOffers
+    * const bogoOffers = await prisma.bogoOffer.findMany()
+    * ```
+    */
+  get bogoOffer(): Prisma.BogoOfferDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1018,7 +1033,8 @@ export namespace Prisma {
     Webhook: 'Webhook',
     ShippingZone: 'ShippingZone',
     ShippingRate: 'ShippingRate',
-    TaxRule: 'TaxRule'
+    TaxRule: 'TaxRule',
+    BogoOffer: 'BogoOffer'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1034,7 +1050,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule"
+      modelProps: "storeSetting" | "staff" | "supplier" | "category" | "product" | "productVariant" | "digitalDownload" | "supplyBatch" | "order" | "blockedFingerprint" | "blockedContact" | "orderItem" | "coupon" | "integration" | "flashSale" | "flashSaleProduct" | "customer" | "webhook" | "shippingZone" | "shippingRate" | "taxRule" | "bogoOffer"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2592,6 +2608,80 @@ export namespace Prisma {
           }
         }
       }
+      BogoOffer: {
+        payload: Prisma.$BogoOfferPayload<ExtArgs>
+        fields: Prisma.BogoOfferFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BogoOfferFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BogoOfferFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>
+          }
+          findFirst: {
+            args: Prisma.BogoOfferFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BogoOfferFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>
+          }
+          findMany: {
+            args: Prisma.BogoOfferFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>[]
+          }
+          create: {
+            args: Prisma.BogoOfferCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>
+          }
+          createMany: {
+            args: Prisma.BogoOfferCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BogoOfferCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>[]
+          }
+          delete: {
+            args: Prisma.BogoOfferDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>
+          }
+          update: {
+            args: Prisma.BogoOfferUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>
+          }
+          deleteMany: {
+            args: Prisma.BogoOfferDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BogoOfferUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BogoOfferUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>[]
+          }
+          upsert: {
+            args: Prisma.BogoOfferUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BogoOfferPayload>
+          }
+          aggregate: {
+            args: Prisma.BogoOfferAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBogoOffer>
+          }
+          groupBy: {
+            args: Prisma.BogoOfferGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BogoOfferGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BogoOfferCountArgs<ExtArgs>
+            result: $Utils.Optional<BogoOfferCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2697,6 +2787,7 @@ export namespace Prisma {
     shippingZone?: ShippingZoneOmit
     shippingRate?: ShippingRateOmit
     taxRule?: TaxRuleOmit
+    bogoOffer?: BogoOfferOmit
   }
 
   /* Types for Logging */
@@ -25978,6 +26069,1122 @@ export namespace Prisma {
 
 
   /**
+   * Model BogoOffer
+   */
+
+  export type AggregateBogoOffer = {
+    _count: BogoOfferCountAggregateOutputType | null
+    _avg: BogoOfferAvgAggregateOutputType | null
+    _sum: BogoOfferSumAggregateOutputType | null
+    _min: BogoOfferMinAggregateOutputType | null
+    _max: BogoOfferMaxAggregateOutputType | null
+  }
+
+  export type BogoOfferAvgAggregateOutputType = {
+    buyQuantity: number | null
+    getQuantity: number | null
+    discountPercent: Decimal | null
+  }
+
+  export type BogoOfferSumAggregateOutputType = {
+    buyQuantity: number | null
+    getQuantity: number | null
+    discountPercent: Decimal | null
+  }
+
+  export type BogoOfferMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    buyVariantId: string | null
+    buyQuantity: number | null
+    getVariantId: string | null
+    getQuantity: number | null
+    discountPercent: Decimal | null
+    startDate: Date | null
+    endDate: Date | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BogoOfferMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    buyVariantId: string | null
+    buyQuantity: number | null
+    getVariantId: string | null
+    getQuantity: number | null
+    discountPercent: Decimal | null
+    startDate: Date | null
+    endDate: Date | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BogoOfferCountAggregateOutputType = {
+    id: number
+    title: number
+    buyVariantId: number
+    buyQuantity: number
+    getVariantId: number
+    getQuantity: number
+    discountPercent: number
+    startDate: number
+    endDate: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BogoOfferAvgAggregateInputType = {
+    buyQuantity?: true
+    getQuantity?: true
+    discountPercent?: true
+  }
+
+  export type BogoOfferSumAggregateInputType = {
+    buyQuantity?: true
+    getQuantity?: true
+    discountPercent?: true
+  }
+
+  export type BogoOfferMinAggregateInputType = {
+    id?: true
+    title?: true
+    buyVariantId?: true
+    buyQuantity?: true
+    getVariantId?: true
+    getQuantity?: true
+    discountPercent?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BogoOfferMaxAggregateInputType = {
+    id?: true
+    title?: true
+    buyVariantId?: true
+    buyQuantity?: true
+    getVariantId?: true
+    getQuantity?: true
+    discountPercent?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BogoOfferCountAggregateInputType = {
+    id?: true
+    title?: true
+    buyVariantId?: true
+    buyQuantity?: true
+    getVariantId?: true
+    getQuantity?: true
+    discountPercent?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BogoOfferAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BogoOffer to aggregate.
+     */
+    where?: BogoOfferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BogoOffers to fetch.
+     */
+    orderBy?: BogoOfferOrderByWithRelationInput | BogoOfferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BogoOfferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BogoOffers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BogoOffers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BogoOffers
+    **/
+    _count?: true | BogoOfferCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BogoOfferAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BogoOfferSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BogoOfferMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BogoOfferMaxAggregateInputType
+  }
+
+  export type GetBogoOfferAggregateType<T extends BogoOfferAggregateArgs> = {
+        [P in keyof T & keyof AggregateBogoOffer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBogoOffer[P]>
+      : GetScalarType<T[P], AggregateBogoOffer[P]>
+  }
+
+
+
+
+  export type BogoOfferGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BogoOfferWhereInput
+    orderBy?: BogoOfferOrderByWithAggregationInput | BogoOfferOrderByWithAggregationInput[]
+    by: BogoOfferScalarFieldEnum[] | BogoOfferScalarFieldEnum
+    having?: BogoOfferScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BogoOfferCountAggregateInputType | true
+    _avg?: BogoOfferAvgAggregateInputType
+    _sum?: BogoOfferSumAggregateInputType
+    _min?: BogoOfferMinAggregateInputType
+    _max?: BogoOfferMaxAggregateInputType
+  }
+
+  export type BogoOfferGroupByOutputType = {
+    id: string
+    title: string
+    buyVariantId: string
+    buyQuantity: number
+    getVariantId: string
+    getQuantity: number
+    discountPercent: Decimal
+    startDate: Date
+    endDate: Date
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: BogoOfferCountAggregateOutputType | null
+    _avg: BogoOfferAvgAggregateOutputType | null
+    _sum: BogoOfferSumAggregateOutputType | null
+    _min: BogoOfferMinAggregateOutputType | null
+    _max: BogoOfferMaxAggregateOutputType | null
+  }
+
+  type GetBogoOfferGroupByPayload<T extends BogoOfferGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BogoOfferGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BogoOfferGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BogoOfferGroupByOutputType[P]>
+            : GetScalarType<T[P], BogoOfferGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BogoOfferSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    buyVariantId?: boolean
+    buyQuantity?: boolean
+    getVariantId?: boolean
+    getQuantity?: boolean
+    discountPercent?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["bogoOffer"]>
+
+  export type BogoOfferSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    buyVariantId?: boolean
+    buyQuantity?: boolean
+    getVariantId?: boolean
+    getQuantity?: boolean
+    discountPercent?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["bogoOffer"]>
+
+  export type BogoOfferSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    buyVariantId?: boolean
+    buyQuantity?: boolean
+    getVariantId?: boolean
+    getQuantity?: boolean
+    discountPercent?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["bogoOffer"]>
+
+  export type BogoOfferSelectScalar = {
+    id?: boolean
+    title?: boolean
+    buyVariantId?: boolean
+    buyQuantity?: boolean
+    getVariantId?: boolean
+    getQuantity?: boolean
+    discountPercent?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BogoOfferOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "buyVariantId" | "buyQuantity" | "getVariantId" | "getQuantity" | "discountPercent" | "startDate" | "endDate" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["bogoOffer"]>
+
+  export type $BogoOfferPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BogoOffer"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      buyVariantId: string
+      buyQuantity: number
+      getVariantId: string
+      getQuantity: number
+      discountPercent: Prisma.Decimal
+      startDate: Date
+      endDate: Date
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["bogoOffer"]>
+    composites: {}
+  }
+
+  type BogoOfferGetPayload<S extends boolean | null | undefined | BogoOfferDefaultArgs> = $Result.GetResult<Prisma.$BogoOfferPayload, S>
+
+  type BogoOfferCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BogoOfferFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BogoOfferCountAggregateInputType | true
+    }
+
+  export interface BogoOfferDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BogoOffer'], meta: { name: 'BogoOffer' } }
+    /**
+     * Find zero or one BogoOffer that matches the filter.
+     * @param {BogoOfferFindUniqueArgs} args - Arguments to find a BogoOffer
+     * @example
+     * // Get one BogoOffer
+     * const bogoOffer = await prisma.bogoOffer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BogoOfferFindUniqueArgs>(args: SelectSubset<T, BogoOfferFindUniqueArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one BogoOffer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BogoOfferFindUniqueOrThrowArgs} args - Arguments to find a BogoOffer
+     * @example
+     * // Get one BogoOffer
+     * const bogoOffer = await prisma.bogoOffer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BogoOfferFindUniqueOrThrowArgs>(args: SelectSubset<T, BogoOfferFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first BogoOffer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BogoOfferFindFirstArgs} args - Arguments to find a BogoOffer
+     * @example
+     * // Get one BogoOffer
+     * const bogoOffer = await prisma.bogoOffer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BogoOfferFindFirstArgs>(args?: SelectSubset<T, BogoOfferFindFirstArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first BogoOffer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BogoOfferFindFirstOrThrowArgs} args - Arguments to find a BogoOffer
+     * @example
+     * // Get one BogoOffer
+     * const bogoOffer = await prisma.bogoOffer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BogoOfferFindFirstOrThrowArgs>(args?: SelectSubset<T, BogoOfferFindFirstOrThrowArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more BogoOffers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BogoOfferFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BogoOffers
+     * const bogoOffers = await prisma.bogoOffer.findMany()
+     * 
+     * // Get first 10 BogoOffers
+     * const bogoOffers = await prisma.bogoOffer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bogoOfferWithIdOnly = await prisma.bogoOffer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BogoOfferFindManyArgs>(args?: SelectSubset<T, BogoOfferFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a BogoOffer.
+     * @param {BogoOfferCreateArgs} args - Arguments to create a BogoOffer.
+     * @example
+     * // Create one BogoOffer
+     * const BogoOffer = await prisma.bogoOffer.create({
+     *   data: {
+     *     // ... data to create a BogoOffer
+     *   }
+     * })
+     * 
+     */
+    create<T extends BogoOfferCreateArgs>(args: SelectSubset<T, BogoOfferCreateArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many BogoOffers.
+     * @param {BogoOfferCreateManyArgs} args - Arguments to create many BogoOffers.
+     * @example
+     * // Create many BogoOffers
+     * const bogoOffer = await prisma.bogoOffer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BogoOfferCreateManyArgs>(args?: SelectSubset<T, BogoOfferCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BogoOffers and returns the data saved in the database.
+     * @param {BogoOfferCreateManyAndReturnArgs} args - Arguments to create many BogoOffers.
+     * @example
+     * // Create many BogoOffers
+     * const bogoOffer = await prisma.bogoOffer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BogoOffers and only return the `id`
+     * const bogoOfferWithIdOnly = await prisma.bogoOffer.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BogoOfferCreateManyAndReturnArgs>(args?: SelectSubset<T, BogoOfferCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a BogoOffer.
+     * @param {BogoOfferDeleteArgs} args - Arguments to delete one BogoOffer.
+     * @example
+     * // Delete one BogoOffer
+     * const BogoOffer = await prisma.bogoOffer.delete({
+     *   where: {
+     *     // ... filter to delete one BogoOffer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BogoOfferDeleteArgs>(args: SelectSubset<T, BogoOfferDeleteArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one BogoOffer.
+     * @param {BogoOfferUpdateArgs} args - Arguments to update one BogoOffer.
+     * @example
+     * // Update one BogoOffer
+     * const bogoOffer = await prisma.bogoOffer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BogoOfferUpdateArgs>(args: SelectSubset<T, BogoOfferUpdateArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more BogoOffers.
+     * @param {BogoOfferDeleteManyArgs} args - Arguments to filter BogoOffers to delete.
+     * @example
+     * // Delete a few BogoOffers
+     * const { count } = await prisma.bogoOffer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BogoOfferDeleteManyArgs>(args?: SelectSubset<T, BogoOfferDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BogoOffers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BogoOfferUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BogoOffers
+     * const bogoOffer = await prisma.bogoOffer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BogoOfferUpdateManyArgs>(args: SelectSubset<T, BogoOfferUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BogoOffers and returns the data updated in the database.
+     * @param {BogoOfferUpdateManyAndReturnArgs} args - Arguments to update many BogoOffers.
+     * @example
+     * // Update many BogoOffers
+     * const bogoOffer = await prisma.bogoOffer.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BogoOffers and only return the `id`
+     * const bogoOfferWithIdOnly = await prisma.bogoOffer.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BogoOfferUpdateManyAndReturnArgs>(args: SelectSubset<T, BogoOfferUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one BogoOffer.
+     * @param {BogoOfferUpsertArgs} args - Arguments to update or create a BogoOffer.
+     * @example
+     * // Update or create a BogoOffer
+     * const bogoOffer = await prisma.bogoOffer.upsert({
+     *   create: {
+     *     // ... data to create a BogoOffer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BogoOffer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BogoOfferUpsertArgs>(args: SelectSubset<T, BogoOfferUpsertArgs<ExtArgs>>): Prisma__BogoOfferClient<$Result.GetResult<Prisma.$BogoOfferPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of BogoOffers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BogoOfferCountArgs} args - Arguments to filter BogoOffers to count.
+     * @example
+     * // Count the number of BogoOffers
+     * const count = await prisma.bogoOffer.count({
+     *   where: {
+     *     // ... the filter for the BogoOffers we want to count
+     *   }
+     * })
+    **/
+    count<T extends BogoOfferCountArgs>(
+      args?: Subset<T, BogoOfferCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BogoOfferCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BogoOffer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BogoOfferAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BogoOfferAggregateArgs>(args: Subset<T, BogoOfferAggregateArgs>): Prisma.PrismaPromise<GetBogoOfferAggregateType<T>>
+
+    /**
+     * Group by BogoOffer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BogoOfferGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BogoOfferGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BogoOfferGroupByArgs['orderBy'] }
+        : { orderBy?: BogoOfferGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BogoOfferGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBogoOfferGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BogoOffer model
+   */
+  readonly fields: BogoOfferFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BogoOffer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BogoOfferClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BogoOffer model
+   */ 
+  interface BogoOfferFieldRefs {
+    readonly id: FieldRef<"BogoOffer", 'String'>
+    readonly title: FieldRef<"BogoOffer", 'String'>
+    readonly buyVariantId: FieldRef<"BogoOffer", 'String'>
+    readonly buyQuantity: FieldRef<"BogoOffer", 'Int'>
+    readonly getVariantId: FieldRef<"BogoOffer", 'String'>
+    readonly getQuantity: FieldRef<"BogoOffer", 'Int'>
+    readonly discountPercent: FieldRef<"BogoOffer", 'Decimal'>
+    readonly startDate: FieldRef<"BogoOffer", 'DateTime'>
+    readonly endDate: FieldRef<"BogoOffer", 'DateTime'>
+    readonly isActive: FieldRef<"BogoOffer", 'Boolean'>
+    readonly createdAt: FieldRef<"BogoOffer", 'DateTime'>
+    readonly updatedAt: FieldRef<"BogoOffer", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BogoOffer findUnique
+   */
+  export type BogoOfferFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * Filter, which BogoOffer to fetch.
+     */
+    where: BogoOfferWhereUniqueInput
+  }
+
+  /**
+   * BogoOffer findUniqueOrThrow
+   */
+  export type BogoOfferFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * Filter, which BogoOffer to fetch.
+     */
+    where: BogoOfferWhereUniqueInput
+  }
+
+  /**
+   * BogoOffer findFirst
+   */
+  export type BogoOfferFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * Filter, which BogoOffer to fetch.
+     */
+    where?: BogoOfferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BogoOffers to fetch.
+     */
+    orderBy?: BogoOfferOrderByWithRelationInput | BogoOfferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BogoOffers.
+     */
+    cursor?: BogoOfferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BogoOffers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BogoOffers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BogoOffers.
+     */
+    distinct?: BogoOfferScalarFieldEnum | BogoOfferScalarFieldEnum[]
+  }
+
+  /**
+   * BogoOffer findFirstOrThrow
+   */
+  export type BogoOfferFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * Filter, which BogoOffer to fetch.
+     */
+    where?: BogoOfferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BogoOffers to fetch.
+     */
+    orderBy?: BogoOfferOrderByWithRelationInput | BogoOfferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BogoOffers.
+     */
+    cursor?: BogoOfferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BogoOffers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BogoOffers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BogoOffers.
+     */
+    distinct?: BogoOfferScalarFieldEnum | BogoOfferScalarFieldEnum[]
+  }
+
+  /**
+   * BogoOffer findMany
+   */
+  export type BogoOfferFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * Filter, which BogoOffers to fetch.
+     */
+    where?: BogoOfferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BogoOffers to fetch.
+     */
+    orderBy?: BogoOfferOrderByWithRelationInput | BogoOfferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BogoOffers.
+     */
+    cursor?: BogoOfferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BogoOffers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BogoOffers.
+     */
+    skip?: number
+    distinct?: BogoOfferScalarFieldEnum | BogoOfferScalarFieldEnum[]
+  }
+
+  /**
+   * BogoOffer create
+   */
+  export type BogoOfferCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * The data needed to create a BogoOffer.
+     */
+    data: XOR<BogoOfferCreateInput, BogoOfferUncheckedCreateInput>
+  }
+
+  /**
+   * BogoOffer createMany
+   */
+  export type BogoOfferCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BogoOffers.
+     */
+    data: BogoOfferCreateManyInput | BogoOfferCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BogoOffer createManyAndReturn
+   */
+  export type BogoOfferCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * The data used to create many BogoOffers.
+     */
+    data: BogoOfferCreateManyInput | BogoOfferCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BogoOffer update
+   */
+  export type BogoOfferUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * The data needed to update a BogoOffer.
+     */
+    data: XOR<BogoOfferUpdateInput, BogoOfferUncheckedUpdateInput>
+    /**
+     * Choose, which BogoOffer to update.
+     */
+    where: BogoOfferWhereUniqueInput
+  }
+
+  /**
+   * BogoOffer updateMany
+   */
+  export type BogoOfferUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BogoOffers.
+     */
+    data: XOR<BogoOfferUpdateManyMutationInput, BogoOfferUncheckedUpdateManyInput>
+    /**
+     * Filter which BogoOffers to update
+     */
+    where?: BogoOfferWhereInput
+  }
+
+  /**
+   * BogoOffer updateManyAndReturn
+   */
+  export type BogoOfferUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * The data used to update BogoOffers.
+     */
+    data: XOR<BogoOfferUpdateManyMutationInput, BogoOfferUncheckedUpdateManyInput>
+    /**
+     * Filter which BogoOffers to update
+     */
+    where?: BogoOfferWhereInput
+  }
+
+  /**
+   * BogoOffer upsert
+   */
+  export type BogoOfferUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * The filter to search for the BogoOffer to update in case it exists.
+     */
+    where: BogoOfferWhereUniqueInput
+    /**
+     * In case the BogoOffer found by the `where` argument doesn't exist, create a new BogoOffer with this data.
+     */
+    create: XOR<BogoOfferCreateInput, BogoOfferUncheckedCreateInput>
+    /**
+     * In case the BogoOffer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BogoOfferUpdateInput, BogoOfferUncheckedUpdateInput>
+  }
+
+  /**
+   * BogoOffer delete
+   */
+  export type BogoOfferDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+    /**
+     * Filter which BogoOffer to delete.
+     */
+    where: BogoOfferWhereUniqueInput
+  }
+
+  /**
+   * BogoOffer deleteMany
+   */
+  export type BogoOfferDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BogoOffers to delete
+     */
+    where?: BogoOfferWhereInput
+  }
+
+  /**
+   * BogoOffer without action
+   */
+  export type BogoOfferDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BogoOffer
+     */
+    select?: BogoOfferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BogoOffer
+     */
+    omit?: BogoOfferOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -26271,6 +27478,24 @@ export namespace Prisma {
   };
 
   export type TaxRuleScalarFieldEnum = (typeof TaxRuleScalarFieldEnum)[keyof typeof TaxRuleScalarFieldEnum]
+
+
+  export const BogoOfferScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    buyVariantId: 'buyVariantId',
+    buyQuantity: 'buyQuantity',
+    getVariantId: 'getVariantId',
+    getQuantity: 'getQuantity',
+    discountPercent: 'discountPercent',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BogoOfferScalarFieldEnum = (typeof BogoOfferScalarFieldEnum)[keyof typeof BogoOfferScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -27949,6 +29174,95 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"TaxRule"> | Date | string
   }
 
+  export type BogoOfferWhereInput = {
+    AND?: BogoOfferWhereInput | BogoOfferWhereInput[]
+    OR?: BogoOfferWhereInput[]
+    NOT?: BogoOfferWhereInput | BogoOfferWhereInput[]
+    id?: StringFilter<"BogoOffer"> | string
+    title?: StringFilter<"BogoOffer"> | string
+    buyVariantId?: StringFilter<"BogoOffer"> | string
+    buyQuantity?: IntFilter<"BogoOffer"> | number
+    getVariantId?: StringFilter<"BogoOffer"> | string
+    getQuantity?: IntFilter<"BogoOffer"> | number
+    discountPercent?: DecimalFilter<"BogoOffer"> | Decimal | DecimalJsLike | number | string
+    startDate?: DateTimeFilter<"BogoOffer"> | Date | string
+    endDate?: DateTimeFilter<"BogoOffer"> | Date | string
+    isActive?: BoolFilter<"BogoOffer"> | boolean
+    createdAt?: DateTimeFilter<"BogoOffer"> | Date | string
+    updatedAt?: DateTimeFilter<"BogoOffer"> | Date | string
+  }
+
+  export type BogoOfferOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    buyVariantId?: SortOrder
+    buyQuantity?: SortOrder
+    getVariantId?: SortOrder
+    getQuantity?: SortOrder
+    discountPercent?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BogoOfferWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BogoOfferWhereInput | BogoOfferWhereInput[]
+    OR?: BogoOfferWhereInput[]
+    NOT?: BogoOfferWhereInput | BogoOfferWhereInput[]
+    title?: StringFilter<"BogoOffer"> | string
+    buyVariantId?: StringFilter<"BogoOffer"> | string
+    buyQuantity?: IntFilter<"BogoOffer"> | number
+    getVariantId?: StringFilter<"BogoOffer"> | string
+    getQuantity?: IntFilter<"BogoOffer"> | number
+    discountPercent?: DecimalFilter<"BogoOffer"> | Decimal | DecimalJsLike | number | string
+    startDate?: DateTimeFilter<"BogoOffer"> | Date | string
+    endDate?: DateTimeFilter<"BogoOffer"> | Date | string
+    isActive?: BoolFilter<"BogoOffer"> | boolean
+    createdAt?: DateTimeFilter<"BogoOffer"> | Date | string
+    updatedAt?: DateTimeFilter<"BogoOffer"> | Date | string
+  }, "id">
+
+  export type BogoOfferOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    buyVariantId?: SortOrder
+    buyQuantity?: SortOrder
+    getVariantId?: SortOrder
+    getQuantity?: SortOrder
+    discountPercent?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BogoOfferCountOrderByAggregateInput
+    _avg?: BogoOfferAvgOrderByAggregateInput
+    _max?: BogoOfferMaxOrderByAggregateInput
+    _min?: BogoOfferMinOrderByAggregateInput
+    _sum?: BogoOfferSumOrderByAggregateInput
+  }
+
+  export type BogoOfferScalarWhereWithAggregatesInput = {
+    AND?: BogoOfferScalarWhereWithAggregatesInput | BogoOfferScalarWhereWithAggregatesInput[]
+    OR?: BogoOfferScalarWhereWithAggregatesInput[]
+    NOT?: BogoOfferScalarWhereWithAggregatesInput | BogoOfferScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BogoOffer"> | string
+    title?: StringWithAggregatesFilter<"BogoOffer"> | string
+    buyVariantId?: StringWithAggregatesFilter<"BogoOffer"> | string
+    buyQuantity?: IntWithAggregatesFilter<"BogoOffer"> | number
+    getVariantId?: StringWithAggregatesFilter<"BogoOffer"> | string
+    getQuantity?: IntWithAggregatesFilter<"BogoOffer"> | number
+    discountPercent?: DecimalWithAggregatesFilter<"BogoOffer"> | Decimal | DecimalJsLike | number | string
+    startDate?: DateTimeWithAggregatesFilter<"BogoOffer"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"BogoOffer"> | Date | string
+    isActive?: BoolWithAggregatesFilter<"BogoOffer"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"BogoOffer"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BogoOffer"> | Date | string
+  }
+
   export type StoreSettingCreateInput = {
     id?: string
     storeName: string
@@ -29521,6 +30835,111 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BogoOfferCreateInput = {
+    id?: string
+    title: string
+    buyVariantId: string
+    buyQuantity?: number
+    getVariantId: string
+    getQuantity?: number
+    discountPercent?: Decimal | DecimalJsLike | number | string
+    startDate?: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BogoOfferUncheckedCreateInput = {
+    id?: string
+    title: string
+    buyVariantId: string
+    buyQuantity?: number
+    getVariantId: string
+    getQuantity?: number
+    discountPercent?: Decimal | DecimalJsLike | number | string
+    startDate?: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BogoOfferUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    buyVariantId?: StringFieldUpdateOperationsInput | string
+    buyQuantity?: IntFieldUpdateOperationsInput | number
+    getVariantId?: StringFieldUpdateOperationsInput | string
+    getQuantity?: IntFieldUpdateOperationsInput | number
+    discountPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BogoOfferUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    buyVariantId?: StringFieldUpdateOperationsInput | string
+    buyQuantity?: IntFieldUpdateOperationsInput | number
+    getVariantId?: StringFieldUpdateOperationsInput | string
+    getQuantity?: IntFieldUpdateOperationsInput | number
+    discountPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BogoOfferCreateManyInput = {
+    id?: string
+    title: string
+    buyVariantId: string
+    buyQuantity?: number
+    getVariantId: string
+    getQuantity?: number
+    discountPercent?: Decimal | DecimalJsLike | number | string
+    startDate?: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BogoOfferUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    buyVariantId?: StringFieldUpdateOperationsInput | string
+    buyQuantity?: IntFieldUpdateOperationsInput | number
+    getVariantId?: StringFieldUpdateOperationsInput | string
+    getQuantity?: IntFieldUpdateOperationsInput | number
+    discountPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BogoOfferUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    buyVariantId?: StringFieldUpdateOperationsInput | string
+    buyQuantity?: IntFieldUpdateOperationsInput | number
+    getVariantId?: StringFieldUpdateOperationsInput | string
+    getQuantity?: IntFieldUpdateOperationsInput | number
+    discountPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -30796,6 +32215,63 @@ export namespace Prisma {
   export type TaxRuleSumOrderByAggregateInput = {
     rate?: SortOrder
     priority?: SortOrder
+  }
+
+  export type BogoOfferCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    buyVariantId?: SortOrder
+    buyQuantity?: SortOrder
+    getVariantId?: SortOrder
+    getQuantity?: SortOrder
+    discountPercent?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BogoOfferAvgOrderByAggregateInput = {
+    buyQuantity?: SortOrder
+    getQuantity?: SortOrder
+    discountPercent?: SortOrder
+  }
+
+  export type BogoOfferMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    buyVariantId?: SortOrder
+    buyQuantity?: SortOrder
+    getVariantId?: SortOrder
+    getQuantity?: SortOrder
+    discountPercent?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BogoOfferMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    buyVariantId?: SortOrder
+    buyQuantity?: SortOrder
+    getVariantId?: SortOrder
+    getQuantity?: SortOrder
+    discountPercent?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BogoOfferSumOrderByAggregateInput = {
+    buyQuantity?: SortOrder
+    getQuantity?: SortOrder
+    discountPercent?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

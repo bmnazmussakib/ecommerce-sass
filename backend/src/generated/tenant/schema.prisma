@@ -309,3 +309,18 @@ model TaxRule {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model BogoOffer {
+  id              String   @id @default(uuid())
+  title           String // e.g. "Buy 1 T-Shirt Get 1 Free"
+  buyVariantId    String // ProductVariant ID required to buy
+  buyQuantity     Int      @default(1) // Quantity required to buy
+  getVariantId    String // ProductVariant ID received as offer
+  getQuantity     Int      @default(1) // Quantity received as offer
+  discountPercent Decimal  @default(100.00) @db.Decimal(5, 2) // 100% = Free
+  startDate       DateTime @default(now())
+  endDate         DateTime
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

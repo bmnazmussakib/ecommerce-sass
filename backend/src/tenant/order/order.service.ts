@@ -22,6 +22,7 @@ import { ShippingService } from '../shipping/shipping.service';
 import { DigitalProductService } from '../digital-product/digital-product.service';
 import { WebhookService } from '../webhook/webhook.service';
 import { TaxRuleService } from '../tax-rule/tax-rule.service';
+import { BogoOfferService } from '../bogo-offer/bogo-offer.service';
 
 @Injectable()
 export class OrderService {
@@ -35,6 +36,7 @@ export class OrderService {
     private readonly digitalProductService: DigitalProductService,
     private readonly webhookService: WebhookService,
     private readonly taxRuleService: TaxRuleService,
+    private readonly bogoOfferService: BogoOfferService,
   ) {}
 
   async checkout(dto: CreateOrderDto, tenantId: string, origin: string) {
@@ -182,6 +184,16 @@ export class OrderService {
         }
         couponUsed = coupon.id;
       }
+
+      // Evaluate BOGO offer promotion discounts
+      const bogoDiscount = await this.bogoOfferService.calculateBogoDiscount(
+        orderItemsData.map((i) => ({
+          variantId: i.variantId,
+          quantity: i.quantity,
+          price: Number(i.price),
+        })),
+      );
+      discount = discount.add(bogoDiscount);
 
       // Calculate shipping: 0 for all-digital orders, otherwise zone-based
       const shippingCharge = allDigital
