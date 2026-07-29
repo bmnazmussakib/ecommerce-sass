@@ -29,6 +29,7 @@ import { WarehouseModule } from './warehouse/warehouse.module';
 import { LanguageModule } from './language/language.module';
 import { CaptchaModule } from './captcha/captcha.module';
 import { ApiKeyModule } from './api-key/api-key.module';
+import { CustomDomainModule } from './custom-domain/custom-domain.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { ApiKeyModule } from './api-key/api-key.module';
     LanguageModule,
     CaptchaModule,
     ApiKeyModule,
+    CustomDomainModule,
   ]
 })
 export class TenantModule {}

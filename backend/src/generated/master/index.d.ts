@@ -2764,6 +2764,8 @@ export namespace Prisma {
     id: string | null
     subdomain: string | null
     customDomain: string | null
+    customDomainStatus: string | null
+    customDomainSslStatus: string | null
     status: $Enums.TenantStatus | null
     dbConnectionString: string | null
     createdAt: Date | null
@@ -2774,6 +2776,8 @@ export namespace Prisma {
     id: string | null
     subdomain: string | null
     customDomain: string | null
+    customDomainStatus: string | null
+    customDomainSslStatus: string | null
     status: $Enums.TenantStatus | null
     dbConnectionString: string | null
     createdAt: Date | null
@@ -2784,6 +2788,8 @@ export namespace Prisma {
     id: number
     subdomain: number
     customDomain: number
+    customDomainStatus: number
+    customDomainSslStatus: number
     status: number
     dbConnectionString: number
     createdAt: number
@@ -2797,6 +2803,8 @@ export namespace Prisma {
     id?: true
     subdomain?: true
     customDomain?: true
+    customDomainStatus?: true
+    customDomainSslStatus?: true
     status?: true
     dbConnectionString?: true
     createdAt?: true
@@ -2807,6 +2815,8 @@ export namespace Prisma {
     id?: true
     subdomain?: true
     customDomain?: true
+    customDomainStatus?: true
+    customDomainSslStatus?: true
     status?: true
     dbConnectionString?: true
     createdAt?: true
@@ -2817,6 +2827,8 @@ export namespace Prisma {
     id?: true
     subdomain?: true
     customDomain?: true
+    customDomainStatus?: true
+    customDomainSslStatus?: true
     status?: true
     dbConnectionString?: true
     createdAt?: true
@@ -2901,6 +2913,8 @@ export namespace Prisma {
     id: string
     subdomain: string
     customDomain: string | null
+    customDomainStatus: string
+    customDomainSslStatus: string
     status: $Enums.TenantStatus
     dbConnectionString: string
     createdAt: Date
@@ -2929,6 +2943,8 @@ export namespace Prisma {
     id?: boolean
     subdomain?: boolean
     customDomain?: boolean
+    customDomainStatus?: boolean
+    customDomainSslStatus?: boolean
     status?: boolean
     dbConnectionString?: boolean
     createdAt?: boolean
@@ -2943,6 +2959,8 @@ export namespace Prisma {
     id?: boolean
     subdomain?: boolean
     customDomain?: boolean
+    customDomainStatus?: boolean
+    customDomainSslStatus?: boolean
     status?: boolean
     dbConnectionString?: boolean
     createdAt?: boolean
@@ -2954,6 +2972,8 @@ export namespace Prisma {
     id?: boolean
     subdomain?: boolean
     customDomain?: boolean
+    customDomainStatus?: boolean
+    customDomainSslStatus?: boolean
     status?: boolean
     dbConnectionString?: boolean
     createdAt?: boolean
@@ -2965,6 +2985,8 @@ export namespace Prisma {
     id?: boolean
     subdomain?: boolean
     customDomain?: boolean
+    customDomainStatus?: boolean
+    customDomainSslStatus?: boolean
     status?: boolean
     dbConnectionString?: boolean
     createdAt?: boolean
@@ -2972,7 +2994,7 @@ export namespace Prisma {
     featureToggles?: boolean
   }
 
-  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "subdomain" | "customDomain" | "status" | "dbConnectionString" | "createdAt" | "updatedAt" | "featureToggles", ExtArgs["result"]["tenant"]>
+  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "subdomain" | "customDomain" | "customDomainStatus" | "customDomainSslStatus" | "status" | "dbConnectionString" | "createdAt" | "updatedAt" | "featureToggles", ExtArgs["result"]["tenant"]>
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subscription?: boolean | Tenant$subscriptionArgs<ExtArgs>
     payments?: boolean | Tenant$paymentsArgs<ExtArgs>
@@ -2991,6 +3013,8 @@ export namespace Prisma {
       id: string
       subdomain: string
       customDomain: string | null
+      customDomainStatus: string
+      customDomainSslStatus: string
       status: $Enums.TenantStatus
       dbConnectionString: string
       createdAt: Date
@@ -3424,6 +3448,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Tenant", 'String'>
     readonly subdomain: FieldRef<"Tenant", 'String'>
     readonly customDomain: FieldRef<"Tenant", 'String'>
+    readonly customDomainStatus: FieldRef<"Tenant", 'String'>
+    readonly customDomainSslStatus: FieldRef<"Tenant", 'String'>
     readonly status: FieldRef<"Tenant", 'TenantStatus'>
     readonly dbConnectionString: FieldRef<"Tenant", 'String'>
     readonly createdAt: FieldRef<"Tenant", 'DateTime'>
@@ -11466,6 +11492,8 @@ export namespace Prisma {
     id: 'id',
     subdomain: 'subdomain',
     customDomain: 'customDomain',
+    customDomainStatus: 'customDomainStatus',
+    customDomainSslStatus: 'customDomainSslStatus',
     status: 'status',
     dbConnectionString: 'dbConnectionString',
     createdAt: 'createdAt',
@@ -11848,6 +11876,8 @@ export namespace Prisma {
     id?: StringFilter<"Tenant"> | string
     subdomain?: StringFilter<"Tenant"> | string
     customDomain?: StringNullableFilter<"Tenant"> | string | null
+    customDomainStatus?: StringFilter<"Tenant"> | string
+    customDomainSslStatus?: StringFilter<"Tenant"> | string
     status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
     dbConnectionString?: StringFilter<"Tenant"> | string
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
@@ -11861,6 +11891,8 @@ export namespace Prisma {
     id?: SortOrder
     subdomain?: SortOrder
     customDomain?: SortOrderInput | SortOrder
+    customDomainStatus?: SortOrder
+    customDomainSslStatus?: SortOrder
     status?: SortOrder
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
@@ -11877,6 +11909,8 @@ export namespace Prisma {
     AND?: TenantWhereInput | TenantWhereInput[]
     OR?: TenantWhereInput[]
     NOT?: TenantWhereInput | TenantWhereInput[]
+    customDomainStatus?: StringFilter<"Tenant"> | string
+    customDomainSslStatus?: StringFilter<"Tenant"> | string
     status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
     dbConnectionString?: StringFilter<"Tenant"> | string
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
@@ -11890,6 +11924,8 @@ export namespace Prisma {
     id?: SortOrder
     subdomain?: SortOrder
     customDomain?: SortOrderInput | SortOrder
+    customDomainStatus?: SortOrder
+    customDomainSslStatus?: SortOrder
     status?: SortOrder
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
@@ -11907,6 +11943,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Tenant"> | string
     subdomain?: StringWithAggregatesFilter<"Tenant"> | string
     customDomain?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
+    customDomainStatus?: StringWithAggregatesFilter<"Tenant"> | string
+    customDomainSslStatus?: StringWithAggregatesFilter<"Tenant"> | string
     status?: EnumTenantStatusWithAggregatesFilter<"Tenant"> | $Enums.TenantStatus
     dbConnectionString?: StringWithAggregatesFilter<"Tenant"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
@@ -12466,6 +12504,8 @@ export namespace Prisma {
     id?: string
     subdomain: string
     customDomain?: string | null
+    customDomainStatus?: string
+    customDomainSslStatus?: string
     status?: $Enums.TenantStatus
     dbConnectionString: string
     createdAt?: Date | string
@@ -12479,6 +12519,8 @@ export namespace Prisma {
     id?: string
     subdomain: string
     customDomain?: string | null
+    customDomainStatus?: string
+    customDomainSslStatus?: string
     status?: $Enums.TenantStatus
     dbConnectionString: string
     createdAt?: Date | string
@@ -12492,6 +12534,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12505,6 +12549,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12518,6 +12564,8 @@ export namespace Prisma {
     id?: string
     subdomain: string
     customDomain?: string | null
+    customDomainStatus?: string
+    customDomainSslStatus?: string
     status?: $Enums.TenantStatus
     dbConnectionString: string
     createdAt?: Date | string
@@ -12529,6 +12577,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12540,6 +12590,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13245,6 +13297,8 @@ export namespace Prisma {
     id?: SortOrder
     subdomain?: SortOrder
     customDomain?: SortOrder
+    customDomainStatus?: SortOrder
+    customDomainSslStatus?: SortOrder
     status?: SortOrder
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
@@ -13256,6 +13310,8 @@ export namespace Prisma {
     id?: SortOrder
     subdomain?: SortOrder
     customDomain?: SortOrder
+    customDomainStatus?: SortOrder
+    customDomainSslStatus?: SortOrder
     status?: SortOrder
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
@@ -13266,6 +13322,8 @@ export namespace Prisma {
     id?: SortOrder
     subdomain?: SortOrder
     customDomain?: SortOrder
+    customDomainStatus?: SortOrder
+    customDomainSslStatus?: SortOrder
     status?: SortOrder
     dbConnectionString?: SortOrder
     createdAt?: SortOrder
@@ -14763,6 +14821,8 @@ export namespace Prisma {
     id?: string
     subdomain: string
     customDomain?: string | null
+    customDomainStatus?: string
+    customDomainSslStatus?: string
     status?: $Enums.TenantStatus
     dbConnectionString: string
     createdAt?: Date | string
@@ -14775,6 +14835,8 @@ export namespace Prisma {
     id?: string
     subdomain: string
     customDomain?: string | null
+    customDomainStatus?: string
+    customDomainSslStatus?: string
     status?: $Enums.TenantStatus
     dbConnectionString: string
     createdAt?: Date | string
@@ -14834,6 +14896,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14846,6 +14910,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14895,6 +14961,8 @@ export namespace Prisma {
     id?: string
     subdomain: string
     customDomain?: string | null
+    customDomainStatus?: string
+    customDomainSslStatus?: string
     status?: $Enums.TenantStatus
     dbConnectionString: string
     createdAt?: Date | string
@@ -14907,6 +14975,8 @@ export namespace Prisma {
     id?: string
     subdomain: string
     customDomain?: string | null
+    customDomainStatus?: string
+    customDomainSslStatus?: string
     status?: $Enums.TenantStatus
     dbConnectionString: string
     createdAt?: Date | string
@@ -14966,6 +15036,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14978,6 +15050,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     subdomain?: StringFieldUpdateOperationsInput | string
     customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customDomainStatus?: StringFieldUpdateOperationsInput | string
+    customDomainSslStatus?: StringFieldUpdateOperationsInput | string
     status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     dbConnectionString?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

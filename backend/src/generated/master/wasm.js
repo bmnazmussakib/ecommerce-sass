@@ -131,6 +131,8 @@ exports.Prisma.TenantScalarFieldEnum = {
   id: 'id',
   subdomain: 'subdomain',
   customDomain: 'customDomain',
+  customDomainStatus: 'customDomainStatus',
+  customDomainSslStatus: 'customDomainSslStatus',
   status: 'status',
   dbConnectionString: 'dbConnectionString',
   createdAt: 'createdAt',

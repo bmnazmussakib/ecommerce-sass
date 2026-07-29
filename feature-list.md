@@ -23,7 +23,7 @@
 | 1.11 | Admin store data access | ✅ Done | Backend | — | — | View vendor products, orders, customers |
 | 1.12 | GlobalTheme management | ✅ Done | Backend | — | Cloudinary (free 25GB) | Full CRUD with upload/activate/deactivate |
 | 1.13 | Vendor onboarding workflow | ✅ Done | Backend | — | — | Automatic DB provisioning, status management, staff registry |
-| 1.14 | Custom domain auto-SSL | 🔜 Due | Backend | Medium | Cloudflare (Free plan) | Let's Encrypt / Cloudflare SSL provisioning |
+| 1.14 | Custom domain auto-SSL | ✅ Done | Backend | — | Cloudflare (Free plan) | Custom domain binding, Node.js DNS CNAME/A verification engine, Cloudflare/Caddy Auto-SSL provisioning |
 | 1.15 | Visitor quota enforcement | ✅ Done | Backend | — | Count visitors, throttle when over plan limit via traffic middleware |
 | 1.16 | Platform analytics dashboard | ✅ Done | B/E + F/E | — | Aggregated platform metrics dashboard API |
 | 1.17 | Infrastructure monitoring | ✅ Done | B/E + F/E | — | Server specs, RAM usage, DB sizes and connection pings |
