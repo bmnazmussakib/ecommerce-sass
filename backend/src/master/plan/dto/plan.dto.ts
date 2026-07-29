@@ -31,6 +31,11 @@ export class CreatePlanDto {
   @Min(0)
   price!: number;
 
+  @ApiProperty({ example: 'USD', required: false, default: 'USD' })
+  @IsString()
+  @IsOptional()
+  currency?: string;
+
   @ApiProperty({ enum: BillingCycle, default: BillingCycle.MONTHLY })
   @IsEnum(BillingCycle)
   @IsOptional()
@@ -67,8 +72,24 @@ export class UpdatePlanDto {
   @IsOptional()
   price?: number;
 
+  @ApiProperty({ example: 'USD', required: false })
+  @IsString()
+  @IsOptional()
+  currency?: string;
+
   @ApiProperty({ enum: BillingCycle, required: false })
   @IsEnum(BillingCycle)
   @IsOptional()
   interval?: BillingCycle;
+}
+
+export class SetPlanCurrencyPriceDto {
+  @ApiProperty({ example: 'BDT', description: 'Currency ISO code (e.g. USD, BDT, EUR, GBP)' })
+  @IsString()
+  currency!: string;
+
+  @ApiProperty({ example: 3000.0, description: 'Price in specified currency' })
+  @IsNumber()
+  @Min(0)
+  price!: number;
 }

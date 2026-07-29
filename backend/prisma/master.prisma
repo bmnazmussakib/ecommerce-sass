@@ -40,15 +40,29 @@ enum TenantStatus {
 }
 
 model Plan {
-  id           String         @id @default(uuid())
-  name         String
-  productLimit Int
-  trafficLimit Int
-  storageLimit Int
-  price        Decimal        @db.Decimal(10, 2)
-  interval     BillingCycle   @default(MONTHLY)
+  id            String                @id @default(uuid())
+  name          String
+  productLimit  Int
+  trafficLimit  Int
+  storageLimit  Int
+  price         Decimal               @db.Decimal(10, 2)
+  currency      String                @default("USD")
+  interval      BillingCycle          @default(MONTHLY)
+  prices        PlanPricing[]
   subscriptions Subscription[]
-  payments     SubscriptionPayment[]
+  payments      SubscriptionPayment[]
+}
+
+model PlanPricing {
+  id        String   @id @default(uuid())
+  planId    String
+  plan      Plan     @relation(fields: [planId], references: [id], onDelete: Cascade)
+  currency  String   // e.g. "USD", "BDT", "EUR", "GBP"
+  price     Decimal  @db.Decimal(10, 2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([planId, currency])
 }
 
 enum BillingCycle {

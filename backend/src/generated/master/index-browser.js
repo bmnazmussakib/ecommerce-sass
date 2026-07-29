@@ -145,7 +145,17 @@ exports.Prisma.PlanScalarFieldEnum = {
   trafficLimit: 'trafficLimit',
   storageLimit: 'storageLimit',
   price: 'price',
+  currency: 'currency',
   interval: 'interval'
+};
+
+exports.Prisma.PlanPricingScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  currency: 'currency',
+  price: 'price',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {
@@ -261,6 +271,7 @@ exports.Prisma.ModelName = {
   SuperAdmin: 'SuperAdmin',
   Tenant: 'Tenant',
   Plan: 'Plan',
+  PlanPricing: 'PlanPricing',
   Subscription: 'Subscription',
   GlobalTheme: 'GlobalTheme',
   TrafficLog: 'TrafficLog',

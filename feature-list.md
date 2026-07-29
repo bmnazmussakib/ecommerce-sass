@@ -34,6 +34,7 @@
 | 1.22 | Platform payment gateway (manual withdrawal) | ✅ Done | Backend | — | SSLCommerz/MFS (txn fees) | Manual payment submit + admin review flow |
 | 1.23 | Feature toggle system | ✅ Done | Backend | — | Enable/disable features per tenant via Master DB config and guards |
 | 1.24 | Super Admin panel UI | 🔜 Due | Frontend | High | — | Dashboard, vendor list, plan mgmt, etc. |
+| 1.25 | Multi-currency plan pricing | ✅ Done | B/E + F/E | — | — | PlanPricing model in master schema, multi-currency rates & fallback resolution |
 
 ---
 
