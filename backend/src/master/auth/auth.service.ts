@@ -22,12 +22,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    let isPasswordValid = false;
-    if (admin.password.startsWith('$2b$10$dummy') || !admin.password.startsWith('$2b$')) {
-      isPasswordValid = dto.password === 'admin123' || dto.password === 'password' || admin.password.includes(dto.password);
-    } else {
-      isPasswordValid = await bcrypt.compare(dto.password, admin.password);
-    }
+    const isPasswordValid = await bcrypt.compare(dto.password, admin.password);
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
