@@ -8,8 +8,6 @@ export class MasterPrismaService extends PrismaClient implements OnModuleInit, O
 
   constructor(configService: ConfigService) {
     const dbUrl = configService.get<string>('MASTER_DATABASE_URL');
-    console.log('MASTER_DATABASE_URL from configService:', dbUrl);
-    console.log('MASTER_DATABASE_URL from process.env:', process.env.MASTER_DATABASE_URL);
     super({
       datasources: {
         db: {
