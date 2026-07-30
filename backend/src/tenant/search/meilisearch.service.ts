@@ -24,7 +24,7 @@ export class MeiliSearchService {
     try {
       const index = this.getTenantIndex(tenantId);
       
-      // Transform product variant details to a flat structure for search
+      // Transform product option and variant details to a flat structure for search
       const document = {
         id: product.id,
         title: product.title,
@@ -33,11 +33,16 @@ export class MeiliSearchService {
         comparePrice: product.comparePrice ? Number(product.comparePrice) : null,
         status: product.status,
         categoryName: product.category?.name || null,
+        options: product.options?.map((opt: any) => ({
+          name: opt.name,
+          values: opt.values,
+        })) || [],
         variants: product.variants?.map((v: any) => ({
           sku: v.sku,
           price: Number(v.price),
           size: v.size,
           color: v.color,
+          options: v.options,
           stock: v.stock,
         })) || [],
       };

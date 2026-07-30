@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEnum, IsNumber, IsArray, ValidateNested, IsDateString } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsNumber, IsArray, ValidateNested, IsDateString, IsObject } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -7,6 +7,22 @@ export enum ProductStatus {
   ACTIVE = 'ACTIVE',
   OUT_OF_STOCK = 'OUT_OF_STOCK',
   SCHEDULED = 'SCHEDULED',
+}
+
+export class ProductOptionDto {
+  @ApiProperty({ example: 'Storage' })
+  @IsString()
+  name!: string;
+
+  @ApiProperty({ example: ['128GB', '256GB'] })
+  @IsArray()
+  @IsString({ each: true })
+  values!: string[];
+
+  @ApiProperty({ required: false, example: 1 })
+  @IsNumber()
+  @IsOptional()
+  position?: number;
 }
 
 export class ProductVariantDto {
@@ -22,6 +38,11 @@ export class ProductVariantDto {
   @IsNumber()
   @IsOptional()
   stock?: number;
+
+  @ApiProperty({ required: false, example: { Storage: '128GB', Color: 'Black' } })
+  @IsObject()
+  @IsOptional()
+  options?: Record<string, string>;
 
   @ApiProperty({ required: false })
   @IsString()
@@ -67,6 +88,13 @@ export class CreateProductDto {
   @IsOptional()
   categoryId?: string;
 
+  @ApiProperty({ type: [ProductOptionDto], required: false })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductOptionDto)
+  @IsOptional()
+  options?: ProductOptionDto[];
+
   @ApiProperty({ type: [ProductVariantDto], required: false })
   @IsArray()
   @ValidateNested({ each: true })
@@ -110,4 +138,11 @@ export class UpdateProductDto {
   @IsString()
   @IsOptional()
   categoryId?: string;
+
+  @ApiProperty({ type: [ProductOptionDto], required: false })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductOptionDto)
+  @IsOptional()
+  options?: ProductOptionDto[];
 }

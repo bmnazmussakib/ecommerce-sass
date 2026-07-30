@@ -68,17 +68,38 @@ export class ProductService {
   }
 
   async create(createProductDto: CreateProductDto, tenantId: string = 'default') {
-    const { variants, publishedAt, ...productData } = createProductDto;
+    const { variants, options, publishedAt, ...productData } = createProductDto;
+
+    // Handle auto-generating default variant if no variants provided (Simple Product)
+    const variantsData = (variants && variants.length > 0) 
+      ? variants.map(v => ({
+          sku: v.sku,
+          price: v.price,
+          stock: v.stock ?? 0,
+          size: v.size,
+          color: v.color,
+          options: v.options ? v.options : undefined,
+        }))
+      : [{
+          sku: `SKU-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+          price: productData.basePrice,
+          stock: 0,
+        }];
+
+    const optionsData = options ? options.map((opt, idx) => ({
+      name: opt.name,
+      values: opt.values,
+      position: opt.position ?? idx + 1,
+    })) : undefined;
     
     const product = await this.prisma.product.create({
       data: {
         ...productData,
         publishedAt: publishedAt ? new Date(publishedAt) : undefined,
-        variants: variants ? {
-          create: variants,
-        } : undefined,
+        options: optionsData ? { create: optionsData } : undefined,
+        variants: { create: variantsData },
       },
-      include: { category: true, variants: true },
+      include: { category: true, options: true, variants: true },
     });
 
     // Async sync to Meilisearch
@@ -90,14 +111,14 @@ export class ProductService {
   async findAll(tenantId: string = 'default') {
     await this.checkAndPublishScheduledProducts(tenantId);
     return this.prisma.product.findMany({
-      include: { category: true, variants: true },
+      include: { category: true, options: true, variants: true },
     });
   }
 
   async findOne(id: string) {
     const product = await this.prisma.product.findUnique({
       where: { id },
-      include: { category: true, variants: true },
+      include: { category: true, options: true, variants: true },
     });
     if (!product) throw new NotFoundException('Product not found');
     return product;
@@ -105,14 +126,26 @@ export class ProductService {
 
   async update(id: string, updateProductDto: UpdateProductDto, tenantId: string = 'default') {
     await this.findOne(id);
-    const { publishedAt, ...productData } = updateProductDto;
+    const { publishedAt, options, ...productData } = updateProductDto;
+
+    if (options) {
+      await this.prisma.productOption.deleteMany({ where: { productId: id } });
+    }
+
+    const optionsData = options ? options.map((opt, idx) => ({
+      name: opt.name,
+      values: opt.values,
+      position: opt.position ?? idx + 1,
+    })) : undefined;
+
     const product = await this.prisma.product.update({
       where: { id },
       data: {
         ...productData,
         publishedAt: publishedAt ? new Date(publishedAt) : undefined,
+        options: optionsData ? { create: optionsData } : undefined,
       },
-      include: { category: true, variants: true },
+      include: { category: true, options: true, variants: true },
     });
 
     // Async sync to Meilisearch

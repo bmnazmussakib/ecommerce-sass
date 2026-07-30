@@ -172,12 +172,22 @@ exports.Prisma.ProductScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ProductOptionScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  name: 'name',
+  position: 'position',
+  values: 'values',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.ProductVariantScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
   sku: 'sku',
   price: 'price',
   stock: 'stock',
+  options: 'options',
   size: 'size',
   color: 'color',
   weight: 'weight',
@@ -529,6 +539,11 @@ exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -631,6 +646,7 @@ exports.Prisma.ModelName = {
   Supplier: 'Supplier',
   Category: 'Category',
   Product: 'Product',
+  ProductOption: 'ProductOption',
   ProductVariant: 'ProductVariant',
   DigitalDownload: 'DigitalDownload',
   SupplyBatch: 'SupplyBatch',
