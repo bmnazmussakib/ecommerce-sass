@@ -40,7 +40,6 @@ export class ProductSchedulerProcessor extends WorkerHost {
         where: { id: productId },
         data: {
           status: 'ACTIVE',
-          scheduledAt: null,
         },
       });
 
