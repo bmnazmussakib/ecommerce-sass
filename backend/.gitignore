@@ -31,5 +31,5 @@ drop-tables.js
 drop.sql
 
 # Local credentials reference (never commit!)
-CREDENTIALS.md
+# CREDENTIALS.md
 

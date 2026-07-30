@@ -47,7 +47,7 @@
 | 2.3 | Store settings | ✅ Done | Backend | — | — | Name, logo, brand color, theme config |
 | 2.4 | Custom CSS / JS per store | ✅ Done | Backend | — | — | Stored in StoreSetting model |
 | 2.5 | Category management (nested) | ✅ Done | Backend | — | — | Full CRUD with parent/children |
-| 2.6 | Product CRUD with variants | ✅ Done | Backend | — | — | Size/color/weight/SKU/price/stock |
+| 2.6 | Product CRUD with dynamic options & variants | ✅ Done | Backend | — | — | Shopify-style ProductOption model, dynamic JSON variant attributes, simple product auto-variant generation, price/stock/SKU |
 | 2.7 | Bulk product import via CSV | ✅ Done | Backend | — | BullMQ + Redis (free OSS) | BullMQ background queue processor |
 | 2.8 | Meilisearch full-text search | ✅ Done | Backend | — | Meilisearch (free self-hosted) | Per-tenant indices, auto-synced |
 | 2.9 | Supplier management CRUD | ✅ Done | Backend | — | — | Supplier names, contacts, addresses |
