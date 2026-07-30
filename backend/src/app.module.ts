@@ -10,8 +10,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TenantResolverMiddleware } from './core/middleware/tenant-resolver.middleware';
 import { TrafficThrottleMiddleware } from './core/middleware/traffic-throttle.middleware';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core';
 import { AuditLogInterceptor } from './core/interceptors/audit-log.interceptor';
+import { CustomThrottlerGuard } from './core/guards/custom-throttler.guard';
 
 @Module({
   imports: [
@@ -42,6 +43,10 @@ import { AuditLogInterceptor } from './core/interceptors/audit-log.interceptor';
     {
       provide: APP_INTERCEPTOR,
       useClass: AuditLogInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: CustomThrottlerGuard,
     },
   ],
 })
