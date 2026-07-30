@@ -36,50 +36,31 @@ export class PlatformMonitoringService {
       where: { status: 'ACTIVE' },
     });
 
-    const tenantDbs = [];
+    const tenantDbs: any[] = [];
+    const CHUNK_SIZE = 10; // Process 10 tenant checks concurrently
 
-    for (const tenant of tenants) {
-      const tenantPrisma = new TenantPrismaClient({
-        datasources: {
-          db: {
-            url: tenant.dbConnectionString,
-          },
-        },
+    for (let i = 0; i < tenants.length; i += CHUNK_SIZE) {
+      const chunk = tenants.slice(i, i + CHUNK_SIZE);
+      const chunkPromises = chunk.map(async (tenant) => {
+        return Promise.race([
+          this.checkTenantDbStatus(tenant),
+          new Promise<any>((_, reject) =>
+            setTimeout(() => reject(new Error('Connection Timeout')), 3000), // 3s Timeout
+          ),
+        ]).catch((err) => {
+          console.error(`[Monitoring] Tenant DB ${tenant.subdomain} check failed: ${err.message}`);
+          return {
+            id: tenant.id,
+            subdomain: tenant.subdomain,
+            dbSize: 'Unknown',
+            latencyMs: 0,
+            status: 'UNHEALTHY',
+          };
+        });
       });
 
-      let size = 'Unknown';
-      let latencyMs = 0;
-      let status = 'HEALTHY';
-
-      try {
-        const start = Date.now();
-        await tenantPrisma.$connect();
-        
-        // Measure connection latency
-        await tenantPrisma.$executeRawUnsafe('SELECT 1;');
-        latencyMs = Date.now() - start;
-
-        // Query database schema size
-        const sizeQuery = await tenantPrisma.$queryRawUnsafe<any[]>(
-          `SELECT pg_size_pretty(pg_database_size(current_database())) as size;`
-        );
-        if (sizeQuery && sizeQuery.length > 0) {
-          size = sizeQuery[0].size;
-        }
-      } catch (err: any) {
-        status = 'UNHEALTHY';
-        console.error(`[Monitoring] Tenant DB ${tenant.subdomain} is unhealthy:`, err.message);
-      } finally {
-        await tenantPrisma.$disconnect();
-      }
-
-      tenantDbs.push({
-        id: tenant.id,
-        subdomain: tenant.subdomain,
-        dbSize: size,
-        latencyMs,
-        status,
-      });
+      const chunkResults = await Promise.all(chunkPromises);
+      tenantDbs.push(...chunkResults);
     }
 
     return {
@@ -105,6 +86,50 @@ export class PlatformMonitoringService {
         },
         tenants: tenantDbs,
       },
+    };
+  }
+
+  private async checkTenantDbStatus(tenant: any) {
+    const tenantPrisma = new TenantPrismaClient({
+      datasources: {
+        db: {
+          url: tenant.dbConnectionString,
+        },
+      },
+    });
+
+    let size = 'Unknown';
+    let latencyMs = 0;
+    let status = 'HEALTHY';
+
+    try {
+      const start = Date.now();
+      await tenantPrisma.$connect();
+      
+      // Measure connection latency
+      await tenantPrisma.$executeRawUnsafe('SELECT 1;');
+      latencyMs = Date.now() - start;
+
+      // Query database schema size
+      const sizeQuery = await tenantPrisma.$queryRawUnsafe<any[]>(
+        `SELECT pg_size_pretty(pg_database_size(current_database())) as size;`
+      );
+      if (sizeQuery && sizeQuery.length > 0) {
+        size = sizeQuery[0].size;
+      }
+    } catch (err: any) {
+      status = 'UNHEALTHY';
+      console.error(`[Monitoring] Dynamic Tenant DB check failed for ${tenant.subdomain}:`, err.message);
+    } finally {
+      await tenantPrisma.$disconnect().catch(() => {});
+    }
+
+    return {
+      id: tenant.id,
+      subdomain: tenant.subdomain,
+      dbSize: size,
+      latencyMs,
+      status,
     };
   }
 }
