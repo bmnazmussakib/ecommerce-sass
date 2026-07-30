@@ -1,11 +1,20 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class BkashService {
-  private readonly baseUrl = 'https://tokenized.sandbox.bka.sh/v1.2.0-beta';
+  constructor(private readonly configService: ConfigService) {}
+
+  private getBaseUrl(keys?: any): string {
+    if (keys?.baseUrl) return keys.baseUrl;
+    return (
+      this.configService.get<string>('BKASH_BASE_URL') ||
+      'https://tokenized.sandbox.bka.sh/v1.2.0-beta'
+    );
+  }
 
   async grantToken(keys: any): Promise<string> {
-    const url = `${this.baseUrl}/tokenized/checkout/token/grant`;
+    const url = `${this.getBaseUrl(keys)}/tokenized/checkout/token/grant`;
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -28,7 +37,7 @@ export class BkashService {
   }
 
   async createPayment(token: string, orderId: string, amount: number, keys: any, callbackUrl: string): Promise<any> {
-    const url = `${this.baseUrl}/tokenized/checkout/create`;
+    const url = `${this.getBaseUrl(keys)}/tokenized/checkout/create`;
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -56,7 +65,7 @@ export class BkashService {
   }
 
   async executePayment(token: string, paymentID: string, keys: any): Promise<any> {
-    const url = `${this.baseUrl}/tokenized/checkout/execute`;
+    const url = `${this.getBaseUrl(keys)}/tokenized/checkout/execute`;
     const response = await fetch(url, {
       method: 'POST',
       headers: {
