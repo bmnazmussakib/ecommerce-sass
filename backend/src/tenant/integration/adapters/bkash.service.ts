@@ -78,7 +78,6 @@ export class BkashService {
     });
 
     const data = await response.json() as any;
-    console.log('bKash execute raw response:', JSON.stringify(data));
     // Always return data; let caller handle statusCode
     return data;
   }

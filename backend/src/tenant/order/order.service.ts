@@ -3,6 +3,7 @@ import {
   Inject,
   BadRequestException,
   NotFoundException,
+  Logger,
 } from '@nestjs/common';
 import { TENANT_PRISMA_CLIENT } from '../../core/database/tenant-connection.provider';
 import {
@@ -28,6 +29,7 @@ import { LoyaltyService } from '../loyalty/loyalty.service';
 
 @Injectable()
 export class OrderService {
+  private readonly logger = new Logger(OrderService.name);
   constructor(
     @Inject(TENANT_PRISMA_CLIENT) private readonly prisma: TenantPrismaClient,
     private readonly bkashService: BkashService,
@@ -386,16 +388,14 @@ export class OrderService {
   }
 
   async verifyBkashPayment(orderId: string, paymentID: string, status: string) {
-    console.log(
-      `Verifying bKash Payment: orderId=${orderId}, paymentID=${paymentID}, status=${status}`,
-    );
+    this.logger.log(`Verifying bKash Payment: orderId=${orderId}, paymentID=${paymentID}, status=${status}`);
     const order = await this.prisma.order.findUnique({
       where: { id: orderId },
     });
     if (!order) throw new NotFoundException('Order not found');
 
     if (status !== 'success') {
-      console.log(`Payment status was not success: ${status}`);
+      this.logger.warn(`Payment status was not success: ${status}`);
       await this.prisma.order.update({
         where: { id: orderId },
         data: { paymentStatus: 'FAILED' },
@@ -419,16 +419,13 @@ export class OrderService {
     const keys = integration.keysJson as any;
     try {
       const token = await this.bkashService.grantToken(keys);
-      console.log(`Granted token for execution: ${token.substring(0, 15)}...`);
+      this.logger.log(`Granted bKash token for execution`);
       const executeRes = await this.bkashService.executePayment(
         token,
         paymentID,
         keys,
       );
-      console.log(
-        'bKash execute payment response:',
-        JSON.stringify(executeRes, null, 2),
-      );
+      this.logger.log(`bKash executePayment statusCode: ${executeRes.statusCode}`);
 
       if (executeRes.statusCode === '0000') {
         await this.prisma.order.update({
@@ -447,9 +444,7 @@ export class OrderService {
         } catch {}
         return { orderId, success: true, digitalDownloads };
       } else {
-        console.log(
-          `bKash returned status code: ${executeRes.statusCode} - ${executeRes.statusMessage}`,
-        );
+        this.logger.warn(`bKash returned status code: ${executeRes.statusCode} - ${executeRes.statusMessage}`);
         await this.prisma.order.update({
           where: { id: orderId },
           data: { paymentStatus: 'FAILED' },
@@ -457,7 +452,7 @@ export class OrderService {
         return { orderId, success: false, reason: executeRes.statusMessage };
       }
     } catch (error) {
-      console.error('Error in bKash verification execution:', error);
+      this.logger.error('Error in bKash verification execution:', error);
       await this.prisma.order.update({
         where: { id: orderId },
         data: { paymentStatus: 'FAILED' },
