@@ -92,7 +92,7 @@ export class OrderService {
       }
     }
 
-    return await this.prisma.$transaction(async (tx) => {
+    const transactionResult = await this.prisma.$transaction(async (tx) => {
       let subTotal = new Prisma.Decimal(0);
       const orderItemsData = [];
       let allDigital = true;
@@ -290,89 +290,99 @@ export class OrderService {
         Number(totalPrice),
       );
 
-      let bkashURL: string | null = null;
-      let sslczGatewayUrl: string | null = null;
-
-      if (dto.paymentMethod === 'BKASH') {
-        const integration = await tx.integration.findUnique({
-          where: { provider: 'BKASH' },
-        });
-        if (!integration || !integration.isActive) {
-          throw new BadRequestException(
-            'bKash integration is not configured or active',
-          );
-        }
-
-        const keys = integration.keysJson as any;
-        const token = await this.bkashService.grantToken(keys);
-        const callbackUrl = `${origin}/api/tenant/orders/bkash-callback?tenantId=${tenantId}&orderId=${order.id}`;
-        const paymentRes = await this.bkashService.createPayment(
-          token,
-          order.id,
-          totalPrice.toNumber(),
-          keys,
-          callbackUrl,
-        );
-        bkashURL = paymentRes.bkashURL;
-      } else if (dto.paymentMethod === 'CARD') {
-        const integration = await tx.integration.findUnique({
-          where: { provider: 'SSLCOMMERZ' },
-        });
-        if (!integration || !integration.isActive) {
-          throw new BadRequestException(
-            'SSLCommerz integration is not configured or active',
-          );
-        }
-
-        const keys = integration.keysJson as any;
-        const successUrl = `${origin}/api/tenant/orders/ssl-callback?status=success&orderId=${order.id}&tenantId=${tenantId}`;
-        const failUrl = `${origin}/api/tenant/orders/ssl-callback?status=fail&orderId=${order.id}&tenantId=${tenantId}`;
-        const cancelUrl = `${origin}/api/tenant/orders/ssl-callback?status=cancel&orderId=${order.id}&tenantId=${tenantId}`;
-
-        sslczGatewayUrl = await this.sslCommerzService.initiatePayment(keys, {
-          total_amount: totalPrice.toNumber(),
-          tran_id: order.id,
-          success_url: successUrl,
-          fail_url: failUrl,
-          cancel_url: cancelUrl,
-          cus_name: order.customerName,
-          cus_email: order.customerEmail || 'customer@ecomize.com',
-          cus_phone: order.customerPhone,
-          cus_add1: order.shippingAddress,
-        });
-      }
-
-      // Dispatch webhook
-      void this.webhookService.dispatch('order.placed', {
-        orderId: order.id,
-        customerName: dto.customerName,
-        customerPhone: dto.customerPhone,
-        totalPrice: totalPrice.toNumber(),
-        paymentMethod: dto.paymentMethod,
-      });
-
-      // Auto-generate download tokens for COD digital orders
-      let digitalDownloads = null;
-      if (allDigital && !bkashURL && !sslczGatewayUrl) {
-        digitalDownloads =
-          await this.digitalProductService.generateDownloadTokens(order.id);
-      }
-
       return {
-        message:
-          bkashURL || sslczGatewayUrl
-            ? 'Redirect to Payment Gateway'
-            : 'Order placed successfully',
-        orderId: order.id,
+        order,
         subTotal,
         discount,
         shippingCharge,
         taxPaid,
         totalPrice,
-        paymentUrl: bkashURL || sslczGatewayUrl,
-        digitalDownloads,
+        allDigital,
       };
     });
+
+    let bkashURL: string | null = null;
+    let sslczGatewayUrl: string | null = null;
+
+    if (dto.paymentMethod === 'BKASH') {
+      const integration = await this.prisma.integration.findUnique({
+        where: { provider: 'BKASH' },
+      });
+      if (!integration || !integration.isActive) {
+        throw new BadRequestException(
+          'bKash integration is not configured or active',
+        );
+      }
+
+      const keys = integration.keysJson as any;
+      const token = await this.bkashService.grantToken(keys);
+      const callbackUrl = `${origin}/api/tenant/orders/bkash-callback?tenantId=${tenantId}&orderId=${transactionResult.order.id}`;
+      const paymentRes = await this.bkashService.createPayment(
+        token,
+        transactionResult.order.id,
+        transactionResult.totalPrice.toNumber(),
+        keys,
+        callbackUrl,
+      );
+      bkashURL = paymentRes.bkashURL;
+    } else if (dto.paymentMethod === 'CARD') {
+      const integration = await this.prisma.integration.findUnique({
+        where: { provider: 'SSLCOMMERZ' },
+      });
+      if (!integration || !integration.isActive) {
+        throw new BadRequestException(
+          'SSLCommerz integration is not configured or active',
+        );
+      }
+
+      const keys = integration.keysJson as any;
+      const successUrl = `${origin}/api/tenant/orders/ssl-callback?status=success&orderId=${transactionResult.order.id}&tenantId=${tenantId}`;
+      const failUrl = `${origin}/api/tenant/orders/ssl-callback?status=fail&orderId=${transactionResult.order.id}&tenantId=${tenantId}`;
+      const cancelUrl = `${origin}/api/tenant/orders/ssl-callback?status=cancel&orderId=${transactionResult.order.id}&tenantId=${tenantId}`;
+
+      sslczGatewayUrl = await this.sslCommerzService.initiatePayment(keys, {
+        total_amount: transactionResult.totalPrice.toNumber(),
+        tran_id: transactionResult.order.id,
+        success_url: successUrl,
+        fail_url: failUrl,
+        cancel_url: cancelUrl,
+        cus_name: transactionResult.order.customerName,
+        cus_email: transactionResult.order.customerEmail || 'customer@ecomize.com',
+        cus_phone: transactionResult.order.customerPhone,
+        cus_add1: transactionResult.order.shippingAddress,
+      });
+    }
+
+    // Dispatch webhook
+    void this.webhookService.dispatch('order.placed', {
+      orderId: transactionResult.order.id,
+      customerName: dto.customerName,
+      customerPhone: dto.customerPhone,
+      totalPrice: transactionResult.totalPrice.toNumber(),
+      paymentMethod: dto.paymentMethod,
+    });
+
+    // Auto-generate download tokens for COD digital orders
+    let digitalDownloads = null;
+    if (transactionResult.allDigital && !bkashURL && !sslczGatewayUrl) {
+      digitalDownloads =
+        await this.digitalProductService.generateDownloadTokens(transactionResult.order.id);
+    }
+
+    return {
+      message:
+        bkashURL || sslczGatewayUrl
+          ? 'Redirect to Payment Gateway'
+          : 'Order placed successfully',
+      orderId: transactionResult.order.id,
+      subTotal: transactionResult.subTotal,
+      discount: transactionResult.discount,
+      shippingCharge: transactionResult.shippingCharge,
+      taxPaid: transactionResult.taxPaid,
+      totalPrice: transactionResult.totalPrice,
+      paymentUrl: bkashURL || sslczGatewayUrl,
+      digitalDownloads,
+    };
   }
 
   async verifyBkashPayment(orderId: string, paymentID: string, status: string) {
