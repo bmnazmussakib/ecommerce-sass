@@ -23,7 +23,7 @@ services:
       - DIRECT_URL=postgresql://postgres:postgres@postgres_master:5432/master_db?schema=public
       - TENANT_DATABASE_TEMPLATE_URL=postgresql://postgres:postgres@postgres_tenant:5432/tenant_template_db?schema=public
       - REDIS_URL=redis://redis:6379
-      - JWT_SECRET=super_secret_key_for_testing
+      - JWT_SECRET=${JWT_SECRET:-super_secret_key_for_testing}
       - APP_URL=http://localhost:8888
     depends_on:
       - postgres_master
