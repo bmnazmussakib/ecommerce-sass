@@ -9,6 +9,8 @@ export const TENANT_PRISMA_CLIENT = 'TENANT_PRISMA_CLIENT';
 @Injectable()
 export class TenantConnectionProvider {
   private static connections: Map<string, TenantPrismaClient> = new Map();
+  private static accessOrder: string[] = []; // LRU tracking
+  private static readonly MAX_CONNECTIONS = 50;
 
   static getProvider() {
     return {
@@ -24,7 +26,6 @@ export class TenantConnectionProvider {
         const hostname = host.split(':')[0];
 
         // Determine subdomain or custom domain
-        // Assuming platform domain is configured as env variable, or just extracting first part
         const parts = hostname.split('.');
         const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
         
@@ -60,7 +61,27 @@ export class TenantConnectionProvider {
         const connectionString = tenant.dbConnectionString;
 
         // Reuse connection pool from cache or initialize new one
-        if (!this.connections.has(connectionString)) {
+        if (this.connections.has(connectionString)) {
+          // Hit: Refresh key priority in LRU queue
+          this.accessOrder = this.accessOrder.filter(k => k !== connectionString);
+          this.accessOrder.push(connectionString);
+        } else {
+          // Miss: Enforce max connections limit
+          if (this.connections.size >= this.MAX_CONNECTIONS) {
+            const oldest = this.accessOrder.shift();
+            if (oldest) {
+              const oldClient = this.connections.get(oldest);
+              if (oldClient) {
+                // Gracefully disconnect connection pool before deleting
+                await oldClient.$disconnect().catch(err => {
+                  console.error(`[LRU Connection Provider] Failed to disconnect connection pool for tenant: ${err.message}`);
+                });
+              }
+              this.connections.delete(oldest);
+            }
+          }
+
+          // Create new client connection pool
           const client = new TenantPrismaClient({
             datasources: {
               db: {
@@ -70,6 +91,7 @@ export class TenantConnectionProvider {
           });
           await client.$connect();
           this.connections.set(connectionString, client);
+          this.accessOrder.push(connectionString);
         }
 
         return this.connections.get(connectionString);
