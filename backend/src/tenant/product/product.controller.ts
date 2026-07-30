@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { memoryStorage } from 'multer';
 import { FeatureToggle } from '../../core/decorators/feature-toggle.decorator';
 import { FeatureToggleGuard } from '../../core/guards/feature-toggle.guard';
 
@@ -47,19 +47,15 @@ export class ProductController {
   })
   @ApiOperation({ summary: 'Bulk upload products via CSV' })
   @UseInterceptors(FileInterceptor('file', {
-    storage: diskStorage({
-      destination: './uploads',
-      filename: (req: any, file: any, cb: any) => {
-        cb(null, `csv-${Date.now()}-${file.originalname}`);
-      },
-    }),
+    storage: memoryStorage(),
   }))
   async bulkUpload(
     @UploadedFile() file: Express.Multer.File,
     @Req() req: any,
   ) {
     const tenantId = req.headers['x-tenant-id'] || 'default';
-    return this.productService.addCsvImportJob(file.path, tenantId);
+    const csvContent = file.buffer.toString('utf-8');
+    return this.productService.addCsvImportJob(csvContent, tenantId);
   }
 
   @Get('search')

@@ -16,7 +16,7 @@ export class ProductService {
     private readonly meilisearchService: MeiliSearchService,
   ) {}
 
-  async addCsvImportJob(filePath: string, tenantId: string) {
+  async addCsvImportJob(csvContent: string, tenantId: string) {
     const tenant = await this.masterPrisma.tenant.findUnique({
       where: { subdomain: tenantId },
     });
@@ -24,7 +24,7 @@ export class ProductService {
     if (!tenant) throw new NotFoundException(`Tenant ${tenantId} not found`);
 
     const job = await this.csvQueue.add('parse', {
-      filePath,
+      csvContent,
       tenantId,
       tenantDbString: tenant.dbConnectionString,
     });

@@ -2,23 +2,19 @@ import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bullmq';
 import csv = require('csv-parser');
-import * as fs from 'fs';
+import { Readable } from 'stream';
 import { PrismaClient as TenantPrismaClient } from '@prisma/tenant-client';
-import { TENANT_PRISMA_CLIENT } from '../../../core/database/tenant-connection.provider';
 
 @Processor('csv-import')
 export class CsvParserProcessor extends WorkerHost {
   private readonly logger = new Logger(CsvParserProcessor.name);
 
-  // Directly instantiate Prisma client using the tenant connection string passed in the job data.
-  // This is because background workers run asynchronously outside request lifecycle,
-  // making REQUEST-scoped DI injection of TENANT_PRISMA_CLIENT unavailable.
   async process(job: Job<any, any, string>): Promise<any> {
-    const { filePath, tenantDbString, tenantId } = job.data;
-    this.logger.log(`Starting CSV parse job for tenant ${tenantId}. File: ${filePath}`);
+    const { csvContent, tenantDbString, tenantId } = job.data;
+    this.logger.log(`Starting CSV parse job for tenant ${tenantId}`);
 
-    if (!fs.existsSync(filePath)) {
-      throw new Error(`File not found at path: ${filePath}`);
+    if (!csvContent) {
+      throw new Error('CSV content is empty or missing');
     }
 
     const tenantPrisma = new TenantPrismaClient({
@@ -30,12 +26,12 @@ export class CsvParserProcessor extends WorkerHost {
     });
 
     const productsToCreate: any[] = [];
+    const stream = Readable.from([csvContent]);
 
     return new Promise((resolve, reject) => {
-      fs.createReadStream(filePath)
+      stream
         .pipe(csv())
         .on('data', (row: any) => {
-          // Standard CSV columns: title, description, basePrice, comparePrice, sku, price, stock, size, color
           productsToCreate.push(row);
         })
         .on('end', async () => {
@@ -50,7 +46,6 @@ export class CsvParserProcessor extends WorkerHost {
               const variantPrice = parseFloat(item.price || item.basePrice || '0');
               const stock = parseInt(item.stock || '0', 10);
 
-              // 1. Check if category exists or default slug
               let categoryId = null;
               if (item.categoryName) {
                 const slug = (item.categoryName as string).toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -62,7 +57,6 @@ export class CsvParserProcessor extends WorkerHost {
                 categoryId = category.id;
               }
 
-              // 2. Create Product and nested Variant
               await tenantPrisma.product.create({
                 data: {
                   title: item.title,
@@ -85,8 +79,6 @@ export class CsvParserProcessor extends WorkerHost {
             }
 
             this.logger.log(`Successfully imported all products for tenant ${tenantId}`);
-            // Cleanup uploaded temp file
-            fs.unlinkSync(filePath);
             resolve({ success: true, count: productsToCreate.length });
           } catch (err: any) {
             this.logger.error(`Import failed for tenant ${tenantId}: ${err.message}`);
