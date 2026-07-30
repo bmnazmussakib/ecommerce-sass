@@ -29,3 +29,7 @@ test-jwt.js
 push-tenant-db.js
 drop-tables.js
 drop.sql
+
+# Local credentials reference (never commit!)
+CREDENTIALS.md
+
