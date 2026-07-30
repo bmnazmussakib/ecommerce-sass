@@ -12,6 +12,9 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+      - /usr/src/app/dist
+      - /usr/src/app/src/generated/master
+      - /usr/src/app/src/generated/tenant
     environment:
       - PORT=8888
       - DATABASE_URL=postgresql://postgres:postgres@postgres_master:5432/master_db?schema=public
