@@ -19,25 +19,28 @@ export class AuditLogInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap({
-        next: async (response) => {
+        next: (response) => {
           // Clean sensitive fields from log details
           const logBody = { ...body };
           delete logBody.password;
           delete logBody.token;
 
-          await this.masterPrisma.auditLog.create({
-            data: {
-              action: `${method} ${url}`,
-              userId: user?.id || user?.sub || null,
-              userEmail: user?.email || null,
-              userRole: user?.role || null,
-              details: {
-                requestBody: logBody,
-                statusCode: context.switchToHttp().getResponse().statusCode,
+          // Asynchronously write audit logs without blocking the response
+          setImmediate(() => {
+            this.masterPrisma.auditLog.create({
+              data: {
+                action: `${method} ${url}`,
+                userId: user?.id || user?.sub || null,
+                userEmail: user?.email || null,
+                userRole: user?.role || null,
+                details: {
+                  requestBody: logBody,
+                  statusCode: context.switchToHttp().getResponse().statusCode,
+                },
               },
-            },
-          }).catch(err => {
-            console.error('[AuditLogInterceptor] Failed to save audit log:', err);
+            }).catch(err => {
+              console.error('[AuditLogInterceptor] Failed to save audit log:', err.message);
+            });
           });
         },
       }),
