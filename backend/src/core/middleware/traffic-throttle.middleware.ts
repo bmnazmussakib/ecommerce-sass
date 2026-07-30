@@ -20,6 +20,12 @@ export class TrafficThrottleMiddleware implements NestMiddleware {
       host: redisHost,
       port: redisPort,
       password: redisPassword,
+      lazyConnect: true,
+      maxRetriesPerRequest: 1,
+    });
+
+    this.redis.on('error', (err) => {
+      // Suppress unhandled ECONNREFUSED stream errors when Redis server is offline
     });
   }
 
