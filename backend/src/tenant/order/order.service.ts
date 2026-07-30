@@ -528,11 +528,30 @@ export class OrderService {
     }
   }
 
-  async findAll() {
-    return this.prisma.order.findMany({
-      orderBy: { createdAt: 'desc' },
-      include: { orderItems: true },
-    });
+  async findAll(page = 1, limit = 20) {
+    const pageNum = Math.max(1, Number(page) || 1);
+    const limitNum = Math.min(100, Math.max(1, Number(limit) || 20));
+    const skip = (pageNum - 1) * limitNum;
+
+    const [orders, total] = await Promise.all([
+      this.prisma.order.findMany({
+        skip,
+        take: limitNum,
+        orderBy: { createdAt: 'desc' },
+        include: { orderItems: true },
+      }),
+      this.prisma.order.count(),
+    ]);
+
+    return {
+      data: orders,
+      meta: {
+        total,
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
+      },
+    };
   }
 
   async findOne(id: string) {

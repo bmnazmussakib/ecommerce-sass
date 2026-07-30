@@ -124,9 +124,12 @@ export class OrderController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
-  @ApiOperation({ summary: 'Get all orders (Admin)' })
-  findAll() {
-    return this.orderService.findAll();
+  @ApiOperation({ summary: 'Get all orders with pagination (Admin)' })
+  findAll(
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+  ) {
+    return this.orderService.findAll(page, limit);
   }
 
   @ApiBearerAuth()
