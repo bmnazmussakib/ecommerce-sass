@@ -1,0 +1,3 @@
+[submodule "ecomize-backend"]
+	path = ecomize-backend
+	url = git@github.com:bmnazmussakib/ecomize-backend.git
